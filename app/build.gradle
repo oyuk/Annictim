@@ -4,15 +4,29 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+Properties apiKeyProperties = new Properties()
+try {
+    apiKeyProperties.load(file('./api-key.properties').newDataInputStream());
+} catch (Exception ex) {
+    throw new GradleException("Missing .properties, check the .properties file.");
+}
+
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.okysoft.annictim"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 100 + versionMinor * 10 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "annictClientId", "\"${apiKeyProperties.getProperty("clientID")}\""
+        buildConfigField "String", "annictClientKey", "\"${apiKeyProperties.getProperty("clientKey")}\""
     }
     buildTypes {
         release {
