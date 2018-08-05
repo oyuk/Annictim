@@ -80,3 +80,4 @@ fastlane/readme.md
 
 
 .idea/
+app/api-key.properties
