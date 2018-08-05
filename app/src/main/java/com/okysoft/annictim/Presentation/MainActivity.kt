@@ -1,7 +1,8 @@
-package com.okysoft.annictim
+package com.okysoft.annictim.Presentation
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.okysoft.annictim.R
 
 class MainActivity : AppCompatActivity() {
 

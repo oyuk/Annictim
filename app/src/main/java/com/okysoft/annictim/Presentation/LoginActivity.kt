@@ -1,4 +1,4 @@
-package com.okysoft.annictim
+package com.okysoft.annictim.Presentation
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import android.support.v7.app.AppCompatActivity
+import com.okysoft.annictim.BuildConfig
+import com.okysoft.annictim.R
 
 class LoginActivity : AppCompatActivity() {
 
