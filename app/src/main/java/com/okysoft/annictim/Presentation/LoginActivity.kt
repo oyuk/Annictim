@@ -25,8 +25,6 @@ class LoginActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // com.okysoft.annictim.oauth://callback?code=3bf01f787883ae0e2c5f68fb63bb6c2e12af46df061bf4c43df54c783667fb1c
-
         val data = intent.dataString
         data?.let {
             val url = Uri.parse(data)
@@ -43,6 +41,10 @@ class LoginActivity : DaggerAppCompatActivity() {
 
         val tabsIntent = CustomTabsIntent.Builder().build()
         tabsIntent.launchUrl(this, uri)
+    }
+
+    private fun openLoginBrowser() {
+
     }
 
 }
