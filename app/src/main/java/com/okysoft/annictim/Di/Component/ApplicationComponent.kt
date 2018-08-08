@@ -3,7 +3,7 @@ package com.okysoft.annictim.Di.Component
 import com.okysoft.annictim.AnnictimApplication
 import com.okysoft.annictim.Di.Module.InfraModule
 import com.okysoft.annictim.Di.Module.LoginActivityModule
-import com.okysoft.annictim.Di.Module.UiModule
+import com.okysoft.annictim.Di.Module.UIModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -15,7 +15,7 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         InfraModule::class,
         LoginActivityModule::class,
-        UiModule::class
+        UIModule::class
         ))
 interface ApplicationComponent: AndroidInjector<AnnictimApplication> {
 
@@ -23,10 +23,6 @@ interface ApplicationComponent: AndroidInjector<AnnictimApplication> {
     interface Builder {
         @BindsInstance
         fun application(application: AnnictimApplication): Builder
-
-//        @BindsInstance
-//        fun infraModule(module: InfraModule): Builder
-
         fun build(): ApplicationComponent
     }
 
