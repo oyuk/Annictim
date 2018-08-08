@@ -5,17 +5,23 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
-import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.BuildConfig
+import com.okysoft.annictim.Presentation.ViewModel.LoginViewModel
 import com.okysoft.annictim.R
+import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : DaggerAppCompatActivity() {
 
     companion object {
         fun createIntent(activity: Context) = Intent(activity, LoginActivity::class.java)
     }
 
+    @Inject lateinit var viewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 

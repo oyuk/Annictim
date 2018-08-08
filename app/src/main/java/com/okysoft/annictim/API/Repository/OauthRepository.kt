@@ -8,11 +8,10 @@ import com.okysoft.annictim.API.Model.Response.OauthResponseModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 
-class OauthRepository(
-        private val oauthService: AnnictService.Oauth
-) {
+class OauthRepository @Inject constructor(private val oauthService: AnnictService.Oauth) {
 
     fun getAccessToken(oauthRequestModel: OauthRequestModel): LiveData<OauthResponseModel> {
         val data = MutableLiveData<OauthResponseModel>()
