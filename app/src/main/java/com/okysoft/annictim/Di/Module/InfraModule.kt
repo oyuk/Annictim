@@ -29,7 +29,7 @@ class InfraModule {
             authRepository: AuthRepository
             ): OkHttpClient {
         val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BASIC
+        logging.level = HttpLoggingInterceptor.Level.BODY
         val builder = OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .addInterceptor(RequestInterceptor(authRepository))

@@ -1,5 +1,6 @@
 package com.okysoft.annictim.Presentation
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -25,9 +26,14 @@ class LoginActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        viewModel.loginComplete.observe(this@LoginActivity, Observer {
+            finish()
+        })
+
         val data = intent.dataString
         data?.let {
-            val url = Uri.parse(data)
+            val uri = Uri.parse(data)
+            viewModel.fetc(uri)
             return
         }
 

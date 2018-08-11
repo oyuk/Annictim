@@ -2,11 +2,11 @@ package com.okysoft.annictim.Presentation
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
-import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
