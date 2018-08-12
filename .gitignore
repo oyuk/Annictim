@@ -81,3 +81,6 @@ fastlane/readme.md
 
 .idea/
 app/api-key.properties
+
+
+app/src/main/graphql/com/okysoft/annictim/api/schema.json

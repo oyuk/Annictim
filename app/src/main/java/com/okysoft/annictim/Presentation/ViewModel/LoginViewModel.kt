@@ -25,7 +25,7 @@ class LoginViewModel @Inject constructor(
                 .toLiveData()
     }
     private val _openLoginView = MutableLiveData<Uri>()
-    val openLoginView = MutableLiveData<Uri>()
+    val openLoginView:LiveData<Uri> = _openLoginView
 
     init {
         oauthRepository.accessToken

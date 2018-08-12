@@ -31,7 +31,7 @@ class LoginActivity : DaggerAppCompatActivity() {
 
         viewModel.openLoginView.observe(this@LoginActivity, Observer {
             val tabsIntent = CustomTabsIntent.Builder().build()
-            tabsIntent.launchUrl(this, it)
+            tabsIntent.launchUrl(this@LoginActivity, it)
         })
 
         viewModel.onCreate()
