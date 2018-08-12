@@ -16,6 +16,12 @@
             android:layout_height="match_parent"
             />
 
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="main"
+            />
+
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"

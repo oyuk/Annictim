@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
-import com.okysoft.annictim.BuildConfig
 import com.okysoft.annictim.Presentation.ViewModel.LoginViewModel
 import com.okysoft.annictim.R
 import dagger.android.AndroidInjection
@@ -27,30 +26,32 @@ class LoginActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         viewModel.loginComplete.observe(this@LoginActivity, Observer {
-            finish()
+            this@LoginActivity.finish()
         })
 
+        viewModel.openLoginView.observe(this@LoginActivity, Observer {
+            val tabsIntent = CustomTabsIntent.Builder().build()
+            tabsIntent.launchUrl(this, it)
+        })
+
+        viewModel.onCreate()
+    }
+
+    override fun onResume() {
+        super.onResume()
         val data = intent.dataString
         data?.let {
             val uri = Uri.parse(data)
-            viewModel.fetc(uri)
+            viewModel.fetch(uri)
             return
         }
-
-        val clientID = BuildConfig.annictClientId
-        val clientKey = BuildConfig.annictClientKey
-
-        val baseURL = "https://api.annict.com"
-        val params = "/oauth/authorize?client_id=${clientID}&redirect_uri=com.okysoft.annictim.oauth://callback&response_type=code&scope=read+write"
-
-        val uri = Uri.parse(baseURL + params)
-
-        val tabsIntent = CustomTabsIntent.Builder().build()
-        tabsIntent.launchUrl(this, uri)
     }
 
-    private fun openLoginBrowser() {
-
+    public override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
     }
+
+    override fun onBackPressed() {}
 
 }

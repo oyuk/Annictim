@@ -13,4 +13,10 @@
             android:layout_height="match_parent"
             />
 
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="login"
+        />
+
     </android.support.design.widget.CoordinatorLayout>

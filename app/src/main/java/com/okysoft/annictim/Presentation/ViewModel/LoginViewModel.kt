@@ -1,10 +1,13 @@
 package com.okysoft.annictim.Presentation.ViewModel
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.net.Uri
 import com.okysoft.annictim.API.Repository.OauthRepository
 import com.okysoft.annictim.AuthRepository
+import com.okysoft.annictim.BuildConfig
+import com.okysoft.annictim.toLiveData
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -16,7 +19,21 @@ class LoginViewModel @Inject constructor(
         private val authRepository: AuthRepository): ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
-    val loginComplete = MutableLiveData<Unit>()
+    val loginComplete: LiveData<Unit> by lazy {
+        oauthRepository.accessToken
+                .map {  }
+                .toLiveData()
+    }
+    private val _openLoginView = MutableLiveData<Uri>()
+    val openLoginView = MutableLiveData<Uri>()
+
+    init {
+        oauthRepository.accessToken
+                .subscribeBy {
+                    saveAccessToken(it)
+                }.addTo(compositeDisposable)
+
+    }
 
     private fun saveAccessToken(accessToken: String) {
         authRepository.putAccessToken(accessToken)
@@ -27,12 +44,23 @@ class LoginViewModel @Inject constructor(
         return oauthRepository.getAccessToken(code)
     }
 
-    fun fetc(uri: Uri) {
+    fun fetch(uri: Uri) {
         fetchAccessToken(uri)
-                .subscribeBy {
-                    saveAccessToken(it)
-                    loginComplete.value = Unit
-                }.addTo(compositeDisposable)
+                .subscribe()
+                .addTo(compositeDisposable)
+    }
+
+    fun onCreate() {
+        val clientID = BuildConfig.annictClientId
+        val baseURL = "https://api.annict.com"
+        val params = "/oauth/authorize?client_id=${clientID}&redirect_uri=com.okysoft.annictim.oauth://callback&response_type=code&scope=read+write"
+        val uri = Uri.parse(baseURL + params)
+        _openLoginView.postValue(uri)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 
 }
