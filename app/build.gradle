@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.apollographql.android'
 
 def versionMajor = 1
 def versionMinor = 0
@@ -78,4 +79,7 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
+    implementation 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha'
+    implementation'com.apollographql.apollo:apollo-rx2-support:1.0.0-alpha'
 }
