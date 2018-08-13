@@ -1,4 +1,4 @@
-query Viewer {
+query MeQuery {
   viewer {
     username
     name

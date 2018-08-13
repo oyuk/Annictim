@@ -1,10 +1,12 @@
 package com.okysoft.annictim.Di.Module
 
+import com.apollographql.apollo.ApolloClient
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.okysoft.annictim.API.AnnictService
 import com.okysoft.annictim.API.RequestInterceptor
+import com.okysoft.annictim.API.UserServiceImpl
 import com.okysoft.annictim.AnnictimApplication
 import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.AuthRepositoryImpl
@@ -22,6 +24,7 @@ import javax.inject.Singleton
 class InfraModule {
 
     private val ENDPOINT = "https://api.annict.com"
+    private val GRAPH_QL_ENDPOINT = "https://api.annict.com/graphql"
 
     @Singleton
     @Provides
@@ -57,18 +60,35 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideOauthService(client: OkHttpClient, gson: Gson): AnnictService.Oauth {
-        return createRetrofit(client,gson)
+    fun provideOauthService(client: Retrofit): AnnictService.Oauth {
+        return client
                 .create(AnnictService.Oauth::class.java)
     }
 
-    private fun createRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
+    @Singleton
+    @Provides
+    fun provideUserService(client: ApolloClient): AnnictService.User {
+        return UserServiceImpl(client)
+    }
+
+    @Singleton
+    @Provides
+    fun createRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .client(client)
                 .baseUrl(ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
+    }
+
+    @Singleton
+    @Provides
+    fun createApollo(client: OkHttpClient): ApolloClient {
+        return ApolloClient.builder()
+                .serverUrl(GRAPH_QL_ENDPOINT)
+                .okHttpClient(client)
+                .build();
     }
 
 }
