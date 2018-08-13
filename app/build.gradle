@@ -37,6 +37,9 @@ android {
     dataBinding {
         enabled = true
     }
+    apollo {
+        useSemanticNaming = false
+    }
 }
 
 dependencies {
