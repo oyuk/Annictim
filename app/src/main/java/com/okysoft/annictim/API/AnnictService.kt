@@ -21,4 +21,8 @@ interface AnnictService {
         fun getMe(): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
     }
 
+    interface Work {
+        fun latest(): Single<Result<List<com.okysoft.annictim.API.Model.Response.Work>>>
+    }
+
 }

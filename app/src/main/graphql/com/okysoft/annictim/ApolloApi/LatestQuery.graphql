@@ -1,0 +1,17 @@
+query Latest($season: String!) {
+  searchWorks(seasons: [$season], orderBy: {field: WATCHERS_COUNT, direction: DESC}, first: 5) {
+    edges {
+      node {
+        id
+        annictId
+        title
+        media
+        watchersCount
+        image {
+          id
+          recommendedImageUrl
+        }
+      }
+    }
+  }
+}
