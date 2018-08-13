@@ -3,18 +3,23 @@ package com.okysoft.annictim.Presentation
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class WorksFragment : Fragment() {
+class WorksFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorkAdapter()
+
+    @Inject
+    lateinit var viewModel: WorksViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
@@ -23,7 +28,6 @@ class WorksFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
         return binding.root
     }
-
 
     companion object {
         val TAG = WorksFragment::class.java.simpleName

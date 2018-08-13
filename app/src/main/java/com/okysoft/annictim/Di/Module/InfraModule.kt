@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder
 import com.okysoft.annictim.API.AnnictService
 import com.okysoft.annictim.API.RequestInterceptor
 import com.okysoft.annictim.API.UserServiceImpl
+import com.okysoft.annictim.API.WorkServiceImpl
 import com.okysoft.annictim.AnnictimApplication
 import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.AuthRepositoryImpl
@@ -63,6 +64,12 @@ class InfraModule {
     fun provideOauthService(client: Retrofit): AnnictService.Oauth {
         return client
                 .create(AnnictService.Oauth::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideWorkService(client: ApolloClient): AnnictService.Work {
+        return WorkServiceImpl(client)
     }
 
     @Singleton
