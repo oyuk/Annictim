@@ -19,7 +19,9 @@ class WorkServiceImpl @Inject constructor(private val client: ApolloClient): Ann
                     val s = edges.filter { it.node() != null }.map {
                         return@map Work(
                                 id = it.node()!!.id(),
-                                title = it.node()!!.title()
+                                title = it.node()!!.title(),
+                                watchersCount = it.node()!!.watchersCount(),
+                                imageUrl = it.node()!!.image()?.recommendedImageUrl() ?: ""
                         )
                     }
                     return@map Result.success(s)

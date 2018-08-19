@@ -58,7 +58,7 @@ class WorkAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
         }
         val item = items.value[position]
         (holder.binding as ItemWorkBinding).run {
-            title.text = item.title
+            work = item
         }
     }
 
