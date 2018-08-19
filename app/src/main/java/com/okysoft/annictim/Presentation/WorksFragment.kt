@@ -1,6 +1,7 @@
 package com.okysoft.annictim.Presentation
 
 
+import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -21,11 +22,20 @@ class WorksFragment : DaggerFragment() {
     @Inject
     lateinit var viewModel: WorksViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.works.observe(this, Observer {
+            adapter.items.accept(it)
+        })
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.addOnScrollListener(LoadMoreScrollListener(layoutManager))
+        viewModel.onCreate()
         return binding.root
     }
 

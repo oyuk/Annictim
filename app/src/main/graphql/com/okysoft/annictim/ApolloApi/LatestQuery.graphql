@@ -1,5 +1,5 @@
 query Latest($season: String!) {
-  searchWorks(seasons: [$season], orderBy: {field: WATCHERS_COUNT, direction: DESC}, first: 5) {
+  searchWorks(seasons: [$season], orderBy: {field: WATCHERS_COUNT, direction: DESC}, first: 20) {
     edges {
       node {
         id
