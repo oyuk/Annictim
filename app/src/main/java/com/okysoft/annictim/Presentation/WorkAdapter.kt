@@ -1,5 +1,7 @@
 package com.okysoft.annictim.Presentation
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
@@ -13,6 +15,8 @@ import io.reactivex.rxkotlin.subscribeBy
 class WorkAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
 
     val items: BehaviorRelay<List<Work>> = BehaviorRelay.createDefault(emptyList())
+    private val _onClick = MutableLiveData<Work>()
+    val onClick: LiveData<Work> = _onClick
     private val bag = CompositeDisposable()
 
     enum class ViewType(val num: Int)  {
@@ -57,6 +61,9 @@ class WorkAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
             return
         }
         val item = items.value[position]
+        holder.binding?.root?.setOnClickListener {
+            _onClick.postValue(item)
+        }
         (holder.binding as ItemWorkBinding).run {
             work = item
         }

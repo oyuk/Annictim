@@ -12,18 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Presentation.MainActivity"
-            android:launchMode="singleTask"
-            >
+        <activity
+            android:name=".Presentation.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Presentation.LoginActivity"
-            android:launchMode="singleTask"
-            >
+        <activity
+            android:name=".Presentation.LoginActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -35,6 +35,10 @@
                     android:scheme="com.okysoft.annictim.oauth" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Presentation.WorkDetailActivity"
+            android:label="@string/title_activity_work_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

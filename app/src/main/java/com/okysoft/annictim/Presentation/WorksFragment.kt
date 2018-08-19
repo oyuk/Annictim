@@ -27,6 +27,9 @@ class WorksFragment : DaggerFragment() {
         viewModel.works.observe(this, Observer {
             adapter.items.accept(it)
         })
+        adapter.onClick.observe(this, Observer {
+            startActivity(WorkDetailActivity.createIntent(activity!!))
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
