@@ -35,9 +35,11 @@ class WorksFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
         val layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.addOnScrollListener(LoadMoreScrollListener(layoutManager))
+        binding.recyclerView.apply {
+            adapter = adapter
+            addOnScrollListener(LoadMoreScrollListener(layoutManager))
+        }
         viewModel.onCreate()
         return binding.root
     }
