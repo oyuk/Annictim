@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class WorkRepository @Inject constructor(private val service: AnnictService.Work) {
 
-    fun latest(): Single<Result<List<Work>>> {
-        return service.latest()
+    fun latest(season: String): Single<Result<List<Work>>> {
+        return service.latest(season)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }

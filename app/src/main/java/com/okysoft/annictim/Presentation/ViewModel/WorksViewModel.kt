@@ -14,7 +14,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class WorksViewModel  @Inject constructor(private val repository: WorkRepository) : ViewModel() {
+class WorksViewModel @Inject constructor(private val repository: WorkRepository) : ViewModel() {
 
     private val _works = MutableLiveData<List<Work>>()
     val works: LiveData<List<Work>> = _works
@@ -30,7 +30,7 @@ class WorksViewModel  @Inject constructor(private val repository: WorkRepository
     }
 
     fun onCreate() {
-        repository.latest()
+        repository.latest("2017-spring")
                 .subscribeBy {
                     when (it) {
                         is Result.Success -> {
@@ -45,7 +45,7 @@ class WorksViewModel  @Inject constructor(private val repository: WorkRepository
     }
 
     fun nextPage() {
-        repository.latest()
+        repository.latest("2017-spring")
                 .subscribeBy {
                     Log.i("hoge", it.toString())
                     when (it) {

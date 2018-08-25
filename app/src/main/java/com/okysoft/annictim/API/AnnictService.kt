@@ -22,7 +22,7 @@ interface AnnictService {
     }
 
     interface Work {
-        fun latest(): Single<Result<List<com.okysoft.annictim.API.Model.Response.Work>>>
+        fun latest(season: String): Single<Result<List<com.okysoft.annictim.API.Model.Response.Work>>>
     }
 
 }
