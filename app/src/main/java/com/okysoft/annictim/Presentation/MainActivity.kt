@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
-import com.okysoft.annictim.API.DateManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
 
@@ -20,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 //        startActivity(LoginActivity.createIntent(this))
 
 
-        val s = DateManager.getNowDate()
         switchFragment(WorksTabPagerFragment.newInstance(), WorksTabPagerFragment.TAG)
     }
 
