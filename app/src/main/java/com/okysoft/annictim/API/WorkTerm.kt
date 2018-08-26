@@ -1,6 +1,5 @@
 package com.okysoft.annictim.API
 
-import java.lang.Math.abs
 import java.util.*
 
 fun Calendar.nextYear(): Int {
@@ -43,8 +42,8 @@ enum class WorkTerm {
             if (term.isFirst()) {
                 calender.previousYear()
             }
-            term.previous()
-            return workTerm(calender.get(Calendar.YEAR), term)
+            val previousTerm = term.previous()
+            return workTerm(calender.get(Calendar.YEAR), previousTerm)
         }
     },
 
@@ -55,8 +54,8 @@ enum class WorkTerm {
             if (term.isLast()) {
                 calender.nextYear()
             }
-            term.next()
-            return workTerm(calender.get(Calendar.YEAR), term)
+            val nextTerm = term.next()
+            return workTerm(calender.get(Calendar.YEAR), nextTerm)
         }
     };
 
@@ -86,11 +85,11 @@ enum class WorkTerm {
         }
 
         fun next(): Term {
-            return fromNum(values().size % (num + 1))
+            return fromNum((num + 1) % values().size )
         }
 
         fun previous(): Term {
-            return fromNum(values().size % abs(num - 1))
+            return fromNum((num + 3) % values().size )
         }
 
         companion object {
