@@ -2,7 +2,6 @@ package com.okysoft.annictim.Presentation
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.R
 
@@ -14,16 +13,13 @@ class NavigationController constructor(activity: AppCompatActivity) {
         if (fragment.isAdded) {
             return
         }
-        val currentFragment = fragmentManager.findFragmentById(containerId)
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(containerId, fragment, tag)
-        currentFragment?.let { fragmentTransaction.detach(it) }
-        if (fragment.isDetached) {
-            fragmentTransaction.attach(fragment)
+                .replace(containerId, fragment, tag)
+        if (fragmentManager.isStateSaved) {
+            fragmentTransaction.commitAllowingStateLoss()
         } else {
-            fragmentTransaction.add(containerId, fragment, tag)
+            fragmentTransaction.commit()
         }
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_NONE).commit()
     }
 
     fun navigateToWorks() {
