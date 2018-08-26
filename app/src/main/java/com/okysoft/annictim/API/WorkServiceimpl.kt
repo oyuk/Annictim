@@ -7,9 +7,15 @@ import com.okysoft.annictim.ApolloApi.Latest
 import com.okysoft.annictim.Result
 import com.okysoft.annictim.Result.Companion.inProgress
 import io.reactivex.Single
+import retrofit2.Retrofit
 import javax.inject.Inject
 
-class WorkServiceImpl @Inject constructor(private val client: ApolloClient): AnnictService.Work {
+class WorkServiceImpl @Inject constructor(
+        private val client: ApolloClient,
+        retrofit: Retrofit
+        ): AnnictService.Works {
+
+    private val meClient = retrofit.create(AnnictService.Work.Me::class.java)
 
     override fun latest(season: String): Single<Result<List<Work>>> {
         return Rx2Apollo.from(client.query(Latest(season)))
@@ -26,6 +32,10 @@ class WorkServiceImpl @Inject constructor(private val client: ApolloClient): Ann
                     }
                     return@map Result.success(s)
                 }.single(inProgress())
+    }
+
+    override fun me(filterStatus: String, page: Int): Single<Result<List<Work>>> {
+        return meClient.me(filterStatus, page)
     }
 
 }

@@ -68,8 +68,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideWorkService(client: ApolloClient): AnnictService.Work {
-        return WorkServiceImpl(client)
+    fun provideWorkService(client: ApolloClient, retrofit: Retrofit): AnnictService.Works {
+        return WorkServiceImpl(client, retrofit)
     }
 
     @Singleton
