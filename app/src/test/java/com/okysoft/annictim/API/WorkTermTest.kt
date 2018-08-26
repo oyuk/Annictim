@@ -33,7 +33,7 @@ class WorkTermTest {
 
     @After
     fun tearDown() {
-        PowerMockito.doCallRealMethod().`when`(Calendar::class)
+
     }
 
     @Test

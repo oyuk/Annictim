@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.API.WorkTerm
 import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
@@ -18,6 +19,9 @@ class WorksFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorkAdapter()
+
+    val workTerm: String
+        get() =  arguments?.getString(WorksFragment.WORK_TERM) ?: ""
 
     @Inject
     lateinit var viewModel: WorksViewModel
@@ -46,13 +50,13 @@ class WorksFragment : DaggerFragment() {
 
     companion object {
         val TAG = WorksFragment::class.java.simpleName
-        const val ID = "ID"
-        fun newInstance(sessionId: String): WorksFragment = WorksFragment().apply {
+        const val WORK_TERM = "WORK_TERM"
+
+        fun newInstance(workTerm: WorkTerm): WorksFragment = WorksFragment().apply {
             val args = Bundle().apply {
-                putString(ID, sessionId)
+                putString(WORK_TERM, workTerm.term())
             }
             arguments = args
         }
     }
-
 }

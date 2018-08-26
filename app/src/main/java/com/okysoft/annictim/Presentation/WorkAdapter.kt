@@ -26,9 +26,9 @@ class WorkAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
     private val TAG = WorkAdapter::class.java.name
 
     init {
-        items.subscribeBy {
-            notifyDataSetChanged()
-        }.addTo(bag)
+        items.subscribeBy(
+                onNext = {notifyDataSetChanged()}
+        ).addTo(bag)
     }
 
     @Suppress("unused")

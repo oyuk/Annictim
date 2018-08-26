@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.API.WorkTerm
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
 
@@ -26,19 +27,20 @@ class WorksTabPagerFragment : Fragment() {
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        override fun getCount() = 2
+        override fun getCount() = 3
 
         override fun getPageTitle(position: Int): CharSequence
                 = when (position) {
-            0 -> "Article"
-            1 -> "Stock"
-            else -> ""
+            0 -> "Current"
+            1 -> "Previous"
+            else -> "Next"
         }
 
         override fun getItem(position: Int): Fragment?
                 = when (position) {
-            0 -> WorksFragment.newInstance("")
-            1 -> WorksFragment.newInstance("")
+            0 -> WorksFragment.newInstance(WorkTerm.Current)
+            1 -> WorksFragment.newInstance(WorkTerm.Previous)
+            2 -> WorksFragment.newInstance(WorkTerm.Next)
             else -> null
         }
     }

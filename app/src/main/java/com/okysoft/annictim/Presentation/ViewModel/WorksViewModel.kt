@@ -3,6 +3,7 @@ package com.okysoft.annictim.Presentation.ViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.util.Log
 import com.jakewharton.rxrelay2.PublishRelay
 import com.okysoft.annictim.API.Model.Response.Work
@@ -14,7 +15,20 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class WorksViewModel @Inject constructor(private val repository: WorkRepository) : ViewModel() {
+class WorksViewModel constructor(
+        private val repository: WorkRepository,
+        private val workTerm: String
+) : ViewModel() {
+
+    class Factory @Inject constructor(
+            private val repository: WorkRepository,
+            private val workTerm: String
+    ) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return WorksViewModel(repository, workTerm) as T
+        }
+    }
 
     private val _works = MutableLiveData<List<Work>>()
     val works: LiveData<List<Work>> = _works
@@ -30,7 +44,7 @@ class WorksViewModel @Inject constructor(private val repository: WorkRepository)
     }
 
     fun onCreate() {
-        repository.latest("2017-spring")
+        repository.latest(workTerm)
                 .subscribeBy {
                     when (it) {
                         is Result.Success -> {
@@ -45,7 +59,7 @@ class WorksViewModel @Inject constructor(private val repository: WorkRepository)
     }
 
     fun nextPage() {
-        repository.latest("2017-spring")
+        repository.latest(workTerm)
                 .subscribeBy {
                     Log.i("hoge", it.toString())
                     when (it) {
