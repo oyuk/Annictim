@@ -13,7 +13,6 @@ import com.okysoft.annictim.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private val navigationController = NavigationController(this)
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -40,6 +40,10 @@ android {
     apollo {
         useSemanticNaming = false
     }
+    androidExtensions {
+        experimental = true
+        features = ["parcelize"]
+    }
 }
 
 dependencies {

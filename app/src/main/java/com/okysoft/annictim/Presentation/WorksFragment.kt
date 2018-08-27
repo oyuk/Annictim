@@ -40,8 +40,8 @@ class WorksFragment : DaggerFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.apply {
-            adapter = adapter
             addOnScrollListener(LoadMoreScrollListener(layoutManager))
         }
         viewModel.onCreate()
