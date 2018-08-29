@@ -26,4 +26,8 @@ class NavigationController constructor(activity: AppCompatActivity) {
         replaceFragment(WorksTabPagerFragment.newInstance(), WorksTabPagerFragment.TAG)
     }
 
+    fun navigateToMeWorks() {
+        replaceFragment(MeWorksTabPagerFragment.newInstance(), MeWorksTabPagerFragment.TAG)
+    }
+
 }
