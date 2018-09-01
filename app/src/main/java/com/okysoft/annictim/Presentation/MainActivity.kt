@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 //        startActivity(LoginActivity.createIntent(this))
 
         navigationController.navigateToWorks()
-
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val navigationItem = BottomNavigationItem.forId(item.itemId)
             navigationItem.navigate(navigationController)
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }),
 
         ME_WORKS(R.id.item2, null, R.drawable.abc_btn_check_material, false, {
-            navigateToWorks()
+            navigateToMeWorks()
         }),
 
         SETTING(R.id.item3, null, R.drawable.abc_btn_check_material, false, {

@@ -2,6 +2,7 @@ package com.okysoft.annictim.API.Repository
 
 import com.okysoft.annictim.API.AnnictService
 import com.okysoft.annictim.API.Model.Response.Work
+import com.okysoft.annictim.Presentation.MeFilterStatus
 import com.okysoft.annictim.Result
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,11 +17,7 @@ class WorkRepository @Inject constructor(private val service: AnnictService.Work
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    enum class FilterStatus {
-        wanna_watch, watching, watched, on_hold, stop_watching
-    }
-
-    fun me(filter: FilterStatus, page: Int): Single<Result<List<Work>>> {
+    fun me(filter: MeFilterStatus, page: Int): Single<Result<List<Work>>> {
         return service.me(filter.toString(), page)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

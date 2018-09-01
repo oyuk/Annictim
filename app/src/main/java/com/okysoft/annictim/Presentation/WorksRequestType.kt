@@ -18,12 +18,12 @@ sealed class WorksRequestType: PaperParcelable {
     }
 
     @PaperParcel
-    data class Me(val param: String): WorksRequestType() {
+    data class MeFilterStatus(val meFilterStatus: com.okysoft.annictim.Presentation.MeFilterStatus): WorksRequestType() {
         companion object {
-            @JvmField val CREATOR = PaperParcelWorksRequestType_Me.CREATOR
+            @JvmField val CREATOR = PaperParcelWorksRequestType_MeFilterStatus.CREATOR
         }
 
-        override fun toParams(): String = param
+        override fun toParams(): String = meFilterStatus.toString()
     }
 
 }

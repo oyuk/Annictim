@@ -10,6 +10,7 @@ import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.API.Repository.WorkRepository
 import com.okysoft.annictim.Presentation.WorksRequestType
 import com.okysoft.annictim.Result
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
@@ -44,8 +45,19 @@ class WorksViewModel constructor(
 
     }
 
+    private fun createRequest(): Single<Result<List<Work>>> {
+        return when(worksRequestType) {
+            is WorksRequestType.Term -> {
+                repository.latest(worksRequestType.toParams())
+            }
+            is WorksRequestType.MeFilterStatus -> {
+                repository.me(worksRequestType.meFilterStatus, 0)
+            }
+        }
+    }
+
     fun onCreate() {
-        repository.latest(worksRequestType.toParams())
+        createRequest()
                 .subscribeBy {
                     when (it) {
                         is Result.Success -> {
@@ -60,7 +72,7 @@ class WorksViewModel constructor(
     }
 
     fun nextPage() {
-        repository.latest(worksRequestType.toParams())
+        createRequest()
                 .subscribeBy {
                     Log.i("hoge", it.toString())
                     when (it) {

@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.API.WorkTerm
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
 
@@ -27,20 +26,23 @@ class MeWorksTabPagerFragment : Fragment() {
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        override fun getCount() = 3
+        override fun getCount() = 4
 
         override fun getPageTitle(position: Int): CharSequence
                 = when (position) {
-            0 -> "Current"
-            1 -> "Previous"
+            0 -> MeFilterStatus.watching.toString()
+            1 -> MeFilterStatus.wanna_watch.toString()
+            3 -> MeFilterStatus.watched.toString()
+            4 -> MeFilterStatus.on_hold.toString()
             else -> "Next"
         }
 
         override fun getItem(position: Int): Fragment?
                 = when (position) {
-            0 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Current))
-            1 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Previous))
-            2 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Next))
+            0 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.watching))
+            1 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.wanna_watch))
+            2 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.watched))
+            3 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.on_hold))
             else -> null
         }
     }

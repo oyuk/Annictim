@@ -28,7 +28,7 @@ interface AnnictService {
 
         interface Me {
 
-            @GET("//me/works")
+            @GET("/me/works")
             fun me(
                     @Query("filter_status") filterStatus: String,
                     @Query("page") page: Int
