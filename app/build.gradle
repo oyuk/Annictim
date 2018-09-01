@@ -106,4 +106,6 @@ dependencies {
     implementation 'nz.bradcampbell:paperparcel:2.0.6'
     implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.6' // Optional
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.6'
+
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
 }

@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         ME_WORKS(R.id.item2, null, R.drawable.abc_btn_check_material, false, {
             navigateToWorks()
+        }),
+
+        SETTING(R.id.item3, null, R.drawable.abc_btn_check_material, false, {
+            navigateToSetting()
         });
 
         interface OnReselectedListener {
