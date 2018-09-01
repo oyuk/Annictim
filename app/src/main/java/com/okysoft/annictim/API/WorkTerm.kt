@@ -22,10 +22,6 @@ fun Calendar.previousMonth(): Int {
     return get(Calendar.MONTH)
 }
 
-fun Calendar.nextTerm() {
-
-}
-
 enum class WorkTerm {
 
     Current {

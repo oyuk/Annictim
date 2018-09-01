@@ -8,6 +8,7 @@ import android.util.Log
 import com.jakewharton.rxrelay2.PublishRelay
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.API.Repository.WorkRepository
+import com.okysoft.annictim.Presentation.WorksRequestType
 import com.okysoft.annictim.Result
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
@@ -17,16 +18,16 @@ import javax.inject.Inject
 
 class WorksViewModel constructor(
         private val repository: WorkRepository,
-        private val workTerm: String
+        private val worksRequestType: WorksRequestType
 ) : ViewModel() {
 
     class Factory @Inject constructor(
             private val repository: WorkRepository,
-            private val workTerm: String
+            private val worksRequestType: WorksRequestType
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return WorksViewModel(repository, workTerm) as T
+            return WorksViewModel(repository, worksRequestType) as T
         }
     }
 
@@ -44,7 +45,7 @@ class WorksViewModel constructor(
     }
 
     fun onCreate() {
-        repository.latest(workTerm)
+        repository.latest(worksRequestType.toParams())
                 .subscribeBy {
                     when (it) {
                         is Result.Success -> {
@@ -59,7 +60,7 @@ class WorksViewModel constructor(
     }
 
     fun nextPage() {
-        repository.latest(workTerm)
+        repository.latest(worksRequestType.toParams())
                 .subscribeBy {
                     Log.i("hoge", it.toString())
                     when (it) {

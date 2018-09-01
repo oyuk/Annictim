@@ -13,15 +13,18 @@ import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import dagger.android.support.DaggerFragment
+import paperparcel.PaperParcel
+import paperparcel.PaperParcelable
 import javax.inject.Inject
+
 
 class WorksFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorkAdapter()
 
-    val workTerm: String
-        get() =  arguments?.getString(WorksFragment.WORK_TERM) ?: ""
+    val worksRequestType: WorksRequestType
+        get() =  arguments?.getParcelable(WorksFragment.REQUEST_TYPE) ?: WorksRequestType.Term(WorkTerm.Current)
 
     @Inject
     lateinit var viewModel: WorksViewModel
@@ -50,13 +53,14 @@ class WorksFragment : DaggerFragment() {
 
     companion object {
         val TAG = WorksFragment::class.java.simpleName
-        const val WORK_TERM = "WORK_TERM"
+        const val REQUEST_TYPE = "REQUEST_TYPE"
 
-        fun newInstance(workTerm: WorkTerm): WorksFragment = WorksFragment().apply {
+        fun newInstance(worksRequestType: WorksRequestType): WorksFragment = WorksFragment().apply {
             val args = Bundle().apply {
-                putString(WORK_TERM, workTerm.term())
+                putParcelable(REQUEST_TYPE, worksRequestType)
             }
             arguments = args
         }
+
     }
 }

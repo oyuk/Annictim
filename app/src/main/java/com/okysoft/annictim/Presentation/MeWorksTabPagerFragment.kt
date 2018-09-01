@@ -38,9 +38,9 @@ class MeWorksTabPagerFragment : Fragment() {
 
         override fun getItem(position: Int): Fragment?
                 = when (position) {
-            0 -> WorksFragment.newInstance(WorkTerm.Current)
-            1 -> WorksFragment.newInstance(WorkTerm.Previous)
-            2 -> WorksFragment.newInstance(WorkTerm.Next)
+            0 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Current))
+            1 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Previous))
+            2 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Next))
             else -> null
         }
     }

@@ -33,14 +33,16 @@ class WorksTabPagerFragment : Fragment() {
                 = when (position) {
             0 -> "Current"
             1 -> "Next"
+            2 -> "hoge"
             else -> "Previous"
         }
 
         override fun getItem(position: Int): Fragment?
                 = when (position) {
-            0 -> WorksFragment.newInstance(WorkTerm.Current)
-            1 -> WorksFragment.newInstance(WorkTerm.Next)
-            2 -> WorksFragment.newInstance(WorkTerm.Previous)
+            0 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Current))
+            1 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Next))
+            2 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Previous))
+            3 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Current))
             else -> null
         }
     }

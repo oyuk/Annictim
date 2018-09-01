@@ -1,6 +1,7 @@
 package com.okysoft.annictim.Di.Module
 
 import android.arch.lifecycle.ViewModelProviders
+import com.okysoft.annictim.Presentation.WorksRequestType
 import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
 import com.okysoft.annictim.Presentation.WorksFragment
 import dagger.Module
@@ -36,8 +37,8 @@ abstract class WorksFragmentModule {
 //        }
 
             @Provides
-            fun providesWorkTerm(fragment: WorksFragment): String {
-                return fragment.workTerm
+            fun providesRequestType(fragment: WorksFragment): WorksRequestType {
+                return fragment.worksRequestType
             }
 
         @Provides
