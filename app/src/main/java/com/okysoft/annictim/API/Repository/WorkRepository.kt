@@ -19,6 +19,8 @@ class WorkRepository @Inject constructor(private val service: AnnictService.Work
 
     fun me(filter: MeFilterStatus, page: Int): Single<Result<List<Work>>> {
         return service.me(filter.toString(), page)
+                .map { Result.success(it.works) }
+                .onErrorReturn { Result.failure<List<Work>>(it.toString(), it) }
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }

@@ -32,8 +32,9 @@ class MeWorksTabPagerFragment : Fragment() {
                 = when (position) {
             0 -> MeFilterStatus.watching.toString()
             1 -> MeFilterStatus.wanna_watch.toString()
-            3 -> MeFilterStatus.watched.toString()
-            4 -> MeFilterStatus.on_hold.toString()
+            2 -> MeFilterStatus.watched.toString()
+            3 -> MeFilterStatus.on_hold.toString()
+            4 -> MeFilterStatus.stop_watching.toString()
             else -> "Next"
         }
 
@@ -43,6 +44,7 @@ class MeWorksTabPagerFragment : Fragment() {
             1 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.wanna_watch))
             2 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.watched))
             3 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.on_hold))
+            4 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.stop_watching))
             else -> null
         }
     }

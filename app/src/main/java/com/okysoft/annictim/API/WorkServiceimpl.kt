@@ -3,6 +3,7 @@ package com.okysoft.annictim.API
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.okysoft.annictim.API.Model.Response.Work
+import com.okysoft.annictim.API.Model.Response.WorksResponse
 import com.okysoft.annictim.ApolloApi.Latest
 import com.okysoft.annictim.Result
 import com.okysoft.annictim.Result.Companion.inProgress
@@ -34,7 +35,7 @@ class WorkServiceImpl @Inject constructor(
                 }.single(inProgress())
     }
 
-    override fun me(filterStatus: String, page: Int): Single<Result<List<Work>>> {
+    override fun me(filterStatus: String, page: Int): Single<WorksResponse> {
         return meClient.me(filterStatus, page)
     }
 

@@ -1,7 +1,7 @@
 package com.okysoft.annictim.Presentation
 
 enum class MeFilterStatus {
-    wanna_watch, watching, watched, on_hold
+    wanna_watch, watching, watched, on_hold, stop_watching
 
 //    companion object {
 //

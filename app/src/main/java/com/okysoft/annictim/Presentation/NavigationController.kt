@@ -10,15 +10,14 @@ class NavigationController constructor(activity: AppCompatActivity) {
     private val fragmentManager: FragmentManager = activity.supportFragmentManager
 
     private fun replaceFragment(fragment: Fragment, tag: String) {
-        if (fragment.isAdded) {
-            return
-        }
-        val fragmentTransaction = fragmentManager.beginTransaction()
+        val transaction = fragmentManager
+                .beginTransaction()
                 .replace(containerId, fragment, tag)
+
         if (fragmentManager.isStateSaved) {
-            fragmentTransaction.commitAllowingStateLoss()
+            transaction.commitAllowingStateLoss()
         } else {
-            fragmentTransaction.commit()
+            transaction.commit()
         }
     }
 

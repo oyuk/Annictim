@@ -14,7 +14,6 @@ import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 class WorksViewModel constructor(
@@ -51,30 +50,34 @@ class WorksViewModel constructor(
                 repository.latest(worksRequestType.toParams())
             }
             is WorksRequestType.MeFilterStatus -> {
-                repository.me(worksRequestType.meFilterStatus, 0)
+                repository.me(worksRequestType.meFilterStatus, 1)
             }
         }
     }
 
     fun onCreate() {
         createRequest()
-                .subscribeBy {
-                    when (it) {
-                        is Result.Success -> {
-                            _works.postValue((_works.value ?: listOf()).plus(it.data))
-                        }
-                        is Result.Failure -> {
+                .subscribe(
+                        {
+                            when (it) {
+                                is Result.Success -> {
+                                    _works.postValue((_works.value ?: listOf()).plus(it.data))
+                                }
+                                is Result.Failure -> {
 
+                                }
+                            }
+                        },
+                        { throwable ->
+                            Log.d("", throwable.toString())
                         }
-                    }
-                }
+                )
                 .addTo(compositeDisposable)
     }
 
     fun nextPage() {
         createRequest()
-                .subscribeBy {
-                    Log.i("hoge", it.toString())
+                .subscribe( {
                     when (it) {
                         is Result.Success -> {
                             _works.value = _works.value?.plus(it.data)
@@ -83,7 +86,8 @@ class WorksViewModel constructor(
 
                         }
                     }
-                }
+                },
+                        { throwable -> })
                 .addTo(compositeDisposable)
     }
 }

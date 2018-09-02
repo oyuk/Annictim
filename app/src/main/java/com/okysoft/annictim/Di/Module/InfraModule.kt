@@ -24,7 +24,7 @@ import javax.inject.Singleton
 @Module
 class InfraModule {
 
-    private val ENDPOINT = "https://api.annict.com"
+    private val REST_END_POINT = "https://api.annict.com"
     private val GRAPH_QL_ENDPOINT = "https://api.annict.com/graphql"
 
     @Singleton
@@ -83,7 +83,7 @@ class InfraModule {
     fun createRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .client(client)
-                .baseUrl(ENDPOINT)
+                .baseUrl(REST_END_POINT)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()

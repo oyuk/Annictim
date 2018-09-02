@@ -2,6 +2,7 @@ package com.okysoft.annictim.API
 
 import com.okysoft.annictim.API.Model.Request.OauthRequestModel
 import com.okysoft.annictim.API.Model.Response.OauthResponseModel
+import com.okysoft.annictim.API.Model.Response.WorksResponse
 import com.okysoft.annictim.Result
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -28,11 +29,11 @@ interface AnnictService {
 
         interface Me {
 
-            @GET("/me/works")
+            @GET("/v1/me/works")
             fun me(
                     @Query("filter_status") filterStatus: String,
                     @Query("page") page: Int
-            ): Single<Result<List<com.okysoft.annictim.API.Model.Response.Work>>>
+            ): Single<WorksResponse>
 
         }
     }
