@@ -13,8 +13,6 @@ import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import dagger.android.support.DaggerFragment
-import paperparcel.PaperParcel
-import paperparcel.PaperParcelable
 import javax.inject.Inject
 
 
@@ -35,7 +33,7 @@ class WorksFragment : DaggerFragment() {
             adapter.items.accept(it)
         })
         adapter.onClick.observe(this, Observer {
-            startActivity(WorkDetailActivity.createIntent(activity!!))
+            startActivity(WorkDetailActivity.createIntent(activity!!, it!!))
         })
     }
 
