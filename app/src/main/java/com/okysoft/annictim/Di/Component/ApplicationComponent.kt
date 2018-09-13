@@ -1,10 +1,7 @@
 package com.okysoft.annictim.Di.Component
 
 import com.okysoft.annictim.AnnictimApplication
-import com.okysoft.annictim.Di.Module.InfraModule
-import com.okysoft.annictim.Di.Module.LoginActivityModule
-import com.okysoft.annictim.Di.Module.UIModule
-import com.okysoft.annictim.Di.Module.WorksFragmentModule
+import com.okysoft.annictim.Di.Module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,6 +14,7 @@ import javax.inject.Singleton
         InfraModule::class,
         LoginActivityModule::class,
         WorksFragmentModule::class,
+        EpisodesFragmentModule::class,
         UIModule::class
         ))
 interface ApplicationComponent: AndroidInjector<AnnictimApplication> {
