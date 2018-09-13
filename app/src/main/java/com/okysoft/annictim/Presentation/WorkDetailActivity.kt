@@ -2,14 +2,17 @@ package com.okysoft.annictim.Presentation
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.R
+import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
 
 class WorkDetailActivity : AppCompatActivity() {
 
     private lateinit var work: Work
+    private lateinit var binding: ActivityWorkDetailBinding
 
     companion object {
 
@@ -26,7 +29,9 @@ class WorkDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_detail)
+        binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
         work = intent.getParcelableExtra(WORK_KEY)
+
     }
 
 }
