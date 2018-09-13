@@ -17,6 +17,11 @@ abstract class EpisodesFragmentModule {
     class InjectViewModel {
 
         @Provides
+        fun providesWorkId(fragment: EpisodesFragment): Int {
+            return fragment.workId
+        }
+
+        @Provides
         fun provideEpisodesViewModel(
                 factory: EpisodesViewModel.Factory,
                 target: EpisodesFragment
