@@ -16,10 +16,9 @@ class WorkDetailActivity : AppCompatActivity() {
         private val WORK_KEY = "WORK_KEY"
 
         fun createIntent(activity: Context, work: Work): Intent {
-            val intent = Intent(activity, WorkDetailActivity::class.java).apply {
+            return Intent(activity, WorkDetailActivity::class.java).apply {
                 putExtra(WORK_KEY, work)
             }
-            return intent
         }
 
     }

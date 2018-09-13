@@ -20,7 +20,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:image_url="@{work.imageUrl}"
+            app:image_url="@{work.images.recommendedUrl}"
             />
 
         <TextView
