@@ -38,6 +38,12 @@ interface AnnictService {
         }
     }
 
+    interface Episode {
+        fun get(
+                @Query("filter_work_id") workId: Int
+        ): Single<List<com.okysoft.annictim.API.Model.Response.Episode>>
+    }
+
     interface Works: Work, Work.Me
 
 }

@@ -4,10 +4,7 @@ import com.apollographql.apollo.ApolloClient
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.okysoft.annictim.API.AnnictService
-import com.okysoft.annictim.API.RequestInterceptor
-import com.okysoft.annictim.API.UserServiceImpl
-import com.okysoft.annictim.API.WorkServiceImpl
+import com.okysoft.annictim.API.*
 import com.okysoft.annictim.AnnictimApplication
 import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.AuthRepositoryImpl
@@ -76,6 +73,12 @@ class InfraModule {
     @Provides
     fun provideUserService(client: ApolloClient): AnnictService.User {
         return UserServiceImpl(client)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEpisodeService(client: Retrofit): AnnictService.Episode {
+        return EpisodeServiceImpl(client)
     }
 
     @Singleton
