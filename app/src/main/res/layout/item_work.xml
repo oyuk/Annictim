@@ -30,6 +30,13 @@
             android:text="@{work.title}"
             />
 
+        <TextView
+            android:id="@+id/watchers_count"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{String.valueOf(work.watchersCount)}"
+            />
+
     </LinearLayout>
 
 </layout>

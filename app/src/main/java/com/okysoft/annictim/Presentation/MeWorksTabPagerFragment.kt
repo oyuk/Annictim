@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
 
@@ -40,11 +41,30 @@ class MeWorksTabPagerFragment : Fragment() {
 
         override fun getItem(position: Int): Fragment?
                 = when (position) {
-            0 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.watching))
-            1 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.wanna_watch))
-            2 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.watched))
-            3 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.on_hold))
-            4 -> WorksFragment.newInstance(WorksRequestType.MeFilterStatus(MeFilterStatus.stop_watching))
+            0 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.wanna_watch),
+                            WorksRequestParamModel.Fields.Feed
+                    )
+            )
+            1 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.watched),
+                            WorksRequestParamModel.Fields.Feed
+                    )
+            )
+            2 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.on_hold),
+                            WorksRequestParamModel.Fields.Feed
+                    )
+            )
+            3 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.stop_watching),
+                            WorksRequestParamModel.Fields.Feed
+                    )
+            )
             else -> null
         }
     }

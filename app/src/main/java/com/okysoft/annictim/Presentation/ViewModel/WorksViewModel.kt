@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.util.Log
 import com.jakewharton.rxrelay2.PublishRelay
 import com.okysoft.annictim.API.Model.Response.Work
+import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.API.Repository.WorkRepository
 import com.okysoft.annictim.Presentation.WorksRequestType
 import com.okysoft.annictim.Result
@@ -18,16 +19,16 @@ import javax.inject.Inject
 
 class WorksViewModel constructor(
         private val repository: WorkRepository,
-        private val worksRequestType: WorksRequestType
+        private val worksRequestParamModel: WorksRequestParamModel
 ) : ViewModel() {
 
     class Factory @Inject constructor(
             private val repository: WorkRepository,
-            private val worksRequestType: WorksRequestType
+            private val worksRequestParamModel: WorksRequestParamModel
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return WorksViewModel(repository, worksRequestType) as T
+            return WorksViewModel(repository, worksRequestParamModel) as T
         }
     }
 
@@ -45,12 +46,12 @@ class WorksViewModel constructor(
     }
 
     private fun createRequest(): Single<Result<List<Work>>> {
-        return when(worksRequestType) {
+        return when(worksRequestParamModel.worksRequestType) {
             is WorksRequestType.Term -> {
-                repository.latest(worksRequestType.toParams())
+                repository.latest(worksRequestParamModel)
             }
             is WorksRequestType.MeFilterStatus -> {
-                repository.me(worksRequestType.meFilterStatus, 1)
+                repository.me(worksRequestParamModel.worksRequestType.meFilterStatus, 1)
             }
         }
     }

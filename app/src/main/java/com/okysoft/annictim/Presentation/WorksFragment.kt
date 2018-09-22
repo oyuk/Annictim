@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.API.WorkTerm
 import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
 import com.okysoft.annictim.R
@@ -21,8 +22,9 @@ class WorksFragment : DaggerFragment() {
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorkAdapter()
 
-    val worksRequestType: WorksRequestType
-        get() =  arguments?.getParcelable(WorksFragment.REQUEST_TYPE) ?: WorksRequestType.Term(WorkTerm.Current)
+    val worksRequestParamModel: WorksRequestParamModel
+        get() =  arguments?.getParcelable(WorksFragment.REQUEST_PARAM_MODEL) ?:
+                WorksRequestParamModel(WorksRequestType.Term(WorkTerm.Current), WorksRequestParamModel.Fields.All)
 
     @Inject
     lateinit var viewModel: WorksViewModel
@@ -51,11 +53,11 @@ class WorksFragment : DaggerFragment() {
 
     companion object {
         val TAG = WorksFragment::class.java.simpleName
-        const val REQUEST_TYPE = "REQUEST_TYPE"
+        const val REQUEST_PARAM_MODEL = "REQUEST_PARAM_MODEL"
 
-        fun newInstance(worksRequestType: WorksRequestType): WorksFragment = WorksFragment().apply {
+        fun newInstance(worksRequestParamModel: WorksRequestParamModel): WorksFragment = WorksFragment().apply {
             val args = Bundle().apply {
-                putParcelable(REQUEST_TYPE, worksRequestType)
+                putParcelable(REQUEST_PARAM_MODEL, worksRequestParamModel)
             }
             arguments = args
         }

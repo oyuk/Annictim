@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.API.WorkTerm
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
@@ -39,10 +40,24 @@ class WorksTabPagerFragment : Fragment() {
 
         override fun getItem(position: Int): Fragment?
                 = when (position) {
-            0 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Current))
-            1 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Next))
-            2 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Previous))
-            3 -> WorksFragment.newInstance(WorksRequestType.Term(WorkTerm.Current))
+            0 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.Term(WorkTerm.Current),
+                            WorksRequestParamModel.Fields.Feed
+                    )
+            )
+            1 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.Term(WorkTerm.Next),
+                            WorksRequestParamModel.Fields.Feed
+                    )
+            )
+            2 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.Term(WorkTerm.Previous),
+                            WorksRequestParamModel.Fields.Feed
+                    )
+            )
             else -> null
         }
     }
