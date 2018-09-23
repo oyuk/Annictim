@@ -33,7 +33,11 @@ class WorkRepository @Inject constructor(private val service: AnnictService.Work
     }
 
     fun latest(season: String, fields: WorksRequestParamModel.Fields): Single<Result<List<Work>>> {
-        return service._latest(season, fields.toParams()).toWorkResults()
+        val params = when(fields) {
+            WorksRequestParamModel.Fields.All -> { null }
+            WorksRequestParamModel.Fields.Feed -> { fields.toParams() }
+        }
+        return service._latest(season, params).toWorkResults()
     }
 
     fun me(filter: MeFilterStatus, page: Int): Single<Result<List<Work>>> {

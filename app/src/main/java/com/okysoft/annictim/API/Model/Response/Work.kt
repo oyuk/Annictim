@@ -1,7 +1,6 @@
 package com.okysoft.annictim.API.Model.Response
 
 import com.google.gson.annotations.SerializedName
-import org.jetbrains.annotations.Nullable
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
@@ -9,21 +8,21 @@ import paperparcel.PaperParcelable
 data class Work(
         @SerializedName("id") val id: Int,
         @SerializedName("title") val title: String,
-        @Nullable @SerializedName("title_kana") val titleKana: String,
-        @Nullable @SerializedName("media") val media: String,
-        @Nullable @SerializedName("media_text") val mediaText: String,
-        @Nullable @SerializedName("season_name") val seasonName: String,
-        @Nullable @SerializedName("season_name_text") val seasonNameText: String,
-        @Nullable @SerializedName("released_on") val releasedOn: String,
-        @Nullable @SerializedName("released_on_about") val releasedOnAbout: String,
-        @Nullable @SerializedName("official_site_url") val officialSiteUrl: String,
-        @Nullable @SerializedName("wikipedia_url") val wikipediaUrl: String,
-        @Nullable @SerializedName("twitter_username") val twitterUsername: String,
-        @Nullable @SerializedName("twitter_hashtag") val twitterHashtag: String,
-        @Nullable @SerializedName("mal_anime_id") val malAnimeId: String,
+        @SerializedName("title_kana") val titleKana: String?,
+        @SerializedName("media") val media: String?,
+        @SerializedName("media_text") val mediaText: String?,
+        @SerializedName("season_name") val seasonName: String?,
+        @SerializedName("season_name_text") val seasonNameText: String?,
+        @SerializedName("released_on") val releasedOn: String?,
+        @SerializedName("released_on_about") val releasedOnAbout: String?,
+        @SerializedName("official_site_url") val officialSiteUrl: String?,
+        @SerializedName("wikipedia_url") val wikipediaUrl: String?,
+        @SerializedName("twitter_username") val twitterUsername: String?,
+        @SerializedName("twitter_hashtag") val twitterHashtag: String?,
+        @SerializedName("mal_anime_id") val malAnimeId: String?,
         @SerializedName("images") val images: Images,
-        @Nullable @SerializedName("episodes_count") val episodesCount: Int,
-        @Nullable @SerializedName("watchers_count") val watchersCount: Int
+        @SerializedName("episodes_count") val episodesCount: Int?,
+        @SerializedName("watchers_count") val watchersCount: Int?
 ): PaperParcelable {
 
     companion object {

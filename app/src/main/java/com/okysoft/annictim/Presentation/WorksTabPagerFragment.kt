@@ -43,19 +43,19 @@ class WorksTabPagerFragment : Fragment() {
             0 -> WorksFragment.newInstance(
                     WorksRequestParamModel(
                             WorksRequestType.Term(WorkTerm.Current),
-                            WorksRequestParamModel.Fields.Feed
+                            WorksRequestParamModel.Fields.All
                     )
             )
             1 -> WorksFragment.newInstance(
                     WorksRequestParamModel(
                             WorksRequestType.Term(WorkTerm.Next),
-                            WorksRequestParamModel.Fields.Feed
+                            WorksRequestParamModel.Fields.All
                     )
             )
             2 -> WorksFragment.newInstance(
                     WorksRequestParamModel(
                             WorksRequestType.Term(WorkTerm.Previous),
-                            WorksRequestParamModel.Fields.Feed
+                            WorksRequestParamModel.Fields.All
                     )
             )
             else -> null
