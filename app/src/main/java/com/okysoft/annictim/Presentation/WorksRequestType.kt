@@ -9,6 +9,15 @@ sealed class WorksRequestType: PaperParcelable {
     abstract fun toParams(): String
 
     @PaperParcel
+    data class Filter(val ids: List<Int>): WorksRequestType() {
+        companion object {
+            @JvmField val CREATOR = PaperParcelWorksRequestType_Filter.CREATOR
+        }
+
+        override fun toParams(): String = ids.joinToString(separator = "")
+    }
+
+    @PaperParcel
     data class Term(val workTerm: WorkTerm): WorksRequestType() {
         companion object {
             @JvmField val CREATOR = PaperParcelWorksRequestType_Term.CREATOR

@@ -41,6 +41,9 @@ interface AnnictService {
             ): Single<WorksResponse>
 
         }
+
+        @GET("/v1/works")
+        fun get(@Query("filter_ids") filterIds: String): Single<WorksResponse>
     }
 
     interface Episode {

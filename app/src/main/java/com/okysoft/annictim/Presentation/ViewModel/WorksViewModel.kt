@@ -53,6 +53,7 @@ class WorksViewModel constructor(
             is WorksRequestType.MeFilterStatus -> {
                 repository.me(worksRequestParamModel.worksRequestType.meFilterStatus, 1)
             }
+            else -> Single.never()
         }
     }
 

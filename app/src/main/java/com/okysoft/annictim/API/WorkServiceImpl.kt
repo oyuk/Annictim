@@ -17,6 +17,10 @@ class WorkServiceImpl @Inject constructor(
     private val retrofitClient = retrofit.create(AnnictService.Work::class.java)
     private val meClient = retrofit.create(AnnictService.Work.Me::class.java)
 
+    override fun get(filterIds: String): Single<WorksResponse> {
+        return retrofitClient.get(filterIds)
+    }
+
     override fun _latest(season: String, fields: String): Single<WorksResponse> {
         return retrofitClient._latest(season, fields)
     }

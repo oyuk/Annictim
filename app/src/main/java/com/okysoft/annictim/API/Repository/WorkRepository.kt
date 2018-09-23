@@ -20,6 +20,14 @@ fun Single<WorksResponse>.toWorkResults(): Single<Result<List<Work>>> {
 
 class WorkRepository @Inject constructor(private val service: AnnictService.Works) {
 
+    fun get(id: Int): Single<Result<Work>> {
+        return service.get("${id}")
+                .map { Result.success(it.works.first()) }
+                .onErrorReturn { Result.failure<Work>(it.toString(), it) }
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun latest(requestModel: WorksRequestParamModel): Single<Result<List<Work>>> {
         return latest(requestModel.worksRequestType.toParams(), requestModel.fields)
     }
