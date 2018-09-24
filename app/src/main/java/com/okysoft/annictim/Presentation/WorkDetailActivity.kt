@@ -1,19 +1,20 @@
 package com.okysoft.annictim.Presentation
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class WorkDetailActivity : AppCompatActivity() {
+class WorkDetailActivity : DaggerAppCompatActivity() {
 
-    private lateinit var work: Work
+    val work: Work by lazy { intent.getParcelableExtra<Work>(WORK_KEY) }
     private lateinit var binding: ActivityWorkDetailBinding
 
     companion object {
@@ -28,9 +29,6 @@ class WorkDetailActivity : AppCompatActivity() {
 
     }
 
-    val workId: Int
-        get() = intent.getParcelableExtra<Work>(WORK_KEY).id
-
     @Inject
     lateinit var viewModel: WorkViewModel
 
@@ -38,7 +36,9 @@ class WorkDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_detail)
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
-        work = intent.getParcelableExtra(WORK_KEY)
+        viewModel.work.observe(this, Observer {
+
+        })
     }
 
 }

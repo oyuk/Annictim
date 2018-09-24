@@ -23,44 +23,30 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <ViewAnimator
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
-            <include layout="@layout/layout_loading"/>
-
-            <LinearLayout
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_height="wrap_content">
+
+            </android.support.design.widget.TabLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="scrollable"
+                app:tabGravity="center"
                 >
+            </android.support.v4.view.ViewPager>
 
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </android.support.design.widget.TabLayout>
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tabMode="scrollable"
-                    app:tabGravity="center"
-                    >
-                </android.support.v4.view.ViewPager>
-
-            </LinearLayout>
-
-            <include
-                android:id="@+id/error"
-                layout="@layout/layout_network_error"
-                />
-
-        </ViewAnimator>
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

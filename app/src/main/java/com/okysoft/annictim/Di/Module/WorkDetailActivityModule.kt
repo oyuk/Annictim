@@ -1,6 +1,7 @@
 package com.okysoft.annictim.Di.Module
 
 import android.arch.lifecycle.ViewModelProviders
+import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
 import com.okysoft.annictim.Presentation.WorkDetailActivity
 import dagger.Module
@@ -17,8 +18,8 @@ abstract class WorkDetailActivityModule {
     class InjectViewModel {
 
         @Provides
-        fun providesWorkId(activity: WorkDetailActivity): Int {
-            return activity.workId
+        fun providesWork(activity: WorkDetailActivity): Work {
+            return activity.work
         }
 
         @Provides
