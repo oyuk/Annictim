@@ -6,6 +6,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.okysoft.annictim.API.Model.Response.Work
+import com.okysoft.annictim.Extension.setImage
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
@@ -39,6 +40,8 @@ class WorkDetailActivity : DaggerAppCompatActivity() {
         viewModel.work.observe(this, Observer {
 
         })
+
+        binding.imageView.setImage(work.images.recommendedUrl)
     }
 
 }

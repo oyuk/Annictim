@@ -15,3 +15,10 @@ fun setImageFromImageUrl(imageView: ImageView, imageUrl: String?) {
             .load(imageUrl)
             .into(imageView)
 }
+
+fun ImageView.setImage(imageUrl: String) {
+    Glide
+            .with(context)
+            .load(imageUrl)
+            .into(this)
+}
