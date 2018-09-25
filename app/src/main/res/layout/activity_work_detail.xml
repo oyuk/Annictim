@@ -40,6 +40,7 @@
                         android:layout_marginTop="24dp"
                         android:padding="24dp"
                         tools:src="@mipmap/ic_launcher"
+                        android:transitionName="workImageView"
                         />
                 </LinearLayout>
 

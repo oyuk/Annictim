@@ -1,9 +1,11 @@
 package com.okysoft.annictim.Presentation
 
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +37,12 @@ class WorksFragment : DaggerFragment() {
             adapter.items.accept(it)
         })
         adapter.onClick.observe(this, Observer {
-            startActivity(WorkDetailActivity.createIntent(activity!!, it!!))
+            it?.let {
+                val pair = android.support.v4.util.Pair.create(it.imateView as View, "workImageView")
+                val options = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(activity as Activity, pair)
+                startActivity(WorkDetailActivity.createIntent(activity!!, it.work), options.toBundle())
+            }
         })
     }
 
