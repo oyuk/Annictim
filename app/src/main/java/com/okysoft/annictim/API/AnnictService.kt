@@ -54,6 +54,10 @@ interface AnnictService {
         ): Single<EpisodesResponse>
     }
 
+    interface Review {
+
+    }
+
     interface Works: Work, Work.Me
 
 }
