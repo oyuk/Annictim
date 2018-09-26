@@ -3,6 +3,7 @@ package com.okysoft.annictim.API
 import com.okysoft.annictim.API.Model.Request.OauthRequestModel
 import com.okysoft.annictim.API.Model.Response.EpisodesResponse
 import com.okysoft.annictim.API.Model.Response.OauthResponseModel
+import com.okysoft.annictim.API.Model.Response.ReviewsResponse
 import com.okysoft.annictim.API.Model.Response.WorksResponse
 import com.okysoft.annictim.Result
 import io.reactivex.Single
@@ -55,7 +56,10 @@ interface AnnictService {
     }
 
     interface Review {
-
+        @GET("/v1/reviews")
+        fun get(
+                @Query("filter_work_id") workId: Int
+        ): Single<ReviewsResponse>
     }
 
     interface Works: Work, Work.Me
