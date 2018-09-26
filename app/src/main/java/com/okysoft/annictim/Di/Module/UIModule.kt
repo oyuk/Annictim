@@ -1,5 +1,6 @@
 package com.okysoft.annictim.Di.Module
 
+import com.okysoft.annictim.Presentation.LaunchActivity
 import com.okysoft.annictim.Presentation.LoginActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -12,5 +13,8 @@ internal abstract class UIModule {
 
     @ContributesAndroidInjector(modules = [LoginActivityModule::class])
     internal abstract fun contributeLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector(modules = [LaunchActivityModule::class])
+    internal abstract fun contributeLaunchActivity(): LaunchActivity
 
 }

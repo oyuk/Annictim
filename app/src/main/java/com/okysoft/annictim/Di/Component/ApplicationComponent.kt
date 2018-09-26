@@ -11,11 +11,13 @@ import javax.inject.Singleton
 @Singleton
 @dagger.Component(modules = arrayOf(
         AndroidSupportInjectionModule::class,
+        ApplicationModule::class,
         InfraModule::class,
         LoginActivityModule::class,
         WorksFragmentModule::class,
         EpisodesFragmentModule::class,
         WorkDetailActivityModule::class,
+        LaunchActivityModule::class,
         UIModule::class
         ))
 interface ApplicationComponent: AndroidInjector<AnnictimApplication> {

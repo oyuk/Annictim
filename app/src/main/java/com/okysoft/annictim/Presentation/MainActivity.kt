@@ -1,5 +1,7 @@
 package com.okysoft.annictim.Presentation
 
+import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.DrawableRes
@@ -14,6 +16,11 @@ class MainActivity : AppCompatActivity() {
 
     private val navigationController = NavigationController(this)
     private lateinit var binding: ActivityMainBinding
+
+    companion object {
+        fun createIntent(activity: Context) = Intent(activity, MainActivity::class.java)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

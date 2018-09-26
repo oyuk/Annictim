@@ -42,6 +42,9 @@ class WorkDetailActivity : DaggerAppCompatActivity() {
         })
 
         binding.imageView.setImage(work.images.recommendedUrl)
+        binding.title.text = work.title
+        binding.media.text = work.mediaText
+        binding.seasonName.text = work.seasonNameText
     }
 
 }
