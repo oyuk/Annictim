@@ -12,7 +12,7 @@ class EpisodeRepository @Inject constructor(private val service: AnnictService.E
 
     fun get(workId: Int): Single<Result<List<Episode>>> {
         return service.get(workId)
-                .map { Result.success(it) }
+                .map { Result.success(it.episodes) }
                 .onErrorReturn { Result.failure<List<Episode>>(it.toString(), it) }
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

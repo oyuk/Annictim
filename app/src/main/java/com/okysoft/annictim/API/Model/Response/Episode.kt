@@ -10,7 +10,7 @@ data class Episode(
     @SerializedName("title") val title: String,
     @SerializedName("records_count") val recordsCount: Int,
     @SerializedName("record_comments_count") val recordCommentsCount: Int,
-    @SerializedName("work") val work: Work
+    @SerializedName("work") val work: Work?
 ) {
 
     data class Work(

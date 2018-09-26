@@ -5,7 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import com.okysoft.annictim.API.Model.Response.Work
+import com.okysoft.annictim.API.Model.WorksRequestParamModel
+import com.okysoft.annictim.API.WorkTerm
 import com.okysoft.annictim.Extension.setImage
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
 import com.okysoft.annictim.R
@@ -45,6 +50,35 @@ class WorkDetailActivity : DaggerAppCompatActivity() {
         binding.title.text = work.title
         binding.media.text = work.mediaText
         binding.seasonName.text = work.seasonNameText
+
+        val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)
+        binding.viewPager.adapter = pagerAdapter
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
+    }
+
+    private inner class PagerAdapter(fm: FragmentManager,
+                                     private val workId: Int) : FragmentPagerAdapter(fm) {
+
+        override fun getCount() = 2
+
+        override fun getPageTitle(position: Int): CharSequence
+                = when (position) {
+            0 -> "Episodes"
+            1 -> "Comment"
+            else -> "Episodes"
+        }
+
+        override fun getItem(position: Int): Fragment?
+                = when (position) {
+            0 -> EpisodesFragment.newInstance(workId)
+            1 -> WorksFragment.newInstance(
+                    WorksRequestParamModel(
+                            WorksRequestType.Term(WorkTerm.Next),
+                            WorksRequestParamModel.Fields.All
+                    )
+            )
+            else -> null
+        }
     }
 
 }

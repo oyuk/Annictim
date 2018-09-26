@@ -1,6 +1,7 @@
 package com.okysoft.annictim.API
 
 import com.okysoft.annictim.API.Model.Request.OauthRequestModel
+import com.okysoft.annictim.API.Model.Response.EpisodesResponse
 import com.okysoft.annictim.API.Model.Response.OauthResponseModel
 import com.okysoft.annictim.API.Model.Response.WorksResponse
 import com.okysoft.annictim.Result
@@ -47,9 +48,10 @@ interface AnnictService {
     }
 
     interface Episode {
+        @GET("/v1/episodes")
         fun get(
                 @Query("filter_work_id") workId: Int
-        ): Single<List<com.okysoft.annictim.API.Model.Response.Episode>>
+        ): Single<EpisodesResponse>
     }
 
     interface Works: Work, Work.Me
