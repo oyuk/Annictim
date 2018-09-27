@@ -9,8 +9,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.okysoft.annictim.API.Model.Response.Work
-import com.okysoft.annictim.API.Model.WorksRequestParamModel
-import com.okysoft.annictim.API.WorkTerm
 import com.okysoft.annictim.Extension.setImage
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
 import com.okysoft.annictim.R
@@ -64,19 +62,14 @@ class WorkDetailActivity : DaggerAppCompatActivity() {
         override fun getPageTitle(position: Int): CharSequence
                 = when (position) {
             0 -> "Episodes"
-            1 -> "Comment"
+            1 -> "Reviews"
             else -> "Episodes"
         }
 
         override fun getItem(position: Int): Fragment?
                 = when (position) {
             0 -> EpisodesFragment.newInstance(workId)
-            1 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.Term(WorkTerm.Next),
-                            WorksRequestParamModel.Fields.All
-                    )
-            )
+            1 -> ReviewsFragment.newInstance(workId)
             else -> null
         }
     }
