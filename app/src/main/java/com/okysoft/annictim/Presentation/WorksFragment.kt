@@ -22,7 +22,7 @@ import javax.inject.Inject
 class WorksFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentWorksBinding
-    private val adapter = WorkAdapter()
+    private val adapter = WorksAdapter()
 
     val worksRequestParamModel: WorksRequestParamModel
         get() =  arguments?.getParcelable(WorksFragment.REQUEST_PARAM_MODEL) ?:

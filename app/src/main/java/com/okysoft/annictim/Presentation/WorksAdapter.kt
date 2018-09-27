@@ -18,7 +18,7 @@ data class WorkClickItem(
         val imateView: ImageView
 )
 
-class WorkAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
+class WorksAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
 
     val items: BehaviorRelay<List<Work>> = BehaviorRelay.createDefault(emptyList())
     private val _onClick = MutableLiveData<WorkClickItem>()
@@ -29,7 +29,7 @@ class WorkAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
         ITEM(0), FOOTER(1)
     }
 
-    private val TAG = WorkAdapter::class.java.name
+    private val TAG = WorksAdapter::class.java.name
 
     init {
         items.subscribeBy(
