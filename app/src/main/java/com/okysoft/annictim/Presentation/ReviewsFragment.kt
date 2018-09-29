@@ -43,7 +43,6 @@ class ReviewsFragment : DaggerFragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.apply {
             addOnScrollListener(LoadMoreScrollListener(layoutManager))
         }

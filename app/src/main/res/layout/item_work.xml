@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -10,34 +13,54 @@
             />
     </data>
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="4dp"
         >
 
-        <ImageView
-            android:id="@+id/imageView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:image_url="@{work.images.recommendedUrl}"
-            android:transitionName="workImageView"
-            />
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            >
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{work.title}"
-            />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                app:image_url="@{work.images.recommendedUrl}"
+                android:transitionName="workImageView"
+                />
 
-        <TextView
-            android:id="@+id/watchers_count"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{String.valueOf(work.watchersCount)}"
-            />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@{work.title}"
+                tools:text="title"
+                />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/watchers_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/ic_eye_24dp"
+                android:drawablePadding="4dp"
+                android:text="@{String.valueOf(work.watchersCount)}"
+                tools:text="100"
+                />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </layout>
