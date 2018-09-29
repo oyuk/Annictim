@@ -123,10 +123,10 @@
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/links"
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
                 >
 
                 <ImageView
@@ -134,39 +134,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_icons8_twitter"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
+                    app:layout_constraintEnd_toStartOf="@id/wikipedia"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
                     android:id="@+id/wikipedia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_icons8_wikipedia"
                     android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toEndOf="@id/twitter"
+                    android:src="@drawable/ic_icons8_wikipedia"
+                    app:layout_constraintEnd_toStartOf="@id/internet"
 
-                    />
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/twitter" />
 
                 <ImageView
                     android:id="@+id/internet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_internet"
                     android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toEndOf="@id/wikipedia"
-
-                    />
+                    android:src="@drawable/ic_internet"
+                    app:layout_constraintEnd_toStartOf="@id/hashtag"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/wikipedia" />
 
                 <ImageView
                     android:id="@+id/hashtag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_hashtag"
                     android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toEndOf="@id/internet"
-                    
-
-                    />
+                    android:src="@drawable/ic_hashtag"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/internet" />
 
             </android.support.constraint.ConstraintLayout>
 
