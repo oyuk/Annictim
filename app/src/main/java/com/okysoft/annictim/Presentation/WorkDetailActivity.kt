@@ -46,8 +46,9 @@ class WorkDetailActivity : DaggerAppCompatActivity() {
 
         binding.imageView.setImage(work.images.recommendedUrl)
         binding.title.text = work.title
-        binding.media.text = work.mediaText
-        binding.seasonName.text = work.seasonNameText
+        binding.media.text = "${work.mediaText} ${work.seasonNameText}"
+        binding.episodesCount.text = work.episodesCount.toString()
+        binding.watchersCount.text = work.watchersCount.toString()
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)
         binding.viewPager.adapter = pagerAdapter

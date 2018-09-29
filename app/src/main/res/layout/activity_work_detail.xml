@@ -65,6 +65,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
@@ -72,7 +74,7 @@
             <TextView
                 android:id="@+id/title"
                 android:gravity="center"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -80,68 +82,93 @@
 
             <TextView
                 android:id="@+id/media"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/grey_600"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="TV"/>
-
-            <TextView
-                android:id="@+id/season_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="2018年夏"/>
+                tools:text="TV 2018年夏"/>
 
             <LinearLayout
-                android:id="@+id/vUserStats"
+                android:id="@+id/count_info"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:baselineAligned="false"
+                android:gravity="center"
                 >
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/episodes_count"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:drawableStart="@drawable/ic_local_movies_24dp"
+                    android:drawablePadding="4dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    tools:text="24 Episodes" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="20sp"
-                        tools:text="episodes_count" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="post"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/user_followers"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/watchers_count"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:drawableStart="@drawable/ic_eye_24dp"
+                    android:drawablePadding="4dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="20sp"
-                        tools:text="watchers_count"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="followers"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                    tools:text="100 Watchers"
+                    />
 
             </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/links"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <ImageView
+                    android:id="@+id/twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_icons8_twitter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/wikipedia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_icons8_wikipedia"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toEndOf="@id/twitter"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/internet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_internet"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toEndOf="@id/wikipedia"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/hashtag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_hashtag"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toEndOf="@id/internet"
+                    
+
+                    />
+
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
