@@ -1,4 +1,4 @@
-package com.okysoft.annictim.Presentation
+package com.okysoft.annictim.Presentation.Activity
 
 import android.arch.lifecycle.Observer
 import android.content.Context
@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.Extension.setImage
+import com.okysoft.annictim.Presentation.Fragment.EpisodesFragment
+import com.okysoft.annictim.Presentation.Fragment.ReviewsFragment
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding

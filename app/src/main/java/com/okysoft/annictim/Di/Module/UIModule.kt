@@ -1,7 +1,7 @@
 package com.okysoft.annictim.Di.Module
 
-import com.okysoft.annictim.Presentation.LaunchActivity
-import com.okysoft.annictim.Presentation.LoginActivity
+import com.okysoft.annictim.Presentation.Activity.LaunchActivity
+import com.okysoft.annictim.Presentation.Activity.LoginActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

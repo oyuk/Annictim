@@ -1,7 +1,7 @@
 package com.okysoft.annictim.Di.Module
 
 import android.arch.lifecycle.ViewModelProviders
-import com.okysoft.annictim.Presentation.EpisodesFragment
+import com.okysoft.annictim.Presentation.Fragment.EpisodesFragment
 import com.okysoft.annictim.Presentation.ViewModel.EpisodesViewModel
 import dagger.Module
 import dagger.Provides

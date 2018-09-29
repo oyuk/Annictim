@@ -1,4 +1,4 @@
-package com.okysoft.annictim.Presentation
+package com.okysoft.annictim.Presentation.Fragment
 
 
 import android.app.Activity
@@ -12,7 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.API.WorkTerm
+import com.okysoft.annictim.Presentation.Activity.WorkDetailActivity
+import com.okysoft.annictim.Presentation.LoadMoreScrollListener
 import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
+import com.okysoft.annictim.Presentation.WorksAdapter
+import com.okysoft.annictim.Presentation.WorksRequestType
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import dagger.android.support.DaggerFragment
@@ -25,7 +29,7 @@ class WorksFragment : DaggerFragment() {
     private val adapter = WorksAdapter()
 
     val worksRequestParamModel: WorksRequestParamModel
-        get() =  arguments?.getParcelable(WorksFragment.REQUEST_PARAM_MODEL) ?:
+        get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?:
                 WorksRequestParamModel(WorksRequestType.Term(WorkTerm.Current), WorksRequestParamModel.Fields.All)
 
     @Inject

@@ -1,4 +1,4 @@
-package com.okysoft.annictim.Presentation
+package com.okysoft.annictim.Presentation.Activity
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle

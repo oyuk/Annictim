@@ -1,7 +1,7 @@
 package com.okysoft.annictim.Di.Module
 
 import android.arch.lifecycle.ViewModelProviders
-import com.okysoft.annictim.Presentation.ReviewsFragment
+import com.okysoft.annictim.Presentation.Fragment.ReviewsFragment
 import com.okysoft.annictim.Presentation.ViewModel.ReviewsViewModel
 import dagger.Module
 import dagger.Provides

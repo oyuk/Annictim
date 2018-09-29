@@ -6,7 +6,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.okysoft.annictim.Presentation.MainActivity"
+        tools:context="com.okysoft.annictim.Presentation.Activity.MainActivity"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.AppBarLayout

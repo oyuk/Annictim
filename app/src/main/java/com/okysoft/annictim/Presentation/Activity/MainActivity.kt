@@ -1,4 +1,4 @@
-package com.okysoft.annictim.Presentation
+package com.okysoft.annictim.Presentation.Activity
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.support.annotation.IdRes
 import android.support.annotation.MenuRes
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
+import com.okysoft.annictim.Presentation.NavigationController
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
 

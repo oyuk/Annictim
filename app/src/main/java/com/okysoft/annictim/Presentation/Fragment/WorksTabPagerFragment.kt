@@ -1,4 +1,4 @@
-package com.okysoft.annictim.Presentation
+package com.okysoft.annictim.Presentation.Fragment
 
 
 import android.databinding.DataBindingUtil
@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.API.WorkTerm
+import com.okysoft.annictim.Presentation.WorksRequestType
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
 

@@ -37,7 +37,8 @@ class EpisodesViewModel @Inject constructor (
                         {
                             when (it) {
                                 is Result.Success -> {
-                                    _episodes.postValue((_episodes.value ?: listOf()).plus(it.data))
+                                    val a = (_episodes.value ?: listOf()).plus(it.data)
+                                    _episodes.postValue(a)
                                 }
                                 is Result.Failure -> {
                                     Log.d("", it.e.toString())

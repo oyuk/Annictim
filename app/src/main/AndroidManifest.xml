@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Presentation.LaunchActivity"
+        <activity android:name=".Presentation.Activity.LaunchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,11 +22,11 @@
         </activity>
 
         <activity
-            android:name=".Presentation.MainActivity"
+            android:name=".Presentation.Activity.MainActivity"
             android:launchMode="singleTask">
         </activity>
         <activity
-            android:name=".Presentation.LoginActivity"
+            android:name=".Presentation.Activity.LoginActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Presentation.WorkDetailActivity"
+            android:name=".Presentation.Activity.WorkDetailActivity"
             android:label="@string/title_activity_work_detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -37,7 +37,8 @@ class ReviewsViewModel @Inject constructor (
                         {
                             when (it) {
                                 is Result.Success -> {
-                                    _reviews.postValue((_reviews.value ?: listOf()).plus(it.data))
+                                    val a = (_reviews.value ?: listOf()).plus(it.data)
+                                    _reviews.postValue(a)
                                 }
                                 is Result.Failure -> {
                                     Log.d("", it.e.toString())

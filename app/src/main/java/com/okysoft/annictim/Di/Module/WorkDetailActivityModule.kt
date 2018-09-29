@@ -3,7 +3,7 @@ package com.okysoft.annictim.Di.Module
 import android.arch.lifecycle.ViewModelProviders
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
-import com.okysoft.annictim.Presentation.WorkDetailActivity
+import com.okysoft.annictim.Presentation.Activity.WorkDetailActivity
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector

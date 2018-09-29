@@ -1,4 +1,4 @@
-package com.okysoft.annictim.Presentation
+package com.okysoft.annictim.Presentation.Fragment
 
 
 import android.arch.lifecycle.Observer
@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.Presentation.EpisodesAdapter
+import com.okysoft.annictim.Presentation.LoadMoreScrollListener
 import com.okysoft.annictim.Presentation.ViewModel.EpisodesViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentEpisodesBinding
@@ -19,7 +21,7 @@ class EpisodesFragment : DaggerFragment() {
     private lateinit var binding: FragmentEpisodesBinding
 
     val workId: Int
-        get() = arguments?.getInt(EpisodesFragment.WORK_ID) ?: -1
+        get() = arguments?.getInt(WORK_ID) ?: -1
 
     @Inject
     lateinit var viewModel: EpisodesViewModel
