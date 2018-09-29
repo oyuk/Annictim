@@ -10,8 +10,8 @@ class EpisodeServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.
 
     private val client = retrofit.create(AnnictService.Episode::class.java)
 
-    override fun get(workId: Int): Single<EpisodesResponse> {
-        return client.get(workId)
+    override fun get(workId: Int, order: String): Single<EpisodesResponse> {
+        return client.get(workId, order)
     }
 
 }

@@ -44,7 +44,6 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
     }
 
     override fun getItemCount(): Int {
-        val a = items.value.size
         if (items.value.isEmpty()) { return 1 }
         return items.value.size
     }

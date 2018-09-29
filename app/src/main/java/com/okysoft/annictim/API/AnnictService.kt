@@ -51,7 +51,8 @@ interface AnnictService {
     interface Episode {
         @GET("/v1/episodes")
         fun get(
-                @Query("filter_work_id") workId: Int
+                @Query("filter_work_id") workId: Int,
+                @Query("sort_sort_number") order: String
         ): Single<EpisodesResponse>
     }
 

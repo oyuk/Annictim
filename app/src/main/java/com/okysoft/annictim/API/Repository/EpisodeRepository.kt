@@ -11,7 +11,7 @@ import javax.inject.Inject
 class EpisodeRepository @Inject constructor(private val service: AnnictService.Episode) {
 
     fun get(workId: Int): Single<Result<List<Episode>>> {
-        return service.get(workId)
+        return service.get(workId, "asc")
                 .map { Result.success(it.episodes) }
                 .onErrorReturn { Result.failure<List<Episode>>(it.toString(), it) }
                 .subscribeOn(Schedulers.newThread())
