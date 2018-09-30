@@ -42,6 +42,7 @@ class WorkDetailActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_detail)
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
+        setSupportActionBar(binding.toolbar)
         viewModel.work.observe(this, Observer {
 
         })
