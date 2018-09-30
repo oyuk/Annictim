@@ -89,6 +89,12 @@ class InfraModule {
 
     @Singleton
     @Provides
+    fun provideRecordService(client: Retrofit): AnnictService.Record {
+        return RecordServiceImpl(client)
+    }
+
+    @Singleton
+    @Provides
     fun createRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .client(client)

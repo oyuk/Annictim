@@ -8,58 +8,57 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.Presentation.Activity.RecordsActivity
-import com.okysoft.annictim.Presentation.EpisodesAdapter
 import com.okysoft.annictim.Presentation.LoadMoreScrollListener
-import com.okysoft.annictim.Presentation.ViewModel.EpisodesViewModel
+import com.okysoft.annictim.Presentation.RecordsActionCreator
+import com.okysoft.annictim.Presentation.RecordsAdapter
+import com.okysoft.annictim.Presentation.ViewModel.RecordsViewModel
 import com.okysoft.annictim.R
-import com.okysoft.annictim.databinding.FragmentEpisodesBinding
+import com.okysoft.annictim.databinding.FragmentRecordsBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class EpisodesFragment : DaggerFragment() {
+class RecordsFragment : DaggerFragment() {
 
-    private lateinit var binding: FragmentEpisodesBinding
+    private lateinit var binding: FragmentRecordsBinding
+    @Inject lateinit var store: RecordsViewModel
+    @Inject lateinit var actionCreator: RecordsActionCreator
 
-    val workId: Int
-        get() = arguments?.getInt(WORK_ID) ?: -1
-
-    @Inject
-    lateinit var viewModel: EpisodesViewModel
-    private val adapter = EpisodesAdapter()
+    val episodeId: Int
+        get() = arguments?.getInt(EPISODE_ID) ?: -1
+    private val adapter = RecordsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.episodes.observe(this, Observer {
+        store.records.observe(this, Observer {
             adapter.items.accept(it)
         })
         adapter.onClick.observe(this, Observer {
             it?.let {
-                startActivity(RecordsActivity.createIntent(activity!!, it.id))
+
             }
         })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_episodes, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_records, container, false)
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
         binding.recyclerView.apply {
             addOnScrollListener(LoadMoreScrollListener(layoutManager))
         }
-        viewModel.fetch()
+        actionCreator.fetch(episodeId)
         return binding.root
     }
 
     companion object {
-        val TAG = EpisodesFragment::class.java.simpleName
-        const val WORK_ID = "WORK_ID"
+        val TAG = RecordsFragment::class.java.simpleName
+        const val EPISODE_ID = "EPISODE_ID"
 
-        fun newInstance(workId: Int): EpisodesFragment = EpisodesFragment().apply {
+        fun newInstance(episodeId: Int): RecordsFragment = RecordsFragment().apply {
             val args = Bundle().apply {
-                putInt(WORK_ID, workId)
+                putInt(EPISODE_ID, episodeId)
             }
             arguments = args
         }

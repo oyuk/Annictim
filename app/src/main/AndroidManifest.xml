@@ -12,19 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Presentation.Activity.LaunchActivity"
+        <activity
+            android:name=".Presentation.Activity.LaunchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Presentation.Activity.MainActivity"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask"></activity>
         <activity
             android:name=".Presentation.Activity.LoginActivity"
             android:launchMode="singleTask">
@@ -42,7 +41,8 @@
         <activity
             android:name=".Presentation.Activity.WorkDetailActivity"
             android:label="@string/title_activity_work_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Presentation.Activity.RecordsActivity"></activity>
     </application>
 
 </manifest>

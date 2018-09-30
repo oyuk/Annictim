@@ -17,6 +17,7 @@ import javax.inject.Singleton
         WorksFragmentModule::class,
         EpisodesFragmentModule::class,
         ReviewsFragmentModule::class,
+        RecordsFragmentModule::class,
         WorkDetailActivityModule::class,
         LaunchActivityModule::class,
         UIModule::class
