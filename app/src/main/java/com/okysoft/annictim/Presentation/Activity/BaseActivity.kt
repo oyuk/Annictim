@@ -18,6 +18,8 @@ abstract class BaseActivity: DaggerAppCompatActivity() {
 
     private fun observeLogout() {
         meStore.logout.observe(this, Observer {
+            val dialog = supportFragmentManager.findFragmentByTag(CustomDialogFragment::class.java.name)
+            if (dialog != null && dialog.isVisible) return@Observer
             CustomDialogFragment.Builder(this)
                     .title("title")
                     .message("message")
