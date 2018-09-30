@@ -15,10 +15,9 @@ import com.okysoft.annictim.Presentation.Fragment.ReviewsFragment
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class WorkDetailActivity : DaggerAppCompatActivity() {
+class WorkDetailActivity : BaseActivity() {
 
     val work: Work by lazy { intent.getParcelableExtra<Work>(WORK_KEY) }
     private lateinit var binding: ActivityWorkDetailBinding

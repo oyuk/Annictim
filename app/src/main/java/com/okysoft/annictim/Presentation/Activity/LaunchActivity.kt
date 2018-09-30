@@ -1,6 +1,8 @@
 package com.okysoft.annictim.Presentation.Activity
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import com.okysoft.annictim.Presentation.ViewModel.LaunchViewModel
 import dagger.android.support.DaggerAppCompatActivity
@@ -10,6 +12,16 @@ class LaunchActivity: DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModel: LaunchViewModel
+
+    companion object {
+
+        fun clearStackAndStart(activity: Activity) {
+            val intent = Intent(activity, LaunchActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_NEW_TASK
+            activity.startActivity(intent)
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

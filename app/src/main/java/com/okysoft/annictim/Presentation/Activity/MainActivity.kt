@@ -8,12 +8,11 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.annotation.MenuRes
 import android.support.annotation.StringRes
-import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.Presentation.NavigationController
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val navigationController = NavigationController(this)
     private lateinit var binding: ActivityMainBinding
@@ -22,12 +21,10 @@ class MainActivity : AppCompatActivity() {
         fun createIntent(activity: Context) = Intent(activity, MainActivity::class.java)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-//        startActivity(LoginActivity.createIntent(this))
 
         navigationController.navigateToWorks()
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->

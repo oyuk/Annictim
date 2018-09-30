@@ -4,11 +4,8 @@ import com.apollographql.apollo.ApolloClient
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.okysoft.annictim.*
 import com.okysoft.annictim.API.*
-import com.okysoft.annictim.AnnictimApplication
-import com.okysoft.annictim.AuthRepository
-import com.okysoft.annictim.AuthRepositoryImpl
-import com.okysoft.annictim.KeyStoreManager
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -27,13 +24,15 @@ class InfraModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-            authRepository: AuthRepository
+            authRepository: AuthRepository,
+            dispatcher: ApplicationDispatcher
             ): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
         val builder = OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .addInterceptor(RequestInterceptor(authRepository))
+                .addInterceptor(ResponseInterceptor(dispatcher))
         return builder.build()
     }
 

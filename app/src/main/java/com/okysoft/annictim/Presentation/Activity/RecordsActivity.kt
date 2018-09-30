@@ -3,11 +3,10 @@ package com.okysoft.annictim.Presentation.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.Presentation.Fragment.RecordsFragment
 import com.okysoft.annictim.R
 
-class RecordsActivity : AppCompatActivity() {
+class RecordsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

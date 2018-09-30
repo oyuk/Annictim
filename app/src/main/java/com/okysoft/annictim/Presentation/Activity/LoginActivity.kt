@@ -9,10 +9,9 @@ import android.support.customtabs.CustomTabsIntent
 import com.okysoft.annictim.Presentation.ViewModel.LoginViewModel
 import com.okysoft.annictim.R
 import dagger.android.AndroidInjection
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class LoginActivity : DaggerAppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     companion object {
         fun createIntent(activity: Context) = Intent(activity, LoginActivity::class.java)
