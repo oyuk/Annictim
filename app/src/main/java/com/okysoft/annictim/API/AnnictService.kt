@@ -1,10 +1,7 @@
 package com.okysoft.annictim.API
 
 import com.okysoft.annictim.API.Model.Request.OauthRequestModel
-import com.okysoft.annictim.API.Model.Response.EpisodesResponse
-import com.okysoft.annictim.API.Model.Response.OauthResponseModel
-import com.okysoft.annictim.API.Model.Response.ReviewsResponse
-import com.okysoft.annictim.API.Model.Response.WorksResponse
+import com.okysoft.annictim.API.Model.Response.*
 import com.okysoft.annictim.Result
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -61,6 +58,13 @@ interface AnnictService {
         fun get(
                 @Query("filter_work_id") workId: Int
         ): Single<ReviewsResponse>
+    }
+
+    interface Record {
+        @GET("/v1/records")
+        fun get(
+                @Query("filter_episode_id") episodeId: Int
+        ): Single<RecordsResponse>
     }
 
     interface Works: Work, Work.Me
