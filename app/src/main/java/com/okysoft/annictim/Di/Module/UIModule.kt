@@ -1,9 +1,6 @@
 package com.okysoft.annictim.Di.Module
 
-import com.okysoft.annictim.Presentation.Activity.BaseActivity
-import com.okysoft.annictim.Presentation.Activity.LaunchActivity
-import com.okysoft.annictim.Presentation.Activity.LoginActivity
-import com.okysoft.annictim.Presentation.Activity.MainActivity
+import com.okysoft.annictim.Presentation.Activity.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -25,4 +22,6 @@ internal abstract class UIModule {
     @ContributesAndroidInjector
     internal abstract fun bindMainActivity(): MainActivity
 
+    @ContributesAndroidInjector
+    internal abstract fun bindRecordsActivity(): RecordsActivity
 }

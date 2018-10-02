@@ -5,17 +5,36 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.util.Log
-import com.jakewharton.rxrelay2.PublishRelay
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.API.Repository.WorkRepository
 import com.okysoft.annictim.Presentation.WorksRequestType
 import com.okysoft.annictim.Result
+import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.processors.PublishProcessor
+import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
+
+
+interface PaginateClient<T> {
+
+}
+
+class WorkPaginator<T>(nextPage: Flowable<Unit>, repository: WorkRepository) {
+
+    private val _items = BehaviorProcessor.create<List<T>>()
+    val items: Flowable<List<T>> = _items
+
+    init {
+        nextPage
+                .subscribe({
+                    repository.
+                })
+    }
+
+}
 
 class WorksViewModel constructor(
         private val repository: WorkRepository,
@@ -35,11 +54,7 @@ class WorksViewModel constructor(
     private val _works = MutableLiveData<List<Work>>()
     val works: LiveData<List<Work>> = _works
 
-    private val paginator = PublishProcessor.create<Int>()
-
     private val compositeDisposable = CompositeDisposable()
-
-    private val page = PublishRelay.create<Int>()
 
     init {
 
@@ -92,4 +107,5 @@ class WorksViewModel constructor(
                         { throwable -> })
                 .addTo(compositeDisposable)
     }
+
 }
