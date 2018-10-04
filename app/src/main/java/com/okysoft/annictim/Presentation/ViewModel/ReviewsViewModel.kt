@@ -41,7 +41,7 @@ class ReviewsViewModel @Inject constructor (
                                     _reviews.postValue(a)
                                 }
                                 is Result.Failure -> {
-                                    Log.d("", it.e.toString())
+                                    Log.d("", it.throwable.toString())
                                 }
                             }
                         },

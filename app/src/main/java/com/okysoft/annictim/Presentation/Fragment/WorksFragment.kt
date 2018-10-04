@@ -12,8 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.okysoft.annictim.API.Model.WorksRequestParamModel
 import com.okysoft.annictim.API.WorkTerm
+import com.okysoft.annictim.Extension.LoadMoreScrollListener
+import com.okysoft.annictim.Extension.addOnLoadMoreListener
 import com.okysoft.annictim.Presentation.Activity.WorkDetailActivity
-import com.okysoft.annictim.Presentation.LoadMoreScrollListener
 import com.okysoft.annictim.Presentation.ViewModel.WorksViewModel
 import com.okysoft.annictim.Presentation.WorksAdapter
 import com.okysoft.annictim.Presentation.WorksRequestType
@@ -23,14 +24,14 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
-class WorksFragment : DaggerFragment() {
+class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorksAdapter()
 
     val worksRequestParamModel: WorksRequestParamModel
         get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?:
-                WorksRequestParamModel(WorksRequestType.Term(WorkTerm.Current), WorksRequestParamModel.Fields.All)
+        WorksRequestParamModel(WorksRequestType.Term(WorkTerm.Current), WorksRequestParamModel.Fields.All)
 
     @Inject
     lateinit var viewModel: WorksViewModel
@@ -38,6 +39,7 @@ class WorksFragment : DaggerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.works.observe(this, Observer {
+            binding.swipeRefresh.isRefreshing = false
             adapter.items.accept(it)
         })
         adapter.onClick.observe(this, Observer {
@@ -56,10 +58,16 @@ class WorksFragment : DaggerFragment() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
         binding.recyclerView.apply {
-            addOnScrollListener(LoadMoreScrollListener(layoutManager))
+            addOnLoadMoreListener(layoutManager,this@WorksFragment)
         }
-        viewModel.onCreate()
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refresh()
+        }
         return binding.root
+    }
+
+    override fun onLoadMore(currentPage: Int) {
+        viewModel.loadMore.onNext(Unit)
     }
 
     companion object {

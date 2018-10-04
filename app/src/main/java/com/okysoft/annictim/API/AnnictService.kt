@@ -28,7 +28,8 @@ interface AnnictService {
         fun latest(season: String): Single<Result<List<com.okysoft.annictim.API.Model.Response.Work>>>
         @GET("/v1/works")
         fun _latest(@Query("filter_season") season: String,
-                    @Query("fields") fields: String?
+                    @Query("fields") fields: String?,
+                    @Query("page") page: Int
                     ): Single<WorksResponse>
 
         interface Me {

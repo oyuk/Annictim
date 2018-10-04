@@ -41,7 +41,7 @@ class EpisodesViewModel @Inject constructor (
                                     _episodes.postValue(a)
                                 }
                                 is Result.Failure -> {
-                                    Log.d("", it.e.toString())
+                                    Log.d("", it.throwable.toString())
                                 }
                             }
                         },

@@ -28,16 +28,16 @@ class WorkRepository @Inject constructor(private val service: AnnictService.Work
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun latest(requestModel: WorksRequestParamModel): Single<Result<List<Work>>> {
-        return latest(requestModel.worksRequestType.toParams(), requestModel.fields)
+    fun latest(requestModel: WorksRequestParamModel, page: Int = 1): Single<Result<List<Work>>> {
+        return latest(requestModel.worksRequestType.toParams(), requestModel.fields, page)
     }
 
-    fun latest(season: String, fields: WorksRequestParamModel.Fields): Single<Result<List<Work>>> {
+    fun latest(season: String, fields: WorksRequestParamModel.Fields, page: Int = 1): Single<Result<List<Work>>> {
         val params = when(fields) {
             WorksRequestParamModel.Fields.All -> { null }
             WorksRequestParamModel.Fields.Feed -> { fields.toParams() }
         }
-        return service._latest(season, params).toWorkResults()
+        return service._latest(season, params, page).toWorkResults()
     }
 
     fun me(filter: MeFilterStatus, page: Int): Single<Result<List<Work>>> {

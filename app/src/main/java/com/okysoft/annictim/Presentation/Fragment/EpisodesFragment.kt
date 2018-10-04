@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.okysoft.annictim.Presentation.Activity.RecordsActivity
 import com.okysoft.annictim.Presentation.EpisodesAdapter
-import com.okysoft.annictim.Presentation.LoadMoreScrollListener
 import com.okysoft.annictim.Presentation.ViewModel.EpisodesViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentEpisodesBinding
@@ -46,9 +45,6 @@ class EpisodesFragment : DaggerFragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.apply {
-            addOnScrollListener(LoadMoreScrollListener(layoutManager))
-        }
         viewModel.fetch()
         return binding.root
     }

@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.Presentation.LoadMoreScrollListener
 import com.okysoft.annictim.Presentation.RecordsActionCreator
 import com.okysoft.annictim.Presentation.RecordsAdapter
 import com.okysoft.annictim.Presentation.ViewModel.RecordsViewModel
@@ -45,9 +44,6 @@ class RecordsFragment : DaggerFragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.apply {
-            addOnScrollListener(LoadMoreScrollListener(layoutManager))
-        }
         actionCreator.fetch(episodeId)
         return binding.root
     }

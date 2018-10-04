@@ -21,8 +21,8 @@ class WorkServiceImpl @Inject constructor(
         return retrofitClient.get(filterIds)
     }
 
-    override fun _latest(season: String, fields: String?): Single<WorksResponse> {
-        return retrofitClient._latest(season, fields)
+    override fun _latest(season: String, fields: String?, page: Int): Single<WorksResponse> {
+        return retrofitClient._latest(season, fields, page)
     }
 
     override fun latest(season: String): Single<Result<List<Work>>> {
