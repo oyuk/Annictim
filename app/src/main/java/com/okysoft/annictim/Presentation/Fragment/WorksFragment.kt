@@ -60,6 +60,7 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         binding.recyclerView.apply {
             addOnLoadMoreListener(layoutManager,this@WorksFragment)
         }
+        binding.recyclerView.itemAnimator.changeDuration = 0
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refresh()
         }
