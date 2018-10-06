@@ -2,9 +2,11 @@ package com.okysoft.annictim.Presentation.Dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 
 class CustomDialogFragment: DialogFragment() {
 
@@ -13,8 +15,7 @@ class CustomDialogFragment: DialogFragment() {
         fun negativeAction()
     }
 
-    var listener: Listener? = null
-
+    private var listener: Listener? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val title = arguments?.getString(TITLE)
@@ -41,6 +42,24 @@ class CustomDialogFragment: DialogFragment() {
         return builder.create()
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        parentFragment?.let {
+            if (it is CustomDialogFragment.Listener) {
+                listener = it
+            }
+            return
+        }
+        if (context is CustomDialogFragment.Listener) {
+            listener = context
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
     companion object {
 
         private val TAG = CustomDialogFragment::class.java.name
@@ -57,12 +76,11 @@ class CustomDialogFragment: DialogFragment() {
         }
     }
 
-    class Builder(private val activity: AppCompatActivity) {
+    class Builder {
         private var title: String? = null
         private var message: String? = null
         private var positiveButtonTitle: String? = null
         private var negativeButtonTitle: String? = null
-        private var listener: CustomDialogFragment.Listener? = null
 
         fun title(title: String): Builder {
             this.title = title
@@ -84,29 +102,26 @@ class CustomDialogFragment: DialogFragment() {
             return this
         }
 
-        fun listener(listener: Listener): Builder {
-            this.listener = listener
-            return this
+        fun build(): CustomDialogFragment {
+            return CustomDialogFragment.newInstance(createBundle())
         }
 
-        private fun create(): CustomDialogFragment {
-            val bundle = Bundle().apply {
+        private fun createBundle(): Bundle {
+            return Bundle().apply {
                 putString(TITLE, title)
                 putString(MESSAGE, message)
                 putString(POSITIVE_BUTTON_TITLE, positiveButtonTitle)
                 putString(NEGATIVE_BUTTON_TITLE, negativeButtonTitle)
             }
-            val fragment = CustomDialogFragment.newInstance(bundle)
-            fragment.listener = listener
-            return fragment
         }
 
-        fun show() {
-            show(TAG)
+        fun show(activity: FragmentActivity) {
+            build().show(activity.supportFragmentManager, TAG)
         }
 
-        fun show(tag: String) {
-            create().show(activity.supportFragmentManager, tag)
+        fun show(fragment: Fragment) {
+            val f = build()
+            f.show(fragment.childFragmentManager, TAG)
         }
 
     }

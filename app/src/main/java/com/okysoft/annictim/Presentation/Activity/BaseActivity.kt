@@ -7,7 +7,7 @@ import com.okysoft.annictim.Presentation.Dialog.CustomDialogFragment
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-abstract class BaseActivity: DaggerAppCompatActivity() {
+abstract class BaseActivity: DaggerAppCompatActivity(), CustomDialogFragment.Listener {
 
     @Inject lateinit var meStore: MeStore
 
@@ -20,21 +20,19 @@ abstract class BaseActivity: DaggerAppCompatActivity() {
         meStore.logout.observe(this, Observer {
             val dialog = supportFragmentManager.findFragmentByTag(CustomDialogFragment::class.java.name)
             if (dialog != null && dialog.isVisible) return@Observer
-            CustomDialogFragment.Builder(this)
+            CustomDialogFragment.Builder()
                     .title("title")
                     .message("message")
                     .positiveButtonTitle("ok")
-                    .listener(object : CustomDialogFragment.Listener {
-                        override fun positiveAction() {
-                            LaunchActivity.clearStackAndStart(this@BaseActivity)
-                        }
-
-                        override fun negativeAction() {
-                            // do nothing
-                        }
-                    })
-                    .show()
+                    .show(this@BaseActivity)
         })
     }
 
+    override fun positiveAction() {
+        LaunchActivity.clearStackAndStart(this@BaseActivity)
+    }
+
+    override fun negativeAction() {
+        // do nothing
+    }
 }
