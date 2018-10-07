@@ -12,3 +12,7 @@ fun<T> Flowable<Result<T>>.filterError(): Flowable<Throwable> {
     return filter { it is Result.Failure }
             .map { (it as Result.Failure).throwable }
 }
+
+inline fun <reified R> Flowable<*>.filterMap(): Flowable<R> {
+    return filter { it is R }.map { (it as R) }
+}
