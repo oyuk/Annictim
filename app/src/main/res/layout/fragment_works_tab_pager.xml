@@ -22,6 +22,7 @@
                 android:background="@color/colorPrimary"
                 app:theme="@style/AppTheme.Toolbar"
                 app:elevation="2dp"
+                app:title="@string/app_name"
                 app:layout_scrollFlags="scroll|enterAlways"
                 />
 

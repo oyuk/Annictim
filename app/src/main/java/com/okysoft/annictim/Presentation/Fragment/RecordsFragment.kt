@@ -4,6 +4,7 @@ package com.okysoft.annictim.Presentation.Fragment
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,8 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentRecordsBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+
+
 
 class RecordsFragment : DaggerFragment() {
 
@@ -44,6 +47,8 @@ class RecordsFragment : DaggerFragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
+        val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+        binding.recyclerView.addItemDecoration(itemDecoration)
         actionCreator.fetch(episodeId)
         return binding.root
     }

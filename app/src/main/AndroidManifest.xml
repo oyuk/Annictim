@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".Presentation.Activity.MainActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity
             android:name=".Presentation.Activity.LoginActivity"
             android:launchMode="singleTask">
@@ -42,7 +42,14 @@
             android:name=".Presentation.Activity.WorkDetailActivity"
             android:label="@string/title_activity_work_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Presentation.Activity.RecordsActivity"></activity>
+        <activity android:name=".Presentation.Activity.RecordsActivity" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Presentation.Activity.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

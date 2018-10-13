@@ -6,4 +6,5 @@
     <string name="title_activity_work_detail">WorkDetailActivity</string>
     <string name="network_error">ネットワークエラー</string>
     <string name="reconnect">再通信</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

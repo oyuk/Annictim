@@ -28,4 +28,10 @@ class RecordsViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .toLiveData()
 
+    val show_empty = dispatcher.success
+            .map { it.items }
+            .filter { it.isEmpty() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .toLiveData()
+
 }

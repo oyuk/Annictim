@@ -33,9 +33,9 @@ class WorksTabPagerFragment : Fragment() {
 
         override fun getPageTitle(position: Int): CharSequence
                 = when (position) {
-            0 -> "Current"
-            1 -> "Next"
-            2 -> "hoge"
+            0 -> "今期"
+            1 -> "来期"
+            2 -> "前期"
             else -> "Previous"
         }
 

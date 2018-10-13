@@ -112,4 +112,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

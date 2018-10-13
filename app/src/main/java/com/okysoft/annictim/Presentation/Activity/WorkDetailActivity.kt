@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.MenuItem
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.Extension.setImage
 import com.okysoft.annictim.Presentation.Fragment.EpisodesFragment
@@ -42,6 +43,7 @@ class WorkDetailActivity : BaseActivity() {
         setContentView(R.layout.activity_work_detail)
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel.work.observe(this, Observer {
 
         })
@@ -49,12 +51,21 @@ class WorkDetailActivity : BaseActivity() {
         binding.imageView.setImage(work.images.recommendedUrl)
         binding.title.text = work.title
         binding.media.text = "${work.mediaText} ${work.seasonNameText}"
-        binding.episodesCount.text = work.episodesCount.toString()
-        binding.watchersCount.text = work.watchersCount.toString()
+//        binding.episodesCount.text = work.episodesCount.toString()
+//        binding.watchersCount.text = work.watchersCount.toString()
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)
         binding.viewPager.adapter = pagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private inner class PagerAdapter(fm: FragmentManager,

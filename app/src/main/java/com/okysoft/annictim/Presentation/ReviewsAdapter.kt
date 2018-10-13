@@ -23,12 +23,6 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import java.util.*
 
-
-
-
-
-
-
 class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>() {
 
     val items: BehaviorRelay<List<Review>> = BehaviorRelay.createDefault(emptyList())
