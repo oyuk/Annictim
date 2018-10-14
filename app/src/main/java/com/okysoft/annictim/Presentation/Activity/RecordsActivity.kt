@@ -2,15 +2,25 @@ package com.okysoft.annictim.Presentation.Activity
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.okysoft.annictim.Presentation.Fragment.RecordsFragment
 import com.okysoft.annictim.R
+import com.okysoft.annictim.databinding.ActivityRecordsBinding
 
 class RecordsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_records)
+
+        val binding = DataBindingUtil.setContentView<ActivityRecordsBinding>(this, R.layout.activity_records)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowTitleEnabled(false)
+        }
+
         val episodeId = intent.getIntExtra(EPISODE_ID, -1)
         supportFragmentManager
                 .beginTransaction()

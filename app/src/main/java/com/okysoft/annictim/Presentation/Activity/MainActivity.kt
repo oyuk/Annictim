@@ -32,6 +32,14 @@ class MainActivity : BaseActivity() {
             navigationItem.navigate(navigationController)
             true
         }
+        binding.bottomNavigationView.setOnNavigationItemReselectedListener { item ->
+            val navigationItem = BottomNavigationItem
+                    .forId(item.itemId)
+            val fragment = supportFragmentManager.findFragmentByTag(navigationItem.name)
+            if (fragment is BottomNavigationItem.OnReselectedListener) {
+                fragment.onReselected()
+            }
+        }
     }
 
     enum class BottomNavigationItem(

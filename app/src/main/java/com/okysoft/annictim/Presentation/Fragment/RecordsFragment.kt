@@ -1,14 +1,17 @@
 package com.okysoft.annictim.Presentation.Fragment
 
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.Presentation.Activity.UserActivity
 import com.okysoft.annictim.Presentation.RecordsActionCreator
 import com.okysoft.annictim.Presentation.RecordsAdapter
 import com.okysoft.annictim.Presentation.ViewModel.RecordsViewModel
@@ -38,6 +41,12 @@ class RecordsFragment : DaggerFragment() {
             it?.let {
 
             }
+        })
+        adapter.onClickUser.observe(this, Observer {
+            val pair = android.support.v4.util.Pair.create(it?.second, "userImageView")
+            val options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(activity as Activity, pair)
+            startActivity(UserActivity.createIntent(activity!!, it!!.first), options.toBundle())
         })
     }
 

@@ -21,6 +21,12 @@ interface AnnictService {
 
     interface User {
         fun getMe(): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
+
+        @GET("/v1/users")
+        fun get(
+                @Query("filter_ids") userIds: String
+        ): Single<UsersResponse>
+
     }
 
     interface Work {

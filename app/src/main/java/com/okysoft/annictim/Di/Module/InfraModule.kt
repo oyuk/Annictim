@@ -70,8 +70,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideUserService(client: ApolloClient): AnnictService.User {
-        return UserServiceImpl(client)
+    fun provideUserService(client: ApolloClient, retrofit: Retrofit): AnnictService.User {
+        return UserServiceImpl(client, retrofit)
     }
 
     @Singleton

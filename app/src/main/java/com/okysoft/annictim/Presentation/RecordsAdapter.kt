@@ -3,6 +3,7 @@ package com.okysoft.annictim.Presentation
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.API.Model.Response.Record
@@ -17,6 +18,8 @@ class RecordsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemRecordBinding>>
     val items: BehaviorRelay<List<Record>> = BehaviorRelay.createDefault(emptyList())
     private val _onClick = MutableLiveData<Record>()
     val onClick: LiveData<Record> = _onClick
+    private val _onClickUser = MutableLiveData<Pair<Int, View>>()
+    val onClickUser: LiveData<Pair<Int, View>> = _onClickUser
     private val bag = CompositeDisposable()
 
     enum class ViewType(val num: Int)  {
@@ -63,6 +66,9 @@ class RecordsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemRecordBinding>>
         val item = items.value[position]
         holder.binding?.root?.setOnClickListener {
             _onClick.postValue(item)
+        }
+        holder.binding?.userImage?.setOnClickListener {
+            _onClickUser.postValue(Pair(item.user.id, it))
         }
         (holder.binding as ItemRecordBinding).run {
             record = item

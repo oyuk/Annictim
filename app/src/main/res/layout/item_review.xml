@@ -10,16 +10,50 @@
             />
     </data>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         >
 
-        <com.github.mikephil.charting.charts.HorizontalBarChart
-            android:id="@+id/chart"
-            android:layout_width="200dp"
-            android:layout_height="150dp" />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/userImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:contentDescription="none"
+            app:image_url="@{review.user.avatarUrl}"
+            app:riv_corner_radius="30dip" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            >
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{review.body}"
+                />
+
+            <com.okysoft.annictim.Presentation.ReviewValueView
+                android:id="@+id/reviewValueView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            </com.okysoft.annictim.Presentation.ReviewValueView>
+
+        </LinearLayout>
 
     </LinearLayout>
 
