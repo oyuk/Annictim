@@ -22,15 +22,15 @@
         android:layout_marginStart="16dp"
         >
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:id="@+id/userImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:contentDescription="none"
-            app:image_url="@{record.user.avatarUrl}"
-            app:riv_corner_radius="30dip" />
+            app:loadImage="@{record.user.avatarUrl}"
+             />
 
         <LinearLayout
             android:layout_width="match_parent"

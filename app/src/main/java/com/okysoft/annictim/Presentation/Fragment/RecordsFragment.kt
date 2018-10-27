@@ -5,7 +5,7 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -43,10 +43,8 @@ class RecordsFragment : DaggerFragment() {
             }
         })
         adapter.onClickUser.observe(this, Observer {
-            val pair = android.support.v4.util.Pair.create(it?.second, "userImageView")
-            val options = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(activity as Activity, pair)
-            startActivity(UserActivity.createIntent(activity!!, it!!.first), options.toBundle())
+            val pair = Pair(it!!.second, "userImageView")
+            UserActivity.start(this.activity as Activity, pair, it.first)
         })
     }
 

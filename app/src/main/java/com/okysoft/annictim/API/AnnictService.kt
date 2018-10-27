@@ -20,12 +20,17 @@ interface AnnictService {
     }
 
     interface User {
-        fun getMe(): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
+//        fun getMe(): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
 
         @GET("/v1/users")
         fun get(
                 @Query("filter_ids") userIds: String
         ): Single<UsersResponse>
+
+        @GET("/v1/me")
+        fun getMe(
+                @Query("access_token") accessToken: String
+        ): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
 
     }
 

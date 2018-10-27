@@ -4,6 +4,7 @@ import android.databinding.BindingAdapter
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter("image_url")
 fun setImageFromImageUrl(imageView: ImageView, imageUrl: String?) {
@@ -13,12 +14,33 @@ fun setImageFromImageUrl(imageView: ImageView, imageUrl: String?) {
     Glide
             .with(imageView.context)
             .load(imageUrl)
+            .apply(RequestOptions.circleCropTransform())
+            .apply(RequestOptions().dontAnimate())
             .into(imageView)
 }
 
-fun ImageView.setImage(imageUrl: String) {
+//
+//fun ImageView.setImage(imageUrl: String) {
+//    Glide
+//            .with(this)
+//            .load(imageUrl)
+//            .apply(RequestOptions.circleCropTransform())
+//            .apply(RequestOptions().dontAnimate())
+//            .into(this)
+//}
+
+
+@BindingAdapter(
+        value = [
+            "loadImage"
+        ]
+)
+fun ImageView.loadImage(imageUrl: String?) {
+    imageUrl ?: return
     Glide
-            .with(context)
+            .with(this)
             .load(imageUrl)
+            .apply(RequestOptions.circleCropTransform())
+            .apply(RequestOptions().dontAnimate())
             .into(this)
 }

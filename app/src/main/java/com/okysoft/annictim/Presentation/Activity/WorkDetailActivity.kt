@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.MenuItem
 import com.okysoft.annictim.API.Model.Response.Work
-import com.okysoft.annictim.Extension.setImage
 import com.okysoft.annictim.Presentation.Fragment.EpisodesFragment
 import com.okysoft.annictim.Presentation.Fragment.ReviewsFragment
 import com.okysoft.annictim.Presentation.ViewModel.WorkViewModel
@@ -48,7 +47,7 @@ class WorkDetailActivity : BaseActivity() {
 
         })
 
-        binding.imageView.setImage(work.images.recommendedUrl)
+//        binding.imageView.setImage(work.images.recommendedUrl)
         binding.title.text = work.title
         binding.media.text = "${work.mediaText} ${work.seasonNameText}"
 //        binding.episodesCount.text = work.episodesCount.toString()
