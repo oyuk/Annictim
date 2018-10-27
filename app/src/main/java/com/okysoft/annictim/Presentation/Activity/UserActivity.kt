@@ -47,6 +47,9 @@ class UserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        postponeEnterTransition()
+
         setContentView(R.layout.activity_user)
 
         setSupportActionBar(binding.toolbar)
@@ -57,10 +60,13 @@ class UserActivity : AppCompatActivity() {
 
         val userId = intent.getIntExtra(USER_ID, -1)
         val sharedElementId = intent.getStringExtra(SHARED_ELEMENT_ID)
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, UserFragment.newInstance(userId, sharedElementId))
-                .commit()
+
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, UserFragment.newInstance(userId, sharedElementId))
+                    .commit()
+        }
     }
 
 }

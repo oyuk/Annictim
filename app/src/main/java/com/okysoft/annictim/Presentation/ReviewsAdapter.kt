@@ -141,7 +141,7 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
 
         holder.binding?.run {
             review = item
-            reviewValueView.setReviewValues(item)
+//            reviewValueView.setReviewValues(item)
         }
     }
 
