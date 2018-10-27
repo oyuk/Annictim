@@ -19,28 +19,27 @@ fun setImageFromImageUrl(imageView: ImageView, imageUrl: String?) {
             .into(imageView)
 }
 
-//
-//fun ImageView.setImage(imageUrl: String) {
-//    Glide
-//            .with(this)
-//            .load(imageUrl)
-//            .apply(RequestOptions.circleCropTransform())
-//            .apply(RequestOptions().dontAnimate())
-//            .into(this)
-//}
-
+fun ImageView.setImage(imageUrl: String) {
+    Glide
+            .with(this)
+            .load(imageUrl)
+            .apply(RequestOptions().dontAnimate())
+            .into(this)
+}
 
 @BindingAdapter(
         value = [
             "loadImage"
-        ]
+        ],
+        requireAll = false
 )
 fun ImageView.loadImage(imageUrl: String?) {
     imageUrl ?: return
+    var options = RequestOptions().dontAnimate().circleCrop()
     Glide
             .with(this)
             .load(imageUrl)
-            .apply(RequestOptions.circleCropTransform())
-            .apply(RequestOptions().dontAnimate())
+            .apply(options)
             .into(this)
+
 }

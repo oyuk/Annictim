@@ -1,6 +1,5 @@
 package com.okysoft.annictim.Presentation.Activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -26,9 +25,9 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-        fun start(activity: Context, sharedElement: Pair<View, String>, userId: Int) {
+        fun start(activity: AppCompatActivity, sharedElement: Pair<View, String>, userId: Int) {
             val options = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(activity as Activity, sharedElement)
+                    .makeSceneTransitionAnimation(activity, sharedElement)
             val intent = Intent(activity, UserActivity::class.java).apply {
                 putExtra(USER_ID, userId)
                 putExtra(SHARED_ELEMENT_ID, sharedElement.second)

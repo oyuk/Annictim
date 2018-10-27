@@ -1,11 +1,11 @@
 package com.okysoft.annictim.Presentation.Fragment
 
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.util.Pair
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -44,7 +44,7 @@ class RecordsFragment : DaggerFragment() {
         })
         adapter.onClickUser.observe(this, Observer {
             val pair = Pair(it!!.second, "userImageView")
-            UserActivity.start(this.activity as Activity, pair, it.first)
+            UserActivity.start(this.activity as AppCompatActivity, pair, it.first)
         })
     }
 

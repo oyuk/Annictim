@@ -32,7 +32,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
-                app:image_url="@{work.images.recommendedUrl}"
+                app:loadImage="@{work.images.recommendedUrl}"
                 android:transitionName="workImageView"
                 />
 
