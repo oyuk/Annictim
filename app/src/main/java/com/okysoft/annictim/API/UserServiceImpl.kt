@@ -3,7 +3,6 @@ package com.okysoft.annictim.API
 import com.apollographql.apollo.ApolloClient
 import com.okysoft.annictim.API.Model.Response.User
 import com.okysoft.annictim.API.Model.Response.UsersResponse
-import com.okysoft.annictim.Result
 import io.reactivex.Single
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -28,7 +27,7 @@ class UserServiceImpl @Inject constructor(
 //        }.single(Result.inProgress())
 //    }
 
-    override fun getMe(accessToken: String): Single<Result<User>> {
+    override fun getMe(accessToken: String): Single<User> {
         return retrofitClient.getMe(accessToken)
     }
 

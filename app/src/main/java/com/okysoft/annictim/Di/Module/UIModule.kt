@@ -24,4 +24,7 @@ internal abstract class UIModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindRecordsActivity(): RecordsActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun bindUserActivity(): UserActivity
 }

@@ -36,4 +36,8 @@ class NavigationController constructor(activity: AppCompatActivity) {
         replaceFragment(SettingFragment.newInstance(), SettingFragment.TAG)
     }
 
+    fun navigateToMe() {
+        replaceFragment(SettingFragment.newInstance(), SettingFragment.TAG)
+    }
+
 }

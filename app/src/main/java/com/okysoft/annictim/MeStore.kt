@@ -1,9 +1,11 @@
 package com.okysoft.annictim
 
 import android.arch.lifecycle.LiveData
+import com.okysoft.annictim.API.Model.Response.User
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class MeStore(
+class MeStore (
         private val authRepository: AuthRepository,
         dispatcher: ApplicationDispatcher
         ) {
@@ -15,5 +17,7 @@ class MeStore(
             .map { }
             .observeOn(AndroidSchedulers.mainThread())
             .toLiveData()
+
+    val me: Flowable<User> = dispatcher.getMe.map { it.me }
 
 }

@@ -27,6 +27,9 @@ class UserFragment : DaggerFragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
         activity?.startPostponedEnterTransition()
+
+
+
         return binding.root
     }
 
@@ -61,7 +64,6 @@ class UserFragment : DaggerFragment() {
                                 }
                             })
                         }
-
         viewModel.fetch()
     }
 
@@ -69,11 +71,13 @@ class UserFragment : DaggerFragment() {
         val TAG = UserFragment::class.java.simpleName
         const val USER_ID = "USER_ID"
         const val SHARED_ELEMENT_ID = "SHARED_ELEMENT_ID"
+        const val IS_ME = "IS_ME"
 
-        fun newInstance(userId: Int, sharedElementId: String): UserFragment = UserFragment().apply {
+        fun newInstance(userId: Int, sharedElementId: String, isMe: Boolean): UserFragment = UserFragment().apply {
             val args = Bundle().apply {
                 putInt(USER_ID, userId)
                 putString(SHARED_ELEMENT_ID, sharedElementId)
+                putBoolean(IS_ME, isMe)
             }
             arguments = args
         }

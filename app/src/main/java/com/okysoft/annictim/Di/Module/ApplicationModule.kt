@@ -1,5 +1,7 @@
 package com.okysoft.annictim.Di.Module
 
+import com.okysoft.annictim.API.Repository.UserRepository
+import com.okysoft.annictim.ApplicationActionCreator
 import com.okysoft.annictim.ApplicationDispatcher
 import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.MeStore
@@ -20,6 +22,14 @@ class ApplicationModule {
     @Provides
     fun provideApplicationDispatcher(): ApplicationDispatcher {
         return ApplicationDispatcher()
+    }
+
+    @Singleton
+    @Provides
+    fun provideApplicationActionCreator(userRepository: UserRepository,
+                                        dispatcher: ApplicationDispatcher
+                                        ): ApplicationActionCreator {
+        return ApplicationActionCreator(userRepository, dispatcher)
     }
 
 }

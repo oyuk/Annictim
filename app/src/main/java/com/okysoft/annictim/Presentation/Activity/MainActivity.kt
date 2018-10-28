@@ -8,14 +8,17 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.annotation.MenuRes
 import android.support.annotation.StringRes
+import com.okysoft.annictim.ApplicationActionCreator
 import com.okysoft.annictim.Presentation.NavigationController
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
     private val navigationController = NavigationController(this)
     private lateinit var binding: ActivityMainBinding
+    @Inject lateinit var applicationActionCreator: ApplicationActionCreator
 
     companion object {
         fun createIntent(activity: Context) = Intent(activity, MainActivity::class.java)
@@ -24,6 +27,11 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (savedInstanceState == null) {
+            applicationActionCreator.getMe()
+        }
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         navigationController.navigateToWorks()

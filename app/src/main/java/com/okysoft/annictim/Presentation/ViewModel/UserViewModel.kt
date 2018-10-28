@@ -7,21 +7,24 @@ import android.arch.lifecycle.ViewModelProvider
 import android.util.Log
 import com.okysoft.annictim.API.Model.Response.User
 import com.okysoft.annictim.API.Repository.UserRepository
+import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.Result
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class UserViewModel constructor(
-        private val userRepository: UserRepository
+        private val userRepository: UserRepository,
+        private val authRepository: AuthRepository
 ): ViewModel() {
 
     class Factory @Inject constructor(
-            private val userRepository: UserRepository
+            private val userRepository: UserRepository,
+            private val authRepository: AuthRepository
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return UserViewModel(userRepository) as T
+            return UserViewModel(userRepository, authRepository) as T
         }
     }
 

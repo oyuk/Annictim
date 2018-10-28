@@ -30,7 +30,7 @@ interface AnnictService {
         @GET("/v1/me")
         fun getMe(
                 @Query("access_token") accessToken: String
-        ): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
+        ): Single<com.okysoft.annictim.API.Model.Response.User>
 
     }
 

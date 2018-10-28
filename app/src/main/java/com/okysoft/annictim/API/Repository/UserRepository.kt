@@ -15,6 +15,9 @@ class UserRepository @Inject constructor(
 
     fun getMe(): Single<Result<User>> {
         return service.getMe(authRepository.getStoredAccessToken())
+                .map { Result.success(it) }
+                .onErrorReturn { Result.failure<User>(it.toString(), it) }
+                .subscribeOn(Schedulers.newThread())
     }
 
     fun get(userId: Int): Single<Result<User>> {
