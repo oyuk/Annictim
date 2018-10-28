@@ -26,10 +26,9 @@ class UserFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
-        activity?.startPostponedEnterTransition()
-
-
-
+        if (arguments!!.getBoolean(IS_ME)) {
+            binding.toolbar.inflateMenu(R.menu.toolbar_me)
+        }
         return binding.root
     }
 

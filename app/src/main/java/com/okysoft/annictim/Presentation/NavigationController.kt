@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.okysoft.annictim.Presentation.Fragment.MeWorksTabPagerFragment
 import com.okysoft.annictim.Presentation.Fragment.SettingFragment
+import com.okysoft.annictim.Presentation.Fragment.UserFragment
 import com.okysoft.annictim.Presentation.Fragment.WorksTabPagerFragment
 import com.okysoft.annictim.R
 
@@ -37,7 +38,7 @@ class NavigationController constructor(activity: AppCompatActivity) {
     }
 
     fun navigateToMe() {
-        replaceFragment(SettingFragment.newInstance(), SettingFragment.TAG)
+        replaceFragment(UserFragment.newInstance(100, "100", true), UserFragment.TAG)
     }
 
 }

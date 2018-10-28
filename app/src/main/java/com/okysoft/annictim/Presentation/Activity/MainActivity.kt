@@ -66,7 +66,7 @@ class MainActivity : BaseActivity() {
         }),
 
         SETTING(R.id.item3, null, R.drawable.abc_btn_check_material, false, {
-            navigateToSetting()
+            navigateToMe()
         });
 
         interface OnReselectedListener {
