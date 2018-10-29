@@ -43,9 +43,16 @@ class RecordsFragment : DaggerFragment() {
             }
         })
         adapter.onClickUser.observe(this, Observer {
+
             val pair = Pair(it!!.second, "userImageView")
+
+//            val transaction = activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(null)
+//            val f = UserFragment.newInstance(it.first, pair.second!!, false)
+//            transaction?.replace(R.id.container, f)?.addSharedElement(it.second, "userImageView")?.commit()
+
             UserActivity.start(this.activity as AppCompatActivity, pair, it.first)
         })
+        actionCreator.fetch(episodeId)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +63,6 @@ class RecordsFragment : DaggerFragment() {
         binding.recyclerView.adapter = adapter
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         binding.recyclerView.addItemDecoration(itemDecoration)
-        actionCreator.fetch(episodeId)
         return binding.root
     }
 

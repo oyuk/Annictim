@@ -1,6 +1,5 @@
 package com.okysoft.annictim.Presentation.Activity
 
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -9,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.MenuItem
+import android.view.View
 import com.okysoft.annictim.API.Model.Response.Work
 import com.okysoft.annictim.Extension.setImage
 import com.okysoft.annictim.Presentation.Fragment.EpisodesFragment
@@ -44,15 +44,31 @@ class WorkDetailActivity : BaseActivity() {
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        viewModel.work.observe(this, Observer {
-
-        })
+//        viewModel.work.observe(this, Observer {
+//
+//        })
 
         binding.imageView.setImage(work.images.recommendedUrl)
         binding.title.text = work.title
         binding.media.text = "${work.mediaText} ${work.seasonNameText}"
-//        binding.episodesCount.text = work.episodesCount.toString()
-//        binding.watchersCount.text = work.watchersCount.toString()
+
+        work.twitterUsername?.let {
+
+        } ?: { binding.twitter.visibility = View.GONE }()
+
+        work.twitterHashtag?.let { hashTag ->
+            binding.twitter.setOnClickListener {
+
+            }
+        } ?: { binding.hashtag.visibility = View.GONE }()
+
+        work.wikipediaUrl?.let {
+
+        } ?: { binding.wikipedia.visibility = View.GONE }()
+
+        work.officialSiteUrl?.let {
+
+        } ?: { binding.internet.visibility = View.GONE }()
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)
         binding.viewPager.adapter = pagerAdapter

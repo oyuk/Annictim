@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    private val navigationController = NavigationController(this)
+    @Inject lateinit var navigationController: NavigationController
     private lateinit var binding: ActivityMainBinding
     @Inject lateinit var applicationActionCreator: ApplicationActionCreator
 

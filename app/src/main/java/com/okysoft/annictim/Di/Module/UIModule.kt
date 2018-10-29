@@ -19,7 +19,7 @@ internal abstract class UIModule {
     @ContributesAndroidInjector
     internal abstract fun bindBaseActivity(): BaseActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
     internal abstract fun bindMainActivity(): MainActivity
 
     @ContributesAndroidInjector

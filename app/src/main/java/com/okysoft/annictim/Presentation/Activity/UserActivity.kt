@@ -47,8 +47,6 @@ class UserActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        postponeEnterTransition()
-
         setContentView(R.layout.activity_user)
 
         setSupportActionBar(binding.toolbar)
@@ -60,10 +58,6 @@ class UserActivity : BaseActivity() {
         val userId = intent.getIntExtra(USER_ID, -1)
         val sharedElementId = intent.getStringExtra(SHARED_ELEMENT_ID)
         val isMe = meStore.me.blockingFirst()?.id == userId
-
-        if (isMe) {
-            binding.toolbar.inflateMenu(R.menu.toolbar_me)
-        }
 
         if (savedInstanceState == null) {
             supportFragmentManager

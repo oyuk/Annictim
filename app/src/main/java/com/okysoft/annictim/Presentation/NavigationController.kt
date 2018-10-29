@@ -3,13 +3,18 @@ package com.okysoft.annictim.Presentation
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import com.okysoft.annictim.MeStore
 import com.okysoft.annictim.Presentation.Fragment.MeWorksTabPagerFragment
 import com.okysoft.annictim.Presentation.Fragment.SettingFragment
 import com.okysoft.annictim.Presentation.Fragment.UserFragment
 import com.okysoft.annictim.Presentation.Fragment.WorksTabPagerFragment
 import com.okysoft.annictim.R
+import javax.inject.Inject
 
-class NavigationController constructor(activity: AppCompatActivity) {
+class NavigationController @Inject constructor(
+        activity: AppCompatActivity,
+        private val meStore: MeStore
+        ) {
     private val containerId: Int = R.id.container
     private val fragmentManager: FragmentManager = activity.supportFragmentManager
 
@@ -38,7 +43,9 @@ class NavigationController constructor(activity: AppCompatActivity) {
     }
 
     fun navigateToMe() {
-        replaceFragment(UserFragment.newInstance(100, "100", true), UserFragment.TAG)
+        val userId = meStore.me.blockingFirst().id
+        if (userId == 0) { return }
+        replaceFragment(UserFragment.newInstance(userId, "100", true), UserFragment.TAG)
     }
 
 }
