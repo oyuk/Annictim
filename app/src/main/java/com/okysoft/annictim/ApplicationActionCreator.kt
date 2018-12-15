@@ -1,7 +1,7 @@
 package com.okysoft.annictim
 
 import android.util.Log
-import com.okysoft.annictim.API.Repository.UserRepository
+import com.okysoft.annictim.api.repository.UserRepository
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

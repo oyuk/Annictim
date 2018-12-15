@@ -1,6 +1,6 @@
 package com.okysoft.annictim
 
-import com.okysoft.annictim.API.Model.Response.User
+import com.okysoft.annictim.api.model.response.User
 
 sealed class ApplicationAction {
     class Logout: ApplicationAction()

@@ -1,6 +1,6 @@
 package com.okysoft.annictim
 
-import com.okysoft.annictim.Di.Component.DaggerApplicationComponent
+import com.okysoft.annictim.di.component.DaggerApplicationComponent
 import dagger.android.support.DaggerApplication
 
 class AnnictimApplication: DaggerApplication() {

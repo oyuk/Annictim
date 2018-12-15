@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".Presentation.Activity.LaunchActivity"
+            android:name=".presentation.activity.LaunchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Presentation.Activity.MainActivity"
+            android:name=".presentation.activity.MainActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".Presentation.Activity.LoginActivity"
+            android:name=".presentation.activity.LoginActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -39,19 +39,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Presentation.Activity.WorkDetailActivity"
+            android:name=".presentation.activity.WorkDetailActivity"
             android:label="@string/title_activity_work_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Presentation.Activity.RecordsActivity" />
+        <activity android:name=".presentation.activity.RecordsActivity" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Presentation.Activity.SearchActivity"
+            android:name=".presentation.activity.SearchActivity"
             android:label="@string/title_activity_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Presentation.Activity.UserActivity"
+            android:name=".presentation.activity.UserActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
