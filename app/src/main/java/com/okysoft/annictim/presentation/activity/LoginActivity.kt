@@ -3,11 +3,13 @@ package com.okysoft.annictim.presentation.activity
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
-import com.okysoft.annictim.presentation.viewModel.LoginViewModel
 import com.okysoft.annictim.R
+import com.okysoft.annictim.databinding.ActivityLoginBinding
+import com.okysoft.annictim.presentation.viewModel.LoginViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -33,7 +35,11 @@ class LoginActivity : BaseActivity() {
             tabsIntent.launchUrl(this@LoginActivity, it)
         })
 
-        viewModel.onCreate()
+
+        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
+        binding.loginButton.setOnClickListener {
+            viewModel.onCreate()
+        }
     }
 
     override fun onResume() {

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
     <android.support.design.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.okysoft.annictim.presentation.activity.LoginActivity"
@@ -10,13 +14,36 @@
         <FrameLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="login"
-        />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+
+                <TextView
+                    android:textSize="50sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Annictim"
+                    />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/login_button"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="ログイン,新規登録"
+                    />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
 
     </android.support.design.widget.CoordinatorLayout>
+
+</layout>
