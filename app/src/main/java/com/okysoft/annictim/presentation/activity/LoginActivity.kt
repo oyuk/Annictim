@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityLoginBinding
+import com.okysoft.annictim.extension.clearStackAndStartActivity
 import com.okysoft.annictim.presentation.viewModel.LoginViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class LoginActivity : BaseActivity() {
         setContentView(R.layout.activity_login)
 
         viewModel.loginComplete.observe(this@LoginActivity, Observer {
-            this@LoginActivity.finish()
+            clearStackAndStartActivity(MainActivity::class.java)
         })
 
         viewModel.openLoginView.observe(this@LoginActivity, Observer {
