@@ -85,6 +85,7 @@ class WorkDetailActivity : BaseActivity() {
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
         var inToolbar = true
+        binding.toolbar.background = getDrawable(R.drawable.toolbar_transition)
 
         binding.appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val toolBarHeight: Float = binding.toolbar.height.toFloat()
@@ -92,17 +93,17 @@ class WorkDetailActivity : BaseActivity() {
                 binding.imageView.getGlobalVisibleRect(it)
             }.bottom - toolBarHeight
 
-            val transition = binding.toolbarFrame.background as TransitionDrawable
+            val transition = binding.toolbar.background as TransitionDrawable
             if (imagesFrameBottomPosition > 0) {
                 if (!inToolbar) {
                     transition.reverseTransition(200)
-                    binding.toolbarTitle.text = ""
+                    binding.toolbar.title = ""
                     inToolbar = true
                 }
             } else {
                 if (inToolbar) {
                     transition.startTransition(200)
-                    binding.toolbarTitle.text = work.title
+                    binding.toolbar.title = work.title
                     inToolbar = false
                 }
             }
