@@ -9,13 +9,14 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.MenuItem
 import android.view.View
+import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Work
+import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
+import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.extension.setImage
 import com.okysoft.annictim.presentation.fragment.EpisodesFragment
 import com.okysoft.annictim.presentation.fragment.ReviewsFragment
 import com.okysoft.annictim.presentation.viewModel.WorkViewModel
-import com.okysoft.annictim.R
-import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
 import javax.inject.Inject
 
 class WorkDetailActivity : BaseActivity() {
@@ -52,22 +53,28 @@ class WorkDetailActivity : BaseActivity() {
         binding.title.text = work.title
         binding.media.text = "${work.mediaText} ${work.seasonNameText}"
 
-        work.twitterUsername?.let {
-
+        work.twitterUsername?.let {userName ->
+            binding.twitter.setOnClickListener {
+                openUrl("https://twitter.com/${userName}")
+            }
         } ?: { binding.twitter.visibility = View.GONE }()
 
         work.twitterHashtag?.let { hashTag ->
-            binding.twitter.setOnClickListener {
-
+            binding.hashtag.setOnClickListener {
+                openUrl("https://twitter.com/search?q=${hashTag}")
             }
         } ?: { binding.hashtag.visibility = View.GONE }()
 
-        work.wikipediaUrl?.let {
-
+        work.wikipediaUrl?.let {url ->
+            binding.wikipedia.setOnClickListener {
+                openUrl(url)
+            }
         } ?: { binding.wikipedia.visibility = View.GONE }()
 
-        work.officialSiteUrl?.let {
-
+        work.officialSiteUrl?.let {url ->
+            binding.internet.setOnClickListener {
+                openUrl(url)
+            }
         } ?: { binding.internet.visibility = View.GONE }()
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)

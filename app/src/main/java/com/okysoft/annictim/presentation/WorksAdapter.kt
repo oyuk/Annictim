@@ -6,9 +6,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.R
+import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.databinding.ItemWorkBinding
+import com.okysoft.annictim.extension.setImage
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -70,8 +71,9 @@ class WorksAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
         holder.binding?.root?.setOnClickListener {
             _onClick.postValue(WorkClickItem(item, holder.binding.imageView))
         }
-        (holder.binding as ItemWorkBinding).run {
+        (holder.binding as ItemWorkBinding).apply {
             work = item
+            imageView.setImage(item.images.recommendedUrl)
         }
     }
 
