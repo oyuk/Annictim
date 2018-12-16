@@ -3,11 +3,12 @@ package com.okysoft.annictim.presentation
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.okysoft.annictim.api.model.response.Record
 import com.okysoft.annictim.R
+import com.okysoft.annictim.api.model.response.Record
 import com.okysoft.annictim.databinding.ItemRecordBinding
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -71,6 +72,7 @@ class RecordsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemRecordBinding>>
             _onClickUser.postValue(Pair(item.user.id, it))
         }
         (holder.binding as ItemRecordBinding).run {
+            Log.d("hoge", item.rating.toString())
             record = item
         }
     }

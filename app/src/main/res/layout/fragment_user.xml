@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="java.lang.Integer" />
         <variable
             name="user"
             type="com.okysoft.annictim.api.model.response.User"
@@ -66,9 +67,10 @@
                     <TextView
                         android:id="@+id/user_name"
                         android:text="@{user.name}"
+                        android:textColor="@color/grey_600"
+                        android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/grey_50"
                         android:layout_marginTop="16dp"
                         android:paddingBottom="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +95,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="視聴数"
+                        android:text="Watching"
                         android:textSize="16sp"
                         />
 
@@ -106,6 +108,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:textSize="16sp"
+                        android:text="@{Integer.toString(user.watchingCount)}"
                         tools:text="100"
                         />
 
@@ -113,7 +116,42 @@
 
                 <include layout="@layout/border" />
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/wanna_watch_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/cell_height"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="Wanna watch"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="16sp"
+                        android:text="@{Integer.toString(user.wannaWatchCount)}"
+                        tools:text="100"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <include layout="@layout/border" />
+
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/watched_count"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/cell_height"
@@ -121,58 +159,100 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
+                        android:layout_height="0dp"
                         android:layout_marginStart="16dp"
                         android:gravity="center_vertical"
-                        android:text="作者サイトへ"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="Watched count"
                         android:textSize="16sp"
                         />
 
-                </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="16sp"
+                        android:text="@{Integer.toString(user.watchedCount)}"
+                        tools:text="100"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
 
                 <include layout="@layout/border" />
 
-                <RelativeLayout
-                    android:id="@+id/on_hold_count"
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/on_hold"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/cell_height"
                     >
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
+                        android:layout_height="0dp"
                         android:layout_marginStart="16dp"
                         android:gravity="center_vertical"
-                        android:text="作者サイトへ"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="On hold"
                         android:textSize="16sp"
                         />
 
-                </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="16sp"
+                        android:text="@{Integer.toString(user.onHoldCount)}"
+                        tools:text="100"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
 
                 <include layout="@layout/border" />
 
-                <RelativeLayout
-                    android:id="@+id/stop_watching_count"
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/stop_watching"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/cell_height"
                     >
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
+                        android:layout_height="0dp"
                         android:layout_marginStart="16dp"
                         android:gravity="center_vertical"
-                        android:text="作者サイトへ"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="Stop watching"
                         android:textSize="16sp"
                         />
 
-                </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="16sp"
+                        android:text="@{Integer.toString(user.stopWatchingCount)}"
+                        tools:text="100"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
 
             </LinearLayout>
 

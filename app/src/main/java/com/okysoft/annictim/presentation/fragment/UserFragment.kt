@@ -11,9 +11,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.presentation.viewModel.UserViewModel
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentUserBinding
+import com.okysoft.annictim.presentation.viewModel.UserViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
