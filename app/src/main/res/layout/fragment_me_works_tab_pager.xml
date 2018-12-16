@@ -17,7 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/colorPrimary"
-                app:title="タグ"
+                app:title="視聴状況"
                 app:theme="@style/AppTheme.Toolbar"
                 app:elevation="2dp"
                 app:layout_scrollFlags="scroll|enterAlways"

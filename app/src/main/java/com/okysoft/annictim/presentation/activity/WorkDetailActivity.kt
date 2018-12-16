@@ -3,6 +3,8 @@ package com.okysoft.annictim.presentation.activity
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.graphics.Rect
+import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -43,6 +45,7 @@ class WorkDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_detail)
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
+        binding.toolbar.title = ""
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //        viewModel.work.observe(this, Observer {
@@ -80,6 +83,29 @@ class WorkDetailActivity : BaseActivity() {
         val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)
         binding.viewPager.adapter = pagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
+
+        var inToolbar = true
+
+        binding.appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val toolBarHeight: Float = binding.toolbar.height.toFloat()
+            val imagesFrameBottomPosition = Rect().also {
+                binding.imageView.getGlobalVisibleRect(it)
+            }.bottom - toolBarHeight
+
+            val transition = binding.toolbarFrame.background as TransitionDrawable
+            if (imagesFrameBottomPosition > 0) {
+                if (!inToolbar) {
+                    transition.reverseTransition(200)
+                    inToolbar = true
+                }
+            } else {
+                if (inToolbar) {
+                    transition.startTransition(200)
+                    inToolbar = false
+                }
+            }
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
