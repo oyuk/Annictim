@@ -159,6 +159,21 @@
                     android:background="@drawable/toolbar_transition"
                     app:layout_collapseMode="pin"
                     >
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:paddingStart="64dp"
+                        android:paddingEnd="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:textColor="@color/grey_50"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical|start"
+                        tools:text="hogehoge"
+                        />
                 </FrameLayout>
 
                 <android.support.v7.widget.Toolbar

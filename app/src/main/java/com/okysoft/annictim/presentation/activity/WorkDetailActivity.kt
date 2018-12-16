@@ -96,11 +96,13 @@ class WorkDetailActivity : BaseActivity() {
             if (imagesFrameBottomPosition > 0) {
                 if (!inToolbar) {
                     transition.reverseTransition(200)
+                    binding.toolbarTitle.text = ""
                     inToolbar = true
                 }
             } else {
                 if (inToolbar) {
                     transition.startTransition(200)
+                    binding.toolbarTitle.text = work.title
                     inToolbar = false
                 }
             }
