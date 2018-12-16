@@ -9,11 +9,11 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.WorksRequestParamModel
+import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
 import com.okysoft.annictim.presentation.MeFilterStatus
 import com.okysoft.annictim.presentation.WorksRequestType
-import com.okysoft.annictim.R
-import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
 
 class MeWorksTabPagerFragment : Fragment() {
 
@@ -29,15 +29,15 @@ class MeWorksTabPagerFragment : Fragment() {
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        override fun getCount() = 4
+        override fun getCount() = 5
 
         override fun getPageTitle(position: Int): CharSequence
                 = when (position) {
-            0 -> MeFilterStatus.watching.toString()
-            1 -> MeFilterStatus.wanna_watch.toString()
-            2 -> MeFilterStatus.watched.toString()
-            3 -> MeFilterStatus.on_hold.toString()
-            4 -> MeFilterStatus.stop_watching.toString()
+            0 -> MeFilterStatus.watching.toDisplayName()
+            1 -> MeFilterStatus.wanna_watch.toDisplayName()
+            2 -> MeFilterStatus.watched.toDisplayName()
+            3 -> MeFilterStatus.on_hold.toDisplayName()
+            4 -> MeFilterStatus.stop_watching.toDisplayName()
             else -> "Next"
         }
 
@@ -45,27 +45,33 @@ class MeWorksTabPagerFragment : Fragment() {
                 = when (position) {
             0 -> WorksFragment.newInstance(
                     WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.wanna_watch),
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.watching),
                             WorksRequestParamModel.Fields.Feed
                     )
             )
             1 -> WorksFragment.newInstance(
                     WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.watched),
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.wanna_watch),
                             WorksRequestParamModel.Fields.Feed
                     )
             )
             2 -> WorksFragment.newInstance(
                     WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.on_hold),
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.watched),
                             WorksRequestParamModel.Fields.Feed
                     )
             )
             3 -> WorksFragment.newInstance(
                     WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.stop_watching),
+                            WorksRequestType.MeFilterStatus(MeFilterStatus.on_hold),
                             WorksRequestParamModel.Fields.Feed
                     )
+            )
+            4 -> WorksFragment.newInstance(
+                WorksRequestParamModel(
+                    WorksRequestType.MeFilterStatus(MeFilterStatus.stop_watching),
+                    WorksRequestParamModel.Fields.Feed
+                )
             )
             else -> null
         }

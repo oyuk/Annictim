@@ -16,7 +16,7 @@ class CustomDialogFragment: DialogFragment() {
     }
 
     private var listener: Listener? = null
-
+    
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val title = arguments?.getString(TITLE)
         val message = arguments?.getString(MESSAGE)

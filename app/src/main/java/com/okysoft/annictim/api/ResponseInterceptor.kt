@@ -11,7 +11,7 @@ class ResponseInterceptor constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
-        if (response.code() in 400..499) {
+        if (response.code() == 401) {
             dispatcher.logout()
         }
         return response
