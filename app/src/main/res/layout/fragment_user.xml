@@ -11,252 +11,254 @@
             />
     </data>
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:fitsSystemWindows="true"
         >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="0dp"
-            android:background="@color/colorPrimary"
-            tools:targetApi="lollipop"
-            />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             >
 
-            <LinearLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="0dp"
+                android:background="@color/colorPrimary"
+                tools:targetApi="lollipop"
+                />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:showIn="@layout/activity_user"
                 >
 
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:showIn="@layout/activity_user"
-                    >
+                <View
+                    android:id="@+id/background"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@id/user_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-                    <View
-                        android:id="@+id/background"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="@id/user_name"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
+                <ImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadImage="@{user.avatarUrl}"
+                    />
 
-                    <ImageView
-                        android:id="@+id/user_image"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:loadImage="@{user.avatarUrl}"
-                        />
+                <TextView
+                    android:id="@+id/user_name"
+                    android:text="@{user.name}"
+                    android:textColor="@color/grey_600"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_image"
+                    tools:text="name"
+                    />
 
-                    <TextView
-                        android:id="@+id/user_name"
-                        android:text="@{user.name}"
-                        android:textColor="@color/grey_600"
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:paddingBottom="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/user_image"
-                        tools:text="name"
-                        />
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/watching_count"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cell_height"
+                >
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/watching_count"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cell_height"
-                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="Watching"
+                    android:textSize="16sp"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="Watching"
-                        android:textSize="16sp"
-                        />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="16sp"
+                    android:text="@{Integer.toString(user.watchingCount)}"
+                    tools:text="100"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginEnd="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="16sp"
-                        android:text="@{Integer.toString(user.watchingCount)}"
-                        tools:text="100"
-                        />
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+            <include layout="@layout/border" />
 
-                <include layout="@layout/border" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/wanna_watch_count"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cell_height"
+                >
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/wanna_watch_count"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cell_height"
-                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="Wanna watch"
+                    android:textSize="16sp"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="Wanna watch"
-                        android:textSize="16sp"
-                        />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="16sp"
+                    android:text="@{Integer.toString(user.wannaWatchCount)}"
+                    tools:text="100"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginEnd="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="16sp"
-                        android:text="@{Integer.toString(user.wannaWatchCount)}"
-                        tools:text="100"
-                        />
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+            <include layout="@layout/border" />
 
-                <include layout="@layout/border" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/watched_count"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cell_height"
+                >
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/watched_count"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cell_height"
-                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="Watched count"
+                    android:textSize="16sp"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="Watched count"
-                        android:textSize="16sp"
-                        />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="16sp"
+                    android:text="@{Integer.toString(user.watchedCount)}"
+                    tools:text="100"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginEnd="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="16sp"
-                        android:text="@{Integer.toString(user.watchedCount)}"
-                        tools:text="100"
-                        />
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+            <include layout="@layout/border" />
 
-                <include layout="@layout/border" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/on_hold"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cell_height"
+                >
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/on_hold"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cell_height"
-                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="On hold"
+                    android:textSize="16sp"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="On hold"
-                        android:textSize="16sp"
-                        />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="16sp"
+                    android:text="@{Integer.toString(user.onHoldCount)}"
+                    tools:text="100"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginEnd="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="16sp"
-                        android:text="@{Integer.toString(user.onHoldCount)}"
-                        tools:text="100"
-                        />
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+            <include layout="@layout/border" />
 
-                <include layout="@layout/border" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/stop_watching"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cell_height"
+                >
 
-                <android.support.constraint.ConstraintLayout
-                    android:id="@+id/stop_watching"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cell_height"
-                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="Stop watching"
+                    android:textSize="16sp"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="Stop watching"
-                        android:textSize="16sp"
-                        />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="16sp"
+                    android:text="@{Integer.toString(user.stopWatchingCount)}"
+                    tools:text="100"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginEnd="16dp"
-                        android:gravity="center_vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="16sp"
-                        android:text="@{Integer.toString(user.stopWatchingCount)}"
-                        tools:text="100"
-                        />
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
-            </LinearLayout>
-
-        </ScrollView>
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>

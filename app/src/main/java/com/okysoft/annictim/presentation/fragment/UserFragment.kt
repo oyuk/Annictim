@@ -4,10 +4,6 @@ package com.okysoft.annictim.presentation.fragment
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.view.ViewCompat
-import android.transition.Transition
-import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,29 +50,29 @@ class UserFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ViewCompat.setTransitionName(binding.userImage, arguments!!.getString(SHARED_ELEMENT_ID))
-        val transitionInflater = TransitionInflater.from(activity)
-
-        sharedElementEnterTransition = transitionInflater.inflateTransition(R.transition.shared_element)
-                        .apply {
-                            addListener(object : Transition.TransitionListener {
-                                override fun onTransitionResume(transition: Transition) {
-                                    Log.d(TAG, "resume")
-                                }
-                                override fun onTransitionPause(transition: Transition) {
-                                    Log.d(TAG, "puase")
-                                }
-                                override fun onTransitionCancel(transition: Transition) {
-                                    Log.d(TAG, "cancel")
-                                }
-                                override fun onTransitionStart(transition: Transition) {
-                                    Log.d(TAG, "start")
-                                }
-                                override fun onTransitionEnd(transition: Transition) {
-                                    Log.d(TAG, "end")
-                                }
-                            })
-                        }
+//        ViewCompat.setTransitionName(binding.userImage, arguments!!.getString(SHARED_ELEMENT_ID))
+//        val transitionInflater = TransitionInflater.from(activity)
+//
+//        sharedElementEnterTransition = transitionInflater.inflateTransition(R.transition.shared_element)
+//                        .apply {
+//                            addListener(object : Transition.TransitionListener {
+//                                override fun onTransitionResume(transition: Transition) {
+//                                    Log.d(TAG, "resume")
+//                                }
+//                                override fun onTransitionPause(transition: Transition) {
+//                                    Log.d(TAG, "puase")
+//                                }
+//                                override fun onTransitionCancel(transition: Transition) {
+//                                    Log.d(TAG, "cancel")
+//                                }
+//                                override fun onTransitionStart(transition: Transition) {
+//                                    Log.d(TAG, "start")
+//                                }
+//                                override fun onTransitionEnd(transition: Transition) {
+//                                    Log.d(TAG, "end")
+//                                }
+//                            })
+//                        }
     }
 
     companion object {
