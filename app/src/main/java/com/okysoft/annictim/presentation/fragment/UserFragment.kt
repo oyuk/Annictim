@@ -26,23 +26,24 @@ class UserFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
-        if (arguments!!.getBoolean(IS_ME)) {
-            binding.toolbar.inflateMenu(R.menu.toolbar_me)
-        }
+//        binding.toolbar.title = "プロフィール"
+//        if (arguments!!.getBoolean(IS_ME)) {
+//            binding.toolbar.inflateMenu(R.menu.toolbar_me)
+//        }
         viewModel.userId = arguments!!.getInt(USER_ID)
         viewModel.user.observe(this, Observer {
             binding.user = it
         })
         viewModel.fetch()
 
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            when {
-                item.itemId == R.id.menu_settings -> {
-
-                }
-            }
-            true
-        }
+//        binding.toolbar.setOnMenuItemClickListener { item ->
+//            when {
+//                item.itemId == R.id.menu_settings -> {
+//
+//                }
+//            }
+//            true
+//        }
 
         return binding.root
     }

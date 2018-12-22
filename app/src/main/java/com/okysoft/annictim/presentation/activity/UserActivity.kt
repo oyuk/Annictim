@@ -8,9 +8,9 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.okysoft.annictim.presentation.fragment.UserFragment
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityUserBinding
+import com.okysoft.annictim.presentation.fragment.UserFragment
 
 class UserActivity : BaseActivity() {
 
@@ -49,15 +49,15 @@ class UserActivity : BaseActivity() {
 
         setContentView(R.layout.activity_user)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setDisplayShowTitleEnabled(false)
-        }
-
         val userId = intent.getIntExtra(USER_ID, -1)
         val sharedElementId = intent.getStringExtra(SHARED_ELEMENT_ID)
         val isMe = meStore.me.blockingFirst()?.id == userId
+
+        binding.toolbar.title = "プロフィール"
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager

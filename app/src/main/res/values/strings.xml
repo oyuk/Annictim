@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Annictim</string>
+    <string name="me_works">視聴状況</string>
+    <string name="user">プロフィール</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
