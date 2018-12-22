@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import com.okysoft.annictim.presentation.fragment.RecordsFragment
+import android.view.MenuItem
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityRecordsBinding
+import com.okysoft.annictim.presentation.fragment.RecordsFragment
 
 class RecordsActivity : BaseActivity() {
 
@@ -15,17 +16,28 @@ class RecordsActivity : BaseActivity() {
         setContentView(R.layout.activity_records)
 
         val binding = DataBindingUtil.setContentView<ActivityRecordsBinding>(this, R.layout.activity_records)
+        binding.toolbar.title = "記録"
         setSupportActionBar(binding.toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
-            it.setDisplayShowTitleEnabled(false)
         }
 
-        val episodeId = intent.getIntExtra(EPISODE_ID, -1)
-        supportFragmentManager
+        if (savedInstanceState == null) {
+            val episodeId = intent.getIntExtra(EPISODE_ID, -1)
+            supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, RecordsFragment.newInstance(episodeId))
                 .commit()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
