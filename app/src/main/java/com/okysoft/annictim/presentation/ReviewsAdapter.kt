@@ -3,10 +3,11 @@ package com.okysoft.annictim.presentation
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.okysoft.annictim.api.model.response.Review
 import com.okysoft.annictim.R
+import com.okysoft.annictim.api.model.response.Review
 import com.okysoft.annictim.databinding.ItemReviewBinding
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -64,7 +65,6 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
         holder.binding?.root?.setOnClickListener {
             _onClick.postValue(item)
         }
-
 
 
 
@@ -141,7 +141,8 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
 
         holder.binding?.run {
             review = item
-//            reviewValueView.setReviewValues(item)
+            comment.visibility = if(item.body.isEmpty()) View.GONE else View.VISIBLE
+            reviewValueView.setReviewValues(item)
         }
     }
 

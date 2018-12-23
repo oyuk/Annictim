@@ -6,6 +6,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/grey_100"
         android:orientation="horizontal"
         >
 
@@ -17,33 +19,33 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:text="映像"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="6dp"
                 android:text="音楽"
                 />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="6dp"
                 android:text="ストーリー"
                 />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="6dp"
                 android:text="キャラクター"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="6dp"
                 android:text="全体"
                 />
 
@@ -52,13 +54,14 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:orientation="vertical"
             >
 
             <TextView
                 android:id="@+id/animationTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:textColor="@color/grey_50"
                 android:text="映像"
                 />
@@ -66,34 +69,34 @@
             <TextView
                 android:id="@+id/musicTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:textColor="@color/grey_50"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:text="音楽"
                 />
             <TextView
                 android:id="@+id/storyTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:textColor="@color/grey_50"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:text="ストーリー"
                 />
             <TextView
                 android:id="@+id/characterTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:textColor="@color/grey_50"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:text="キャラクター"
                 />
 
             <TextView
                 android:id="@+id/overallTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:textColor="@color/grey_50"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:text="全体"
                 />
 
