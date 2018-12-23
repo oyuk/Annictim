@@ -53,7 +53,8 @@
         <activity
             android:name=".presentation.activity.UserActivity"
             android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".presentation.activity.SettingActivity"></activity>
     </application>
 
 </manifest>

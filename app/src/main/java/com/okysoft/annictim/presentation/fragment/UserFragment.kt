@@ -4,11 +4,10 @@ package com.okysoft.annictim.presentation.fragment
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentUserBinding
+import com.okysoft.annictim.presentation.activity.SettingActivity
 import com.okysoft.annictim.presentation.viewModel.UserViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -21,6 +20,7 @@ class UserFragment : DaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +35,7 @@ class UserFragment : DaggerFragment() {
             binding.user = it
         })
         viewModel.fetch()
-
+        setHasOptionsMenu(true)
 //        binding.toolbar.setOnMenuItemClickListener { item ->
 //            when {
 //                item.itemId == R.id.menu_settings -> {
@@ -74,6 +74,18 @@ class UserFragment : DaggerFragment() {
 //                                }
 //                            })
 //                        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater!!.inflate(R.menu.toolbar_me, menu)
+        val item = menu?.findItem(R.id.menu_settings)
+        item?.setOnMenuItemClickListener { i ->
+            activity?.let {
+                it.startActivity(SettingActivity.createIntent(it))
+            }
+            true
+        }
     }
 
     companion object {

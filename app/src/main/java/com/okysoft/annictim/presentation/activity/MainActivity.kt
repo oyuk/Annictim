@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.annotation.MenuRes
 import android.support.annotation.StringRes
-import android.view.Menu
 import com.okysoft.annictim.ApplicationActionCreator
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
@@ -19,7 +18,6 @@ class MainActivity : BaseActivity() {
     @Inject lateinit var navigationController: NavigationController
     private lateinit var binding: ActivityMainBinding
     @Inject lateinit var applicationActionCreator: ApplicationActionCreator
-    private var toolbarRes: Int? = null
 
     companion object {
         fun createIntent(activity: Context) = Intent(activity, MainActivity::class.java)
@@ -34,7 +32,7 @@ class MainActivity : BaseActivity() {
         }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        setSupportActionBar(binding.toolbar)
         navigationController.navigateToWorks()
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             val navigationItem = BottomNavigationItem.forId(item.itemId)
@@ -42,9 +40,6 @@ class MainActivity : BaseActivity() {
             binding.toolbar.title = navigationItem.titleRes?.let {
                 getString(it)
             } ?: ""
-
-            toolbarRes = navigationItem.toolbarRes
-            invalidateOptionsMenu()
 
             navigationItem.navigate(navigationController)
             true
@@ -59,27 +54,21 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(toolbarRes ?: R.menu.toolbar, menu)
-        return true;
-    }
-
     enum class BottomNavigationItem(
             @MenuRes val menuId: Int,
             @StringRes val titleRes: Int?,
-            @MenuRes val toolbarRes: Int?,
             val isUseToolbarElevation: Boolean,
             val navigate: NavigationController.() -> Unit
     ) {
-        WORKS(R.id.item1, R.string.app_name, R.menu.toolbar, false, {
+        WORKS(R.id.item1, R.string.app_name, false, {
             navigateToWorks()
         }),
 
-        ME_WORKS(R.id.item2, R.string.me_works,  R.menu.toolbar, false, {
+        ME_WORKS(R.id.item2, R.string.me_works, false, {
             navigateToMeWorks()
         }),
 
-        SETTING(R.id.item3, R.string.user, R.menu.toolbar_me, false, {
+        SETTING(R.id.item3, R.string.user,false, {
             navigateToMe()
         });
 
