@@ -8,8 +8,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.okysoft.annictim.api.model.response.Review
 import com.okysoft.annictim.R
+import com.okysoft.annictim.api.model.response.Review
 import com.okysoft.annictim.databinding.ViewReviewValuesBinding
 
 class ReviewValueView @JvmOverloads constructor(
@@ -34,16 +34,16 @@ class ReviewValueView @JvmOverloads constructor(
     private fun setRatingValue(value: String, textView: TextView) {
         val c = ContextCompat.getDrawable(context, R.drawable.rating_value_view)
         val color: Int = when(value) {
-            "bad" -> { R.color.red_500 }
-            "average" -> { R.color.orange_500 }
-            "good" -> { R.color.green_500 }
-            "great" -> { R.color.blue_500 }
-            else -> { R.color.orange_500 }
+            "bad" -> { R.color.red_300 }
+            "average" -> { R.color.orange_300 }
+            "good" -> { R.color.green_300 }
+            "great" -> { R.color.blue_300 }
+            else -> { R.color.orange_300 }
         }
         c?.setTint(ContextCompat.getColor(context, color));
         c?.setTintMode(PorterDuff.Mode.SRC_IN);
         textView.apply {
-            this.text = value
+            this.text = value.capitalize()
             this.background = c
         }
     }
