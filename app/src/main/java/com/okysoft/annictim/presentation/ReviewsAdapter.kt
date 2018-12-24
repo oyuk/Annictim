@@ -9,6 +9,8 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Review
 import com.okysoft.annictim.databinding.ItemReviewBinding
+import com.okysoft.annictim.extension.toDate
+import com.okysoft.annictim.extension.toReadableDateTimeString
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -141,6 +143,7 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
 
         holder.binding?.run {
             review = item
+            textViewDate.text = item.createdAt.toDate()?.toReadableDateTimeString()
             comment.visibility = if(item.body.isEmpty()) View.GONE else View.VISIBLE
             if (item.hasRating) {
                 reviewValueView.setReviewValues(item)

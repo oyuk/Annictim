@@ -10,16 +10,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.api.model.WorksRequestParamModel
+import com.okysoft.annictim.R
 import com.okysoft.annictim.api.WorkTerm
+import com.okysoft.annictim.api.model.WorksRequestParamModel
+import com.okysoft.annictim.databinding.FragmentWorksBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
-import com.okysoft.annictim.presentation.activity.WorkDetailActivity
-import com.okysoft.annictim.presentation.viewModel.WorksViewModel
 import com.okysoft.annictim.presentation.WorksAdapter
 import com.okysoft.annictim.presentation.WorksRequestType
-import com.okysoft.annictim.R
-import com.okysoft.annictim.databinding.FragmentWorksBinding
+import com.okysoft.annictim.presentation.activity.WorkDetailActivity
+import com.okysoft.annictim.presentation.viewModel.WorksViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
