@@ -24,11 +24,21 @@ class ReviewValueView @JvmOverloads constructor(
     }
 
     fun setReviewValues(review: Review) {
-        setRatingValue(review.ratingAnimationState, binding.animationTextView)
-        setRatingValue(review.ratingMusicState, binding.musicTextView)
-        setRatingValue(review.ratingStoryState, binding.storyTextView)
-        setRatingValue(review.ratingCharacterState, binding.characterTextView)
-        setRatingValue(review.ratingOverallState, binding.overallTextView)
+        review.ratingAnimationState?.let {
+            setRatingValue(it, binding.animationTextView)
+        }
+        review.ratingMusicState?.let {
+            setRatingValue(it, binding.musicTextView)
+        }
+        review.ratingStoryState?.let {
+            setRatingValue(it, binding.storyTextView)
+        }
+        review.ratingCharacterState?.let {
+            setRatingValue(it, binding.characterTextView)
+        }
+        review.ratingOverallState?.let {
+            setRatingValue(it, binding.overallTextView)
+        }
     }
 
     private fun setRatingValue(value: String, textView: TextView) {

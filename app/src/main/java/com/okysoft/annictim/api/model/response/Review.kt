@@ -1,25 +1,15 @@
 package com.okysoft.annictim.api.model.response
 import com.google.gson.annotations.SerializedName
 
-fun Review.ratingNum(rating: Review.Rating): Float {
-    return when (rating) {
-        Review.Rating.animation -> this.ratingToNum(ratingAnimationState)
-        Review.Rating.mutic -> this.ratingToNum(ratingMusicState)
-        Review.Rating.story -> this.ratingToNum(ratingStoryState)
-        Review.Rating.character -> this.ratingToNum(ratingCharacterState)
-        Review.Rating.overall -> this.ratingToNum(ratingOverallState)
-    }
-}
-
 data class Review(
         @SerializedName("id") val id: Int,
         @SerializedName("title") val title: String,
         @SerializedName("body") val body: String,
-        @SerializedName("rating_animation_state") val ratingAnimationState: String,
-        @SerializedName("rating_music_state") val ratingMusicState: String,
-        @SerializedName("rating_story_state") val ratingStoryState: String,
-        @SerializedName("rating_character_state") val ratingCharacterState: String,
-        @SerializedName("rating_overall_state") val ratingOverallState: String,
+        @SerializedName("rating_animation_state") val ratingAnimationState: String?,
+        @SerializedName("rating_music_state") val ratingMusicState: String?,
+        @SerializedName("rating_story_state") val ratingStoryState: String?,
+        @SerializedName("rating_character_state") val ratingCharacterState: String?,
+        @SerializedName("rating_overall_state") val ratingOverallState: String?,
         @SerializedName("likes_count") val likesCount: Int,
         @SerializedName("impressions_count") val impressionsCount: Int,
         @SerializedName("modified_at") val modifiedAt: Any,
@@ -40,6 +30,15 @@ data class Review(
             else -> 0f
         }
     }
+
+    val hasRating: Boolean
+        get() {
+            return ratingAnimationState != null &&
+                    ratingMusicState != null &&
+                    ratingStoryState != null &&
+                    ratingCharacterState != null &&
+                    ratingOverallState != null
+        }
 
     data class User(
         @SerializedName("id") val id: Int,

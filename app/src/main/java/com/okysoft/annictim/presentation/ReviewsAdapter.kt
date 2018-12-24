@@ -142,7 +142,13 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
         holder.binding?.run {
             review = item
             comment.visibility = if(item.body.isEmpty()) View.GONE else View.VISIBLE
-            reviewValueView.setReviewValues(item)
+            if (item.hasRating) {
+                reviewValueView.setReviewValues(item)
+                reviewValueView.visibility = View.VISIBLE
+            } else {
+                reviewValueView.visibility = View.GONE
+            }
+
         }
     }
 
