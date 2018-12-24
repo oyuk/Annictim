@@ -9,11 +9,11 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.api.model.WorksRequestParamModel
-import com.okysoft.annictim.api.WorkTerm
-import com.okysoft.annictim.presentation.WorksRequestType
 import com.okysoft.annictim.R
+import com.okysoft.annictim.api.WorkTerm
+import com.okysoft.annictim.api.model.WorksRequestParamModel
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
+import com.okysoft.annictim.presentation.WorksRequestType
 
 class WorksTabPagerFragment : Fragment() {
 
@@ -33,10 +33,10 @@ class WorksTabPagerFragment : Fragment() {
 
         override fun getPageTitle(position: Int): CharSequence
                 = when (position) {
-            0 -> "今期"
-            1 -> "来期"
-            2 -> "前期"
-            else -> "Previous"
+            0 -> getString(R.string.current_season)
+            1 -> getString(R.string.next_season)
+            2 -> getString(R.string.previous_season)
+            else -> getString(R.string.current_season)
         }
 
         override fun getItem(position: Int): Fragment?

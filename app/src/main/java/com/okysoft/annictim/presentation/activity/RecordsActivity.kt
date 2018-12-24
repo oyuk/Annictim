@@ -16,7 +16,7 @@ class RecordsActivity : BaseActivity() {
         setContentView(R.layout.activity_records)
 
         val binding = DataBindingUtil.setContentView<ActivityRecordsBinding>(this, R.layout.activity_records)
-        binding.toolbar.title = "記録"
+        binding.toolbar.title = getString(R.string.record)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)

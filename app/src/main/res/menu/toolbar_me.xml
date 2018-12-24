@@ -6,7 +6,7 @@
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings_24dp"
         android:orderInCategory="100"
-        android:title="設定"
+        android:title="@string/setting"
         app:showAsAction="always"
         />
 </menu>

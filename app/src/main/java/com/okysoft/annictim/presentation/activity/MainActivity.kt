@@ -57,18 +57,17 @@ class MainActivity : BaseActivity() {
     enum class BottomNavigationItem(
             @MenuRes val menuId: Int,
             @StringRes val titleRes: Int?,
-            val isUseToolbarElevation: Boolean,
             val navigate: NavigationController.() -> Unit
     ) {
-        WORKS(R.id.item1, R.string.app_name, false, {
+        WORKS(R.id.item1, R.string.app_name, {
             navigateToWorks()
         }),
 
-        ME_WORKS(R.id.item2, R.string.me_works, false, {
+        ME_WORKS(R.id.item2, R.string.me_works, {
             navigateToMeWorks()
         }),
 
-        SETTING(R.id.item3, R.string.user,false, {
+        SETTING(R.id.item3, R.string.user, {
             navigateToMe()
         });
 

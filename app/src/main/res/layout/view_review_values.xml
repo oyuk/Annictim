@@ -20,33 +20,33 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="映像"
+                android:text="@string/movie"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="6dp"
-                android:text="音楽"
+                android:text="@string/music"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="6dp"
-                android:text="ストーリー"
+                android:text="@string/story"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="6dp"
-                android:text="キャラクター"
+                android:text="@string/character"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="6dp"
-                android:text="全体"
+                android:text="@string/overall"
                 />
 
         </LinearLayout>
@@ -63,7 +63,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:textColor="@color/grey_50"
-                android:text="映像"
                 />
 
             <TextView
@@ -72,23 +71,22 @@
                 android:layout_height="20dp"
                 android:textColor="@color/grey_50"
                 android:layout_marginTop="6dp"
-                android:text="音楽"
                 />
+
             <TextView
                 android:id="@+id/storyTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:textColor="@color/grey_50"
                 android:layout_marginTop="6dp"
-                android:text="ストーリー"
                 />
+
             <TextView
                 android:id="@+id/characterTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:textColor="@color/grey_50"
                 android:layout_marginTop="6dp"
-                android:text="キャラクター"
                 />
 
             <TextView
@@ -97,7 +95,6 @@
                 android:layout_height="20dp"
                 android:textColor="@color/grey_50"
                 android:layout_marginTop="6dp"
-                android:text="全体"
                 />
 
         </LinearLayout>

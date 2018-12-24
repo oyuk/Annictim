@@ -48,9 +48,6 @@ class WorkDetailActivity : BaseActivity() {
         binding.toolbar.title = ""
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        viewModel.work.observe(this, Observer {
-//
-//        })
 
         binding.imageView.setImage(work.images.recommendedUrl)
         binding.title.text = work.title

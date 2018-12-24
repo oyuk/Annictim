@@ -53,7 +53,7 @@ class UserActivity : BaseActivity() {
         val sharedElementId = intent.getStringExtra(SHARED_ELEMENT_ID)
         val isMe = meStore.me.blockingFirst()?.id == userId
 
-        binding.toolbar.title = "プロフィール"
+        binding.toolbar.title = getString(R.string.user)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)

@@ -21,7 +21,7 @@ class SettingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_setting)
 
         val binding = DataBindingUtil.setContentView<ActivitySettingBinding>(this, R.layout.activity_setting)
-        binding.toolbar.title = "設定"
+        binding.toolbar.title = getString(R.string.setting)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)

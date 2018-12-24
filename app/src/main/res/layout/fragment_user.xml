@@ -81,7 +81,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="Watching"
+                    android:text="@string/watching"
                     android:textSize="16sp"
                     />
 
@@ -116,7 +116,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="Wanna watch"
+                    android:text="@string/wanna_watch"
                     android:textSize="16sp"
                     />
 
@@ -151,7 +151,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="Watched count"
+                    android:text="@string/watched_count"
                     android:textSize="16sp"
                     />
 
@@ -186,7 +186,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="On hold"
+                    android:text="@string/on_hold"
                     android:textSize="16sp"
                     />
 
@@ -221,7 +221,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="Stop watching"
+                    android:text="@string/stop_watching"
                     android:textSize="16sp"
                     />
 

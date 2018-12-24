@@ -2,6 +2,41 @@
     <string name="app_name">Annictim</string>
     <string name="me_works">視聴状況</string>
     <string name="user">プロフィール</string>
+    <string name="setting">設定</string>
+    <string name="record">記録</string>
+
+    <string name="OK">OK</string>
+    <string name="CANCEL">CANCEL</string>
+
+    <string name="logout">ログアウト</string>
+    <string name="logout_confirm">ログアウトしますか？</string>
+    <string name="login_or_create">ログイン、新規登録</string>
+
+    <string name="current_season">今期</string>
+    <string name="next_season">来期</string>
+    <string name="previous_season">前期</string>
+
+    <string name="feedback">フィードバック</string>
+
+    <string name="watching">Watching</string>
+    <string name="wanna_watch">Wanna watch</string>
+    <string name="watched_count">Watched count</string>
+    <string name="on_hold">On hold</string>
+    <string name="stop_watching">Stop watching</string>
+
+    <string name="movie">映像</string>
+    <string name="music">音楽</string>
+    <string name="story">ストーリー</string>
+    <string name="character">キャラクター</string>
+    <string name="overall">全体</string>
+
+    <string name="to_creator_site">作者サイトへ</string>
+    <string name="to_github">ソースコードを見る(GitHub)</string>
+    <string name="license">ライセンス</string>
+
+    <string name="home">Home</string>
+    <string name="record_en">Record</string>
+    <string name="profile">Profile</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
