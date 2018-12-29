@@ -39,10 +39,10 @@ class SettingFragment : DaggerFragment(), CustomDialogFragment.Listener {
             val tabsIntent = CustomTabsIntent.Builder().build()
             tabsIntent.launchUrl(this@SettingFragment.activity, Uri.parse("http://reidr.hatenablog.com/"))
         }
-        binding.sourceCodeText.setOnClickListener {
-            val tabsIntent = CustomTabsIntent.Builder().build()
-            tabsIntent.launchUrl(this@SettingFragment.activity, Uri.parse("https://github.com/oyuk/Annictim"))
-        }
+//        binding.sourceCodeText.setOnClickListener {
+//            val tabsIntent = CustomTabsIntent.Builder().build()
+//            tabsIntent.launchUrl(this@SettingFragment.activity, Uri.parse("https://github.com/oyuk/Annictim"))
+//        }
         binding.license.setOnClickListener {
             startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
         }
