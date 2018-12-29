@@ -11,6 +11,7 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityLoginBinding
 import com.okysoft.annictim.extension.clearStackAndStartActivity
 import com.okysoft.annictim.extension.clearTopAndStartActivity
+import com.okysoft.annictim.presentation.dialog.ProgressFragment
 import com.okysoft.annictim.presentation.viewModel.LoginViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -53,10 +54,18 @@ class LoginActivity : BaseActivity() {
         super.onResume()
         val data = intent.dataString
         data?.let {
+            showProgress()
             val uri = Uri.parse(data)
             viewModel.fetch(uri)
             return
         }
+    }
+
+    private fun showProgress() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.content, ProgressFragment.newInstance())
+            .commit()
     }
 
     public override fun onNewIntent(intent: Intent) {

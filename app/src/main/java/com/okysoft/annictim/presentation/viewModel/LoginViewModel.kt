@@ -4,9 +4,9 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.net.Uri
-import com.okysoft.annictim.api.repository.OauthRepository
 import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.BuildConfig
+import com.okysoft.annictim.api.repository.OauthRepository
 import com.okysoft.annictim.toLiveData
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -24,6 +24,7 @@ class LoginViewModel @Inject constructor(
                 .map {  }
                 .toLiveData()
     }
+
     private val _openLoginView = MutableLiveData<Uri>()
     val openLoginView:LiveData<Uri> = _openLoginView
 
