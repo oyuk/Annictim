@@ -1,7 +1,6 @@
 package com.okysoft.annictim.presentation.fragment
 
 
-import android.app.Activity
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.net.Uri
@@ -13,6 +12,7 @@ import android.view.ViewGroup
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentSettingBinding
+import com.okysoft.annictim.extension.clearStackAndStartActivity
 import com.okysoft.annictim.presentation.activity.LaunchActivity
 import com.okysoft.annictim.presentation.dialog.CustomDialogFragment
 import com.okysoft.annictim.presentation.viewModel.SettingViewModel
@@ -50,8 +50,10 @@ class SettingFragment : DaggerFragment(), CustomDialogFragment.Listener {
     }
 
     override fun positiveAction() {
-        viewModel.logout()
-        LaunchActivity.clearStackAndStart(this@SettingFragment.activity as Activity)
+        activity?.let {
+            viewModel.logout()
+            it.clearStackAndStartActivity(LaunchActivity::class.java)
+        }
     }
 
     override fun negativeAction() {

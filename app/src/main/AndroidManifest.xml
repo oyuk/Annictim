@@ -23,10 +23,11 @@
         </activity>
         <activity
             android:name=".presentation.activity.MainActivity"
-            android:launchMode="singleTask" />
+             />
         <activity
             android:name=".presentation.activity.LoginActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTop"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

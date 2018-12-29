@@ -3,7 +3,6 @@ package com.okysoft.annictim.presentation.activity
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import com.okysoft.annictim.MeStore
-import com.okysoft.annictim.extension.clearStackAndStartActivity
 import com.okysoft.annictim.presentation.dialog.CustomDialogFragment
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
@@ -30,7 +29,7 @@ abstract class BaseActivity: DaggerAppCompatActivity(), CustomDialogFragment.Lis
     }
 
     override fun positiveAction() {
-        clearStackAndStartActivity(LaunchActivity::class.java)
+        LaunchActivity.start(this)
     }
 
     override fun negativeAction() {

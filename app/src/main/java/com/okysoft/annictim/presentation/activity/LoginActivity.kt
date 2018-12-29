@@ -10,6 +10,7 @@ import android.support.customtabs.CustomTabsIntent
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityLoginBinding
 import com.okysoft.annictim.extension.clearStackAndStartActivity
+import com.okysoft.annictim.extension.clearTopAndStartActivity
 import com.okysoft.annictim.presentation.viewModel.LoginViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -17,7 +18,13 @@ import javax.inject.Inject
 class LoginActivity : BaseActivity() {
 
     companion object {
+
         fun createIntent(activity: Context) = Intent(activity, LoginActivity::class.java)
+
+        fun start(context: Context) {
+            context.clearTopAndStartActivity(createIntent(context))
+        }
+
     }
 
     @Inject lateinit var viewModel: LoginViewModel
@@ -35,7 +42,6 @@ class LoginActivity : BaseActivity() {
             val tabsIntent = CustomTabsIntent.Builder().build()
             tabsIntent.launchUrl(this@LoginActivity, it)
         })
-
 
         val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
         binding.loginButton.setOnClickListener {
@@ -57,7 +63,5 @@ class LoginActivity : BaseActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
     }
-
-    override fun onBackPressed() {}
 
 }

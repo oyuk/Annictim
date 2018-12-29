@@ -10,6 +10,7 @@ import android.support.annotation.StringRes
 import com.okysoft.annictim.ApplicationActionCreator
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
+import com.okysoft.annictim.extension.clearTopAndStartActivity
 import com.okysoft.annictim.presentation.NavigationController
 import javax.inject.Inject
 
@@ -21,6 +22,10 @@ class MainActivity : BaseActivity() {
 
     companion object {
         fun createIntent(activity: Context) = Intent(activity, MainActivity::class.java)
+
+        fun start(context: Context) {
+            context.clearTopAndStartActivity(createIntent(context))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +51,7 @@ class MainActivity : BaseActivity() {
         }
         binding.bottomNavigationView.setOnNavigationItemReselectedListener { item ->
             val navigationItem = BottomNavigationItem
-                    .forId(item.itemId)
+                .forId(item.itemId)
             val fragment = supportFragmentManager.findFragmentByTag(navigationItem.name)
             if (fragment is BottomNavigationItem.OnReselectedListener) {
                 fragment.onReselected()
@@ -55,9 +60,9 @@ class MainActivity : BaseActivity() {
     }
 
     enum class BottomNavigationItem(
-            @MenuRes val menuId: Int,
-            @StringRes val titleRes: Int?,
-            val navigate: NavigationController.() -> Unit
+        @MenuRes val menuId: Int,
+        @StringRes val titleRes: Int?,
+        val navigate: NavigationController.() -> Unit
     ) {
         WORKS(R.id.item1, R.string.app_name, {
             navigateToWorks()
