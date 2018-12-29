@@ -47,7 +47,8 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
                 val pair = android.support.v4.util.Pair.create(it.imateView as View, "workImageView")
                 val options = ActivityOptionsCompat
                         .makeSceneTransitionAnimation(activity as Activity, pair)
-                startActivity(WorkDetailActivity.createIntent(activity!!, it.work), options.toBundle())
+//                startActivity(WorkDetailActivity.createIntent(activity!!, it.work), options.toBundle())
+                startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
             }
         })
     }

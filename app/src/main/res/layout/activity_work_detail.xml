@@ -40,7 +40,6 @@
                         android:layout_height="wrap_content"
                         android:background="@color/grey_50"
                         tools:src="@mipmap/ic_launcher"
-                        android:transitionName="workImageView"
                         />
 
                     <TextView
