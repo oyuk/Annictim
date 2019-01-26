@@ -1,10 +1,10 @@
 package com.okysoft.annictim.api
 
 import com.apollographql.apollo.ApolloClient
-import com.okysoft.annictim.api.model.response.Work
-import com.okysoft.annictim.api.model.response.WorksResponse
 import com.okysoft.annictim.Result
 import com.okysoft.annictim.Result.Companion.success
+import com.okysoft.annictim.api.model.response.Work
+import com.okysoft.annictim.api.model.response.WorksResponse
 import io.reactivex.Single
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -43,8 +43,12 @@ class WorkServiceImpl @Inject constructor(
 //                }.single(inProgress())
     }
 
-    override fun me(filterStatus: String, page: Int): Single<WorksResponse> {
-        return meClient.me(filterStatus, page)
+    override fun search(query: Map<String, String>): Single<WorksResponse> {
+        return retrofitClient.search(query)
+    }
+
+    override fun me(query: Map<String, String>): Single<WorksResponse> {
+        return meClient.me(query)
     }
 
 }

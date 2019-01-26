@@ -1,11 +1,10 @@
 package com.okysoft.annictim.api.repository
 
+import com.okysoft.annictim.Result
 import com.okysoft.annictim.api.AnnictService
+import com.okysoft.annictim.api.model.WorksRequestParamModel
 import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.api.model.response.WorksResponse
-import com.okysoft.annictim.api.model.WorksRequestParamModel
-import com.okysoft.annictim.presentation.MeFilterStatus
-import com.okysoft.annictim.Result
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -29,19 +28,19 @@ class WorkRepository @Inject constructor(private val service: AnnictService.Work
     }
 
     fun latest(requestModel: WorksRequestParamModel, page: Int = 1): Single<Result<List<Work>>> {
-        return latest(requestModel.worksRequestType.toParams(), requestModel.fields, page)
+        return search(requestModel, page)
     }
 
-    fun latest(season: String, fields: WorksRequestParamModel.Fields, page: Int = 1): Single<Result<List<Work>>> {
-        val params = when(fields) {
-            WorksRequestParamModel.Fields.All -> { null }
-            WorksRequestParamModel.Fields.Feed -> { fields.toParams() }
-        }
-        return service._latest(season, params, page).toWorkResults()
+    fun search(requestParamModel: WorksRequestParamModel, page: Int = 1): Single<Result<List<Work>>> {
+        val params = requestParamModel.toParams().toMutableMap()
+        params["page"] = page.toString()
+        return service.search(params).toWorkResults()
     }
 
-    fun me(filter: MeFilterStatus, page: Int): Single<Result<List<Work>>> {
-        return service.me(filter.toString(), page).toWorkResults()
+    fun me(requestParamModel: WorksRequestParamModel, page: Int): Single<Result<List<Work>>> {
+        val params = requestParamModel.toParams().toMutableMap()
+        params["page"] = page.toString()
+        return service.me(params).toWorkResults()
     }
 
 }

@@ -22,6 +22,15 @@ data class WorksRequestParamModel (
         }
     }
 
+    fun toParams(): Map<String, String> {
+        val params = worksRequestType.toParams().toMutableMap()
+        val fieldsParams = fields.toParams()
+        if (fieldsParams.isNotEmpty()) {
+            params["fields"] = fieldsParams
+        }
+        return params
+    }
+
     companion object {
         @JvmField val CREATOR = PaperParcelWorksRequestParamModel.CREATOR
     }

@@ -1,12 +1,13 @@
 package com.okysoft.annictim.api
 
+import com.okysoft.annictim.Result
 import com.okysoft.annictim.api.model.request.OauthRequestModel
 import com.okysoft.annictim.api.model.response.*
-import com.okysoft.annictim.Result
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface AnnictService {
 
@@ -43,13 +44,13 @@ interface AnnictService {
                     @Query("page") page: Int
                     ): Single<WorksResponse>
 
+        @GET("/v1/works")
+        fun search(@QueryMap query: Map<String, String>): Single<WorksResponse>
+
         interface Me {
 
             @GET("/v1/me/works")
-            fun me(
-                    @Query("filter_status") filterStatus: String,
-                    @Query("page") page: Int
-            ): Single<WorksResponse>
+            fun me(@QueryMap query: Map<String, String>): Single<WorksResponse>
 
         }
 
