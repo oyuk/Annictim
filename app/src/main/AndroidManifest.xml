@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".presentation.activity.WorksActivity"></activity>
         <activity
             android:name=".presentation.activity.LaunchActivity"
             android:screenOrientation="portrait">
@@ -21,13 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.activity.MainActivity"
-             />
+        <activity android:name=".presentation.activity.MainActivity" />
         <activity
             android:name=".presentation.activity.LoginActivity"
-            android:launchMode="singleTop"
-            >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -55,7 +53,7 @@
             android:name=".presentation.activity.UserActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".presentation.activity.SettingActivity"></activity>
+        <activity android:name=".presentation.activity.SettingActivity" />
     </application>
 
 </manifest>

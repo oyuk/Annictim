@@ -3,12 +3,12 @@ package com.okysoft.annictim.presentation.viewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.okysoft.annictim.api.model.response.Work
+import com.okysoft.annictim.Result
 import com.okysoft.annictim.api.model.WorksRequestParamModel
+import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.api.repository.WorkRepository
 import com.okysoft.annictim.presentation.WorkPaginator
 import com.okysoft.annictim.presentation.WorksRequestType
-import com.okysoft.annictim.Result
 import com.okysoft.annictim.toLiveData
 import io.reactivex.Single
 import io.reactivex.processors.PublishProcessor
@@ -40,7 +40,10 @@ class WorksViewModel constructor(
                     repository.latest(worksRequestParamModel, page)
                 }
                 is WorksRequestType.MeFilterStatus -> {
-                    repository.me(worksRequestParamModel.worksRequestType.meFilterStatus, page)
+                    repository.me(worksRequestParamModel, page)
+                }
+                is WorksRequestType.Search -> {
+                    repository.search(worksRequestParamModel, page)
                 }
                 else -> Single.never()
             }
