@@ -6,7 +6,7 @@ import paperparcel.PaperParcelable
 
 sealed class WorksRequestType: PaperParcelable {
 
-    abstract fun toParams(): String
+    abstract fun toParams(): Map<String, String>
 
     @PaperParcel
     data class Filter(val ids: List<Int>): WorksRequestType() {
@@ -14,7 +14,7 @@ sealed class WorksRequestType: PaperParcelable {
             @JvmField val CREATOR = PaperParcelWorksRequestType_Filter.CREATOR
         }
 
-        override fun toParams(): String = ids.joinToString(separator = "")
+        override fun toParams(): Map<String, String> = mapOf(Pair("filter_ids", ids.joinToString(separator = "")))
     }
 
     @PaperParcel
@@ -23,7 +23,7 @@ sealed class WorksRequestType: PaperParcelable {
             @JvmField val CREATOR = PaperParcelWorksRequestType_Term.CREATOR
         }
 
-        override fun toParams(): String = workTerm.term()
+        override fun toParams(): Map<String, String> = mapOf(Pair("filter_season", workTerm.term().toString()))
     }
 
     @PaperParcel
@@ -32,7 +32,27 @@ sealed class WorksRequestType: PaperParcelable {
             @JvmField val CREATOR = PaperParcelWorksRequestType_MeFilterStatus.CREATOR
         }
 
-        override fun toParams(): String = meFilterStatus.toString()
+        override fun toParams(): Map<String, String> = mapOf(Pair("filter_status",meFilterStatus.toString()))
+    }
+
+    @PaperParcel
+    data class Search(val ids: List<Int> = listOf(), val workTerm: WorkTerm? = null, val title: String = ""): WorksRequestType() {
+        companion object {
+            @JvmField val CREATOR = PaperParcelWorksRequestType_Search.CREATOR
+        }
+
+        override fun toParams(): Map<String, String>
+            = mutableMapOf<String, String>().apply {
+            if (ids.isNotEmpty()) {
+                this["filter_ids"] = ids.toString()
+            }
+            workTerm?.let {
+                this["filter_season"] = workTerm.term().toString()
+            }
+            if (title.isNotEmpty()) {
+                this["filter_title"] = title
+            }
+        }
     }
 
 }
