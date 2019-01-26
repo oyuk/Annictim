@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.WorkTerm
 import com.okysoft.annictim.api.model.WorksRequestParamModel
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
 import com.okysoft.annictim.presentation.WorksRequestType
+import com.okysoft.annictim.presentation.activity.SearchActivity
 
 class WorksTabPagerFragment : Fragment() {
 
@@ -24,7 +23,20 @@ class WorksTabPagerFragment : Fragment() {
         val pagerAdapter = PagerAdapter(childFragmentManager)
         binding.viewPager.adapter = pagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater!!.inflate(R.menu.search, menu)
+        val item = menu?.findItem(R.id.menu_search)
+        item?.setOnMenuItemClickListener { i ->
+            activity?.let {
+                it.startActivity(SearchActivity.createIntent(it))
+            }
+            true
+        }
     }
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
