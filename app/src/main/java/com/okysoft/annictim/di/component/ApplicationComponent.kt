@@ -24,6 +24,7 @@ import javax.inject.Singleton
         SettingFragmentModule::class,
         UserFragmentModule::class,
         SearchFragmentModule::class,
+        CastsFragmentModule::class,
         UIModule::class
         ))
 interface ApplicationComponent: AndroidInjector<AnnictimApplication> {
