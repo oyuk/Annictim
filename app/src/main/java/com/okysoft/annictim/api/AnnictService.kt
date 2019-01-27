@@ -20,6 +20,13 @@ interface AnnictService {
 
     }
 
+    interface Cast {
+
+        @GET("/v1/casts")
+        fun get(@QueryMap query: Map<String, String>): Single<CastResponse>
+
+    }
+
     interface User {
 //        fun getMe(): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
 
