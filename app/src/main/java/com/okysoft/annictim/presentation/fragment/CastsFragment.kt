@@ -1,30 +1,76 @@
 package com.okysoft.annictim.presentation.fragment
 
 
+import android.arch.lifecycle.Observer
+import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.okysoft.annictim.R
+import com.okysoft.annictim.databinding.FragmentCastsBinding
+import com.okysoft.annictim.extension.LoadMoreScrollListener
+import com.okysoft.annictim.extension.addOnLoadMoreListener
+import com.okysoft.annictim.presentation.CastRequestParams
+import com.okysoft.annictim.presentation.CastsAdapter
+import com.okysoft.annictim.presentation.viewModel.CastsViewModel
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
-/**
- * A simple [Fragment] subclass.
- *
- */
-class CastsFragment : Fragment() {
+    private lateinit var binding: FragmentCastsBinding
+
+    val castRequestParams: CastRequestParams
+        get() = arguments?.getParcelable(REQUEST_PARAMS) ?: CastRequestParams()
+
+    @Inject
+    lateinit var viewModel: CastsViewModel
+    private val adapter = CastsAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.casts.observe(this, Observer {
+            binding.swipeRefresh.isRefreshing = false
+            adapter.items.accept(it)
+        })
+        adapter.onClick.observe(this, Observer {
+            it?.let {
+
+            }
+        })
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_casts, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_casts, container, false)
+        val layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.apply {
+            addOnLoadMoreListener(layoutManager,this@CastsFragment)
+        }
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refresh()
+        }
+        return binding.root
     }
 
+    override fun onLoadMore(currentPage: Int) {
+        viewModel.loadMore.onNext(Unit)
+    }
 
+    companion object {
+        val TAG = CastsFragment::class.java.simpleName
+        const val REQUEST_PARAMS = "REQUEST_PARAMS"
+
+        fun newInstance(requestParams: CastRequestParams): CastsFragment = CastsFragment().apply {
+            val args = Bundle().apply {
+                putParcelable(REQUEST_PARAMS, requestParams)
+            }
+            arguments = args
+        }
+
+    }
 }
