@@ -149,6 +149,14 @@
 
                     </android.support.constraint.ConstraintLayout>
 
+                    <TextView
+                        android:id="@+id/castTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:textColor="@color/grey_800"
+                        android:text="@string/cast"
+                        />
+
                 </LinearLayout>
 
                 <android.support.v7.widget.Toolbar

@@ -77,6 +77,10 @@ class WorkDetailActivity : BaseActivity() {
             }
         } ?: { binding.internet.visibility = View.GONE }()
 
+        binding.castTextView.setOnClickListener {
+            startActivity(CastsActivity.createIntent(this, work))
+        }
+
         val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)
         binding.viewPager.adapter = pagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
