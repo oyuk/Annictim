@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".presentation.activity.WorksActivity"></activity>
+        <activity android:name=".presentation.activity.PersonActivity"></activity>
+        <activity android:name=".presentation.activity.CastsActivity" />
+        <activity android:name=".presentation.activity.WorksActivity" />
         <activity
             android:name=".presentation.activity.LaunchActivity"
             android:screenOrientation="portrait">
