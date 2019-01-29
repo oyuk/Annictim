@@ -64,6 +64,14 @@
                         android:layout_height="wrap_content"
                         tools:text="TV 2018年夏"/>
 
+                    <TextView
+                        android:id="@+id/staff"
+                        android:gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/grey_600"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="京都アニメーション"/>
                     <!--<android.support.constraint.ConstraintLayout-->
                     <!--android:id="@+id/count_info"-->
                     <!--android:layout_width="match_parent"-->
@@ -152,10 +160,19 @@
                     <TextView
                         android:id="@+id/castTextView"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="20dp"
                         android:textColor="@color/grey_800"
                         android:text="@string/cast"
                         />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/castRecyclerView"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </android.support.v7.widget.RecyclerView>
 
                 </LinearLayout>
 
@@ -167,7 +184,7 @@
                     app:layout_collapseMode="pin"
                     tools:text="hogehoge"
                     />
-
+g
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>

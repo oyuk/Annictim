@@ -3,6 +3,7 @@ package com.okysoft.annictim.presentation
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
@@ -66,6 +67,8 @@ class CastsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemCastBinding>>() {
         }
         (holder.binding as ItemCastBinding).apply {
             cast = item
+            val characterName = item.character.name ?: ""
+            characterNameTextView.visibility = if (characterName.isBlank()) View.GONE else View.VISIBLE
         }
     }
 

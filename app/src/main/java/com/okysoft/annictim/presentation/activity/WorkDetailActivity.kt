@@ -1,5 +1,6 @@
 package com.okysoft.annictim.presentation.activity
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v7.widget.GridLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.okysoft.annictim.R
@@ -16,6 +18,7 @@ import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.extension.setImage
+import com.okysoft.annictim.presentation.CastsAdapter
 import com.okysoft.annictim.presentation.fragment.EpisodesFragment
 import com.okysoft.annictim.presentation.fragment.ReviewsFragment
 import com.okysoft.annictim.presentation.viewModel.WorkViewModel
@@ -25,6 +28,7 @@ class WorkDetailActivity : BaseActivity() {
 
     val work: Work by lazy { intent.getParcelableExtra<Work>(WORK_KEY) }
     private lateinit var binding: ActivityWorkDetailBinding
+    private val castAdapter = CastsAdapter()
 
     companion object {
 
@@ -52,6 +56,21 @@ class WorkDetailActivity : BaseActivity() {
         binding.imageView.setImage(work.images.recommendedUrl)
         binding.title.text = work.title
         binding.media.text = "${work.mediaText} ${work.seasonNameText}"
+
+        binding.castRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.castRecyclerView.adapter = castAdapter
+
+        viewModel.casts.observe(this, Observer {
+            castAdapter.items.accept(it)
+        })
+
+        castAdapter.onClick.observe(this, Observer {
+            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))
+        })
+
+        viewModel.staffs.observe(this, Observer {
+            binding.staff.text = it?.first()?.name
+        })
 
         work.twitterUsername?.let {userName ->
             binding.twitter.setOnClickListener {

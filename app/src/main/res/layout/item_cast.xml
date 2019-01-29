@@ -15,27 +15,41 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        card_view:cardCornerRadius="4dp"
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             >
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/grey_800"
+                android:text="@{cast.name}"
+                tools:text="title"
+                />
+
+            <TextView
+                android:id="@+id/characterNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="@{cast.name}"
+                android:layout_marginStart="4dp"
+                android:gravity="bottom"
+                android:textSize="11sp"
+                android:textColor="@color/grey_800"
+                android:text="@{@string/character_name(@{cast.character.name})}"
                 tools:text="title"
                 />
 

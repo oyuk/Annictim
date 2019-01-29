@@ -34,7 +34,7 @@ data class Character(
     @SerializedName("kind")
     val kind: String,
     @SerializedName("name")
-    val name: String,
+    var name: String?,
     @SerializedName("name_en")
     val nameEn: String,
     @SerializedName("name_kana")

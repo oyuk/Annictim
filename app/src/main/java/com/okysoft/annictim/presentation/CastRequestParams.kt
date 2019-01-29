@@ -22,7 +22,7 @@ data class CastRequestParams(
 
         override fun toString(): String
             = when(this) {
-            Minimum -> "id,name,name_en,sort_number"
+            Minimum -> "id,name,name_en,sort_number,character"
             All -> ""
         }
     }
