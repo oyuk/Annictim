@@ -2,6 +2,7 @@ package com.okysoft.annictim.extension
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 
 class LoadMoreScrollListener(private val layoutManager: LinearLayoutManager,
                              private val listener: LoadMoreScrollListener.Listener
@@ -15,6 +16,7 @@ class LoadMoreScrollListener(private val layoutManager: LinearLayoutManager,
         val firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
 
         if (totalItemCount - visibleItemCount <= firstVisibleItem) {// + visibleThreshold)) {
+            Log.i("https://api.annict.com/v1/casts", "$totalItemCount $visibleItemCount $firstVisibleItem")
             listener.onLoadMore(currentPage)
         }
     }

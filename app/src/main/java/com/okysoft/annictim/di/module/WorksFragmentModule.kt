@@ -2,8 +2,8 @@ package com.okysoft.annictim.di.module
 
 import android.arch.lifecycle.ViewModelProviders
 import com.okysoft.annictim.api.model.WorksRequestParamModel
-import com.okysoft.annictim.presentation.viewModel.WorksViewModel
 import com.okysoft.annictim.presentation.fragment.WorksFragment
+import com.okysoft.annictim.presentation.viewModel.WorksViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -29,7 +29,7 @@ abstract class WorksFragmentModule {
 //        companion object {
 //
 //            @JvmStatic
-//            @Provides
+//       chastRepository:      @Provides
 //            fun providesWorkTerm(fragment: WorksFragment): String {
 //                return fragment.workTerm
 //            }

@@ -23,7 +23,7 @@ sealed class WorksRequestType: PaperParcelable {
             @JvmField val CREATOR = PaperParcelWorksRequestType_Term.CREATOR
         }
 
-        override fun toParams(): Map<String, String> = mapOf(Pair("filter_season", workTerm.term().toString()))
+        override fun toParams(): Map<String, String> = mapOf(Pair("filter_season", workTerm.term()))
     }
 
     @PaperParcel
@@ -47,12 +47,13 @@ sealed class WorksRequestType: PaperParcelable {
                 this["filter_ids"] = ids.toString()
             }
             workTerm?.let {
-                this["filter_season"] = workTerm.term().toString()
+                this["filter_season"] = workTerm.term()
             }
             if (title.isNotEmpty()) {
                 this["filter_title"] = title
             }
         }
+
     }
 
 }

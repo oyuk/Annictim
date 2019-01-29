@@ -28,7 +28,7 @@ class CastsViewModel constructor(
 
     val loadMore = PublishProcessor.create<Unit>()
     private val paginator: CastPaginator = CastPaginator(loadMore) { page ->
-        repository.get(castRequestParams.copy(page = page).toParams())
+        repository.get(castRequestParams.copy(page = page))
     }
     val casts: LiveData<List<Cast>> = paginator.items.toLiveData()
 
