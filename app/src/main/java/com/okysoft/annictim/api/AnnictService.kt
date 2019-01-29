@@ -20,6 +20,13 @@ interface AnnictService {
 
     }
 
+    interface Staff {
+
+        @GET("/v1/staffs")
+        fun get(@QueryMap query: Map<String, String>): Single<StaffResponse>
+
+    }
+
     interface Cast {
 
         @GET("/v1/casts")
