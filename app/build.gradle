@@ -106,7 +106,10 @@ dependencies {
     implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.6' // Optional
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.6'
 
-    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha11'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha11'
 }
