@@ -30,7 +30,7 @@ class SearchFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, com.okysoft.annictim.R.layout.fragment_search, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
         binding.titleEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -76,7 +76,12 @@ class SearchFragment : DaggerFragment() {
         viewModel.transitionTo.observe(this , Observer {
             activity?.startActivity(WorksActivity.createIntent(activity!!, it!!))
         })
-
+        viewModel.enableSeasonSelect.observe(this, Observer {
+            binding.seasonSpinner.isEnabled = it!!
+            if (!it) {
+                binding.seasonSpinner.setSelection(0)
+            }
+        })
         return binding.root
     }
 
@@ -88,6 +93,7 @@ class SearchFragment : DaggerFragment() {
         for (i in 1.downTo(-20)) {
             list.add((currentYearInt + i).toString() + '年')
         }
+        list.add(0, "全体")
         return list
     }
 

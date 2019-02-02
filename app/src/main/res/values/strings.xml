@@ -54,11 +54,11 @@
     <string name="title_activity_user">UserActivity</string>
 
     <string-array name="season_list">
+        <item>全体</item>
         <item>春</item>
         <item>夏</item>
         <item>秋</item>
         <item>冬</item>
-        <item>全体</item>
     </string-array>
 
 </resources>

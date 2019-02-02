@@ -22,11 +22,15 @@ class SearchViewModel: ViewModel() {
     }
 
     val transitionTo: LiveData<WorkRequestParams>
+    val enableSeasonSelect: LiveData<Boolean>
 
     init {
+        enableSeasonSelect = yearProcessor
+            .map { it != "全体" }
+            .toLiveData()
+
         val yearParams = yearProcessor
             .map { REGEX.find(it)?.value ?: "" }
-            .filter { it.isNotBlank() }
 
         val seasonParams = seasonProcessor
             .map {
@@ -43,7 +47,12 @@ class SearchViewModel: ViewModel() {
         val parameter =
             Flowable.combineLatest(titleProcessor, yearParams, seasonParams, Function3 {
                 title: String, year: String, season: String ->
-                WorkRequestParams(title = title, season = "$year-$season")
+                val seasonString = if (year.isNotBlank() && season.isNotBlank()) {
+                    "$year-$season"
+                } else {
+                    null
+                }
+                WorkRequestParams(title = title, season = seasonString)
             })
 
         transitionTo = tappedSearch.withLatestFrom(parameter)
