@@ -52,4 +52,13 @@
     <string name="reconnect">再通信</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_user">UserActivity</string>
+
+    <string-array name="season_list">
+        <item>春</item>
+        <item>夏</item>
+        <item>秋</item>
+        <item>冬</item>
+        <item>全体</item>
+    </string-array>
+
 </resources>
