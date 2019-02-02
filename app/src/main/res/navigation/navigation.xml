@@ -1,0 +1,21 @@
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomNavigationView"
+    app:startDestination="@id/item1">
+
+    <custom_fragment
+        android:id="@+id/item1"
+        android:name="com.okysoft.annictim.presentation.fragment.WorksTabPagerFragment"
+        android:label="FirstFragment" />
+    <custom_fragment
+        android:id="@+id/item2"
+        android:name="com.okysoft.annictim.presentation.fragment.MeWorksTabPagerFragment"
+        android:label="SecondFragment" />
+
+    <custom_fragment
+        android:id="@+id/item3"
+        android:name="com.okysoft.annictim.presentation.fragment.UserFragment"
+        android:label="ThridFragment" />
+
+</navigation>
