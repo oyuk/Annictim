@@ -51,15 +51,7 @@ interface AnnictService {
 
     interface Work {
         // Apolloを使う場合はこちら
-        fun latest(season: String): Single<Result<List<com.okysoft.annictim.api.model.response.Work>>>
-        @GET("/v1/works")
-        fun _latest(@Query("filter_season") season: String,
-                    @Query("fields") fields: String?,
-                    @Query("page") page: Int
-                    ): Single<WorksResponse>
-
-        @GET("/v1/works")
-        fun search(@QueryMap query: Map<String, String>): Single<WorksResponse>
+//        fun latest(season: String): Single<Result<List<com.okysoft.annictim.api.model.response.Work>>>
 
         interface Me {
 
@@ -69,7 +61,7 @@ interface AnnictService {
         }
 
         @GET("/v1/works")
-        fun get(@Query("filter_ids") filterIds: String): Single<WorksResponse>
+        fun get(@QueryMap query: Map<String, String>): Single<WorksResponse>
     }
 
     interface Episode {

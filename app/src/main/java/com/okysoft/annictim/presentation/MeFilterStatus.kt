@@ -12,11 +12,11 @@ enum class MeFilterStatus {
         stop_watching -> "Stop watching"
     }
 
-    //    companion object {
-//
-//        private fun fromNum(num: Int): MeFilterStatus {
-//            return MeFilterStatus.values().firstOrNull { it.num == num } ?: WorkTerm.Term.Winter
-//        }
-//
-//    }
+    companion object {
+
+        fun fromNum(num: Int): MeFilterStatus {
+            return MeFilterStatus.values().firstOrNull { it.ordinal == num } ?: wanna_watch
+        }
+
+    }
 }

@@ -11,13 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.okysoft.annictim.R
-import com.okysoft.annictim.api.WorkTerm
-import com.okysoft.annictim.api.model.WorksRequestParamModel
+import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
 import com.okysoft.annictim.presentation.WorksAdapter
-import com.okysoft.annictim.presentation.WorksRequestType
 import com.okysoft.annictim.presentation.activity.WorkDetailActivity
 import com.okysoft.annictim.presentation.viewModel.WorksViewModel
 import dagger.android.support.DaggerFragment
@@ -29,9 +27,8 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorksAdapter()
 
-    val worksRequestParamModel: WorksRequestParamModel
-        get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?:
-        WorksRequestParamModel(WorksRequestType.Term(WorkTerm.Current), WorksRequestParamModel.Fields.All)
+    val workRequestParams: WorkRequestParams
+        get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?: WorkRequestParams(season = null)
 
     @Inject
     lateinit var viewModel: WorksViewModel
@@ -77,9 +74,9 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         val TAG = WorksFragment::class.java.simpleName
         const val REQUEST_PARAM_MODEL = "REQUEST_PARAM_MODEL"
 
-        fun newInstance(worksRequestParamModel: WorksRequestParamModel): WorksFragment = WorksFragment().apply {
+        fun newInstance(workRequestParams: WorkRequestParams): WorksFragment = WorksFragment().apply {
             val args = Bundle().apply {
-                putParcelable(REQUEST_PARAM_MODEL, worksRequestParamModel)
+                putParcelable(REQUEST_PARAM_MODEL, workRequestParams)
             }
             arguments = args
         }

@@ -10,10 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.okysoft.annictim.R
-import com.okysoft.annictim.api.model.WorksRequestParamModel
+import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
 import com.okysoft.annictim.presentation.MeFilterStatus
-import com.okysoft.annictim.presentation.WorksRequestType
 
 class MeWorksTabPagerFragment : Fragment() {
 
@@ -31,50 +30,16 @@ class MeWorksTabPagerFragment : Fragment() {
 
         override fun getCount() = 5
 
-        override fun getPageTitle(position: Int): CharSequence
-                = when (position) {
-            0 -> MeFilterStatus.watching.toDisplayName()
-            1 -> MeFilterStatus.wanna_watch.toDisplayName()
-            2 -> MeFilterStatus.watched.toDisplayName()
-            3 -> MeFilterStatus.on_hold.toDisplayName()
-            4 -> MeFilterStatus.stop_watching.toDisplayName()
-            else -> "Next"
+        override fun getPageTitle(position: Int): CharSequence {
+            return MeFilterStatus.fromNum(position).toDisplayName()
         }
 
-        override fun getItem(position: Int): Fragment?
-                = when (position) {
-            0 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.watching),
-                            WorksRequestParamModel.Fields.Feed
-                    )
-            )
-            1 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.wanna_watch),
-                            WorksRequestParamModel.Fields.Feed
-                    )
-            )
-            2 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.watched),
-                            WorksRequestParamModel.Fields.Feed
-                    )
-            )
-            3 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.MeFilterStatus(MeFilterStatus.on_hold),
-                            WorksRequestParamModel.Fields.Feed
-                    )
-            )
-            4 -> WorksFragment.newInstance(
-                WorksRequestParamModel(
-                    WorksRequestType.MeFilterStatus(MeFilterStatus.stop_watching),
-                    WorksRequestParamModel.Fields.Feed
-                )
-            )
-            else -> null
+        override fun getItem(position: Int): Fragment? {
+            val meFilterStatus = MeFilterStatus.fromNum(position)
+            return WorksFragment.newInstance(WorkRequestParams(type = WorkRequestParams.Type.Me,
+                status = meFilterStatus.toString(), season = null))
         }
+
     }
 
     companion object {

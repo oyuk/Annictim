@@ -9,9 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.*
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.WorkTerm
-import com.okysoft.annictim.api.model.WorksRequestParamModel
+import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
-import com.okysoft.annictim.presentation.WorksRequestType
 import com.okysoft.annictim.presentation.activity.SearchActivity
 
 class WorksTabPagerFragment : Fragment() {
@@ -44,35 +43,23 @@ class WorksTabPagerFragment : Fragment() {
         override fun getCount() = 3
 
         override fun getPageTitle(position: Int): CharSequence
-                = when (position) {
+            = when (position) {
             0 -> getString(R.string.current_season)
             1 -> getString(R.string.next_season)
             2 -> getString(R.string.previous_season)
             else -> getString(R.string.current_season)
         }
 
-        override fun getItem(position: Int): Fragment?
-                = when (position) {
-            0 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.Term(WorkTerm.Current),
-                            WorksRequestParamModel.Fields.All
-                    )
-            )
-            1 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.Term(WorkTerm.Next),
-                            WorksRequestParamModel.Fields.All
-                    )
-            )
-            2 -> WorksFragment.newInstance(
-                    WorksRequestParamModel(
-                            WorksRequestType.Term(WorkTerm.Previous),
-                            WorksRequestParamModel.Fields.All
-                    )
-            )
-            else -> null
+        override fun getItem(position: Int): Fragment? {
+            val workTerm = when(position) {
+                0 -> WorkTerm.Current
+                1 -> WorkTerm.Next
+                2 -> WorkTerm.Previous
+                else -> WorkTerm.Current
+            }
+            return WorksFragment.newInstance(WorkRequestParams(workTerm = workTerm))
         }
+
     }
 
     companion object {
