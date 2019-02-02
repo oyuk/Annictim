@@ -2,44 +2,65 @@ package com.okysoft.annictim.presentation.viewModel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import com.okysoft.annictim.api.model.WorksRequestParamModel
-import com.okysoft.annictim.api.repository.WorkRepository
-import com.okysoft.annictim.presentation.WorksRequestType
+import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.toLiveData
+import io.reactivex.Flowable
+import io.reactivex.functions.Function3
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.withLatestFrom
-import javax.inject.Inject
 
-class SearchViewModel constructor(
-    repository: WorkRepository
-) : ViewModel() {
-
-    class Factory @Inject constructor(
-        private val repository: WorkRepository
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SearchViewModel(repository) as T
-        }
-    }
+class SearchViewModel: ViewModel() {
 
     private val titleProcessor = BehaviorProcessor.createDefault("")
+    private val yearProcessor = BehaviorProcessor.createDefault("")
+    private val seasonProcessor = BehaviorProcessor.createDefault("")
     private val tappedSearch = PublishProcessor.create<Unit>()
 
-    val transitionTo: LiveData<WorksRequestParamModel> =
-        tappedSearch.withLatestFrom(titleProcessor)
-            .map { it.second }
+    companion object {
+        private val REGEX: Regex = """(\d{4})""".toRegex()
+    }
+
+    val transitionTo: LiveData<WorkRequestParams>
+
+    init {
+        val yearParams = yearProcessor
+            .map { REGEX.find(it)?.value ?: "" }
+            .filter { it.isNotBlank() }
+
+        val seasonParams = seasonProcessor
             .map {
-                WorksRequestParamModel(
-                    WorksRequestType.Search(title = it),
-                    WorksRequestParamModel.Fields.All)
+                when (it) {
+                    "全体" -> "all"
+                    "春" -> "spring"
+                    "夏" -> "summer"
+                    "秋" -> "autumn"
+                    "冬" -> "winter"
+                    else -> ""
+                }
             }
+
+        val parameter =
+            Flowable.combineLatest(titleProcessor, yearParams, seasonParams, Function3 {
+                title: String, year: String, season: String ->
+                WorkRequestParams(title = title, season = "$year-$season")
+            })
+
+        transitionTo = tappedSearch.withLatestFrom(parameter)
+            .map { it.second }
             .toLiveData()
+    }
 
     fun setTitle(title: CharSequence) {
         titleProcessor.onNext(title.toString())
+    }
+
+    fun selectYear(year: String) {
+        yearProcessor.onNext(year)
+    }
+
+    fun selectSeason(season: String) {
+        seasonProcessor.onNext(season)
     }
 
     fun tappedSearch() {
