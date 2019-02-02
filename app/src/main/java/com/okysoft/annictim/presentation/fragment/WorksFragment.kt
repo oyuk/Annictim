@@ -40,7 +40,7 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         super.onCreate(savedInstanceState)
         viewModel.works.observe(this, Observer {
             binding.swipeRefresh.isRefreshing = false
-            adapter.items.accept(it)
+            adapter.updateItem(it ?: listOf())
         })
         adapter.onClick.observe(this, Observer {
             it?.let {
@@ -61,10 +61,11 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         binding.recyclerView.apply {
             addOnLoadMoreListener(layoutManager,this@WorksFragment)
         }
-        binding.recyclerView.itemAnimator.changeDuration = 0
+        binding.recyclerView.itemAnimator?.changeDuration = 0
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refresh()
         }
+        viewModel.refresh()
         return binding.root
     }
 

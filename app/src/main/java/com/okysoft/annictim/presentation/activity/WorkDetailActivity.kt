@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil
 import android.graphics.Rect
 import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -107,7 +108,7 @@ class WorkDetailActivity : BaseActivity() {
         var inToolbar = true
         binding.toolbar.background = getDrawable(R.drawable.toolbar_transition)
 
-        binding.appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val toolBarHeight: Float = binding.toolbar.height.toFloat()
             val imagesFrameBottomPosition = Rect().also {
                 binding.imageView.getGlobalVisibleRect(it)
@@ -127,7 +128,7 @@ class WorkDetailActivity : BaseActivity() {
                     inToolbar = false
                 }
             }
-        }
+        })
 
     }
 

@@ -1,11 +1,12 @@
 package com.okysoft.annictim.api.model.response
 
 import com.google.gson.annotations.SerializedName
+import com.okysoft.annictim.Diffable
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
 @PaperParcel
-data class Work(
+data class Work (
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,
     @SerializedName("title_kana") val titleKana: String?,
@@ -24,7 +25,7 @@ data class Work(
     @SerializedName("episodes_count") val episodesCount: Int?,
     @SerializedName("watchers_count") val watchersCount: Int?,
     @SerializedName("reviews_count") val reviewsCount: Int?
-    ): PaperParcelable {
+    ): PaperParcelable, Diffable {
 
     companion object {
         @JvmField val CREATOR = PaperParcelWork.CREATOR
@@ -64,6 +65,10 @@ data class Work(
         companion object {
             @JvmField val CREATOR = PaperParcelWork_Twitter.CREATOR
         }
+    }
+
+    override fun isTheSame(other: Diffable): Boolean {
+        return id == (other as? Work)?.id
     }
 
 }

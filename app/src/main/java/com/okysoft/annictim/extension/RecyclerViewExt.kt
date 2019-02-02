@@ -9,7 +9,7 @@ class LoadMoreScrollListener(private val layoutManager: LinearLayoutManager,
 ) : RecyclerView.OnScrollListener() {
     private var currentPage = 1
 
-    override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
         val visibleItemCount = layoutManager.childCount
         val totalItemCount = layoutManager.itemCount

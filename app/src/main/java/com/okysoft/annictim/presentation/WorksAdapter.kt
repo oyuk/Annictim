@@ -2,46 +2,39 @@ package com.okysoft.annictim.presentation
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.jakewharton.rxrelay2.BehaviorRelay
+import com.okysoft.annictim.DiffUtilCallback
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.databinding.ItemWorkBinding
 import com.okysoft.annictim.extension.setImage
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
+import kotlin.properties.Delegates
 
 data class WorkClickItem(
-        val work: Work,
-        val imateView: ImageView
+    val work: Work,
+    val imateView: ImageView
 )
 
 class WorksAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
 
-    val items: BehaviorRelay<List<Work>> = BehaviorRelay.createDefault(emptyList())
+    private var items: List<Work> by Delegates.observable(emptyList()) { _, old, new ->
+        DiffUtil.calculateDiff(DiffUtilCallback(old, new), false).dispatchUpdatesTo(this)
+    }
     private val _onClick = MutableLiveData<WorkClickItem>()
     val onClick: LiveData<WorkClickItem> = _onClick
-    private val bag = CompositeDisposable()
+
+    fun updateItem(i: List<Work>) {
+        items = i
+    }
 
     enum class ViewType(val num: Int)  {
         ITEM(0), FOOTER(1)
     }
 
     private val TAG = WorksAdapter::class.java.name
-
-    init {
-        items.subscribeBy(
-                onNext = {notifyDataSetChanged()}
-        ).addTo(bag)
-    }
-
-    @Suppress("unused")
-    fun finalize() {
-        bag.dispose()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<ItemWorkBinding> {
         if (viewType == ViewType.ITEM.num) {
@@ -51,14 +44,13 @@ class WorksAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
     }
 
     override fun getItemCount(): Int {
-        if (items.value.isEmpty()) { return 1 }
-        return items.value.size
+        return items.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position == items.value.size) {
-            return ViewType.FOOTER.num
-        }
+//        if (position == items.size) {
+//            return ViewType.FOOTER.num
+//        }
         return ViewType.ITEM.num
     }
 
@@ -67,7 +59,7 @@ class WorksAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
         if (viewType == ViewType.FOOTER.num) {
             return
         }
-        val item = items.value[position]
+        val item = items[position]
         holder.binding?.root?.setOnClickListener {
             _onClick.postValue(WorkClickItem(item, holder.binding.imageView))
         }
