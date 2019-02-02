@@ -1,6 +1,5 @@
 package com.okysoft.annictim.di.module
 
-import android.arch.lifecycle.ViewModelProviders
 import com.okysoft.annictim.presentation.fragment.SearchFragment
 import com.okysoft.annictim.presentation.viewModel.SearchViewModel
 import dagger.Module
@@ -17,10 +16,7 @@ abstract class SearchFragmentModule {
     class InjectViewModel {
 
         @Provides
-        fun provideSearchViewModel(
-            factory: SearchViewModel.Factory,
-            target: SearchFragment
-        ) = ViewModelProviders.of(target, factory).get(SearchViewModel::class.java)
+        fun provideSearchViewModel(): SearchViewModel = SearchViewModel()
 
     }
 }
