@@ -19,7 +19,7 @@ internal abstract class UIModule {
     @ContributesAndroidInjector
     internal abstract fun bindBaseActivity(): BaseActivity
 
-    @ContributesAndroidInjector(modules = [MainActivityModule::class])
+    @ContributesAndroidInjector(modules = [MainActivityModule::class, CustomNavHostFragmentModule::class])
     internal abstract fun bindMainActivity(): MainActivity
 
     @ContributesAndroidInjector

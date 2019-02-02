@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.annotation.MenuRes
 import android.support.annotation.StringRes
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.okysoft.annictim.ApplicationActionCreator
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
@@ -30,7 +32,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
             applicationActionCreator.getMe()
@@ -38,25 +40,30 @@ class MainActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
-        navigationController.navigateToWorks()
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            val navigationItem = BottomNavigationItem.forId(item.itemId)
 
-            binding.toolbar.title = navigationItem.titleRes?.let {
-                getString(it)
-            } ?: ""
+        val navController = findNavController(R.id.nav_host_fragment)
+        binding.bottomNavigationView.setupWithNavController(navController)
 
-            navigationItem.navigate(navigationController)
-            true
-        }
-        binding.bottomNavigationView.setOnNavigationItemReselectedListener { item ->
-            val navigationItem = BottomNavigationItem
-                .forId(item.itemId)
-            val fragment = supportFragmentManager.findFragmentByTag(navigationItem.name)
-            if (fragment is BottomNavigationItem.OnReselectedListener) {
-                fragment.onReselected()
-            }
-        }
+//        navigationController.navigateToWorks()
+//        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+//            val navigationItem = BottomNavigationItem.forId(item.itemId)
+//
+//            binding.toolbar.title = navigationItem.titleRes?.let {
+//                getString(it)
+//            } ?: ""
+//
+////            navigationItem.navigate(navigationController)
+//            true
+//        }
+
+//        binding.bottomNavigationView.setOnNavigationItemReselectedListener { item ->
+//            val navigationItem = BottomNavigationItem
+//                .forId(item.itemId)
+//            val fragment = supportFragmentManager.findFragmentByTag(navigationItem.name)
+//            if (fragment is BottomNavigationItem.OnReselectedListener) {
+//                fragment.onReselected()
+//            }
+//        }
     }
 
     enum class BottomNavigationItem(
