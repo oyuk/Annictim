@@ -10,6 +10,7 @@
     <string name="CANCEL">CANCEL</string>
 
     <string name="cast">キャスト</string>
+    <string name="staff">スタッフ</string>
 
     <string name="logout">ログアウト</string>
     <string name="logout_confirm">ログアウトしますか？</string>

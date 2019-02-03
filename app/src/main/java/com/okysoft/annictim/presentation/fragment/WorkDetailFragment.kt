@@ -26,6 +26,7 @@ class WorkDetailFragment : DaggerFragment() {
     lateinit var viewModel: WorkViewModel
     private lateinit var binding: FragmentWorkDetailBinding
     private val castAdapter = CastsAdapter()
+//    private val staffAdapter = StaffAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -70,6 +71,13 @@ class WorkDetailFragment : DaggerFragment() {
         viewModel.casts.observe(this, Observer {
             castAdapter.items.accept(it)
         })
+
+//        binding.staffRecyclerView.layoutManager = GridLayoutManager(activity, 2)
+//        binding.staffRecyclerView.adapter = staffAdapter
+//
+//        viewModel.staffs.observe(this, Observer {
+//            staffAdapter.items.accept(it)
+//        })
 
         castAdapter.onClick.observe(this, Observer {
             //            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))

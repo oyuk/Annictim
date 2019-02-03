@@ -8,17 +8,17 @@ data class Staff(
     @SerializedName("name")
     val name: String,
     @SerializedName("name_en")
-    val nameEn: String,
+    val nameEn: String?,
     @SerializedName("role_other")
-    val roleOther: String,
+    val roleOther: String?,
     @SerializedName("role_other_en")
-    val roleOtherEn: String,
+    val roleOtherEn: String?,
     @SerializedName("role_text")
     val roleText: String,
     @SerializedName("sort_number")
-    val sortNumber: Int,
+    val sortNumber: Int?,
     @SerializedName("work")
-    val work: Work,
+    val work: Work?,
     @SerializedName("organization")
-    val organization: Organization
+    val organization: Organization?
 )

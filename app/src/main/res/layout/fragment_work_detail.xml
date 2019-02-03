@@ -111,6 +111,27 @@
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
 
+
+        <TextView
+            android:id="@+id/staffTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="@color/grey_800"
+            android:layout_marginTop="8dp"
+            android:text="@string/staff"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/staffRecyclerView"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+
     </LinearLayout>
 
 </layout>
