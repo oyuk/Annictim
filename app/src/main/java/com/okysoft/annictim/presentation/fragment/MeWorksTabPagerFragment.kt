@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
-import com.okysoft.annictim.presentation.MeFilterStatus
+import com.okysoft.annictim.presentation.WatchKind
 
 class MeWorksTabPagerFragment : Fragment() {
 
@@ -28,14 +28,14 @@ class MeWorksTabPagerFragment : Fragment() {
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        override fun getCount() = 5
+        override fun getCount() = WatchKind.meKindCount
 
         override fun getPageTitle(position: Int): CharSequence {
-            return MeFilterStatus.fromNum(position).toDisplayName()
+            return WatchKind.fromNum(position).toDisplayName()
         }
 
         override fun getItem(position: Int): Fragment? {
-            val meFilterStatus = MeFilterStatus.fromNum(position)
+            val meFilterStatus = WatchKind.fromNum(position)
             return WorksFragment.newInstance(WorkRequestParams(type = WorkRequestParams.Type.Me,
                 status = meFilterStatus.toString(), season = null))
         }
