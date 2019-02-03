@@ -31,7 +31,7 @@ data class StaffRequestParams(
         = mutableMapOf<String, String>().apply {
         this["fields"] = fields.toString()
         if (ids.isNotEmpty()) {
-            this["filter_ids"] = ids.toString()
+            this["filter_ids"] = ids.joinToString(separator = ",")
         }
         workId.let {
             this["filter_work_id"] = workId.toString()

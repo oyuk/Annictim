@@ -59,7 +59,7 @@ data class WorkRequestParams(
         fun toParams(): String {
             return when (this) {
                 All -> ""
-                Feed -> "id,title,images"
+                Feed -> "id,title,images,watchers_count,reviews_count,no_episodes"
             }
         }
     }
@@ -68,7 +68,7 @@ data class WorkRequestParams(
         = mutableMapOf<String, String>().apply {
         this["fields"] = fields.toParams()
         if (ids.isNotEmpty()) {
-            this["filter_ids"] = ids.toString()
+            this["filter_ids"] = ids.joinToString(separator = ",")
         }
         season?.let {
             this["filter_season"] = it
