@@ -1,8 +1,8 @@
 package com.okysoft.annictim.api
 
-import com.okysoft.annictim.Result
 import com.okysoft.annictim.api.model.request.OauthRequestModel
 import com.okysoft.annictim.api.model.response.*
+import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -17,6 +17,13 @@ interface AnnictService {
         fun getAccessToken(
                 @retrofit2.http.Body oauthRequestModel: OauthRequestModel
         ): Single<OauthResponseModel>
+
+    }
+
+    interface Me {
+
+        @POST("/me/statuses")
+        fun status(@QueryMap query: Map<String, String>): Completable
 
     }
 
