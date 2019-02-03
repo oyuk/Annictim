@@ -19,7 +19,7 @@ import javax.inject.Singleton
         EpisodesFragmentModule::class,
         ReviewsFragmentModule::class,
         RecordsFragmentModule::class,
-        WorkDetailActivityModule::class,
+        WorkDetailFragmentModule::class,
         LaunchActivityModule::class,
         SettingFragmentModule::class,
         UserFragmentModule::class,
