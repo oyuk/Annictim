@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.api.model.response.Cast
 import com.okysoft.annictim.api.model.response.Staff
 import com.okysoft.annictim.api.model.response.Work
@@ -22,23 +23,23 @@ class WorkViewModel constructor(
     private val workRepository: WorkRepository,
     private val castRepository: CastRepository,
     private val staffRepository: StaffRepository,
-    private val work: Work
+    private val workId: Int
 ) : ViewModel() {
 
     class Factory @Inject constructor(
         private val workRepository: WorkRepository,
         private val castRepository: CastRepository,
         private val staffRepository: StaffRepository,
-        private val work: Work
+        private val workId: Int
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return WorkViewModel(workRepository, castRepository, staffRepository, work) as T
+            return WorkViewModel(workRepository, castRepository, staffRepository, workId) as T
         }
     }
 
     private val _work = MutableLiveData<Work>()
-    val workLiveData: LiveData<Work> = _work
+    val work: LiveData<Work> = _work
     private val _casts = MutableLiveData<List<Cast>>()
     val casts: LiveData<List<Cast>> = _casts
     private val _staffs = MutableLiveData<List<Staff>>()
@@ -46,9 +47,21 @@ class WorkViewModel constructor(
     private val compositeDisposable = CompositeDisposable()
 
     init {
+        workRepository.get(WorkRequestParams(
+            fields = WorkRequestParams.Fields.All,
+            ids = listOf(workId),
+            season = null,
+            perPage = 1
+        ))
+            .filterSuccess()
+            .subscribeBy {
+                _work.postValue(it.first())
+            }.addTo(compositeDisposable)
+
+
         castRepository.get(CastRequestParams(
             fields = CastRequestParams.FieldType.All,
-            workId = work.id,
+            workId = workId,
             perPage = 6))
             .filterSuccess()
             .subscribeBy {
@@ -58,14 +71,12 @@ class WorkViewModel constructor(
 
         staffRepository.get(StaffRequestParams(
             fields = StaffRequestParams.FieldType.Minimum,
-            workId = work.id))
+            workId = workId))
             .filterSuccess()
             .subscribeBy {
                 _staffs.postValue(it)
             }
             .addTo(compositeDisposable)
-
-        _work.postValue(work)
     }
 
 
