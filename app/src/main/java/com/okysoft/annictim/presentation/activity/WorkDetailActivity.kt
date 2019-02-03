@@ -1,6 +1,5 @@
 package com.okysoft.annictim.presentation.activity
 
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -11,25 +10,20 @@ import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
-import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.extension.setImage
-import com.okysoft.annictim.presentation.CastsAdapter
 import com.okysoft.annictim.presentation.fragment.EpisodesFragment
 import com.okysoft.annictim.presentation.fragment.ReviewsFragment
-import com.okysoft.annictim.presentation.viewModel.WorkViewModel
-import javax.inject.Inject
+import com.okysoft.annictim.presentation.fragment.WorkDetailFragment
 
-class WorkDetailActivity : BaseActivity() {
+class WorkDetailActivity : AppCompatActivity() {
 
     val work: Work by lazy { intent.getParcelableExtra<Work>(WORK_KEY) }
     private lateinit var binding: ActivityWorkDetailBinding
-    private val castAdapter = CastsAdapter()
 
     companion object {
 
@@ -43,63 +37,14 @@ class WorkDetailActivity : BaseActivity() {
 
     }
 
-    @Inject
-    lateinit var viewModel: WorkViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_detail)
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
+        binding.imageView.setImage(work.images.recommendedUrl)
         binding.toolbar.title = ""
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.imageView.setImage(work.images.recommendedUrl)
-        binding.title.text = work.title
-        binding.media.text = "${work.mediaText} ${work.seasonNameText}"
-
-        binding.castRecyclerView.layoutManager = GridLayoutManager(this, 2)
-        binding.castRecyclerView.adapter = castAdapter
-
-        viewModel.casts.observe(this, Observer {
-            castAdapter.items.accept(it)
-        })
-
-        castAdapter.onClick.observe(this, Observer {
-            //            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))
-        })
-
-        viewModel.staffs.observe(this, Observer {
-            binding.staff.text = it?.first()?.name
-        })
-
-        work.twitterUsername?.let {userName ->
-            binding.twitter.setOnClickListener {
-                openUrl("https://twitter.com/${userName}")
-            }
-        } ?: { binding.twitter.visibility = View.GONE }()
-
-        work.twitterHashtag?.let { hashTag ->
-            binding.hashtag.setOnClickListener {
-                openUrl("https://twitter.com/search?q=${hashTag}")
-            }
-        } ?: { binding.hashtag.visibility = View.GONE }()
-
-        work.wikipediaUrl?.let {url ->
-            binding.wikipedia.setOnClickListener {
-                openUrl(url)
-            }
-        } ?: { binding.wikipedia.visibility = View.GONE }()
-
-        work.officialSiteUrl?.let {url ->
-            binding.internet.setOnClickListener {
-                openUrl(url)
-            }
-        } ?: { binding.internet.visibility = View.GONE }()
-
-        binding.castTextView.setOnClickListener {
-            startActivity(CastsActivity.createIntent(this, work))
-        }
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, work)
         binding.viewPager.adapter = pagerAdapter
@@ -144,27 +89,37 @@ class WorkDetailActivity : BaseActivity() {
     private inner class PagerAdapter(fm: FragmentManager,
                                      private val work: Work) : FragmentPagerAdapter(fm) {
 
-        override fun getCount() = if (work.noEpisodes) 1 else 2
+        override fun getCount() = if (work.noEpisodes) 2 else 3
 
         override fun getPageTitle(position: Int): CharSequence {
             val reviewTitle = "Reviews(${work.reviewsCount})"
             if (work.noEpisodes) {
-                return reviewTitle
+                return when (position) {
+                    0 -> "詳細"
+                    1 -> reviewTitle
+                    else -> "Episodes"
+                }
             }
             return when (position) {
-                0 -> "Episodes(${work.episodesCount})"
-                1 -> reviewTitle
+                0 -> "詳細"
+                1 -> "Episodes(${work.episodesCount})"
+                2 -> reviewTitle
                 else -> "Episodes"
             }
         }
 
         override fun getItem(position: Int): Fragment? {
             if (work.noEpisodes) {
-                return ReviewsFragment.newInstance(work.id)
+                return when (position) {
+                    0 -> WorkDetailFragment.newInstance(work.id)
+                    1 -> ReviewsFragment.newInstance(work.id)
+                    else -> null
+                }
             }
             return when (position) {
-                0 -> EpisodesFragment.newInstance(work.id)
-                1 -> ReviewsFragment.newInstance(work.id)
+                0 -> WorkDetailFragment.newInstance(work.id)
+                1 -> EpisodesFragment.newInstance(work.id)
+                2 -> ReviewsFragment.newInstance(work.id)
                 else -> null
             }
         }
