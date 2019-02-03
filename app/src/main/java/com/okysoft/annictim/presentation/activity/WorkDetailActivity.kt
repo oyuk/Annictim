@@ -66,7 +66,7 @@ class WorkDetailActivity : BaseActivity() {
         })
 
         castAdapter.onClick.observe(this, Observer {
-            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))
+            //            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))
         })
 
         viewModel.staffs.observe(this, Observer {
@@ -101,7 +101,7 @@ class WorkDetailActivity : BaseActivity() {
             startActivity(CastsActivity.createIntent(this, work))
         }
 
-        val pagerAdapter = PagerAdapter(supportFragmentManager, work.id)
+        val pagerAdapter = PagerAdapter(supportFragmentManager, work)
         binding.viewPager.adapter = pagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 
@@ -142,22 +142,31 @@ class WorkDetailActivity : BaseActivity() {
     }
 
     private inner class PagerAdapter(fm: FragmentManager,
-                                     private val workId: Int) : FragmentPagerAdapter(fm) {
+                                     private val work: Work) : FragmentPagerAdapter(fm) {
 
-        override fun getCount() = 2
+        override fun getCount() = if (work.noEpisodes) 1 else 2
 
-        override fun getPageTitle(position: Int): CharSequence
-                = when (position) {
-            0 -> "Episodes"
-            1 -> "Reviews"
-            else -> "Episodes"
+        override fun getPageTitle(position: Int): CharSequence {
+            val reviewTitle = "Reviews(${work.reviewsCount})"
+            if (work.noEpisodes) {
+                return reviewTitle
+            }
+            return when (position) {
+                0 -> "Episodes(${work.episodesCount})"
+                1 -> reviewTitle
+                else -> "Episodes"
+            }
         }
 
-        override fun getItem(position: Int): Fragment?
-                = when (position) {
-            0 -> EpisodesFragment.newInstance(workId)
-            1 -> ReviewsFragment.newInstance(workId)
-            else -> null
+        override fun getItem(position: Int): Fragment? {
+            if (work.noEpisodes) {
+                return ReviewsFragment.newInstance(work.id)
+            }
+            return when (position) {
+                0 -> EpisodesFragment.newInstance(work.id)
+                1 -> ReviewsFragment.newInstance(work.id)
+                else -> null
+            }
         }
     }
 

@@ -14,7 +14,9 @@ class CastRepository @Inject constructor(private val service: AnnictService.Cast
     fun get(requestParams: CastRequestParams): Single<Result<List<Cast>>> {
         return service.get(requestParams.toParams())
             .map { Result.success(it.casts) }
-            .onErrorReturn { Result.failure<List<Cast>>(it.toString(), it) }
+            .onErrorReturn {
+                Result.failure<List<Cast>>(it.toString(), it)
+            }
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
     }
