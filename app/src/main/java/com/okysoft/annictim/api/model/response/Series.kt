@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Series(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("name_en")
-    val nameEn: String,
+    val nameEn: String?,
     @SerializedName("name_ro")
-    val nameRo: String
+    val nameRo: String?
 )

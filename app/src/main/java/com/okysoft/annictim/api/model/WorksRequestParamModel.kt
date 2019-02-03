@@ -8,7 +8,7 @@ import paperparcel.PaperParcelable
 @PaperParcel
 data class WorkRequestParams(
     val type: Type = Type.Works,
-    val fields: WorkRequestParams.Fields = WorkRequestParams.Fields.Feed,
+    val fields: WorkRequestParams.Fields = WorkRequestParams.Fields.All,
     val ids: List<Int> = listOf(),
     val season: String? = null,
     val title: String? = null,
@@ -17,11 +17,11 @@ data class WorkRequestParams(
     val perPage: Int = 20,
     val sortId: String? = null,
     val sortSeason: String? = null,
-    val sortWatchersCount: Int? = null): PaperParcelable {
+    val sortWatchersCount: String = "desc"): PaperParcelable {
 
     constructor(
         type: Type = Type.Works,
-        fields: Fields = Fields.Feed,
+        fields: Fields = Fields.All,
         ids: List<Int> = listOf(),
         workTerm: WorkTerm = WorkTerm.Current,
         title: String? = null,
@@ -30,7 +30,7 @@ data class WorkRequestParams(
         perPage: Int = 20,
         sortId: String? = null,
         sortSeason: String? = null,
-        sortWatchersCount: Int? = null): this(
+        sortWatchersCount:String = "desc"): this(
         type,
         fields,
         ids,
@@ -87,9 +87,7 @@ data class WorkRequestParams(
         sortSeason?.let {
             this["sort_season"] = it
         }
-        sortWatchersCount?.let {
-            this["sort_watchers_count"] = it.toString()
-        }
+        this["sort_watchers_count"] = sortWatchersCount
     }
 
 }

@@ -24,7 +24,8 @@ data class Work (
     @SerializedName("images") val images: Images,
     @SerializedName("episodes_count") val episodesCount: Int?,
     @SerializedName("watchers_count") val watchersCount: Int?,
-    @SerializedName("reviews_count") val reviewsCount: Int?
+    @SerializedName("reviews_count") val reviewsCount: Int?,
+    @SerializedName("no_episodes") val noEpisodes: Boolean
     ): PaperParcelable, Diffable {
 
     companion object {

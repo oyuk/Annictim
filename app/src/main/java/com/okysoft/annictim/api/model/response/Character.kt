@@ -4,57 +4,57 @@ import com.google.gson.annotations.SerializedName
 
 data class Character(
     @SerializedName("age")
-    val age: String,
+    val age: String?,
     @SerializedName("age_en")
-    val ageEn: String,
+    val ageEn: String?,
     @SerializedName("birthday")
-    val birthday: String,
+    val birthday: String?,
     @SerializedName("birthday_en")
-    val birthdayEn: String,
+    val birthdayEn: String?,
     @SerializedName("blood_type")
-    val bloodType: String,
+    val bloodType: String?,
     @SerializedName("blood_type_en")
-    val bloodTypeEn: String,
+    val bloodTypeEn: String?,
     @SerializedName("description")
-    val description: String,
+    val description: String?,
     @SerializedName("description_en")
-    val descriptionEn: String,
+    val descriptionEn: String?,
     @SerializedName("description_source")
-    val descriptionSource: String,
+    val descriptionSource: String?,
     @SerializedName("description_source_en")
-    val descriptionSourceEn: String,
+    val descriptionSourceEn: String?,
     @SerializedName("favorite_characters_count")
-    val favoriteCharactersCount: Int,
+    val favoriteCharactersCount: Int?,
     @SerializedName("height")
-    val height: String,
+    val height: String?,
     @SerializedName("height_en")
-    val heightEn: String,
+    val heightEn: String?,
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("kind")
-    val kind: String,
+    val kind: String?,
     @SerializedName("name")
     var name: String?,
     @SerializedName("name_en")
-    val nameEn: String,
+    val nameEn: String?,
     @SerializedName("name_kana")
-    val nameKana: String,
+    val nameKana: String?,
     @SerializedName("nationality")
-    val nationality: String,
+    val nationality: String?,
     @SerializedName("nationality_en")
-    val nationalityEn: String,
+    val nationalityEn: String?,
     @SerializedName("nickname")
-    val nickname: String,
+    val nickname: String?,
     @SerializedName("nickname_en")
-    val nicknameEn: String,
+    val nicknameEn: String?,
     @SerializedName("occupation")
-    val occupation: String,
+    val occupation: String?,
     @SerializedName("occupation_en")
-    val occupationEn: String,
+    val occupationEn: String?,
     @SerializedName("series")
-    val series: Series,
+    val series: Series?,
     @SerializedName("weight")
-    val weight: String,
+    val weight: String?,
     @SerializedName("weight_en")
-    val weightEn: String
+    val weightEn: String?
 )

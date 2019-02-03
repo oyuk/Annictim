@@ -47,10 +47,10 @@ class WorkViewModel constructor(
 
     init {
         castRepository.get(CastRequestParams(
-            fields = CastRequestParams.FieldType.Minimum,
+            fields = CastRequestParams.FieldType.All,
             workId = work.id,
             perPage = 6))
-                    .filterSuccess()
+            .filterSuccess()
             .subscribeBy {
                 _casts.postValue(it)
             }

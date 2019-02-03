@@ -4,50 +4,50 @@ import com.google.gson.annotations.SerializedName
 
 data class People(
     @SerializedName("birthday")
-    val birthday: String,
+    val birthday: String?,
     @SerializedName("blood_type")
-    val bloodType: String,
+    val bloodType: String?,
     @SerializedName("casts_count")
-    val castsCount: Int,
+    val castsCount: Int?,
     @SerializedName("favorite_people_count")
-    val favoritePeopleCount: Int,
+    val favoritePeopleCount: Int?,
     @SerializedName("gender_text")
-    val genderText: String,
-    @SerializedName("height")
-    val height: Int,
+    val genderText: String?,
+//    @SerializedName("height")
+//    val height: Int?,
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("name_en")
-    val nameEn: String,
+    val nameEn: String?,
     @SerializedName("name_kana")
-    val nameKana: String,
+    val nameKana: String?,
     @SerializedName("nickname")
-    val nickname: String,
+    val nickname: String?,
     @SerializedName("nickname_en")
-    val nicknameEn: String,
+    val nicknameEn: String?,
     @SerializedName("prefecture")
-    val prefecture: Prefecture,
+    val prefecture: Prefecture?,
     @SerializedName("staffs_count")
-    val staffsCount: Int,
+    val staffsCount: Int?,
     @SerializedName("twitter_username")
-    val twitterUsername: String,
+    val twitterUsername: String?,
     @SerializedName("twitter_username_en")
-    val twitterUsernameEn: String,
+    val twitterUsernameEn: String?,
     @SerializedName("url")
-    val url: String,
+    val url: String?,
     @SerializedName("url_en")
-    val urlEn: String,
+    val urlEn: String?,
     @SerializedName("wikipedia_url")
-    val wikipediaUrl: String,
+    val wikipediaUrl: String?,
     @SerializedName("wikipedia_url_en")
-    val wikipediaUrlEn: String
+    val wikipediaUrlEn: String?
 ) {
     data class Prefecture(
         @SerializedName("id")
-        val id: Int,
+        val id: Int?,
         @SerializedName("name")
-        val name: String
+        val name: String?
     )
 }
