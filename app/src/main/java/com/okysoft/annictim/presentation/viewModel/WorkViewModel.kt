@@ -58,7 +58,6 @@ class WorkViewModel constructor(
                 _work.postValue(it.first())
             }.addTo(compositeDisposable)
 
-
         castRepository.get(CastRequestParams(
             fields = CastRequestParams.FieldType.All,
             workId = workId,
@@ -71,7 +70,8 @@ class WorkViewModel constructor(
 
         staffRepository.get(StaffRequestParams(
             fields = StaffRequestParams.FieldType.Minimum,
-            workId = workId))
+            workId = workId,
+            perPage = 6))
             .filterSuccess()
             .subscribeBy {
                 _staffs.postValue(it)

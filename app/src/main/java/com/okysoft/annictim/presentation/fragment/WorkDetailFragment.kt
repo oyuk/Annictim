@@ -12,6 +12,7 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.presentation.CastsAdapter
+import com.okysoft.annictim.presentation.StaffAdapter
 import com.okysoft.annictim.presentation.viewModel.WorkViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -26,7 +27,7 @@ class WorkDetailFragment : DaggerFragment() {
     lateinit var viewModel: WorkViewModel
     private lateinit var binding: FragmentWorkDetailBinding
     private val castAdapter = CastsAdapter()
-//    private val staffAdapter = StaffAdapter()
+    private val staffAdapter = StaffAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -72,19 +73,15 @@ class WorkDetailFragment : DaggerFragment() {
             castAdapter.items.accept(it)
         })
 
-//        binding.staffRecyclerView.layoutManager = GridLayoutManager(activity, 2)
-//        binding.staffRecyclerView.adapter = staffAdapter
-//
-//        viewModel.staffs.observe(this, Observer {
-//            staffAdapter.items.accept(it)
-//        })
+        binding.staffRecyclerView.layoutManager = GridLayoutManager(activity, 2)
+        binding.staffRecyclerView.adapter = staffAdapter
+
+        viewModel.staffs.observe(this, Observer {
+            staffAdapter.items.accept(it)
+        })
 
         castAdapter.onClick.observe(this, Observer {
             //            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))
-        })
-
-        viewModel.staffs.observe(this, Observer {
-            binding.staff.text = it?.first()?.name
         })
 
         return binding.root

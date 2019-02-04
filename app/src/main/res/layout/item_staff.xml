@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="staff"
+            type="com.okysoft.annictim.api.model.response.Staff"
+            />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/grey_50"
+        app:cardElevation="0dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/grey_800"
+                android:text="@{staff.name}"
+                tools:text="title"
+                />
+
+            <TextView
+                android:id="@+id/roleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:gravity="bottom"
+                android:textSize="11sp"
+                android:textColor="@color/grey_800"
+                android:text="@{@string/character_name(@{staff.roleText})}"
+                tools:text="title"
+                />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>
