@@ -3,13 +3,14 @@ package com.okysoft.annictim.api
 import com.apollographql.apollo.ApolloClient
 import com.okysoft.annictim.api.model.response.User
 import com.okysoft.annictim.api.model.response.UsersResponse
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import javax.inject.Inject
+import javax.inject.Named
 
 class UserServiceImpl @Inject constructor(
-        private val client: ApolloClient,
-        retrofit: Retrofit
+    private val client: ApolloClient,
+    @Named("coroutines") retrofit: Retrofit
         ): AnnictService.User {
 
     private val retrofitClient = retrofit.create(AnnictService.User::class.java)
@@ -27,12 +28,13 @@ class UserServiceImpl @Inject constructor(
 //        }.single(Result.inProgress())
 //    }
 
-    override fun getMe(accessToken: String): Single<User> {
+    override fun getMe(accessToken: String): Deferred<User> {
         return retrofitClient.getMe(accessToken)
     }
 
-    override fun get(userIds: String): Single<UsersResponse> {
+    override fun get(userIds: String): Deferred<UsersResponse> {
         return retrofitClient.get(userIds)
+
     }
 
 }

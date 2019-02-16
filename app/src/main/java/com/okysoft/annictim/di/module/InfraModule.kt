@@ -4,16 +4,20 @@ import com.apollographql.apollo.ApolloClient
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.okysoft.annictim.*
 import com.okysoft.annictim.api.*
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
+import kotlin.coroutines.CoroutineContext
 
 @Module
 class InfraModule {
@@ -70,7 +74,7 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideUserService(client: ApolloClient, retrofit: Retrofit): AnnictService.User {
+    fun provideUserService(client: ApolloClient, @Named("coroutines") retrofit: Retrofit): AnnictService.User {
         return UserServiceImpl(client, retrofit)
     }
 
@@ -119,6 +123,24 @@ class InfraModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
+    }
+
+    @Singleton
+    @Provides
+    @Named("coroutines")
+    fun createCoroutinesRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
+        return Retrofit.Builder()
+            .client(client)
+            .baseUrl(REST_END_POINT)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun createCoroutineContext(): CoroutineContext {
+        return Dispatchers.Default
     }
 
     @Singleton

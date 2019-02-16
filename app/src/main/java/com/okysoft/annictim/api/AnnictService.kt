@@ -4,6 +4,7 @@ import com.okysoft.annictim.api.model.request.OauthRequestModel
 import com.okysoft.annictim.api.model.response.*
 import io.reactivex.Completable
 import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -47,12 +48,12 @@ interface AnnictService {
         @GET("/v1/users")
         fun get(
                 @Query("filter_ids") userIds: String
-        ): Single<UsersResponse>
+        ): Deferred<UsersResponse>
 
         @GET("/v1/me")
         fun getMe(
                 @Query("access_token") accessToken: String
-        ): Single<com.okysoft.annictim.api.model.response.User>
+        ): Deferred<com.okysoft.annictim.api.model.response.User>
 
     }
 
