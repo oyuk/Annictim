@@ -22,7 +22,7 @@ interface AnnictService {
 
     interface Me {
 
-        @POST("/me/statuses")
+        @POST("v1/me/statuses")
         fun status(@QueryMap query: Map<String, String>): Completable
 
     }

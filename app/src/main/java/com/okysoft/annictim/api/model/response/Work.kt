@@ -25,7 +25,8 @@ data class Work (
     @SerializedName("episodes_count") val episodesCount: Int?,
     @SerializedName("watchers_count") val watchersCount: Int?,
     @SerializedName("reviews_count") val reviewsCount: Int?,
-    @SerializedName("no_episodes") val noEpisodes: Boolean
+    @SerializedName("no_episodes") val noEpisodes: Boolean,
+    @SerializedName("status") val status: Status?
     ): PaperParcelable, Diffable {
 
     companion object {
@@ -65,6 +66,15 @@ data class Work (
 
         companion object {
             @JvmField val CREATOR = PaperParcelWork_Twitter.CREATOR
+        }
+    }
+
+    @PaperParcel
+    data class Status (
+        @SerializedName("kind") val kind: String
+    ): PaperParcelable {
+        companion object {
+            @JvmField val CREATOR = PaperParcelWork_Status.CREATOR
         }
     }
 
