@@ -8,6 +8,8 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
@@ -16,7 +18,6 @@ import com.okysoft.annictim.presentation.StaffAdapter
 import com.okysoft.annictim.presentation.viewModel.WorkViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
-
 
 class WorkDetailFragment : DaggerFragment() {
 
@@ -31,7 +32,20 @@ class WorkDetailFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_work_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, com.okysoft.annictim.R.layout.fragment_work_detail, container, false)
+
+        val statusSpinnerAdapter = ArrayAdapter.createFromResource(activity,
+            R.array.status_list,
+            R.layout.support_simple_spinner_dropdown_item)
+
+        binding.statusSpinner.adapter = statusSpinnerAdapter
+        binding.statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val item = statusSpinnerAdapter.getItem(position) ?: ""
+                viewModel.updateStatus(workId, item.toString())
+            }
+        }
 
         viewModel.work.observe(this, Observer {
             binding.title.text = it?.title
@@ -64,6 +78,11 @@ class WorkDetailFragment : DaggerFragment() {
             binding.castTextView.setOnClickListener {
 //                startActivity(CastsActivity.createIntent(activity!!, ))
             }
+        })
+
+        viewModel.workKind.observe(this, Observer {
+            val position = statusSpinnerAdapter.getPosition(it?.toJA())
+            binding.statusSpinner.setSelection(position)
         })
 
         binding.castRecyclerView.layoutManager = GridLayoutManager(activity, 2)

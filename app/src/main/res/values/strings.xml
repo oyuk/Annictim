@@ -62,4 +62,13 @@
         <item>冬</item>
     </string-array>
 
+    <string-array name="status_list">
+        <item>見たい</item>
+        <item>見てる</item>
+        <item>見た</item>
+        <item>中断</item>
+        <item>中止</item>
+        <item>未選択</item>
+    </string-array>
+
 </resources>
