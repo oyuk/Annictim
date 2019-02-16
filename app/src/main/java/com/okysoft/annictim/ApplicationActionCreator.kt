@@ -2,8 +2,8 @@ package com.okysoft.annictim
 
 import android.util.Log
 import com.okysoft.annictim.api.repository.UserRepository
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ApplicationActionCreator @Inject constructor(
@@ -11,18 +11,14 @@ class ApplicationActionCreator @Inject constructor(
         private val dispatcher: ApplicationDispatcher) {
 
     fun getMe() {
-        repository.getMe()
-                .subscribeOn(Schedulers.io())
-                .subscribeBy {
-                    when (it) {
-                        is Result.Success -> {
-                            dispatcher.dispatch(ApplicationAction.GetMe(it.data))
-                        }
-                        is Result.Failure -> {
-                            Log.d("", it.throwable.toString())
-                        }
-                    }
-                }
+        GlobalScope.launch {
+            try {
+                val user = repository.getMe().await()
+                dispatcher.dispatch(ApplicationAction.GetMe(user))
+            } catch (t: Throwable) {
+                Log.d("", t.toString())
+            }
+        }
     }
 
 }
