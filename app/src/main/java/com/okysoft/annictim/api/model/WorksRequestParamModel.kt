@@ -54,12 +54,14 @@ data class WorkRequestParams(
 
     enum class Fields {
         All,
-        Feed;
+        Feed,
+        Status;
 
         fun toParams(): String {
             return when (this) {
                 All -> ""
                 Feed -> "id,title,images,watchers_count,reviews_count,no_episodes"
+                Status -> "status"
             }
         }
     }
