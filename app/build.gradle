@@ -110,6 +110,10 @@ dependencies {
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha11'
-    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha11'
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-beta02'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-beta02'
+
+    def coroutines_version = '1.0.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }
