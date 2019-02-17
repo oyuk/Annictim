@@ -61,7 +61,7 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideOauthService(client: Retrofit): AnnictService.Oauth {
+    fun provideOauthService(@Named("coroutines") client: Retrofit): AnnictService.Oauth {
         return client
                 .create(AnnictService.Oauth::class.java)
     }
@@ -110,7 +110,7 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideMeService(client: Retrofit): AnnictService.Me {
+    fun provideMeService(@Named("coroutines") client: Retrofit): AnnictService.Me {
         return MeServiceImpl(client)
     }
 

@@ -2,7 +2,6 @@ package com.okysoft.annictim.api
 
 import com.okysoft.annictim.api.model.request.OauthRequestModel
 import com.okysoft.annictim.api.model.response.*
-import io.reactivex.Completable
 import io.reactivex.Single
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -17,14 +16,14 @@ interface AnnictService {
         @POST("/oauth/token")
         fun getAccessToken(
                 @retrofit2.http.Body oauthRequestModel: OauthRequestModel
-        ): Single<OauthResponseModel>
+        ): Deferred<OauthResponseModel>
 
     }
 
     interface Me {
 
         @POST("v1/me/statuses")
-        fun status(@QueryMap query: Map<String, String>): Completable
+        fun status(@QueryMap query: Map<String, String>): Deferred<Unit>
 
     }
 

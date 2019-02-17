@@ -1,21 +1,23 @@
 package com.okysoft.annictim.api.repository
 
+import android.util.Log
+import com.okysoft.annictim.BuildConfig
 import com.okysoft.annictim.api.AnnictService
 import com.okysoft.annictim.api.model.request.OauthRequestModel
-import com.okysoft.annictim.BuildConfig
 import io.reactivex.Flowable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.processors.BehaviorProcessor
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class OauthRepository @Inject constructor(private val oauthService: AnnictService.Oauth) {
+class OauthRepository @Inject constructor(private val oauthService: AnnictService.Oauth,
+                                          private val CoroutineContext: CoroutineContext) {
 
     private val _accessToken = BehaviorProcessor.create<String>()
     val accessToken: Flowable<String> = _accessToken.share()
 
-    fun getAccessToken(code: String): Single<String> {
+    fun getAccessToken(code: String) {
         val requestModel = OauthRequestModel(
                 clientId = BuildConfig.annictClientId,
                 clientSecret = BuildConfig.annictClientKey,
@@ -23,13 +25,14 @@ class OauthRepository @Inject constructor(private val oauthService: AnnictServic
                 redirectUri = "com.okysoft.annictim.oauth://callback",
                 code = code
         )
-        return oauthService.getAccessToken(requestModel)
-                .map { it.accessToken }
-                .doOnSuccess {
-                    _accessToken.onNext(it)
-                }
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+        GlobalScope.launch(CoroutineContext) {
+            try {
+                val response = oauthService.getAccessToken(requestModel).await()
+                _accessToken.onNext(response.accessToken)
+            } catch (throwable: Throwable) {
+                Log.e("", throwable.toString())
+            }
+        }
     }
 
 }
