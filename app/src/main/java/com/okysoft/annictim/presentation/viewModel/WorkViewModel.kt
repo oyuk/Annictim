@@ -17,18 +17,22 @@ import com.okysoft.annictim.extension.filterSuccess
 import com.okysoft.annictim.presentation.CastRequestParams
 import com.okysoft.annictim.presentation.StaffRequestParams
 import com.okysoft.annictim.presentation.WatchKind
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class WorkViewModel constructor(
-    private val workRepository: WorkRepository,
-    private val castRepository: CastRepository,
-    private val staffRepository: StaffRepository,
+    workRepository: WorkRepository,
+    castRepository: CastRepository,
+    staffRepository: StaffRepository,
     private val meRepository: MeRepository,
-    private val workId: Int
+    workId: Int,
+    coroutineContext: CoroutineContext
 ) : ViewModel() {
 
     class Factory @Inject constructor(
@@ -36,11 +40,17 @@ class WorkViewModel constructor(
         private val castRepository: CastRepository,
         private val staffRepository: StaffRepository,
         private val meRepository: MeRepository,
-        private val workId: Int
+        private val workId: Int,
+        private val coroutineContext: CoroutineContext
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return WorkViewModel(workRepository, castRepository, staffRepository, meRepository,  workId) as T
+            return WorkViewModel(workRepository,
+                castRepository,
+                staffRepository,
+                meRepository,
+                workId,
+                coroutineContext) as T
         }
     }
 
@@ -52,9 +62,12 @@ class WorkViewModel constructor(
     val staffs: LiveData<List<Staff>> = _staffs
     private val _workKind = MutableLiveData<WatchKind>()
     val workKind: LiveData<WatchKind> = _workKind
+    private val job = Job()
+    private val coroutineContext = coroutineContext + job
     private val compositeDisposable = CompositeDisposable()
 
     init {
+
 //        workRepository.me(WorkRequestParams(ids = listOf(workId),
 //            type = WorkRequestParams.Type.Me,
 //            perPage = 1,
@@ -103,13 +116,13 @@ class WorkViewModel constructor(
 
     fun updateStatus(workId: Int, status: String) {
         val watchKind = WatchKind.fromJA(status)
-       meRepository.updateStatus(WorkStatusRequestParams(workId, watchKind))
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy {
+        GlobalScope.launch(coroutineContext) {
+            try {
+                meRepository.updateStatus(WorkStatusRequestParams(workId, watchKind))
+            } catch (trowable: Throwable) {
 
             }
-            .addTo(compositeDisposable)
-
+        }
     }
 
 }

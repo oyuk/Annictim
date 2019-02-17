@@ -1,14 +1,13 @@
 package com.okysoft.annictim.presentation.viewModel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.net.Uri
 import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.BuildConfig
 import com.okysoft.annictim.api.repository.OauthRepository
 import com.okysoft.annictim.toLiveData
-import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -40,15 +39,13 @@ class LoginViewModel @Inject constructor(
         authRepository.putAccessToken(accessToken)
     }
 
-    private fun fetchAccessToken(uri: Uri): Single<String> {
+    private fun fetchAccessToken(uri: Uri) {
         val code = uri.getQueryParameter("code")
-        return oauthRepository.getAccessToken(code)
+        oauthRepository.getAccessToken(code)
     }
 
     fun fetch(uri: Uri) {
         fetchAccessToken(uri)
-                .subscribe()
-                .addTo(compositeDisposable)
     }
 
     fun onCreate() {
