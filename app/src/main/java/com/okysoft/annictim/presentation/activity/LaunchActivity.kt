@@ -1,6 +1,6 @@
 package com.okysoft.annictim.presentation.activity
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle

@@ -1,11 +1,11 @@
 package com.okysoft.annictim.presentation.fragment
 
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import android.view.*
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.WorkTerm

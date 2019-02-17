@@ -1,9 +1,9 @@
 package com.okysoft.annictim.presentation
 
 import android.content.Context
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout

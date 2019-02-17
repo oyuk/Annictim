@@ -1,6 +1,6 @@
 package com.okysoft.annictim.extension
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide

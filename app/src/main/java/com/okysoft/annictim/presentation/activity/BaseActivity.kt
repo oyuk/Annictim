@@ -1,6 +1,6 @@
 package com.okysoft.annictim.presentation.activity
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
 import com.okysoft.annictim.MeStore
 import com.okysoft.annictim.presentation.dialog.CustomDialogFragment

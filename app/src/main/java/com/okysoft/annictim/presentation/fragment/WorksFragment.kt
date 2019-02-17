@@ -2,11 +2,11 @@ package com.okysoft.annictim.presentation.fragment
 
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.app.ActivityOptionsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +41,7 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         })
         adapter.onClick.observe(this, Observer {
             it?.let {
-                val pair = android.support.v4.util.Pair.create(it.imateView as View, "workImageView")
+                val pair = androidx.core.util.Pair.create(it.imateView as View, "workImageView")
                 val options = ActivityOptionsCompat
                         .makeSceneTransitionAnimation(activity as Activity, pair)
 //                startActivity(WorkDetailActivity.createIntent(activity!!, it.work), options.toBundle())

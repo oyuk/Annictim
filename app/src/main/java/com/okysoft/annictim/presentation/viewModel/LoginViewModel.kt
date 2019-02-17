@@ -1,8 +1,8 @@
 package com.okysoft.annictim.presentation.viewModel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import android.net.Uri
 import com.okysoft.annictim.AuthRepository
 import com.okysoft.annictim.BuildConfig

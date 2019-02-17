@@ -1,15 +1,15 @@
 package com.okysoft.annictim.presentation.fragment
 
 
-import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl

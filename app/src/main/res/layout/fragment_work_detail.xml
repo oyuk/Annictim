@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     tools:text="TV 2018年夏"/>
 
-                <android.support.v7.widget.AppCompatSpinner
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/status_spinner"
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="48dp"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     />
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/links"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@id/internet" />
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/castTextView"
@@ -105,7 +105,7 @@
                     android:text="@string/cast"
                     />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/castRecyclerView"
                     android:overScrollMode="never"
                     android:background="@color/grey_50"
@@ -115,7 +115,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/staffTextView"
@@ -126,7 +126,7 @@
                     android:text="@string/staff"
                     />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/staffRecyclerView"
                     android:overScrollMode="never"
                     android:layout_marginTop="4dp"
@@ -134,7 +134,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 

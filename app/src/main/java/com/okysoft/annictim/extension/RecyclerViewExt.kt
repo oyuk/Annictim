@@ -1,7 +1,7 @@
 package com.okysoft.annictim.extension
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 
 class LoadMoreScrollListener(private val layoutManager: LinearLayoutManager,
@@ -28,6 +28,6 @@ class LoadMoreScrollListener(private val layoutManager: LinearLayoutManager,
 }
 
 fun RecyclerView.addOnLoadMoreListener(layoutManager: LinearLayoutManager,
-                                       listener: LoadMoreScrollListener.Listener) {
+                                                                    listener: LoadMoreScrollListener.Listener) {
     addOnScrollListener(LoadMoreScrollListener(layoutManager, listener))
 }

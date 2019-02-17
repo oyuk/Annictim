@@ -2,11 +2,11 @@ package com.okysoft.annictim.presentation.activity
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.util.Pair
-import android.support.v7.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityUserBinding

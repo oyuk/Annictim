@@ -2,15 +2,15 @@ package com.okysoft.annictim.presentation.activity
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.graphics.Rect
 import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.appbar.AppBarLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Work

@@ -1,6 +1,6 @@
 package com.okysoft.annictim.di.module
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.okysoft.annictim.di.ViewModelKey
 import com.okysoft.annictim.presentation.viewModel.LoginViewModel
 import dagger.Binds

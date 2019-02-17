@@ -1,6 +1,6 @@
 package com.okysoft.annictim
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 
 class DiffUtilCallback(val old: List<Diffable>, val new: List<Diffable>): DiffUtil.Callback() {
 

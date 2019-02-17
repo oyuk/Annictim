@@ -1,6 +1,6 @@
 package com.okysoft.annictim
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.okysoft.annictim.api.model.response.User
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -19,7 +19,7 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             />
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 />
 
-            <android.support.design.widget.BottomNavigationView
+            <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,10 +49,10 @@
                 app:itemTextColor="@drawable/bottom_navigation"
                 app:menu="@menu/bottom_navigation_menu"
                 >
-            </android.support.design.widget.BottomNavigationView>
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

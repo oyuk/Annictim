@@ -1,7 +1,7 @@
 package com.okysoft.annictim.presentation.viewModel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.toLiveData
 import io.reactivex.Flowable

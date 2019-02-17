@@ -1,6 +1,6 @@
 package com.okysoft.annictim.di.module
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import com.okysoft.annictim.presentation.CastRequestParams
 import com.okysoft.annictim.presentation.fragment.CastsFragment
 import com.okysoft.annictim.presentation.viewModel.CastsViewModel

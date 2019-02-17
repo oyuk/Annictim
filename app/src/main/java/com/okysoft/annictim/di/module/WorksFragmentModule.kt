@@ -1,6 +1,6 @@
 package com.okysoft.annictim.di.module
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.presentation.fragment.WorksFragment
 import com.okysoft.annictim.presentation.viewModel.WorksViewModel

@@ -2,7 +2,8 @@ package com.okysoft.annictim
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @Navigator.Name("custom_fragment")
 class CustomNavigator(
     private val context: Context,
-    private val manager: android.support.v4.app.FragmentManager,
+    private val manager: FragmentManager,
     private val containerId : Int,
     private val userId: Int): FragmentNavigator(context, manager, containerId) {
 

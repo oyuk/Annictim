@@ -1,12 +1,12 @@
 package com.okysoft.annictim.presentation.activity
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
-import android.support.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsIntent
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityLoginBinding
 import com.okysoft.annictim.extension.clearStackAndStartActivity

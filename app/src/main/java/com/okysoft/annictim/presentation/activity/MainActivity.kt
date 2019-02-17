@@ -2,11 +2,11 @@ package com.okysoft.annictim.presentation.activity
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.annotation.MenuRes
-import android.support.annotation.StringRes
+import androidx.annotation.IdRes
+import androidx.annotation.MenuRes
+import androidx.annotation.StringRes
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.okysoft.annictim.ApplicationActionCreator

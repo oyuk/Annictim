@@ -2,7 +2,7 @@ package com.okysoft.annictim.presentation.activity
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.MenuItem
 import com.okysoft.annictim.R

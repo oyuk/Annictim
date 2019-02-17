@@ -1,8 +1,8 @@
 package com.okysoft.annictim.presentation.viewModel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.okysoft.annictim.api.model.response.Record
 import com.okysoft.annictim.presentation.RecordDispatcher
 import com.okysoft.annictim.toLiveData

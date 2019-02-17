@@ -1,8 +1,8 @@
 package com.okysoft.annictim.presentation
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.support.v7.widget.RecyclerView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
