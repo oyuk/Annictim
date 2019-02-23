@@ -1,55 +1,49 @@
 package com.okysoft.annictim.presentation.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import android.util.Log
 import com.okysoft.annictim.api.model.response.Episode
 import com.okysoft.annictim.api.repository.EpisodeRepository
-import com.okysoft.annictim.Result
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class EpisodesViewModel @Inject constructor (
         private val workId: Int,
-        private val episodeRepository: EpisodeRepository
+        private val episodeRepository: EpisodeRepository,
+        private val coroutineContext: CoroutineContext
 ): ViewModel() {
 
     class Factory @Inject constructor (
             private val workId: Int,
-            private val repository: EpisodeRepository
+            private val repository: EpisodeRepository,
+            private val coroutineContext: CoroutineContext
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return EpisodesViewModel(workId, repository) as T
+            return EpisodesViewModel(workId, repository, coroutineContext) as T
         }
     }
 
+    private val job = Job()
     private val _episodes = MutableLiveData<List<Episode>>()
     val episodes: LiveData<List<Episode>> = _episodes
-    private val compositeDisposable = CompositeDisposable()
 
     fun fetch() {
-        episodeRepository.get(workId)
-                .subscribe(
-                        {
-                            when (it) {
-                                is Result.Success -> {
-                                    val a = (_episodes.value ?: listOf()).plus(it.data)
-                                    _episodes.postValue(a)
-                                }
-                                is Result.Failure -> {
-                                    Log.d("", it.throwable.toString())
-                                }
-                            }
-                        },
-                        { throwable ->
-                            Log.d("", throwable.toString())
-                        }
-                )
-                .addTo(compositeDisposable)
+        GlobalScope.launch(coroutineContext + job) {
+            try  {
+                val response = episodeRepository.get(workId).await()
+                _episodes.postValue(response.episodes)
+            } catch (throwable: Throwable) {
+                Log.d("", throwable.toString())
+
+            }
+        }
     }
 
 }

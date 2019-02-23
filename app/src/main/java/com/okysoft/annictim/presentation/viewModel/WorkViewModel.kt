@@ -13,13 +13,9 @@ import com.okysoft.annictim.api.repository.CastRepository
 import com.okysoft.annictim.api.repository.MeRepository
 import com.okysoft.annictim.api.repository.StaffRepository
 import com.okysoft.annictim.api.repository.WorkRepository
-import com.okysoft.annictim.extension.filterSuccess
 import com.okysoft.annictim.presentation.CastRequestParams
 import com.okysoft.annictim.presentation.StaffRequestParams
 import com.okysoft.annictim.presentation.WatchKind
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -64,7 +60,6 @@ class WorkViewModel constructor(
     val workKind: LiveData<WatchKind> = _workKind
     private val job = Job()
     private val coroutineContext = coroutineContext + job
-    private val compositeDisposable = CompositeDisposable()
 
     init {
 
@@ -82,36 +77,44 @@ class WorkViewModel constructor(
 //            }
 //            .addTo(compositeDisposable)
 
-        workRepository.get(WorkRequestParams(
-            fields = WorkRequestParams.Fields.All,
-            ids = listOf(workId),
-            season = null,
-            perPage = 1
-        ))
-            .filterSuccess()
-            .subscribeBy {
-                _work.postValue(it.first())
-            }.addTo(compositeDisposable)
+        GlobalScope.launch(coroutineContext) {
+            try {
+                val response = workRepository.get(WorkRequestParams(
+                    fields = WorkRequestParams.Fields.All,
+                    ids = listOf(workId),
+                    season = null,
+                    perPage = 1
+                )).await()
+                _work.postValue(response.works.first())
+            } catch (throwable: Throwable) {
 
-        castRepository.get(CastRequestParams(
-            fields = CastRequestParams.FieldType.All,
-            workId = workId,
-            perPage = 6))
-            .filterSuccess()
-            .subscribeBy {
-                _casts.postValue(it)
             }
-            .addTo(compositeDisposable)
+        }
 
-        staffRepository.get(StaffRequestParams(
-            fields = StaffRequestParams.FieldType.Minimum,
-            workId = workId,
-            perPage = 6))
-            .filterSuccess()
-            .subscribeBy {
-                _staffs.postValue(it)
+        GlobalScope.launch(coroutineContext) {
+            try {
+                val response = castRepository.get(CastRequestParams(
+                    fields = CastRequestParams.FieldType.All,
+                    workId = workId,
+                    perPage = 6)).await()
+                _casts.postValue(response.casts)
+            } catch (throwable: Throwable) {
+
             }
-            .addTo(compositeDisposable)
+        }
+
+        GlobalScope.launch(coroutineContext) {
+            try {
+                val response = staffRepository.get(StaffRequestParams(
+                    fields = StaffRequestParams.FieldType.Minimum,
+                    workId = workId,
+                    perPage = 6)).await()
+                _staffs.postValue(response.staffs)
+            } catch (throwable: Throwable) {
+
+            }
+        }
+
     }
 
     fun updateStatus(workId: Int, status: String) {
