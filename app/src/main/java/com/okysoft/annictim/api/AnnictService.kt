@@ -2,7 +2,6 @@ package com.okysoft.annictim.api
 
 import com.okysoft.annictim.api.model.request.OauthRequestModel
 import com.okysoft.annictim.api.model.response.*
-import io.reactivex.Single
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -30,14 +29,14 @@ interface AnnictService {
     interface Staff {
 
         @GET("/v1/staffs")
-        fun get(@QueryMap query: Map<String, String>): Single<StaffResponse>
+        fun get(@QueryMap query: Map<String, String>): Deferred<StaffResponse>
 
     }
 
     interface Cast {
 
         @GET("/v1/casts")
-        fun get(@QueryMap query: Map<String, String>): Single<CastResponse>
+        fun get(@QueryMap query: Map<String, String>): Deferred<CastResponse>
 
     }
 
@@ -63,12 +62,12 @@ interface AnnictService {
         interface Me {
 
             @GET("/v1/me/works")
-            fun me(@QueryMap query: Map<String, String>): Single<WorksResponse>
+            fun me(@QueryMap query: Map<String, String>): Deferred<WorksResponse>
 
         }
 
         @GET("/v1/works")
-        fun get(@QueryMap query: Map<String, String>): Single<WorksResponse>
+        fun get(@QueryMap query: Map<String, String>): Deferred<WorksResponse>
     }
 
     interface Episode {
@@ -76,21 +75,21 @@ interface AnnictService {
         fun get(
                 @Query("filter_work_id") workId: Int,
                 @Query("sort_sort_number") order: String
-        ): Single<EpisodesResponse>
+        ): Deferred<EpisodesResponse>
     }
 
     interface Review {
         @GET("/v1/reviews")
         fun get(
                 @Query("filter_work_id") workId: Int
-        ): Single<ReviewsResponse>
+        ): Deferred<ReviewsResponse>
     }
 
     interface Record {
         @GET("/v1/records")
         fun get(
                 @Query("filter_episode_id") episodeId: Int
-        ): Single<RecordsResponse>
+        ): Deferred<RecordsResponse>
     }
 
     interface Works: Work, Work.Me

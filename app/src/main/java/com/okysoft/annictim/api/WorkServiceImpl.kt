@@ -2,7 +2,7 @@ package com.okysoft.annictim.api
 
 import com.apollographql.apollo.ApolloClient
 import com.okysoft.annictim.api.model.response.WorksResponse
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class WorkServiceImpl @Inject constructor(
     private val retrofitClient = retrofit.create(AnnictService.Work::class.java)
     private val meClient = retrofit.create(AnnictService.Work.Me::class.java)
 
-    override fun get(query: Map<String, String>): Single<WorksResponse> {
+    override fun get(query: Map<String, String>): Deferred<WorksResponse> {
         return retrofitClient.get(query)
     }
 
@@ -36,7 +36,7 @@ class WorkServiceImpl @Inject constructor(
 //                }.single(inProgress())
 //    }
 
-    override fun me(query: Map<String, String>): Single<WorksResponse> {
+    override fun me(query: Map<String, String>): Deferred<WorksResponse> {
         return meClient.me(query)
     }
 

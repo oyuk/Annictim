@@ -13,9 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
@@ -61,7 +59,7 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideOauthService(@Named("coroutines") client: Retrofit): AnnictService.Oauth {
+    fun provideOauthService(client: Retrofit): AnnictService.Oauth {
         return client
                 .create(AnnictService.Oauth::class.java)
     }
@@ -74,7 +72,7 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideUserService(client: ApolloClient, @Named("coroutines") retrofit: Retrofit): AnnictService.User {
+    fun provideUserService(client: ApolloClient, retrofit: Retrofit): AnnictService.User {
         return UserServiceImpl(client, retrofit)
     }
 
@@ -110,25 +108,13 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideMeService(@Named("coroutines") client: Retrofit): AnnictService.Me {
+    fun provideMeService(client: Retrofit): AnnictService.Me {
         return MeServiceImpl(client)
     }
 
     @Singleton
     @Provides
     fun createRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
-        return Retrofit.Builder()
-                .client(client)
-                .baseUrl(REST_END_POINT)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-    }
-
-    @Singleton
-    @Provides
-    @Named("coroutines")
-    fun createCoroutinesRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(REST_END_POINT)

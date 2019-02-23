@@ -1,7 +1,7 @@
 package com.okysoft.annictim.api
 
 import com.okysoft.annictim.api.model.response.StaffResponse
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -9,7 +9,7 @@ class StaffServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.St
 
     private val client = retrofit.create(AnnictService.Staff::class.java)
 
-    override fun get(params: Map<String, String>): Single<StaffResponse> {
+    override fun get(params: Map<String, String>): Deferred<StaffResponse> {
         return client.get(params)
     }
 

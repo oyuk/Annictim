@@ -8,6 +8,7 @@ import com.okysoft.annictim.api.model.response.WorksResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 
 fun Single<WorksResponse>.toWorkResults(): Single<Result<List<Work>>> {
@@ -19,16 +20,19 @@ fun Single<WorksResponse>.toWorkResults(): Single<Result<List<Work>>> {
 
 class WorkRepository @Inject constructor(private val service: AnnictService.Works) {
 
-    fun get(requestParams: WorkRequestParams): Single<Result<List<Work>>> {
+    fun get(requestParams: WorkRequestParams): Deferred<WorksResponse> {
         return service.get(requestParams.toParams())
-                .map { Result.success(it.works) }
-                .onErrorReturn { Result.failure<List<Work>>(it.toString(), it) }
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun me(requestParamModel: WorkRequestParams): Single<Result<List<Work>>> {
-        return service.me(requestParamModel.toParams()).toWorkResults()
+    fun me(requestParamModel: WorkRequestParams): Deferred<WorksResponse> {
+        return service.me(requestParamModel.toParams())
+    }
+
+    fun request(requestParams: WorkRequestParams, page: Int): Deferred<WorksResponse> {
+        return when (requestParams.type) {
+            WorkRequestParams.Type.Me -> me(requestParams.copy(page = page))
+            WorkRequestParams.Type.Works -> get(requestParams.copy(page = page))
+        }
     }
 
 }

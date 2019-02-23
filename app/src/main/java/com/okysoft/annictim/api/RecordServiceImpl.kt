@@ -1,7 +1,7 @@
 package com.okysoft.annictim.api
 
 import com.okysoft.annictim.api.model.response.RecordsResponse
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -9,7 +9,7 @@ class RecordServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.R
 
     private val client = retrofit.create(AnnictService.Record::class.java)
 
-    override fun get(episodeId: Int): Single<RecordsResponse> {
+    override fun get(episodeId: Int): Deferred<RecordsResponse> {
         return client.get(episodeId)
     }
 
