@@ -1,12 +1,12 @@
 package com.okysoft.annictim.presentation.fragment
 
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
+import android.view.*
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import android.view.*
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.WorkTerm
 import com.okysoft.annictim.api.model.WorkRequestParams
@@ -57,7 +57,7 @@ class WorksTabPagerFragment : Fragment() {
                 2 -> WorkTerm.Previous
                 else -> WorkTerm.Current
             }
-            return WorksFragment.newInstance(WorkRequestParams(workTerm = workTerm))
+            return WorksFragment.newInstance(WorkRequestParams(workTerm = workTerm, fields = WorkRequestParams.Fields.Feed))
         }
 
     }

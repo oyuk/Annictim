@@ -1,6 +1,7 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
+import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.presentation.fragment.WorkDetailFragment
 import com.okysoft.annictim.presentation.viewModel.WorkViewModel
 import dagger.Module
@@ -17,8 +18,8 @@ abstract class WorkDetailFragmentModule {
     class InjectViewModel {
 
         @Provides
-        fun providesWorkId(fragment: WorkDetailFragment): Int {
-            return fragment.workId
+        fun providesWork(fragment: WorkDetailFragment): Work {
+            return fragment.work
         }
 
         @Provides

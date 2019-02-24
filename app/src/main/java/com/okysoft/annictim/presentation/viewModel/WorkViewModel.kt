@@ -31,7 +31,7 @@ class WorkViewModel constructor(
     castRepository: CastRepository,
     staffRepository: StaffRepository,
     private val meRepository: MeRepository,
-    workId: Int,
+    work: Work,
     coroutineContext: CoroutineContext
 ) : ViewModel() {
 
@@ -40,7 +40,7 @@ class WorkViewModel constructor(
         private val castRepository: CastRepository,
         private val staffRepository: StaffRepository,
         private val meRepository: MeRepository,
-        private val workId: Int,
+        private val work: Work,
         private val coroutineContext: CoroutineContext
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
@@ -49,7 +49,7 @@ class WorkViewModel constructor(
                 castRepository,
                 staffRepository,
                 meRepository,
-                workId,
+                work,
                 coroutineContext) as T
         }
     }
@@ -68,26 +68,14 @@ class WorkViewModel constructor(
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        GlobalScope.launch(coroutineContext) {
-            try {
-                val response = workRepository.get(WorkRequestParams(
-                    fields = WorkRequestParams.Fields.All,
-                    ids = listOf(workId),
-                    season = null,
-                    perPage = 1
-                )).await()
-                _work.postValue(response.works.first())
-            } catch (throwable: Throwable) {
-
-            }
-        }
+        _work.postValue(work)
 
         GlobalScope.launch(coroutineContext) {
             try {
                 val response = workRepository.me(WorkRequestParams(
                     type = WorkRequestParams.Type.Me,
                     fields = WorkRequestParams.Fields.Status,
-                    ids = listOf(workId),
+                    ids = listOf(work.id),
                     season = null,
                     perPage = 1
                 )).await()
@@ -102,7 +90,7 @@ class WorkViewModel constructor(
             try {
                 val response = castRepository.get(CastRequestParams(
                     fields = CastRequestParams.FieldType.All,
-                    workId = workId)).await()
+                    workId = work.id)).await()
                 _casts.postValue(response.casts)
             } catch (throwable: Throwable) {
 
@@ -113,7 +101,7 @@ class WorkViewModel constructor(
             try {
                 val response = staffRepository.get(StaffRequestParams(
                     fields = StaffRequestParams.FieldType.Minimum,
-                    workId = workId)).await()
+                    workId = work.id)).await()
                 _staffs.postValue(response.staffs)
             } catch (throwable: Throwable) {
 
@@ -125,7 +113,7 @@ class WorkViewModel constructor(
             .subscribeBy {
                 GlobalScope.launch(coroutineContext) {
                     try {
-                        meRepository.updateStatus(WorkStatusRequestParams(workId, it))
+                        meRepository.updateStatus(WorkStatusRequestParams(work.id, it))
                     } catch (trowable: Throwable) {
 
                     }

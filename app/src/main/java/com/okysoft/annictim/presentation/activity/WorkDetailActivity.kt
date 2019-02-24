@@ -2,16 +2,16 @@ package com.okysoft.annictim.presentation.activity
 
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.graphics.Rect
 import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
-import com.google.android.material.appbar.AppBarLayout
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.appcompat.app.AppCompatActivity
-import android.view.MenuItem
+import com.google.android.material.appbar.AppBarLayout
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
@@ -111,13 +111,13 @@ class WorkDetailActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment? {
             if (work.noEpisodes) {
                 return when (position) {
-                    0 -> WorkDetailFragment.newInstance(work.id)
+                    0 -> WorkDetailFragment.newInstance(work)
                     1 -> ReviewsFragment.newInstance(work.id)
                     else -> null
                 }
             }
             return when (position) {
-                0 -> WorkDetailFragment.newInstance(work.id)
+                0 -> WorkDetailFragment.newInstance(work)
                 1 -> EpisodesFragment.newInstance(work.id)
                 2 -> ReviewsFragment.newInstance(work.id)
                 else -> null

@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
+import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.presentation.CastsAdapter
@@ -22,8 +23,8 @@ import javax.inject.Inject
 
 class WorkDetailFragment : DaggerFragment() {
 
-    val workId: Int
-        get() =  arguments?.getInt(WorkDetailFragment.WORK_ID) ?: -1
+    val work: Work
+        get() =  arguments?.getParcelable(WORK) ?: Work.default()
 
     @Inject
     lateinit var viewModel: WorkViewModel
@@ -113,11 +114,11 @@ class WorkDetailFragment : DaggerFragment() {
 
     companion object {
         val TAG = WorkDetailFragment::class.java.simpleName
-        const val WORK_ID = "WORK_ID"
+        const val WORK = "WORK"
 
-        fun newInstance(workId: Int): WorkDetailFragment = WorkDetailFragment().apply {
+        fun newInstance(work: Work): WorkDetailFragment = WorkDetailFragment().apply {
             val args = Bundle().apply {
-                putInt(WORK_ID, workId)
+                putParcelable(WORK, work)
             }
             arguments = args
         }
