@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
             <LinearLayout
@@ -17,127 +18,238 @@
 
                 <TextView
                     android:id="@+id/title"
-                    android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="24sp"
                     android:textColor="@color/grey_600"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
                     android:ellipsize="end"
                     tools:text="タイトル" />
 
                 <TextView
                     android:id="@+id/media"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:textColor="@color/grey_600"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="12dp"
                     tools:text="TV 2018年夏"/>
+
+                <include layout="@layout/border" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:text="視聴状況"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/status_spinner"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginEnd="48dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="start"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
                     />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/links"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_gravity="center_horizontal"
+                <include layout="@layout/border" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:text="メディア"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/twitter_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/work_detail_cell_height"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
                     >
 
                     <ImageView
-                        android:id="@+id/twitter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_icons8_twitter"
-                        app:layout_constraintEnd_toStartOf="@id/wikipedia"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_icons8_twitter" />
+
+                    <TextView
+                        android:id="@+id/twitter_url"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="Twitter"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/wikipedia_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/work_detail_cell_height"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    >
 
                     <ImageView
-                        android:id="@+id/wikipedia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:src="@drawable/ic_icons8_wikipedia"
-                        app:layout_constraintEnd_toStartOf="@id/internet"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@id/twitter" />
+                        android:layout_gravity="center"
+                        />
 
-                    <ImageView
-                        android:id="@+id/internet"
+                    <TextView
+                        android:id="@+id/wikipediaTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="Wikipedia"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/internet_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/work_detail_cell_height"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_internet"
-                        app:layout_constraintEnd_toStartOf="@id/hashtag"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@id/wikipedia" />
+                        />
+
+                    <TextView
+                        android:id="@+id/internetTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="公式サイト"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/hashtag_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/work_detail_cell_height"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    >
 
                     <ImageView
                         android:id="@+id/hashtag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_hashtag"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@id/internet" />
+                        />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/hashtagTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="Twitterハッシュタグ"
+                        />
+
+                </LinearLayout>
+
+                <include layout="@layout/border" />
 
                 <TextView
-                    android:id="@+id/castTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:textColor="@color/grey_800"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
                     android:text="@string/cast"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/castRecyclerView"
                     android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"
                     android:background="@color/grey_50"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    >
                 </androidx.recyclerview.widget.RecyclerView>
 
+                <include layout="@layout/border" />
+
                 <TextView
-                    android:id="@+id/staffTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:textColor="@color/grey_800"
-                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
                     android:text="@string/staff"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/staffRecyclerView"
                     android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"
                     android:layout_marginTop="4dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                 </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 </layout>

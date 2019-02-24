@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="cell_height">56dp</dimen>
+    <dimen name="work_detail_cell_height">40dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>

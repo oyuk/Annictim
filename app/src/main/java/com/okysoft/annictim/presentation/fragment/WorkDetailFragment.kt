@@ -52,32 +52,33 @@ class WorkDetailFragment : DaggerFragment() {
             binding.media.text = "${it?.mediaText} ${it?.seasonNameText}"
 
             it?.twitterUsername?.let {userName ->
-                binding.twitter.setOnClickListener {
+                binding.twitterLayout.setOnClickListener {
                     openUrl("https://twitter.com/${userName}")
                 }
-            } ?: { binding.twitter.visibility = View.GONE }()
+            } ?: { binding.twitterLayout.visibility = View.GONE }()
 
             it?.twitterHashtag?.let { hashTag ->
-                binding.hashtag.setOnClickListener {
-                    openUrl("https://twitter.com/search?q=${hashTag}")
+                val url = "https://twitter.com/search?q=${hashTag}"
+                binding.hashtagLayout.setOnClickListener {
+                    openUrl(url)
                 }
-            } ?: { binding.hashtag.visibility = View.GONE }()
+            } ?: { binding.hashtagLayout.visibility = View.GONE }()
 
             it?.wikipediaUrl?.let {url ->
-                binding.wikipedia.setOnClickListener {
+                binding.wikipediaLayout.setOnClickListener {
                     openUrl(url)
                 }
-            } ?: { binding.wikipedia.visibility = View.GONE }()
+            } ?: { binding.wikipediaLayout.visibility = View.GONE }()
 
             it?.officialSiteUrl?.let {url ->
-                binding.internet.setOnClickListener {
+                binding.internetLayout.setOnClickListener {
                     openUrl(url)
                 }
-            } ?: { binding.internet.visibility = View.GONE }()
+            } ?: { binding.internetLayout.visibility = View.GONE }()
 
-            binding.castTextView.setOnClickListener {
+//            binding.castTextView.setOnClickListener {
 //                startActivity(CastsActivity.createIntent(activity!!, ))
-            }
+//            }
         })
 
         viewModel.workKind.observe(this, Observer {
