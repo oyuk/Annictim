@@ -62,21 +62,6 @@ class WorkViewModel constructor(
     private val coroutineContext = coroutineContext + job
 
     init {
-
-//        workRepository.me(WorkRequestParams(ids = listOf(workId),
-//            type = WorkRequestParams.Type.Me,
-//            perPage = 1,
-//            season = null))
-//            .filterSuccess()
-//            .filter { it.isNullOrEmpty() }
-//            .map { it.first().status?.kind }
-//            .filter { it.isNotBlank()  }
-//            .map { WatchKind.fromString(it) }
-//            .subscribeBy {
-//                _workKind.postValue(it)
-//            }
-//            .addTo(compositeDisposable)
-
         GlobalScope.launch(coroutineContext) {
             try {
                 val response = workRepository.get(WorkRequestParams(
@@ -95,8 +80,7 @@ class WorkViewModel constructor(
             try {
                 val response = castRepository.get(CastRequestParams(
                     fields = CastRequestParams.FieldType.All,
-                    workId = workId,
-                    perPage = 6)).await()
+                    workId = workId)).await()
                 _casts.postValue(response.casts)
             } catch (throwable: Throwable) {
 
@@ -107,8 +91,7 @@ class WorkViewModel constructor(
             try {
                 val response = staffRepository.get(StaffRequestParams(
                     fields = StaffRequestParams.FieldType.Minimum,
-                    workId = workId,
-                    perPage = 6)).await()
+                    workId = workId)).await()
                 _staffs.postValue(response.staffs)
             } catch (throwable: Throwable) {
 
