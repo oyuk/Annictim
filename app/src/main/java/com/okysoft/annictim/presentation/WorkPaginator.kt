@@ -1,6 +1,5 @@
 package com.okysoft.annictim.presentation
 
-import com.okysoft.annictim.Result
 import com.okysoft.annictim.api.model.response.Cast
 import com.okysoft.annictim.api.model.response.Work
 import io.reactivex.Flowable
@@ -11,9 +10,34 @@ import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.withLatestFrom
 import java.util.concurrent.TimeUnit
 
+
+private sealed class Response<T> {
+    data class Success<T>(val response: List<T>, val page: Int) : Response<T>()
+    data class Error<T>(val throwable: Throwable, val page: Int) : Response<T>()
+}
+
+private fun <T> Flowable<Response<T>>.split(): Pair<Flowable<Response.Success<T>>, Flowable<Response.Error<T>>> {
+    val successResponse = switchMap {
+            when(it) {
+                is Response.Success -> Flowable.just(it)
+                is Response.Error -> Flowable.empty()
+            }
+        }
+        .share()
+    val errorResponse = switchMap {
+            when(it) {
+                is Response.Success -> Flowable.empty()
+                is Response.Error -> Flowable.just(it)
+            }
+        }
+        .share()
+    return Pair(successResponse, errorResponse)
+}
+
 abstract class Paginator<T>(
     paginationTrigger: Flowable<Unit>,
-    requestCreator: ((Int) -> Single<Result<List<T>>>)
+    refresh: Flowable<Unit>,
+    requestCreator: ((Int) -> Single<List<T>>)
 ) {
 
     val items: Flowable<List<T>>
@@ -22,40 +46,17 @@ abstract class Paginator<T>(
     private val refresh = PublishProcessor.create<Unit>()
     private val disposable = CompositeDisposable()
 
-    data class PaginationResponse<T>(
-        val response: Result<List<T>>,
-        val page: Int
-    ) {
-
-        fun success(): Boolean = response is Result.Success
-
-        fun data(): List<T> = (response as Result.Success).data
-
-        fun error(): Throwable = (response as Result.Failure).throwable
-    }
-
     init {
         val _loading = BehaviorProcessor.createDefault(false)
         loading = _loading
-        val _items = PublishProcessor .create<List<T>>()
+        val _items = PublishProcessor.create<List<T>>()
         items = _items
         val currentPage = BehaviorProcessor.createDefault(1)
         val completeRequest = BehaviorProcessor.createDefault(false)
 
-//        val updateCurrentPage = Flowable.zip(
-//            items.map { it.size } ,
-//            items.skip(1).map { it.size }, BiFunction { t1: Int, t2: Int -> Pair(t1, t2) })
-//            .filter {
-//                Log.i("https://api.annict.com/v1/works", "$it")
-//                it.first != it.second
-//            }
-//            .withLatestFrom(currentPage)
-//            .map { it.second  + 1 }
-
         Flowable.merge(
             refresh.map { 1 },
-//            updateCurrentPage
-        items.withLatestFrom(currentPage).map { it.second + 1 }.skip(1)
+            items.withLatestFrom(currentPage).map { it.second + 1 }.skip(1)
         )
             .subscribe(currentPage)
 
@@ -73,63 +74,40 @@ abstract class Paginator<T>(
             .withLatestFrom(currentPage)
             .map { it.second }
             .switchMapSingle { page ->
-                requestCreator(page).map { PaginationResponse(it, page) }
+                requestCreator(page)
+                    .doOnSubscribe { _loading.onNext(true) }
+                    .map { Response.Success(it, page) as Response<T> }
+                    .onErrorReturn { Response.Error(it, page) }
             }
             .share()
 
-        error = response
-            .filter { !it.success() }
-            .map { it.error() }
+        val (successResponse, errorResponse) = response.split()
 
-        val successResponse = response.filter { it.success() }.share()
+        error = errorResponse.map { it.throwable }
 
         successResponse
-            .scan(listOf()) { t1: List<T>, t2: PaginationResponse<T> ->
-                if (t2.page == 1) { t2.data() } else {  t1 + t2.data() }
+            .scan(listOf()) { t1: List<T>, t2: Response.Success<T> ->
+                if (t2.page == 1) { t2.response } else { t1 + t2.response }
             }
             .subscribe(_items)
 
         successResponse
-            .map { it.data().isEmpty() }
+            .map { it.response.isEmpty() }
             .subscribe(completeRequest)
 
-//        val refreshResponse = response
-//            .filter { it.second == 1 }
-//            .concatMapSingle { it.first }
-//            .doOnNext {
-//                Log.i("hoge", it.toString())
-//            }
-//            .filterSuccess()
-//
-//        val paginationResponse = response
-//            .filter { it.second > 1 }
-//            .concatMapSingle { it.first }
-//            .filterSuccess()
-//            .doOnNext {
-//                Log.i("hoge", it.toString())
-//            }
-//            .withLatestFrom(items)
-//            .map { it.second + it.first }
-
-//        Flowable.merge(refreshResponse, paginationResponse)
-//            .subscribe (_items)
-
-        //TODO: errorのときにloadignがfalseにならないので修正する
-        Flowable.merge(fetchTrigger.map { true }, items.map { false })
-            .subscribe (_loading)
-    }
-
-    fun refresh() {
-        refresh.onNext(Unit)
+        Flowable.merge(successResponse.map { false }, error.map {false })
+            .subscribe(_loading)
     }
 
 }
 
 class WorkPaginator(nextPage: Flowable<Unit>,
-                    requestCreator: ((Int) -> Single<Result<List<Work>>>))
-    : Paginator<Work>(nextPage, requestCreator)
+                    refresh: Flowable<Unit>,
+                    requestCreator: ((Int) -> Single<List<Work>>))
+    : Paginator<Work>(nextPage, refresh, requestCreator)
 
 class CastPaginator(nextPage: Flowable<Unit>,
-                    requestCreator: ((Int) -> Single<Result<List<Cast>>>))
-    : Paginator<Cast>(nextPage, requestCreator)
+                    refresh: Flowable<Unit>,
+                    requestCreator: ((Int) -> Single<List<Cast>>))
+    : Paginator<Cast>(nextPage, refresh, requestCreator)
 
