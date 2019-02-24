@@ -2,14 +2,14 @@ package com.okysoft.annictim.presentation.fragment
 
 
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.core.app.ActivityOptionsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentWorksBinding
@@ -48,6 +48,7 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
                 startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
             }
         })
+        viewModel.refresh()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,7 +63,6 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refresh()
         }
-        viewModel.refresh()
         return binding.root
     }
 
