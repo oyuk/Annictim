@@ -34,7 +34,7 @@ class ReviewsViewModel @Inject constructor (
     private val _reviews = MutableLiveData<List<Review>>()
     val reviews: LiveData<List<Review>> = _reviews
 
-    fun fetch() {
+    init {
         GlobalScope.launch(coroutineContext + job) {
             try {
                 val response = reviewRepository.get(workId).await()

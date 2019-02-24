@@ -1,17 +1,17 @@
 package com.okysoft.annictim.presentation.fragment
 
 
-import androidx.lifecycle.Observer
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.presentation.ReviewsAdapter
-import com.okysoft.annictim.presentation.viewModel.ReviewsViewModel
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentReviewsBinding
+import com.okysoft.annictim.presentation.ReviewsAdapter
+import com.okysoft.annictim.presentation.viewModel.ReviewsViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -44,7 +44,6 @@ class ReviewsFragment : DaggerFragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
-        viewModel.fetch()
         return binding.root
     }
 
