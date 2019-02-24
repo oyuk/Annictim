@@ -39,6 +39,7 @@ class WorkDetailFragment : DaggerFragment() {
             R.layout.support_simple_spinner_dropdown_item)
 
         binding.statusSpinner.adapter = statusSpinnerAdapter
+        binding.statusSpinner.setSelection(5)
         binding.statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
