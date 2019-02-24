@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.Result
 import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.api.repository.WorkRepository

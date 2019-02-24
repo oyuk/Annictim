@@ -1,13 +1,8 @@
 package com.okysoft.annictim.api.repository
 
-import com.okysoft.annictim.Result
 import com.okysoft.annictim.api.AnnictService
 import com.okysoft.annictim.api.model.WorkRequestParams
-import com.okysoft.annictim.api.model.response.Work
 import com.okysoft.annictim.api.model.response.WorksResponse
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 
