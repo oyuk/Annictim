@@ -11,13 +11,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 
-fun Single<WorksResponse>.toWorkResults(): Single<Result<List<Work>>> {
-    return map { Result.success(it.works) }
-            .onErrorReturn { Result.failure<List<Work>>(it.toString(), it) }
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-}
-
 class WorkRepository @Inject constructor(private val service: AnnictService.Works) {
 
     fun get(requestParams: WorkRequestParams): Deferred<WorksResponse> {
