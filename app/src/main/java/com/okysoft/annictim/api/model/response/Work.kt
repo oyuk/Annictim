@@ -28,19 +28,48 @@ data class Work (
     @SerializedName("reviews_count") val reviewsCount: Int?,
     @SerializedName("no_episodes") val noEpisodes: Boolean,
     @SerializedName("status") val status: Status?
-    ): PaperParcelable, Diffable {
+): PaperParcelable, Diffable {
 
     companion object {
         @JvmField val CREATOR = PaperParcelWork.CREATOR
+
+        fun default(): Work {
+            return Work(
+                id = 0,
+                title = "",
+                titleKana = null,
+                media = null,
+                mediaText = null,
+                seasonName = null,
+                seasonNameText = null,
+                releasedOn = null,
+                releasedOnAbout = null,
+                officialSiteUrl = null,
+                wikipediaUrl = null,
+                twitterUsername = null,
+                twitterHashtag = null,
+                malAnimeId = null,
+                images = Images("",
+                    Facebook(""),
+                    Twitter("", "", "", "", "")),
+                episodesCount = null,
+                watchersCount = null,
+                reviewsCount = null,
+                noEpisodes = false,
+                status = null
+            )
+        }
+
     }
 
-    val watchKind: WatchKind = WatchKind.fromString(status?.kind ?: "")
+    var watchKind: WatchKind = WatchKind.no_select
+        get() = WatchKind.fromString(status?.kind ?: "")
 
     @PaperParcel
     data class Images(
-            @SerializedName("recommended_url") val recommendedUrl: String,
-            @SerializedName("facebook") val facebook: Facebook,
-            @SerializedName("twitter") val twitter: Twitter
+        @SerializedName("recommended_url") val recommendedUrl: String,
+        @SerializedName("facebook") val facebook: Facebook,
+        @SerializedName("twitter") val twitter: Twitter
     ): PaperParcelable {
 
         companion object {
@@ -50,7 +79,7 @@ data class Work (
 
     @PaperParcel
     data class Facebook(
-            @SerializedName("og_image_url") val ogImageUrl: String
+        @SerializedName("og_image_url") val ogImageUrl: String
     ): PaperParcelable {
 
         companion object {
@@ -60,11 +89,11 @@ data class Work (
 
     @PaperParcel
     data class Twitter(
-            @SerializedName("mini_avatar_url") val miniAvatarUrl: String,
-            @SerializedName("normal_avatar_url") val normalAvatarUrl: String,
-            @SerializedName("bigger_avatar_url") val biggerAvatarUrl: String,
-            @SerializedName("original_avatar_url") val originalAvatarUrl: String,
-            @SerializedName("image_url") val imageUrl: String
+        @SerializedName("mini_avatar_url") val miniAvatarUrl: String,
+        @SerializedName("normal_avatar_url") val normalAvatarUrl: String,
+        @SerializedName("bigger_avatar_url") val biggerAvatarUrl: String,
+        @SerializedName("original_avatar_url") val originalAvatarUrl: String,
+        @SerializedName("image_url") val imageUrl: String
     ): PaperParcelable {
 
         companion object {
