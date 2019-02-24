@@ -1,14 +1,14 @@
 package com.okysoft.annictim.presentation.fragment
 
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
@@ -36,10 +36,12 @@ class MeWorksTabPagerFragment : Fragment() {
 
         override fun getItem(position: Int): Fragment? {
             val meFilterStatus = WatchKind.fromNum(position)
-            return WorksFragment.newInstance(WorkRequestParams(type = WorkRequestParams.Type.Me,
-                status = meFilterStatus.toString(), season = null))
+            return WorksFragment.newInstance(WorkRequestParams(
+                type = WorkRequestParams.Type.Me,
+                status = meFilterStatus.toString(),
+                fields = WorkRequestParams.Fields.Feed,
+                season = null))
         }
-
     }
 
     companion object {

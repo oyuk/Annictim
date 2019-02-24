@@ -60,7 +60,7 @@ data class WorkRequestParams(
         fun toParams(): String {
             return when (this) {
                 All -> ""
-                Feed -> "id,title,images,watchers_count,reviews_count,no_episodes,season_name_text"
+                Feed -> "id,title,images,watchers_count,reviews_count,no_episodes,season_name_text,media_text,official_site_url,wikipedia_url,twitter_username,twitter_hashtag"
                 Status -> "status.kind"
             }
         }
