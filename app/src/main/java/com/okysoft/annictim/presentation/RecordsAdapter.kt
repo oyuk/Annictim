@@ -1,10 +1,10 @@
 package com.okysoft.annictim.presentation
 
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import android.view.View
-import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Record
@@ -75,6 +75,8 @@ class RecordsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemRecordBinding>>
         (holder.binding as ItemRecordBinding).run {
             record = item
             textViewDate.text = item.createdAt.toDate()?.toReadableDateTimeString()
+            val comment = item.comment ?: ""
+            commentTextView.visibility = if (comment.isEmpty()) View.GONE else View.VISIBLE
         }
     }
 

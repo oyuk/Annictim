@@ -3,8 +3,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Record(
     @SerializedName("id") val id: Int,
-    @SerializedName("comment") val comment: String,
-    @SerializedName("rating") val rating: Int,
+    @SerializedName("comment") val comment: String?,
+    @SerializedName("rating_state") val ratingState: String,
     @SerializedName("is_modified") val isModified: Boolean,
     @SerializedName("likes_count") val likesCount: Int,
     @SerializedName("comments_count") val commentsCount: Int,
@@ -23,4 +23,13 @@ data class Record(
         @SerializedName("records_count") val recordsCount: Int,
         @SerializedName("created_at") val createdAt: String
     )
+
+    val rating: Int = when(ratingState) {
+        "bad" -> 0
+        "average" -> 1
+        "good" -> 2
+        "great" -> 3
+        else -> 0
+    }
+
 }

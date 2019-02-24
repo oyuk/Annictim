@@ -16,10 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_margin="8dp"
         >
 
         <ImageView
@@ -27,17 +24,17 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_margin="8dp"
             android:contentDescription="none"
             android:transitionName="userImageView"
             app:loadImage="@{record.user.avatarUrl}"
-             />
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:orientation="vertical"
-            android:layout_marginStart="16dp"
             >
 
             <TextView
@@ -45,13 +42,6 @@
                 android:layout_height="wrap_content"
                 android:text="@{record.user.username}"
                 android:textStyle="bold"
-                />
-
-            <TextView
-                android:id="@+id/textView_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 />
 
             <RatingBar
@@ -65,13 +55,20 @@
                 />
 
             <TextView
-                android:id="@+id/comment"
+                android:id="@+id/commentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@{record.comment}"
                 />
 
+            <TextView
+                android:id="@+id/textView_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="12sp"
+                />
         </LinearLayout>
 
     </LinearLayout>
