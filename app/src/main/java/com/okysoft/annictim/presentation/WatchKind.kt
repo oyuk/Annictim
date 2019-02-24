@@ -33,11 +33,11 @@ enum class WatchKind(val rawValue: String) {
         const val meKindCount: Int = 5
 
         fun fromString(s: String): WatchKind {
-            return WatchKind.values().filter { s == it.rawValue }.first()
+            return WatchKind.values().filter { s == it.rawValue }.firstOrNull() ?: no_select
         }
 
         fun fromNum(num: Int): WatchKind {
-            return WatchKind.values().firstOrNull { it.ordinal == num } ?: WatchKind.wanna_watch
+            return WatchKind.values().firstOrNull { it.ordinal == num } ?: no_select
         }
 
         fun fromJA(ja: String): WatchKind {

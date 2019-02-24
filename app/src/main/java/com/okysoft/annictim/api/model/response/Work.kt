@@ -2,6 +2,7 @@ package com.okysoft.annictim.api.model.response
 
 import com.google.gson.annotations.SerializedName
 import com.okysoft.annictim.Diffable
+import com.okysoft.annictim.presentation.WatchKind
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
@@ -32,6 +33,8 @@ data class Work (
     companion object {
         @JvmField val CREATOR = PaperParcelWork.CREATOR
     }
+
+    val watchKind: WatchKind = WatchKind.fromString(status?.kind ?: "")
 
     @PaperParcel
     data class Images(
