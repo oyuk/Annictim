@@ -61,7 +61,7 @@ data class WorkRequestParams(
             return when (this) {
                 All -> ""
                 Feed -> "id,title,images,watchers_count,reviews_count,no_episodes,season_name_text"
-                Status -> "status"
+                Status -> "status.kind"
             }
         }
     }
