@@ -56,7 +56,7 @@ data class Work (
                 watchersCount = null,
                 reviewsCount = null,
                 noEpisodes = false,
-                status = null
+                status = Status("no_select")
             )
         }
 
