@@ -16,6 +16,10 @@ import com.okysoft.annictim.api.repository.WorkRepository
 import com.okysoft.annictim.presentation.CastRequestParams
 import com.okysoft.annictim.presentation.StaffRequestParams
 import com.okysoft.annictim.presentation.WatchKind
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.processors.PublishProcessor
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -58,8 +62,10 @@ class WorkViewModel constructor(
     val staffs: LiveData<List<Staff>> = _staffs
     private val _workKind = MutableLiveData<WatchKind>()
     val workKind: LiveData<WatchKind> = _workKind
+    private val statusPublisher = PublishProcessor.create<WatchKind>()
     private val job = Job()
     private val coroutineContext = coroutineContext + job
+    private val compositeDisposable = CompositeDisposable()
 
     init {
         GlobalScope.launch(coroutineContext) {
@@ -71,6 +77,22 @@ class WorkViewModel constructor(
                     perPage = 1
                 )).await()
                 _work.postValue(response.works.first())
+            } catch (throwable: Throwable) {
+
+            }
+        }
+
+        GlobalScope.launch(coroutineContext) {
+            try {
+                val response = workRepository.me(WorkRequestParams(
+                    type = WorkRequestParams.Type.Me,
+                    fields = WorkRequestParams.Fields.Status,
+                    ids = listOf(workId),
+                    season = null,
+                    perPage = 1
+                )).await()
+                val watchKind = response.works.firstOrNull()?.watchKind ?: WatchKind.no_select
+                _workKind.postValue(watchKind)
             } catch (throwable: Throwable) {
 
             }
@@ -98,17 +120,22 @@ class WorkViewModel constructor(
             }
         }
 
+        statusPublisher
+            .distinctUntilChanged()
+            .subscribeBy {
+                GlobalScope.launch(coroutineContext) {
+                    try {
+                        meRepository.updateStatus(WorkStatusRequestParams(workId, it))
+                    } catch (trowable: Throwable) {
+
+                    }
+                }
+            }.addTo(compositeDisposable)
     }
 
-    fun updateStatus(workId: Int, status: String) {
+    fun updateStatus(status: String) {
         val watchKind = WatchKind.fromJA(status)
-        GlobalScope.launch(coroutineContext) {
-            try {
-                meRepository.updateStatus(WorkStatusRequestParams(workId, watchKind))
-            } catch (trowable: Throwable) {
-
-            }
-        }
+        statusPublisher.onNext(watchKind)
     }
 
 }

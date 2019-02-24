@@ -15,6 +15,7 @@ import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.presentation.CastsAdapter
 import com.okysoft.annictim.presentation.StaffAdapter
+import com.okysoft.annictim.presentation.WatchKind
 import com.okysoft.annictim.presentation.viewModel.WorkViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -33,20 +34,6 @@ class WorkDetailFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, com.okysoft.annictim.R.layout.fragment_work_detail, container, false)
-
-        val statusSpinnerAdapter = ArrayAdapter.createFromResource(activity,
-            R.array.status_list,
-            R.layout.support_simple_spinner_dropdown_item)
-
-        binding.statusSpinner.adapter = statusSpinnerAdapter
-        binding.statusSpinner.setSelection(5)
-        binding.statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val item = statusSpinnerAdapter.getItem(position) ?: ""
-                viewModel.updateStatus(workId, item.toString())
-            }
-        }
 
         viewModel.work.observe(this, Observer {
             binding.title.text = it?.title
@@ -83,8 +70,8 @@ class WorkDetailFragment : DaggerFragment() {
         })
 
         viewModel.workKind.observe(this, Observer {
-            val position = statusSpinnerAdapter.getPosition(it?.toJA())
-            binding.statusSpinner.setSelection(position)
+            val watchKind = it ?: WatchKind.no_select
+            setupStatusSpinner(watchKind)
         })
 
         binding.castRecyclerView.layoutManager = GridLayoutManager(activity, 2)
@@ -106,6 +93,22 @@ class WorkDetailFragment : DaggerFragment() {
         })
 
         return binding.root
+    }
+
+    private fun setupStatusSpinner(watchKind: WatchKind) {
+        val statusSpinnerAdapter = ArrayAdapter.createFromResource(activity,
+            R.array.status_list,
+            R.layout.support_simple_spinner_dropdown_item)
+        binding.statusSpinner.adapter = statusSpinnerAdapter
+        val position = statusSpinnerAdapter.getPosition(watchKind.toJA())
+        binding.statusSpinner.setSelection(position)
+        binding.statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val item = statusSpinnerAdapter.getItem(position) ?: ""
+                viewModel.updateStatus(item.toString())
+            }
+        }
     }
 
     companion object {
