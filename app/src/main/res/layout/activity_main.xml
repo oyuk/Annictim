@@ -28,28 +28,39 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             >
 
-            <fragment
-                android:id="@+id/nav_host_fragment"
-                android:name="com.okysoft.annictim.CustomNavHostFragment"
-                app:navGraph="@navigation/navigation"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                />
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginEnd="0dp"
-                android:layout_marginStart="0dp"
-                android:background="@color/colorPrimaryDark"
-                app:itemIconTint="@drawable/bottom_navigation"
-                app:itemTextColor="@drawable/bottom_navigation"
-                app:menu="@menu/bottom_navigation_menu"
                 >
-            </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+                <fragment
+                    android:id="@+id/nav_host_fragment"
+                    android:name="com.okysoft.annictim.CustomNavHostFragment"
+                    app:navGraph="@navigation/navigation"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    />
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNavigationView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/colorPrimaryDark"
+                    app:itemIconTint="@drawable/bottom_navigation"
+                    app:itemTextColor="@drawable/bottom_navigation"
+                    app:menu="@menu/bottom_navigation_menu"
+                    >
+                </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
