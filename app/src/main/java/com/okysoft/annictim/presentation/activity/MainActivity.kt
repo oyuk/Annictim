@@ -2,23 +2,18 @@ package com.okysoft.annictim.presentation.activity
 
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.annotation.IdRes
-import androidx.annotation.MenuRes
-import androidx.annotation.StringRes
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.okysoft.annictim.ApplicationActionCreator
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
 import com.okysoft.annictim.extension.clearTopAndStartActivity
-import com.okysoft.annictim.presentation.NavigationController
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    @Inject lateinit var navigationController: NavigationController
     private lateinit var binding: ActivityMainBinding
     @Inject lateinit var applicationActionCreator: ApplicationActionCreator
 
@@ -43,55 +38,6 @@ class MainActivity : BaseActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         binding.bottomNavigationView.setupWithNavController(navController)
-
-//        navigationController.navigateToWorks()
-//        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-//            val navigationItem = BottomNavigationItem.forId(item.itemId)
-//
-//            binding.toolbar.title = navigationItem.titleRes?.let {
-//                getString(it)
-//            } ?: ""
-//
-////            navigationItem.navigate(navigationController)
-//            true
-//        }
-
-//        binding.bottomNavigationView.setOnNavigationItemReselectedListener { item ->
-//            val navigationItem = BottomNavigationItem
-//                .forId(item.itemId)
-//            val fragment = supportFragmentManager.findFragmentByTag(navigationItem.name)
-//            if (fragment is BottomNavigationItem.OnReselectedListener) {
-//                fragment.onReselected()
-//            }
-//        }
-    }
-
-    enum class BottomNavigationItem(
-        @MenuRes val menuId: Int,
-        @StringRes val titleRes: Int?,
-        val navigate: NavigationController.() -> Unit
-    ) {
-        WORKS(R.id.item1, R.string.app_name, {
-            navigateToWorks()
-        }),
-
-        ME_WORKS(R.id.item2, R.string.me_works, {
-            navigateToMeWorks()
-        }),
-
-        SETTING(R.id.item3, R.string.user, {
-            navigateToMe()
-        });
-
-        interface OnReselectedListener {
-            fun onReselected()
-        }
-
-        companion object {
-            fun forId(@IdRes id: Int): BottomNavigationItem {
-                return values().first { it.menuId == id }
-            }
-        }
     }
 
 }
