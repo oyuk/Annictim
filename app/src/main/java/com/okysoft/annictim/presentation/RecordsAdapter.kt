@@ -10,7 +10,7 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.api.model.response.Record
 import com.okysoft.annictim.databinding.ItemRecordBinding
 import com.okysoft.annictim.extension.toDate
-import com.okysoft.annictim.extension.toReadableDateTimeString
+import com.okysoft.annictim.extension.toReadableDateString
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -74,7 +74,7 @@ class RecordsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemRecordBinding>>
         }
         (holder.binding as ItemRecordBinding).run {
             record = item
-            textViewDate.text = item.createdAt.toDate()?.toReadableDateTimeString()
+            textViewDate.text = item.createdAt.toDate()?.toReadableDateString()
             val comment = item.comment ?: ""
             commentTextView.visibility = if (comment.isEmpty()) View.GONE else View.VISIBLE
         }
