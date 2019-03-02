@@ -1,8 +1,8 @@
 package com.okysoft.annictim.infra.api.model.response
 
 import com.google.gson.annotations.SerializedName
-import com.okysoft.annictim.presentation.widget.Diffable
 import com.okysoft.annictim.presentation.WatchKind
+import com.okysoft.annictim.presentation.widget.Diffable
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
@@ -17,10 +17,10 @@ data class Work (
     @SerializedName("season_name_text") val seasonNameText: String?,
     @SerializedName("released_on") val releasedOn: String?,
     @SerializedName("released_on_about") val releasedOnAbout: String?,
-    @SerializedName("official_site_url") val officialSiteUrl: String?,
-    @SerializedName("wikipedia_url") val wikipediaUrl: String?,
-    @SerializedName("twitter_username") val twitterUsername: String?,
-    @SerializedName("twitter_hashtag") val twitterHashtag: String?,
+    @SerializedName("official_site_url") val officialSiteUrl: String,
+    @SerializedName("wikipedia_url") val wikipediaUrl: String,
+    @SerializedName("twitter_username") val twitterUsername: String,
+    @SerializedName("twitter_hashtag") val twitterHashtag: String,
     @SerializedName("mal_anime_id") val malAnimeId: String?,
     @SerializedName("images") val images: Images,
     @SerializedName("episodes_count") val episodesCount: Int?,
@@ -44,10 +44,10 @@ data class Work (
                 seasonNameText = null,
                 releasedOn = null,
                 releasedOnAbout = null,
-                officialSiteUrl = null,
-                wikipediaUrl = null,
-                twitterUsername = null,
-                twitterHashtag = null,
+                officialSiteUrl = "",
+                wikipediaUrl = "",
+                twitterUsername = "",
+                twitterHashtag = "",
                 malAnimeId = null,
                 images = Images("",
                     Facebook(""),

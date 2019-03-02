@@ -2,12 +2,12 @@ package com.okysoft.annictim.presentation.works
 
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.databinding.ActivityWorksBinding
+import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 
 class WorksActivity : AppCompatActivity() {
 
@@ -21,11 +21,11 @@ class WorksActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var binding: ActivityWorksBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
-
-        val binding = DataBindingUtil.setContentView<ActivityWorksBinding>(this, R.layout.activity_works)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_works)
         binding.toolbar.title = getString(R.string.search)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.let {

@@ -11,12 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Work
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
+import com.okysoft.annictim.infra.api.model.response.Work
+import com.okysoft.annictim.presentation.WatchKind
 import com.okysoft.annictim.presentation.cast.CastsAdapter
 import com.okysoft.annictim.presentation.staff.StaffAdapter
-import com.okysoft.annictim.presentation.WatchKind
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -35,35 +35,35 @@ class WorkDetailFragment : DaggerFragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, com.okysoft.annictim.R.layout.fragment_work_detail, container, false)
 
-        viewModel.work.observe(this, Observer {
-            binding.title.text = it?.title
-            binding.media.text = "${it?.mediaText} ${it?.seasonNameText}"
+        viewModel.work.observe(this, Observer { work ->
+            binding.title.text = work.title
+            binding.media.text = "${work.mediaText} ${work.seasonNameText}"
 
-            it?.twitterUsername?.let {userName ->
+            if (work.twitterUsername.isNotBlank()) {
+                binding.twitterLayout.visibility = View.VISIBLE
                 binding.twitterLayout.setOnClickListener {
-                    openUrl("https://twitter.com/${userName}")
+                    openUrl("https://twitter.com/${work.twitterUsername}")
                 }
-            } ?: { binding.twitterLayout.visibility = View.GONE }()
-
-            it?.twitterHashtag?.let { hashTag ->
-                val url = "https://twitter.com/search?q=${hashTag}"
+            }
+            if (work.twitterHashtag.isNotBlank()) {
+                binding.hashtagLayout.visibility = View.VISIBLE
+                val url = "https://twitter.com/search?q=${work.twitterHashtag}"
                 binding.hashtagLayout.setOnClickListener {
                     openUrl(url)
                 }
-            } ?: { binding.hashtagLayout.visibility = View.GONE }()
-
-            it?.wikipediaUrl?.let {url ->
+            }
+            if (work.wikipediaUrl.isNotBlank()) {
+                binding.wikipediaLayout.visibility = View.VISIBLE
                 binding.wikipediaLayout.setOnClickListener {
-                    openUrl(url)
+                    openUrl(work.wikipediaUrl)
                 }
-            } ?: { binding.wikipediaLayout.visibility = View.GONE }()
-
-            it?.officialSiteUrl?.let {url ->
+            }
+            if (work.officialSiteUrl.isNotBlank()) {
+                binding.internetLayout.visibility = View.VISIBLE
                 binding.internetLayout.setOnClickListener {
-                    openUrl(url)
+                    openUrl(work.officialSiteUrl)
                 }
-            } ?: { binding.internetLayout.visibility = View.GONE }()
-
+            }
 //            binding.castTextView.setOnClickListener {
 //                startActivity(CastsActivity.createIntent(activity!!, ))
 //            }
