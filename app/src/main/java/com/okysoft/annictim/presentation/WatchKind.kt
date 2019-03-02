@@ -25,7 +25,7 @@ enum class WatchKind(val rawValue: String) {
         watched -> "見た"
         on_hold -> "中断"
         stop_watching -> "中止"
-        no_select -> "未定"
+        no_select -> "未選択"
     }
 
     companion object {
