@@ -19,6 +19,13 @@ interface AnnictService {
 
     }
 
+    interface Program {
+
+        @GET("/v1/me/programs")
+        fun get(@QueryMap query: Map<String, String>): Deferred<ProgramsResponse>
+    }
+
+
     interface Me {
 
         @POST("v1/me/statuses")
