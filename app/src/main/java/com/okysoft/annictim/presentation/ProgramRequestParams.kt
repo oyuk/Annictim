@@ -6,7 +6,8 @@ import paperparcel.PaperParcelable
 @PaperParcel
 data class ProgramRequestParams(
     val fields: String = "",
-    val page: Int = 1
+    val page: Int = 1,
+    val sort_started_at: String = "desc"
 ): PaperParcelable {
 
     companion object {
@@ -17,6 +18,7 @@ data class ProgramRequestParams(
         = mutableMapOf<String, String>().apply {
         this["fields"] = fields
         this["page"] = page.toString()
+        this["sort_started_at"] = sort_started_at
     }
 
 }
