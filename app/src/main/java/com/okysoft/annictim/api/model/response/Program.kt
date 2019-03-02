@@ -16,6 +16,7 @@ data class Program(
     @SerializedName("work")
     val work: Work
 ) {
+
     data class Channel(
         @SerializedName("id")
         val id: Int,

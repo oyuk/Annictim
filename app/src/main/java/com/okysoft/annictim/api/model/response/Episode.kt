@@ -13,6 +13,9 @@ data class Episode(
     @SerializedName("work") val work: Work?
 ) {
 
+    val fullTitle: String
+       get() = "$numberText $title"
+
     data class Work(
         @SerializedName("id") val id: Int,
         @SerializedName("title") val title: String,
