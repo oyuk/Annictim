@@ -1,16 +1,15 @@
 package com.okysoft.annictim.di.module
 
-import com.apollographql.apollo.ApolloClient
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.okysoft.annictim.infra.api.*
-import com.okysoft.annictim.infra.api.repository.AuthRepository
-import com.okysoft.annictim.infra.api.repository.AuthRepositoryImpl
 import com.okysoft.annictim.application.AnnictimApplication
 import com.okysoft.annictim.application.ApplicationDispatcher
 import com.okysoft.annictim.infra.KeyStoreManager
+import com.okysoft.annictim.infra.api.*
+import com.okysoft.annictim.infra.api.repository.AuthRepository
+import com.okysoft.annictim.infra.api.repository.AuthRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -70,14 +69,14 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideWorkService(client: ApolloClient, retrofit: Retrofit): AnnictService.Works {
-        return WorkServiceImpl(client, retrofit)
+    fun provideWorkService(retrofit: Retrofit): AnnictService.Works {
+        return WorkServiceImpl(retrofit)
     }
 
     @Singleton
     @Provides
-    fun provideUserService(client: ApolloClient, retrofit: Retrofit): AnnictService.User {
-        return UserServiceImpl(client, retrofit)
+    fun provideUserService(retrofit: Retrofit): AnnictService.User {
+        return UserServiceImpl(retrofit)
     }
 
     @Singleton
@@ -137,15 +136,6 @@ class InfraModule {
     @Provides
     fun createCoroutineContext(): CoroutineContext {
         return Dispatchers.Default
-    }
-
-    @Singleton
-    @Provides
-    fun createApollo(client: OkHttpClient): ApolloClient {
-        return ApolloClient.builder()
-                .serverUrl(GRAPH_QL_ENDPOINT)
-                .okHttpClient(client)
-                .build();
     }
 
 }

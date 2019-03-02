@@ -48,7 +48,6 @@ interface AnnictService {
     }
 
     interface User {
-//        fun getMe(): Single<Result<com.okysoft.annictim.API.Model.Response.User>>
 
         @GET("/v1/users")
         fun get(
@@ -63,8 +62,6 @@ interface AnnictService {
     }
 
     interface Work {
-        // Apolloを使う場合はこちら
-//        fun latest(season: String): Single<Result<List<com.okysoft.annictim.infra.api.model.response.Work>>>
 
         interface Me {
 
