@@ -15,6 +15,11 @@
 
     <item
         android:id="@+id/item3"
+        android:icon="@drawable/ic_today_24dp"
+        android:title="@string/program_en" />
+
+    <item
+        android:id="@+id/item4"
         android:icon="@drawable/ic_person_24dp"
         android:title="@string/profile" />
 

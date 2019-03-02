@@ -12,10 +12,13 @@
         android:id="@+id/item2"
         android:name="com.okysoft.annictim.presentation.fragment.MeWorksTabPagerFragment"
         android:label="SecondFragment" />
-
     <custom_fragment
         android:id="@+id/item3"
+        android:name="com.okysoft.annictim.presentation.fragment.ProgramsFragment"
+        android:label="ThirdFragment" />
+    <custom_fragment
+        android:id="@+id/item4"
         android:name="com.okysoft.annictim.presentation.fragment.UserFragment"
-        android:label="ThridFragment" />
+        android:label="FourthFragment" />
 
 </navigation>
