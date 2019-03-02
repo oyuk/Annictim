@@ -1,6 +1,7 @@
 package com.okysoft.annictim.presentation
 
 import com.okysoft.annictim.api.model.response.Cast
+import com.okysoft.annictim.api.model.response.Program
 import com.okysoft.annictim.api.model.response.Work
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -110,4 +111,9 @@ class CastPaginator(nextPage: Flowable<Unit>,
                     refresh: Flowable<Unit>,
                     requestCreator: ((Int) -> Single<List<Cast>>))
     : Paginator<Cast>(nextPage, refresh, requestCreator)
+
+class ProgramPaginator(nextPage: Flowable<Unit>,
+                    refresh: Flowable<Unit>,
+                    requestCreator: ((Int) -> Single<List<Program>>))
+    : Paginator<Program>(nextPage, refresh, requestCreator)
 
