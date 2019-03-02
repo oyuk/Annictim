@@ -2,7 +2,7 @@ package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModel
 import com.okysoft.annictim.di.ViewModelKey
-import com.okysoft.annictim.presentation.viewModel.LaunchViewModel
+import com.okysoft.annictim.presentation.launch.LaunchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

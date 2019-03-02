@@ -9,7 +9,7 @@
     <data>
         <variable
             name="cast"
-            type="com.okysoft.annictim.api.model.response.Cast"
+            type="com.okysoft.annictim.infra.api.model.response.Cast"
             />
     </data>
 

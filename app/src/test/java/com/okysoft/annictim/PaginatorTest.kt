@@ -1,6 +1,6 @@
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
-import com.okysoft.annictim.api.model.response.Work
+import com.okysoft.annictim.infra.api.model.response.Work
 import com.okysoft.annictim.presentation.Paginator
 import com.okysoft.annictim.presentation.WorkPaginator
 import io.reactivex.Single

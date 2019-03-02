@@ -6,7 +6,7 @@
     <data>
         <variable
             name="review"
-            type="com.okysoft.annictim.api.model.response.Review"
+            type="com.okysoft.annictim.infra.api.model.response.Review"
             />
     </data>
 
@@ -59,13 +59,13 @@
                 android:text="@{review.body}"
                 />
 
-            <com.okysoft.annictim.presentation.ReviewValueView
+            <com.okysoft.annictim.presentation.widget.ReviewValueView
                 android:id="@+id/reviewValueView"
                 android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
-            </com.okysoft.annictim.presentation.ReviewValueView>
+            </com.okysoft.annictim.presentation.widget.ReviewValueView>
 
         </LinearLayout>
 

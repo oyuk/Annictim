@@ -7,7 +7,7 @@
         <import type="java.lang.Integer" />
         <variable
             name="user"
-            type="com.okysoft.annictim.api.model.response.User"
+            type="com.okysoft.annictim.infra.api.model.response.User"
             />
     </data>
 

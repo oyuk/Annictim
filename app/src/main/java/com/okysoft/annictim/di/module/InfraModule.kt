@@ -5,8 +5,12 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.okysoft.annictim.*
-import com.okysoft.annictim.api.*
+import com.okysoft.annictim.infra.api.*
+import com.okysoft.annictim.infra.api.repository.AuthRepository
+import com.okysoft.annictim.infra.api.repository.AuthRepositoryImpl
+import com.okysoft.annictim.application.AnnictimApplication
+import com.okysoft.annictim.application.ApplicationDispatcher
+import com.okysoft.annictim.infra.KeyStoreManager
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +30,8 @@ class InfraModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-            authRepository: AuthRepository,
-            dispatcher: ApplicationDispatcher
+        authRepository: AuthRepository,
+        dispatcher: ApplicationDispatcher
             ): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -49,8 +53,8 @@ class InfraModule {
     @Singleton
     @Provides
     fun provideAuthRepository(
-            keyStoreManager: KeyStoreManager,
-            application: AnnictimApplication
+        keyStoreManager: KeyStoreManager,
+        application: AnnictimApplication
     ): AuthRepository = AuthRepositoryImpl(keyStoreManager, application)
 
     @Singleton

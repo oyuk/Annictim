@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.dialog.ProgressFragment"
+    tools:context=".presentation.widget.dialog.ProgressFragment"
     android:clickable="true"
     android:background="#33aaaaaa"
     >

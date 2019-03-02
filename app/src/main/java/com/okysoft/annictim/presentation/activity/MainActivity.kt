@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.okysoft.annictim.ApplicationActionCreator
+import com.okysoft.annictim.application.ApplicationActionCreator
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityMainBinding
 import com.okysoft.annictim.extension.clearTopAndStartActivity

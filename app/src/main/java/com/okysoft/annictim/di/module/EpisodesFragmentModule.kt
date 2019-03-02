@@ -1,8 +1,8 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.presentation.fragment.EpisodesFragment
-import com.okysoft.annictim.presentation.viewModel.EpisodesViewModel
+import com.okysoft.annictim.presentation.episode.EpisodesFragment
+import com.okysoft.annictim.presentation.episode.EpisodesViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -23,8 +23,8 @@ abstract class EpisodesFragmentModule {
 
         @Provides
         fun provideEpisodesViewModel(
-                factory: EpisodesViewModel.Factory,
-                target: EpisodesFragment
+            factory: EpisodesViewModel.Factory,
+            target: EpisodesFragment
         ) = ViewModelProviders.of(target, factory).get(EpisodesViewModel::class.java)
 
     }

@@ -1,9 +1,9 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.api.model.WorkRequestParams
-import com.okysoft.annictim.presentation.fragment.WorksFragment
-import com.okysoft.annictim.presentation.viewModel.WorksViewModel
+import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
+import com.okysoft.annictim.presentation.works.WorksFragment
+import com.okysoft.annictim.presentation.works.WorksViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -43,8 +43,8 @@ abstract class WorksFragmentModule {
 
         @Provides
         fun provideWorksViewModel(
-                factory: WorksViewModel.Factory,
-                target: WorksFragment
+            factory: WorksViewModel.Factory,
+            target: WorksFragment
         ) = ViewModelProviders.of(target, factory).get(WorksViewModel::class.java)
 
     }

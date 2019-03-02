@@ -6,19 +6,19 @@
 
     <custom_fragment
         android:id="@+id/item1"
-        android:name="com.okysoft.annictim.presentation.fragment.WorksTabPagerFragment"
+        android:name="com.okysoft.annictim.presentation.works.WorksTabPagerFragment"
         android:label="FirstFragment" />
     <custom_fragment
         android:id="@+id/item2"
-        android:name="com.okysoft.annictim.presentation.fragment.MeWorksTabPagerFragment"
+        android:name="com.okysoft.annictim.presentation.works.MeWorksTabPagerFragment"
         android:label="SecondFragment" />
     <custom_fragment
         android:id="@+id/item3"
-        android:name="com.okysoft.annictim.presentation.fragment.ProgramsFragment"
+        android:name="com.okysoft.annictim.presentation.program.ProgramsFragment"
         android:label="ThirdFragment" />
     <custom_fragment
         android:id="@+id/item4"
-        android:name="com.okysoft.annictim.presentation.fragment.UserFragment"
+        android:name="com.okysoft.annictim.presentation.user.UserFragment"
         android:label="FourthFragment" />
 
 </navigation>

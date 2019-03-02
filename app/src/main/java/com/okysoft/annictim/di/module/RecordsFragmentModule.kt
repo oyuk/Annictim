@@ -1,11 +1,11 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.presentation.fragment.RecordsFragment
-import com.okysoft.annictim.presentation.fragment.ReviewsFragment
-import com.okysoft.annictim.presentation.RecordDispatcher
-import com.okysoft.annictim.presentation.viewModel.RecordsViewModel
-import com.okysoft.annictim.presentation.viewModel.ReviewsViewModel
+import com.okysoft.annictim.presentation.record.RecordsFragment
+import com.okysoft.annictim.presentation.review.ReviewsFragment
+import com.okysoft.annictim.presentation.record.RecordDispatcher
+import com.okysoft.annictim.presentation.record.RecordsViewModel
+import com.okysoft.annictim.presentation.review.ReviewsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -27,8 +27,8 @@ abstract class RecordsFragmentModule {
 
         @Provides
         fun provideReviewsViewModel(
-                factory: RecordsViewModel.Factory,
-                target: ReviewsFragment
+            factory: RecordsViewModel.Factory,
+            target: ReviewsFragment
         ) = ViewModelProviders.of(target, factory).get(ReviewsViewModel::class.java)
 
     }

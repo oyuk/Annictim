@@ -5,18 +5,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".AnnictimApplication"
+        android:name=".application.AnnictimApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".presentation.activity.PersonActivity"></activity>
-        <activity android:name=".presentation.activity.CastsActivity" />
-        <activity android:name=".presentation.activity.WorksActivity" />
+        <activity android:name=".presentation.person.PersonActivity"></activity>
+        <activity android:name=".presentation.cast.CastsActivity" />
+        <activity android:name=".presentation.works.WorksActivity" />
         <activity
-            android:name=".presentation.activity.LaunchActivity"
+            android:name=".presentation.launch.LaunchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".presentation.activity.MainActivity" />
         <activity
-            android:name=".presentation.activity.LoginActivity"
+            android:name=".presentation.login.LoginActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -40,22 +40,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.activity.WorkDetailActivity"
+            android:name=".presentation.workDetail.WorkDetailActivity"
             android:label="@string/title_activity_work_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".presentation.activity.RecordsActivity" />
+        <activity android:name=".presentation.record.RecordsActivity" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.activity.SearchActivity"
+            android:name=".presentation.search.SearchActivity"
             android:label="@string/title_activity_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".presentation.activity.UserActivity"
+            android:name=".presentation.user.UserActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".presentation.activity.SettingActivity" />
+        <activity android:name=".presentation.setting.SettingActivity" />
     </application>
 
 </manifest>

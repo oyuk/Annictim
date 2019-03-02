@@ -9,7 +9,7 @@
         android:id="@+id/coordinatorlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.okysoft.annictim.presentation.activity.LoginActivity"
+        tools:context="com.okysoft.annictim.presentation.login.LoginActivity"
         android:fitsSystemWindows="true">
 
         <FrameLayout

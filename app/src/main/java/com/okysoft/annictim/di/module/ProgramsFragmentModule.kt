@@ -1,9 +1,9 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.presentation.ProgramRequestParams
-import com.okysoft.annictim.presentation.fragment.ProgramsFragment
-import com.okysoft.annictim.presentation.viewModel.ProgramsViewModel
+import com.okysoft.annictim.presentation.program.ProgramRequestParams
+import com.okysoft.annictim.presentation.program.ProgramsFragment
+import com.okysoft.annictim.presentation.program.ProgramsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector

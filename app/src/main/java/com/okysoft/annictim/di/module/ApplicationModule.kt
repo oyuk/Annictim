@@ -1,9 +1,9 @@
 package com.okysoft.annictim.di.module
 
-import com.okysoft.annictim.api.repository.UserRepository
-import com.okysoft.annictim.ApplicationActionCreator
-import com.okysoft.annictim.ApplicationDispatcher
-import com.okysoft.annictim.AuthRepository
+import com.okysoft.annictim.infra.api.repository.UserRepository
+import com.okysoft.annictim.application.ApplicationActionCreator
+import com.okysoft.annictim.application.ApplicationDispatcher
+import com.okysoft.annictim.infra.api.repository.AuthRepository
 import com.okysoft.annictim.MeStore
 import dagger.Module
 import dagger.Provides

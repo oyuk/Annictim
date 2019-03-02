@@ -9,7 +9,7 @@
     <data>
         <variable
             name="work"
-            type="com.okysoft.annictim.api.model.response.Work"
+            type="com.okysoft.annictim.infra.api.model.response.Work"
             />
     </data>
 

@@ -1,8 +1,8 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.presentation.fragment.ReviewsFragment
-import com.okysoft.annictim.presentation.viewModel.ReviewsViewModel
+import com.okysoft.annictim.presentation.review.ReviewsFragment
+import com.okysoft.annictim.presentation.review.ReviewsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -23,8 +23,8 @@ abstract class ReviewsFragmentModule {
 
         @Provides
         fun provideReviewsViewModel(
-                factory: ReviewsViewModel.Factory,
-                target: ReviewsFragment
+            factory: ReviewsViewModel.Factory,
+            target: ReviewsFragment
         ) = ViewModelProviders.of(target, factory).get(ReviewsViewModel::class.java)
 
     }

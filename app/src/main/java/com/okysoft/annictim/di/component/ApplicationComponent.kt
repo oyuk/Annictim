@@ -1,6 +1,6 @@
 package com.okysoft.annictim.di.component
 
-import com.okysoft.annictim.AnnictimApplication
+import com.okysoft.annictim.application.AnnictimApplication
 import com.okysoft.annictim.di.module.*
 import dagger.BindsInstance
 import dagger.Component

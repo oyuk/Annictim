@@ -1,8 +1,8 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.presentation.fragment.UserFragment
-import com.okysoft.annictim.presentation.viewModel.UserViewModel
+import com.okysoft.annictim.presentation.user.UserFragment
+import com.okysoft.annictim.presentation.user.UserViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -18,8 +18,8 @@ abstract class UserFragmentModule {
 
         @Provides
         fun provideWorkViewModel(
-                factory: UserViewModel.Factory,
-                target: UserFragment
+            factory: UserViewModel.Factory,
+            target: UserFragment
         ) = ViewModelProviders.of(target, factory).get(UserViewModel::class.java)
 
     }

@@ -1,7 +1,7 @@
 package com.okysoft.annictim.di.module
 
-import com.okysoft.annictim.presentation.fragment.SearchFragment
-import com.okysoft.annictim.presentation.viewModel.SearchViewModel
+import com.okysoft.annictim.presentation.search.SearchFragment
+import com.okysoft.annictim.presentation.search.SearchViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector

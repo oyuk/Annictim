@@ -1,9 +1,9 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.api.model.response.Work
-import com.okysoft.annictim.presentation.fragment.WorkDetailFragment
-import com.okysoft.annictim.presentation.viewModel.WorkViewModel
+import com.okysoft.annictim.infra.api.model.response.Work
+import com.okysoft.annictim.presentation.workDetail.WorkDetailFragment
+import com.okysoft.annictim.presentation.workDetail.WorkViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
