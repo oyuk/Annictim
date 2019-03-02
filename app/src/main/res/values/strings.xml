@@ -5,6 +5,7 @@
     <string name="setting">設定</string>
     <string name="record">記録</string>
     <string name="search">検索</string>
+    <string name="program">放送予定</string>
 
     <string name="OK">OK</string>
     <string name="CANCEL">CANCEL</string>
@@ -42,6 +43,7 @@
 
     <string name="home">Home</string>
     <string name="record_en">Record</string>
+    <string name="program_en">Program</string>
     <string name="profile">Profile</string>
 
     <string name="character_name">(%s)</string>
