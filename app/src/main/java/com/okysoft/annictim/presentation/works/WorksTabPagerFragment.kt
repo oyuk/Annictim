@@ -7,11 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.okysoft.annictim.R
+import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
 import com.okysoft.annictim.infra.api.WorkTerm
 import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
-import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
-import com.okysoft.annictim.presentation.search.SearchActivity
 
 class WorksTabPagerFragment : Fragment() {
 
@@ -29,13 +30,17 @@ class WorksTabPagerFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater!!.inflate(R.menu.search, menu)
-        val item = menu?.findItem(R.id.menu_search)
-        item?.setOnMenuItemClickListener { i ->
-            activity?.let {
-                it.startActivity(SearchActivity.createIntent(it))
-            }
-            true
-        }
+//        val item = menu?.findItem(R.id.menu_search)
+//        item?.setOnMenuItemClickListener { i ->
+//            activity?.let {
+//                it.startActivity(SearchActivity.createIntent(it))
+//            }
+//            true
+//        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return NavigationUI.onNavDestinationSelected(item!!, findNavController()) || super.onOptionsItemSelected(item)
     }
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {

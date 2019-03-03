@@ -1,20 +1,18 @@
 package com.okysoft.annictim.presentation.works
 
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
+import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.presentation.workDetail.WorkDetailActivity
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -39,10 +37,6 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         })
         adapter.onClick.observe(this, Observer {
             it?.let {
-                val pair = androidx.core.util.Pair.create(it.imateView as View, "workImageView")
-                val options = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(activity as Activity, pair)
-//                startActivity(WorkDetailActivity.createIntent(activity!!, it.work), options.toBundle())
                 startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
             }
         })

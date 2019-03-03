@@ -1,13 +1,14 @@
 package com.okysoft.annictim.presentation.user
 
 
-import androidx.lifecycle.Observer
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.*
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentUserBinding
-import com.okysoft.annictim.presentation.setting.SettingActivity
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -74,13 +75,18 @@ class UserFragment : DaggerFragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater!!.inflate(R.menu.toolbar_me, menu)
-        val item = menu?.findItem(R.id.menu_settings)
-        item?.setOnMenuItemClickListener { i ->
-            activity?.let {
-                it.startActivity(SettingActivity.createIntent(it))
-            }
-            true
-        }
+//        val item = menu?.findItem(R.id.menu_settings)
+//        item?.setOnMenuItemClickListener { i ->
+//            activity?.let {
+//                it.startActivity(SettingActivity.createIntent(it))
+//            }
+//            true
+//        }
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return NavigationUI.onNavDestinationSelected(item!!, findNavController()) || super.onOptionsItemSelected(item)
     }
 
     companion object {

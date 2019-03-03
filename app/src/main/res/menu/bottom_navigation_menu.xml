@@ -4,22 +4,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item1"
+        android:id="@+id/works_tab"
         android:icon="@drawable/ic_home_24dp"
         android:title="@string/home" />
 
     <item
-        android:id="@+id/item2"
+        android:id="@+id/me_works"
         android:icon="@drawable/ic_star_24dp"
         android:title="@string/record_en" />
 
     <item
-        android:id="@+id/item3"
+        android:id="@+id/programs"
         android:icon="@drawable/ic_today_24dp"
         android:title="@string/program_en" />
 
     <item
-        android:id="@+id/item4"
+        android:id="@+id/user"
         android:icon="@drawable/ic_person_24dp"
         android:title="@string/profile" />
 

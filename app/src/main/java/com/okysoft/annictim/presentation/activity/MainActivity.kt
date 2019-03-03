@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.okysoft.annictim.application.ApplicationActionCreator
 import com.okysoft.annictim.R
+import com.okysoft.annictim.application.ApplicationActionCreator
 import com.okysoft.annictim.databinding.ActivityMainBinding
 import com.okysoft.annictim.extension.clearTopAndStartActivity
 import javax.inject.Inject
@@ -27,16 +29,13 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-
         if (savedInstanceState == null) {
             applicationActionCreator.getMe()
         }
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
-
         val navController = findNavController(R.id.nav_host_fragment)
+        setupActionBarWithNavController(navController, AppBarConfiguration(setOf(R.id.works_tab, R.id.me_works, R.id.programs, R.id.user)))
         binding.bottomNavigationView.setupWithNavController(navController)
     }
 
