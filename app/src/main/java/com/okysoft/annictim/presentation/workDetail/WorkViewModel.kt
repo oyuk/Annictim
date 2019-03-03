@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.okysoft.annictim.infra.api.model.request.CastRequestParams
+import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkStatusRequestParams
 import com.okysoft.annictim.infra.api.model.response.Cast
@@ -13,8 +15,6 @@ import com.okysoft.annictim.infra.api.repository.CastRepository
 import com.okysoft.annictim.infra.api.repository.MeRepository
 import com.okysoft.annictim.infra.api.repository.StaffRepository
 import com.okysoft.annictim.infra.api.repository.WorkRepository
-import com.okysoft.annictim.infra.api.model.request.CastRequestParams
-import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
 import com.okysoft.annictim.presentation.WatchKind
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
@@ -109,11 +109,13 @@ class WorkViewModel constructor(
         }
 
         statusPublisher
+            .skip(1)
             .distinctUntilChanged()
             .subscribeBy {
                 GlobalScope.launch(coroutineContext) {
                     try {
-                        meRepository.updateStatus(WorkStatusRequestParams(work.id, it))
+                        val response = meRepository.updateStatus(WorkStatusRequestParams(work.id, it)).await()
+                        
                     } catch (trowable: Throwable) {
 
                     }

@@ -3,6 +3,7 @@ package com.okysoft.annictim.infra.api
 import com.okysoft.annictim.infra.api.model.request.OauthRequestModel
 import com.okysoft.annictim.infra.api.model.response.*
 import kotlinx.coroutines.Deferred
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -29,7 +30,7 @@ interface AnnictService {
     interface Me {
 
         @POST("v1/me/statuses")
-        fun status(@QueryMap query: Map<String, String>): Deferred<Unit>
+        fun status(@QueryMap query: Map<String, String>): Deferred<Response<Unit>>
 
     }
 
