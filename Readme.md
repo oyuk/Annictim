@@ -1,5 +1,7 @@
 # Annictim
 
+[Annict](https://annict.jp/)の非公式Androidアプリです
+
 Home | Record | Profile
 ---- | ---- | ----
 <img src="/images/home.png" width="300"> | <img src="/images/record.png" width="300"> | <img src="/images/profile.png" width="300">
