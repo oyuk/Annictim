@@ -6,7 +6,7 @@ data class Program(
     @SerializedName("channel")
     val channel: Channel,
     @SerializedName("episode")
-    val episode: Episode,
+    val episode: EpisodeResponse,
     @SerializedName("id")
     val id: Int,
     @SerializedName("is_rebroadcast")
