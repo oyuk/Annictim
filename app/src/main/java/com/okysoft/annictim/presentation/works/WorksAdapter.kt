@@ -1,17 +1,17 @@
 package com.okysoft.annictim.presentation.works
 
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import android.view.ViewGroup
-import android.widget.ImageView
-import com.okysoft.annictim.presentation.widget.DiffUtilCallback
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Work
 import com.okysoft.annictim.databinding.ItemWorkBinding
+import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.extension.setImage
 import com.okysoft.annictim.presentation.BindingViewHolder
+import com.okysoft.annictim.presentation.widget.DiffUtilCallback
 import kotlin.properties.Delegates
 
 data class WorkClickItem(
@@ -66,7 +66,7 @@ class WorksAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
         }
         (holder.binding as ItemWorkBinding).apply {
             work = item
-            imageView.setImage(item.images.recommendedUrl)
+            imageView.setImage(item.imageUrl)
         }
     }
 

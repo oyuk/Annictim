@@ -4,12 +4,14 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.okysoft.annictim.Util.WatchKindAdapter
 import com.okysoft.annictim.application.AnnictimApplication
 import com.okysoft.annictim.application.ApplicationDispatcher
 import com.okysoft.annictim.infra.KeyStoreManager
 import com.okysoft.annictim.infra.api.*
 import com.okysoft.annictim.infra.api.repository.AuthRepository
 import com.okysoft.annictim.infra.api.repository.AuthRepositoryImpl
+import com.okysoft.annictim.presentation.WatchKind
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +26,6 @@ import kotlin.coroutines.CoroutineContext
 class InfraModule {
 
     private val REST_END_POINT = "https://api.annict.com"
-    private val GRAPH_QL_ENDPOINT = "https://api.annict.com/graphql"
 
     @Singleton
     @Provides
@@ -45,8 +46,9 @@ class InfraModule {
     @Provides
     fun provideGsonBuilder(): Gson {
         return GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create() // NamingPoricy そ指定す
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .registerTypeAdapter(WatchKind::class.java, WatchKindAdapter)
+            .create() // NamingPoricy そ指定す
     }
 
     @Singleton

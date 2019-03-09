@@ -1,7 +1,7 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.infra.api.model.response.Work
+import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.presentation.workDetail.WorkDetailFragment
 import com.okysoft.annictim.presentation.workDetail.WorkViewModel
 import dagger.Module
