@@ -1,11 +1,12 @@
 package com.okysoft.annictim.domain
 
+import com.okysoft.annictim.infra.api.model.response.RecordResponse
+
 data class Record(
     val id: Int,
     val comment: String,
     val ratingState: String,
-    val createdAt: String,
-    val user: User
+    val user: RecordResponse.User
 ) {
 
     val rating: Int = when(ratingState) {

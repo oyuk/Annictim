@@ -41,4 +41,9 @@ class UseCaseModule {
         return UserUseCaseImpl(repository, UserTranslator())
     }
 
+    @Provides
+    fun provideRecordUseCase(repository: RecordRepository): RecordUseCase {
+        return RecordUseCaseImpl(repository, RecordTranslator())
+    }
+
 }
