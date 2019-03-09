@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.okysoft.annictim.domain.Cast
+import com.okysoft.annictim.domain.Staff
 import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.infra.api.model.request.CastRequestParams
 import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkStatusRequestParams
-import com.okysoft.annictim.infra.api.model.response.StaffResponse
 import com.okysoft.annictim.infra.api.repository.MeRepository
-import com.okysoft.annictim.infra.api.repository.StaffRepository
 import com.okysoft.annictim.presentation.WatchKind
 import com.okysoft.annictim.usecase.CastUseCase
+import com.okysoft.annictim.usecase.StaffUseCase
 import com.okysoft.annictim.usecase.WorkUseCase
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
@@ -30,7 +30,7 @@ import kotlin.coroutines.CoroutineContext
 class WorkViewModel constructor(
     workUseCase: WorkUseCase,
     castUseCase: CastUseCase,
-    staffRepository: StaffRepository,
+    staffUseCase: StaffUseCase,
     private val meRepository: MeRepository,
     work: Work,
     coroutineContext: CoroutineContext
@@ -39,7 +39,7 @@ class WorkViewModel constructor(
     class Factory @Inject constructor(
         private val workUseCase: WorkUseCase,
         private val castUseCase: CastUseCase,
-        private val staffRepository: StaffRepository,
+        private val staffUseCase: StaffUseCase,
         private val meRepository: MeRepository,
         private val work: Work,
         private val coroutineContext: CoroutineContext
@@ -48,7 +48,7 @@ class WorkViewModel constructor(
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return WorkViewModel(workUseCase,
                 castUseCase,
-                staffRepository,
+                staffUseCase,
                 meRepository,
                 work,
                 coroutineContext) as T
@@ -59,8 +59,8 @@ class WorkViewModel constructor(
     val workResponse: LiveData<Work> = _work
     private val _casts = MutableLiveData<List<Cast>>()
     val casts: LiveData<List<Cast>> = _casts
-    private val _staffs = MutableLiveData<List<StaffResponse>>()
-    val staffs: LiveData<List<StaffResponse>> = _staffs
+    private val _staffs = MutableLiveData<List<Staff>>()
+    val staffs: LiveData<List<Staff>> = _staffs
     private val _workKind = MutableLiveData<WatchKind>()
     val workKind: LiveData<WatchKind> = _workKind
     private val statusPublisher = PublishProcessor.create<WatchKind>()
@@ -100,10 +100,10 @@ class WorkViewModel constructor(
 
         GlobalScope.launch(coroutineContext) {
             try {
-                val response = staffRepository.get(StaffRequestParams(
+                val response = staffUseCase.get(StaffRequestParams(
                     fields = StaffRequestParams.FieldType.Minimum,
                     workId = work.id)).await()
-                _staffs.postValue(response.staffs)
+                _staffs.postValue(response)
             } catch (throwable: Throwable) {
 
             }

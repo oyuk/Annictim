@@ -9,7 +9,7 @@
     <data>
         <variable
             name="staff"
-            type="com.okysoft.annictim.infra.api.model.response.StaffResponse"
+            type="com.okysoft.annictim.domain.Staff"
             />
     </data>
 
