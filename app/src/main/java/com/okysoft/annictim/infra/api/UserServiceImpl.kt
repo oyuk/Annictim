@@ -16,7 +16,6 @@ class UserServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.Use
 
     override fun get(userIds: String): Deferred<UsersResponse> {
         return retrofitClient.get(userIds)
-
     }
 
 }
