@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Review
 import com.okysoft.annictim.databinding.ViewReviewValuesBinding
+import com.okysoft.annictim.domain.Review
 
 class ReviewValueView @JvmOverloads constructor(
         context: Context,

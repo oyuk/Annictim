@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ItemReviewBinding
+import com.okysoft.annictim.domain.Review
 import com.okysoft.annictim.extension.toDate
 import com.okysoft.annictim.extension.toReadableDateString
-import com.okysoft.annictim.infra.api.model.response.Review
 import com.okysoft.annictim.presentation.BindingViewHolder
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
