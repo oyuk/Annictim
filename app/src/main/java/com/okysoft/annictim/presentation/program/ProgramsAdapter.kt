@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Program
+import com.okysoft.annictim.infra.api.model.response.ProgramResponse
 import com.okysoft.annictim.databinding.ItemProgramBinding
 import com.okysoft.annictim.extension.setImage
 import com.okysoft.annictim.extension.toDate
@@ -18,9 +18,9 @@ import io.reactivex.rxkotlin.subscribeBy
 
 class ProgramsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemProgramBinding>>() {
 
-    val items: BehaviorRelay<List<Program>> = BehaviorRelay.createDefault(emptyList())
-    private val _onClick = MutableLiveData<Program>()
-    val onClick: LiveData<Program> = _onClick
+    val items: BehaviorRelay<List<ProgramResponse>> = BehaviorRelay.createDefault(emptyList())
+    private val _onClick = MutableLiveData<ProgramResponse>()
+    val onClick: LiveData<ProgramResponse> = _onClick
     private val bag = CompositeDisposable()
 
     enum class ViewType(val num: Int)  {
