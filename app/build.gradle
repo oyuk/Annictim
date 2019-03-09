@@ -112,4 +112,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.1.1"
 }
