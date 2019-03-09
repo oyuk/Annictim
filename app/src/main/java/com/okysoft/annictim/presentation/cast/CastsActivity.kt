@@ -2,12 +2,12 @@ package com.okysoft.annictim.presentation.cast
 
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Work
 import com.okysoft.annictim.databinding.ActivityCastsBinding
+import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.infra.api.model.request.CastRequestParams
 
 class CastsActivity : AppCompatActivity() {

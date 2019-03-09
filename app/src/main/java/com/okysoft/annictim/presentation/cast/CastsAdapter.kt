@@ -1,14 +1,14 @@
 package com.okysoft.annictim.presentation.cast
 
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import android.view.View
-import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Cast
 import com.okysoft.annictim.databinding.ItemCastBinding
+import com.okysoft.annictim.domain.Cast
 import com.okysoft.annictim.presentation.BindingViewHolder
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
