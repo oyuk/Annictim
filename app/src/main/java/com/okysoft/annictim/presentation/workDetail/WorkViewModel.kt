@@ -10,7 +10,7 @@ import com.okysoft.annictim.infra.api.model.request.CastRequestParams
 import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkStatusRequestParams
-import com.okysoft.annictim.infra.api.model.response.Staff
+import com.okysoft.annictim.infra.api.model.response.StaffResponse
 import com.okysoft.annictim.infra.api.repository.MeRepository
 import com.okysoft.annictim.infra.api.repository.StaffRepository
 import com.okysoft.annictim.presentation.WatchKind
@@ -59,8 +59,8 @@ class WorkViewModel constructor(
     val workResponse: LiveData<Work> = _work
     private val _casts = MutableLiveData<List<Cast>>()
     val casts: LiveData<List<Cast>> = _casts
-    private val _staffs = MutableLiveData<List<Staff>>()
-    val staffs: LiveData<List<Staff>> = _staffs
+    private val _staffs = MutableLiveData<List<StaffResponse>>()
+    val staffs: LiveData<List<StaffResponse>> = _staffs
     private val _workKind = MutableLiveData<WatchKind>()
     val workKind: LiveData<WatchKind> = _workKind
     private val statusPublisher = PublishProcessor.create<WatchKind>()
