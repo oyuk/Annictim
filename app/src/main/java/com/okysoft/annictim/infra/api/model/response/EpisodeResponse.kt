@@ -7,7 +7,7 @@ data class EpisodeResponse(
     @SerializedName("number") val number: Any,
     @SerializedName("number_text") val numberText: String,
     @SerializedName("sort_number") val sortNumber: Int,
-    @SerializedName("title") val title: String,
+    @SerializedName("title") val title: String?,
     @SerializedName("records_count") val recordsCount: Int,
     @SerializedName("record_comments_count") val recordCommentsCount: Int,
     @SerializedName("work") val work: Work?

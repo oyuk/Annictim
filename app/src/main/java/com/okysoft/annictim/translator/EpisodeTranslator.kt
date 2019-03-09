@@ -9,7 +9,7 @@ class EpisodeTranslator: Translator<EpisodeResponse, Episode> {
         return Episode(
             id = response.id,
             numberText = response.numberText,
-            title = response.title
+            title = response.title ?: ""
         )
     }
 
