@@ -23,7 +23,7 @@ data class WorkResponse (
     @SerializedName("twitter_username") val twitterUsername: String,
     @SerializedName("twitter_hashtag") val twitterHashtag: String,
     @SerializedName("mal_anime_id") val malAnimeId: String?,
-    @SerializedName("images") val images: Images,
+    @SerializedName("images") val images: Images?,
     @SerializedName("episodes_count") val episodesCount: Int?,
     @SerializedName("watchers_count") val watchersCount: Int?,
     @SerializedName("reviews_count") val reviewsCount: Int?,
@@ -69,7 +69,7 @@ data class WorkResponse (
 
     @PaperParcel
     data class Images(
-        @SerializedName("recommended_url") val recommendedUrl: String?,
+        @SerializedName("recommended_url") val recommendedUrl: String,
         @SerializedName("facebook") val facebook: Facebook,
         @SerializedName("twitter") val twitter: Twitter
     ): PaperParcelable {
