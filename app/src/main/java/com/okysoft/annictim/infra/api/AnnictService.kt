@@ -58,7 +58,7 @@ interface AnnictService {
         @GET("/v1/me")
         fun getMe(
                 @Query("access_token") accessToken: String
-        ): Deferred<com.okysoft.annictim.infra.api.model.response.User>
+        ): Deferred<com.okysoft.annictim.infra.api.model.response.UserResponse>
 
     }
 

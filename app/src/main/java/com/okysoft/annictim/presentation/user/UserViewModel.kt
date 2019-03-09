@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import android.util.Log
 import com.okysoft.annictim.infra.api.repository.AuthRepository
-import com.okysoft.annictim.infra.api.model.response.User
+import com.okysoft.annictim.infra.api.model.response.UserResponse
 import com.okysoft.annictim.infra.api.repository.UserRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -33,8 +33,8 @@ class UserViewModel constructor(
 
     private val job = Job()
     var userId: Int = 0
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User> = _user
+    private val _user = MutableLiveData<UserResponse>()
+    val user: LiveData<UserResponse> = _user
 
     fun fetch() {
          GlobalScope.launch(coroutineContext + job) {
