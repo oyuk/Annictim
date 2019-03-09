@@ -37,7 +37,7 @@ interface AnnictService {
     interface Staff {
 
         @GET("/v1/staffs")
-        fun get(@QueryMap query: Map<String, String>): Deferred<StaffResponse>
+        fun get(@QueryMap query: Map<String, String>): Deferred<StaffsResponse>
 
     }
 
