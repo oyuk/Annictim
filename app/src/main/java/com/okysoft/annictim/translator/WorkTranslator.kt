@@ -20,7 +20,7 @@ class WorkTranslator: Translator<WorkResponse, Work> {
             episodesCount = response.episodesCount ?: 0,
             watchersCount = response.watchersCount ?: 0,
             reviewsCount = response.reviewsCount ?: 0,
-            imageUrl = response.images.recommendedUrl,
+            imageUrl = response.images.recommendedUrl ?: "",
             noEpisodes = false,
             watchKind = WatchKind.fromString(response.status?.kind ?: "")
         )

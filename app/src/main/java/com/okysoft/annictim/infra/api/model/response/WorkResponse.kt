@@ -69,7 +69,7 @@ data class WorkResponse (
 
     @PaperParcel
     data class Images(
-        @SerializedName("recommended_url") val recommendedUrl: String,
+        @SerializedName("recommended_url") val recommendedUrl: String?,
         @SerializedName("facebook") val facebook: Facebook,
         @SerializedName("twitter") val twitter: Twitter
     ): PaperParcelable {

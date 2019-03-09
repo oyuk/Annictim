@@ -1,5 +1,6 @@
 package com.okysoft.annictim.presentation.workDetail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -83,7 +84,7 @@ class WorkViewModel constructor(
                 val watchKind = response.firstOrNull()?.watchKind ?: WatchKind.no_select
                 _workKind.postValue(watchKind)
             } catch (throwable: Throwable) {
-
+                Log.e("", throwable.toString())
             }
         }
 
@@ -117,7 +118,7 @@ class WorkViewModel constructor(
                     try {
                         val response = meRepository.updateStatus(WorkStatusRequestParams(work.id, it)).await()
                     } catch (trowable: Throwable) {
-
+                        Log.e("", trowable.toString())
                     }
                 }
             }.addTo(compositeDisposable)
