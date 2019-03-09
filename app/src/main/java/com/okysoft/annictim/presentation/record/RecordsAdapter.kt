@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Record
 import com.okysoft.annictim.databinding.ItemRecordBinding
 import com.okysoft.annictim.extension.toDate
 import com.okysoft.annictim.extension.toReadableDateString
+import com.okysoft.annictim.infra.api.model.response.RecordResponse
 import com.okysoft.annictim.presentation.BindingViewHolder
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -18,9 +18,9 @@ import io.reactivex.rxkotlin.subscribeBy
 
 class RecordsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemRecordBinding>>() {
 
-    val items: BehaviorRelay<List<Record>> = BehaviorRelay.createDefault(emptyList())
-    private val _onClick = MutableLiveData<Record>()
-    val onClick: LiveData<Record> = _onClick
+    val items: BehaviorRelay<List<RecordResponse>> = BehaviorRelay.createDefault(emptyList())
+    private val _onClick = MutableLiveData<RecordResponse>()
+    val onClick: LiveData<RecordResponse> = _onClick
     private val _onClickUser = MutableLiveData<Pair<Int, View>>()
     val onClickUser: LiveData<Pair<Int, View>> = _onClickUser
     private val bag = CompositeDisposable()

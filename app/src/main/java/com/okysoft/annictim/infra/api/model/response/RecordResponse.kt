@@ -1,7 +1,7 @@
 package com.okysoft.annictim.infra.api.model.response
 import com.google.gson.annotations.SerializedName
 
-data class Record(
+data class RecordResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("comment") val comment: String?,
     @SerializedName("rating_state") val ratingState: String,
