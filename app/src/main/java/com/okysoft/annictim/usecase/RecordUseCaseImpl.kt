@@ -12,9 +12,9 @@ class RecordUseCaseImpl (
     private val translator: RecordTranslator
 ): RecordUseCase {
 
-    override fun get(workId: Int): Single<List<Record>> {
+    override fun get(episodeId: Int): Single<List<Record>> {
         return GlobalScope.rxSingle {
-            val response = repository.get(workId).await()
+            val response = repository.get(episodeId).await()
             val models = response.records.map { translator.translate(it) }
             return@rxSingle models
         }

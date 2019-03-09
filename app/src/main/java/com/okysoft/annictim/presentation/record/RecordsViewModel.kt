@@ -3,7 +3,7 @@ package com.okysoft.annictim.presentation.record
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.infra.api.model.response.RecordResponse
+import com.okysoft.annictim.domain.Record
 import com.okysoft.annictim.extension.toLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class RecordsViewModel @Inject constructor(
         }
     }
 
-    val records: LiveData<List<RecordResponse>> = dispatcher.success
+    val records: LiveData<List<Record>> = dispatcher.success
             .map { it.items }
             .observeOn(AndroidSchedulers.mainThread())
             .toLiveData()

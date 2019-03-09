@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface RecordUseCase {
 
-    fun get(workId: Int): Single<List<Record>>
+    fun get(episodeId: Int): Single<List<Record>>
 
 }

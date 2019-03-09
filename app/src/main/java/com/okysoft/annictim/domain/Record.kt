@@ -6,6 +6,7 @@ data class Record(
     val id: Int,
     val comment: String,
     val ratingState: String,
+    val createdAt: String,
     val user: RecordResponse.User
 ) {
 

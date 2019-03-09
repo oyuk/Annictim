@@ -10,6 +10,7 @@ class RecordTranslator: Translator<RecordResponse, Record> {
             id = response.id,
             comment = response.comment ?: "",
             ratingState = response.ratingState,
+            createdAt = response.createdAt,
             user = response.user
         )
     }
