@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.infra.api.model.response.Episode
+import com.okysoft.annictim.infra.api.model.response.EpisodeResponse
 import com.okysoft.annictim.infra.api.repository.EpisodeRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -31,8 +31,8 @@ class EpisodesViewModel @Inject constructor (
     }
 
     private val job = Job()
-    private val _episodes = MutableLiveData<List<Episode>>()
-    val episodes: LiveData<List<Episode>> = _episodes
+    private val _episodes = MutableLiveData<List<EpisodeResponse>>()
+    val episodes: LiveData<List<EpisodeResponse>> = _episodes
 
     fun fetch() {
         GlobalScope.launch(coroutineContext + job) {
