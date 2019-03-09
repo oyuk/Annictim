@@ -1,7 +1,7 @@
 package com.okysoft.annictim.presentation.works
 
-import com.okysoft.annictim.infra.api.model.response.WorkResponse
+import com.okysoft.annictim.domain.Work
 
 sealed class WorkAction {
-    class Update(val workResponse: WorkResponse): WorkAction()
+    class Update(val work: Work): WorkAction()
 }

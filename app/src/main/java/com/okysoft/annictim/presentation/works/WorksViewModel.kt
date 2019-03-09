@@ -11,6 +11,7 @@ import com.okysoft.annictim.usecase.WorkUseCase
 import io.reactivex.Single
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.rx2.asSingle
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -40,7 +41,7 @@ class WorksViewModel constructor(
     init {
         val context = coroutineContext + job
         val requestCreator: ((Int) -> Single<List<Work>>) = { page ->
-            useCase.request(workRequestParams.copy(page = page))
+            useCase.request(workRequestParams.copy(page = page)).asSingle(context)
         }
         paginator = WorkPaginator(loadMore, refresh, requestCreator)
         works = paginator.items.toLiveData()

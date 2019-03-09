@@ -1,16 +1,10 @@
 package com.okysoft.annictim.usecase
 
 import com.okysoft.annictim.domain.Review
-import io.reactivex.Single
-
-interface UseCase<T, R> {
-
-    fun get(requestParams: T): Single<List<R>>
-
-}
+import kotlinx.coroutines.Deferred
 
 interface ReviewUseCase {
 
-    fun get(workId: Int): Single<List<Review>>
+    fun get(workId: Int): Deferred<List<Review>>
 
 }

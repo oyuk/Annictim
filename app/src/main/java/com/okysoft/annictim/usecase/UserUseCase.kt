@@ -1,9 +1,9 @@
 package com.okysoft.annictim.usecase
 
 import com.okysoft.annictim.domain.User
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 
 interface UserUseCase {
-    fun getMe(): Single<User>
-    fun get(userId: Int): Single<List<User>>
+    fun getMe(): Deferred<User>
+    fun get(userId: Int): Deferred<List<User>>
 }

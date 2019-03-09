@@ -2,10 +2,10 @@ package com.okysoft.annictim.usecase
 
 import com.okysoft.annictim.domain.Staff
 import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 
 interface StaffUseCase {
 
-    fun get(requestParams: StaffRequestParams): Single<List<Staff>>
+    fun get(requestParams: StaffRequestParams): Deferred<List<Staff>>
 
 }

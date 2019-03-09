@@ -10,6 +10,7 @@ import com.okysoft.annictim.presentation.CastPaginator
 import com.okysoft.annictim.usecase.CastUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.rx2.asSingle
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -34,7 +35,7 @@ class CastsViewModel constructor(
     val loadMore = PublishProcessor.create<Unit>()
     private val refreshPublisher = PublishProcessor.create<Unit>()
     private val paginator: CastPaginator = CastPaginator(loadMore, refreshPublisher) { page ->
-        useCase.get(castRequestParams.copy(page = page))
+        useCase.get(castRequestParams.copy(page = page)).asSingle(coroutineContext)
     }
     val casts: LiveData<List<Cast>> = paginator.items.toLiveData()
 

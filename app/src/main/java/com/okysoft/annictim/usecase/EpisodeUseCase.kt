@@ -1,10 +1,10 @@
 package com.okysoft.annictim.usecase
 
 import com.okysoft.annictim.domain.Episode
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 
 interface EpisodeUseCase {
 
-    fun get(workId: Int): Single<List<Episode>>
+    fun get(workId: Int): Deferred<List<Episode>>
 
 }

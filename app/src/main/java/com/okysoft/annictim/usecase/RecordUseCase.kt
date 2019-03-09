@@ -1,10 +1,10 @@
 package com.okysoft.annictim.usecase
 
 import com.okysoft.annictim.domain.Record
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 
 interface RecordUseCase {
 
-    fun get(episodeId: Int): Single<List<Record>>
+    fun get(episodeId: Int): Deferred<List<Record>>
 
 }
