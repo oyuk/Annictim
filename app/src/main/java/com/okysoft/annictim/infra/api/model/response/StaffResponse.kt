@@ -2,7 +2,7 @@ package com.okysoft.annictim.infra.api.model.response
 import com.google.gson.annotations.SerializedName
 
 
-data class Staff(
+data class StaffResponse(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

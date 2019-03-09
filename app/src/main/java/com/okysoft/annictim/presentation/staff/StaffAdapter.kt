@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.response.Staff
+import com.okysoft.annictim.infra.api.model.response.StaffResponse
 import com.okysoft.annictim.databinding.ItemStaffBinding
 import com.okysoft.annictim.presentation.BindingViewHolder
 import io.reactivex.disposables.CompositeDisposable
@@ -16,9 +16,9 @@ import io.reactivex.rxkotlin.subscribeBy
 
 class StaffAdapter: RecyclerView.Adapter<BindingViewHolder<ItemStaffBinding>>() {
 
-    val items: BehaviorRelay<List<Staff>> = BehaviorRelay.createDefault(emptyList())
-    private val _onClick = MutableLiveData<Staff>()
-    val onClick: LiveData<Staff> = _onClick
+    val items: BehaviorRelay<List<StaffResponse>> = BehaviorRelay.createDefault(emptyList())
+    private val _onClick = MutableLiveData<StaffResponse>()
+    val onClick: LiveData<StaffResponse> = _onClick
     private val bag = CompositeDisposable()
 
     enum class ViewType(val num: Int)  {
