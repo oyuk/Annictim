@@ -5,7 +5,7 @@
     <data>
         <variable
             name="episode"
-            type="com.okysoft.annictim.infra.api.model.response.EpisodeResponse"
+            type="com.okysoft.annictim.domain.Episode"
             />
     </data>
 

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ItemEpisodeBinding
-import com.okysoft.annictim.infra.api.model.response.EpisodeResponse
+import com.okysoft.annictim.domain.Episode
 import com.okysoft.annictim.presentation.BindingViewHolder
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -15,9 +15,9 @@ import io.reactivex.rxkotlin.subscribeBy
 
 class EpisodesAdapter: RecyclerView.Adapter<BindingViewHolder<ItemEpisodeBinding>>() {
 
-    val items: BehaviorRelay<List<EpisodeResponse>> = BehaviorRelay.createDefault(emptyList())
-    private val _onClick = MutableLiveData<EpisodeResponse>()
-    val onClick: LiveData<EpisodeResponse> = _onClick
+    val items: BehaviorRelay<List<Episode>> = BehaviorRelay.createDefault(emptyList())
+    private val _onClick = MutableLiveData<Episode>()
+    val onClick: LiveData<Episode> = _onClick
     private val bag = CompositeDisposable()
 
     enum class ViewType(val num: Int)  {
