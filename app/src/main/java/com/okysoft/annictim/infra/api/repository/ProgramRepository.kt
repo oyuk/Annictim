@@ -2,7 +2,7 @@ package com.okysoft.annictim.infra.api.repository
 
 import com.okysoft.annictim.infra.api.AnnictService
 import com.okysoft.annictim.infra.api.model.response.ProgramsResponse
-import com.okysoft.annictim.presentation.program.ProgramRequestParams
+import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
 import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 

@@ -9,7 +9,7 @@
     <data>
         <variable
             name="program"
-            type="com.okysoft.annictim.infra.api.model.response.ProgramResponse"
+            type="com.okysoft.annictim.domain.Program"
             />
     </data>
 

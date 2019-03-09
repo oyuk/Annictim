@@ -2,7 +2,7 @@ package com.okysoft.annictim.usecase
 
 import com.okysoft.annictim.domain.Program
 import com.okysoft.annictim.infra.api.repository.ProgramRepository
-import com.okysoft.annictim.presentation.program.ProgramRequestParams
+import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
 import com.okysoft.annictim.translator.ProgramTranslator
 import io.reactivex.Single
 import kotlinx.coroutines.GlobalScope

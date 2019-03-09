@@ -12,6 +12,7 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentProgramsBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
+import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
