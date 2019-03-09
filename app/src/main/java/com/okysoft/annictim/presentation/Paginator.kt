@@ -1,8 +1,8 @@
 package com.okysoft.annictim.presentation
 
 import com.okysoft.annictim.domain.Cast
+import com.okysoft.annictim.domain.Program
 import com.okysoft.annictim.domain.Work
-import com.okysoft.annictim.infra.api.model.response.ProgramResponse
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -114,6 +114,6 @@ class CastPaginator(nextPage: Flowable<Unit>,
 
 class ProgramPaginator(nextPage: Flowable<Unit>,
                     refresh: Flowable<Unit>,
-                    requestCreator: ((Int) -> Single<List<ProgramResponse>>))
-    : Paginator<ProgramResponse>(nextPage, refresh, requestCreator)
+                    requestCreator: ((Int) -> Single<List<Program>>))
+    : Paginator<Program>(nextPage, refresh, requestCreator)
 

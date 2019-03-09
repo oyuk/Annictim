@@ -22,7 +22,7 @@
         >
         <argument
             android:name="requestParams"
-            app:argType="com.okysoft.annictim.presentation.program.ProgramRequestParams" />
+            app:argType="com.okysoft.annictim.infra.api.model.request.ProgramRequestParams" />
     </custom_fragment>
     <custom_fragment
         android:id="@+id/user"

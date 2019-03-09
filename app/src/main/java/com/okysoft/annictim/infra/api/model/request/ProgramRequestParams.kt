@@ -1,4 +1,4 @@
-package com.okysoft.annictim.presentation.program
+package com.okysoft.annictim.infra.api.model.request
 
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable

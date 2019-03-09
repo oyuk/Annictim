@@ -4,32 +4,34 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.infra.api.model.response.ProgramResponse
-import com.okysoft.annictim.infra.api.repository.ProgramRepository
-import com.okysoft.annictim.presentation.ProgramPaginator
+import com.okysoft.annictim.domain.Program
 import com.okysoft.annictim.extension.toLiveData
+import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
+import com.okysoft.annictim.presentation.ProgramPaginator
+import com.okysoft.annictim.usecase.ProgramUseCase
 import io.reactivex.Single
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.rx2.await
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class ProgramsViewModel constructor(
-    repository: ProgramRepository,
+    usecase: ProgramUseCase,
     requestParams: ProgramRequestParams,
     private val coroutineContext: CoroutineContext
 ) : ViewModel() {
 
     class Factory @Inject constructor(
-        private val repository: ProgramRepository,
+        private val useCase: ProgramUseCase,
         private val requestParams: ProgramRequestParams,
         private val coroutineContext: CoroutineContext
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ProgramsViewModel(repository, requestParams, coroutineContext) as T
+            return ProgramsViewModel(useCase, requestParams, coroutineContext) as T
         }
     }
 
@@ -37,11 +39,11 @@ class ProgramsViewModel constructor(
     val loadMore = PublishProcessor.create<Unit>()
     private val refreshPublisher = PublishProcessor.create<Unit>()
     private val paginator: ProgramPaginator = ProgramPaginator(loadMore, refreshPublisher) { page ->
-        Single.create<List<ProgramResponse>> {
+        Single.create<List<Program>> {
             GlobalScope.launch(coroutineContext + job) {
                 try {
-                    val response = repository.get(requestParams.copy(page = page)).await()
-                    it.onSuccess(response.programs)
+                    val response = usecase.get(requestParams.copy(page = page)).await()
+                    it.onSuccess(response)
                 } catch (throwable: Throwable) {
                     Log.d("", throwable.toString())
                     it.onError(throwable)
@@ -49,7 +51,7 @@ class ProgramsViewModel constructor(
             }
         }
     }
-    val programs: LiveData<List<ProgramResponse>> = paginator.items.toLiveData()
+    val programs: LiveData<List<Program>> = paginator.items.toLiveData()
 
     fun refresh() {
         refreshPublisher.onNext(Unit)
