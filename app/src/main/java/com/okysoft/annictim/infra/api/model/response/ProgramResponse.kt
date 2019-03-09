@@ -2,9 +2,9 @@ package com.okysoft.annictim.infra.api.model.response
 import com.google.gson.annotations.SerializedName
 
 
-data class Program(
+data class ProgramResponse(
     @SerializedName("channel")
-    val channel: Channel,
+    val channel: ChannelResponse,
     @SerializedName("episode")
     val episode: EpisodeResponse,
     @SerializedName("id")
@@ -17,7 +17,7 @@ data class Program(
     val workResponse: WorkResponse
 ) {
 
-    data class Channel(
+    data class ChannelResponse(
         @SerializedName("id")
         val id: Int,
         @SerializedName("name")

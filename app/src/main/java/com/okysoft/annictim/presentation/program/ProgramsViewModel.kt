@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.infra.api.model.response.Program
+import com.okysoft.annictim.infra.api.model.response.ProgramResponse
 import com.okysoft.annictim.infra.api.repository.ProgramRepository
 import com.okysoft.annictim.presentation.ProgramPaginator
 import com.okysoft.annictim.extension.toLiveData
@@ -37,7 +37,7 @@ class ProgramsViewModel constructor(
     val loadMore = PublishProcessor.create<Unit>()
     private val refreshPublisher = PublishProcessor.create<Unit>()
     private val paginator: ProgramPaginator = ProgramPaginator(loadMore, refreshPublisher) { page ->
-        Single.create<List<Program>> {
+        Single.create<List<ProgramResponse>> {
             GlobalScope.launch(coroutineContext + job) {
                 try {
                     val response = repository.get(requestParams.copy(page = page)).await()
@@ -49,7 +49,7 @@ class ProgramsViewModel constructor(
             }
         }
     }
-    val programs: LiveData<List<Program>> = paginator.items.toLiveData()
+    val programs: LiveData<List<ProgramResponse>> = paginator.items.toLiveData()
 
     fun refresh() {
         refreshPublisher.onNext(Unit)
