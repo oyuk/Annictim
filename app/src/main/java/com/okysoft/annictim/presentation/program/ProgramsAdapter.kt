@@ -70,7 +70,7 @@ class ProgramsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemProgramBinding
         }
         (holder.binding as ItemProgramBinding).apply {
             program = item
-            imageView.setImage(item.workResponse.images.recommendedUrl ?: "")
+            imageView.setImage(item.workResponse.images?.recommendedUrl ?: "")
             startedAt.text = item.startedAt.toDate()?.toReadableDateTimeString()
         }
     }

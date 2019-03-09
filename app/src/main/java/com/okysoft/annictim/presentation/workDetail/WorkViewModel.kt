@@ -10,7 +10,6 @@ import com.okysoft.annictim.domain.Staff
 import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.infra.api.model.request.CastRequestParams
 import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkStatusRequestParams
 import com.okysoft.annictim.infra.api.repository.MeRepository
 import com.okysoft.annictim.presentation.WatchKind
@@ -74,14 +73,7 @@ class WorkViewModel constructor(
 
         GlobalScope.launch(coroutineContext) {
             try {
-                val response = workUseCase.me(WorkRequestParams(
-                    type = WorkRequestParams.Type.Me,
-                    fields = WorkRequestParams.Fields.Status,
-                    ids = listOf(work.id),
-                    season = null,
-                    perPage = 1
-                )).await()
-                val watchKind = response.firstOrNull()?.watchKind ?: WatchKind.no_select
+                val watchKind = workUseCase.getWatchKind(workId = work.id).await()
                 _workKind.postValue(watchKind)
             } catch (throwable: Throwable) {
                 Log.e("", throwable.toString())
