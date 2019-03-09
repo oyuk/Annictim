@@ -35,7 +35,7 @@ class ProgramsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         })
         adapter.onClick.observe(this, Observer {
 //            it?.let {
-//                startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
+//                startActivity(WorkDetailActivity.createIntent(activity!!, it.workResponse))
 //            }
         })
         viewModel.refresh()

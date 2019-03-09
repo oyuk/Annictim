@@ -14,7 +14,7 @@ data class Program(
     @SerializedName("started_at")
     val startedAt: String,
     @SerializedName("work")
-    val work: Work
+    val workResponse: WorkResponse
 ) {
 
     data class Channel(

@@ -18,7 +18,7 @@ data class Staff(
     @SerializedName("sort_number")
     val sortNumber: Int?,
     @SerializedName("work")
-    val work: Work?,
+    val workResponse: WorkResponse?,
     @SerializedName("organization")
     val organization: Organization?
 )
