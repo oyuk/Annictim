@@ -1,7 +1,7 @@
 package com.okysoft.annictim.infra.api.model.response
 import com.google.gson.annotations.SerializedName
 
-data class Review(
+data class ReviewResponse(
         @SerializedName("id") val id: Int,
         @SerializedName("title") val title: String,
         @SerializedName("body") val body: String,
@@ -16,29 +16,6 @@ data class Review(
         @SerializedName("created_at") val createdAt: String,
         @SerializedName("user") val user: User
 ) {
-
-    enum class Rating {
-        animation, mutic, story, character, overall
-    }
-
-    internal fun ratingToNum(rating: String): Float {
-        return when(rating) {
-            "bad" -> 1f
-            "average" -> 2f
-            "good" -> 2f
-            "great" -> 4f
-            else -> 0f
-        }
-    }
-
-    val hasRating: Boolean
-        get() {
-            return ratingAnimationState != null &&
-                    ratingMusicState != null &&
-                    ratingStoryState != null &&
-                    ratingCharacterState != null &&
-                    ratingOverallState != null
-        }
 
     data class User(
         @SerializedName("id") val id: Int,
