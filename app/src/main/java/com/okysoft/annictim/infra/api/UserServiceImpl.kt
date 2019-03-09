@@ -1,6 +1,6 @@
 package com.okysoft.annictim.infra.api
 
-import com.okysoft.annictim.infra.api.model.response.User
+import com.okysoft.annictim.infra.api.model.response.UserResponse
 import com.okysoft.annictim.infra.api.model.response.UsersResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
@@ -10,7 +10,7 @@ class UserServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.Use
 
     private val retrofitClient = retrofit.create(AnnictService.User::class.java)
 
-    override fun getMe(accessToken: String): Deferred<User> {
+    override fun getMe(accessToken: String): Deferred<UserResponse> {
         return retrofitClient.getMe(accessToken)
     }
 

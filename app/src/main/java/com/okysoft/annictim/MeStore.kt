@@ -1,7 +1,7 @@
 package com.okysoft.annictim
 
 import androidx.lifecycle.LiveData
-import com.okysoft.annictim.infra.api.model.response.User
+import com.okysoft.annictim.infra.api.model.response.UserResponse
 import com.okysoft.annictim.infra.api.repository.AuthRepository
 import com.okysoft.annictim.application.ApplicationDispatcher
 import com.okysoft.annictim.extension.toLiveData
@@ -21,6 +21,6 @@ class MeStore (
             .observeOn(AndroidSchedulers.mainThread())
             .toLiveData()
 
-    val me: Flowable<User> = dispatcher.getMe.map { it.me }
+    val me: Flowable<UserResponse> = dispatcher.getMe.map { it.me }
 
 }

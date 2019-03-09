@@ -1,7 +1,7 @@
 package com.okysoft.annictim.infra.api.model.response
 import com.google.gson.annotations.SerializedName
 
-data class User(
+data class UserResponse(
     @SerializedName("avatar_url")
     val avatarUrl: String,
     @SerializedName("background_image_url")
