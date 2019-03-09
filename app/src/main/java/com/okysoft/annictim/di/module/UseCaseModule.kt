@@ -36,5 +36,9 @@ class UseCaseModule {
         return EpisodeUseCaseImpl(repository, EpisodeTranslator())
     }
 
+    @Provides
+    fun provideUserUseCase(repository: UserRepository): UserUseCase {
+        return UserUseCaseImpl(repository, UserTranslator())
+    }
 
 }
