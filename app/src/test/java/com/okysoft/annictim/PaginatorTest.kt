@@ -1,6 +1,7 @@
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
-import com.okysoft.annictim.infra.api.model.response.Work
+import com.okysoft.annictim.domain.Work
+import com.okysoft.annictim.infra.api.model.response.WorkResponse
 import com.okysoft.annictim.presentation.Paginator
 import com.okysoft.annictim.presentation.WorkPaginator
 import io.reactivex.Single
@@ -11,7 +12,7 @@ import org.junit.Test
 import org.powermock.core.classloader.annotations.PrepareForTest
 import java.util.concurrent.CountDownLatch
 
-@PrepareForTest(Work::class)
+@PrepareForTest(WorkResponse::class)
 class PaginatorTest {
 
     lateinit var paginator: Paginator<Work>
