@@ -14,8 +14,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
+import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.extension.setImage
-import com.okysoft.annictim.infra.api.model.response.Work
 import com.okysoft.annictim.presentation.episode.EpisodesFragment
 import com.okysoft.annictim.presentation.review.ReviewsFragment
 
@@ -40,7 +40,7 @@ class WorkDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_detail)
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
-        binding.imageView.setImage(work.images.recommendedUrl)
+        binding.imageView.setImage(work.imageUrl)
         binding.toolbar.title = ""
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -12,8 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
+import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.extension.openUrl
-import com.okysoft.annictim.infra.api.model.response.Work
 import com.okysoft.annictim.presentation.WatchKind
 import com.okysoft.annictim.presentation.cast.CastsAdapter
 import com.okysoft.annictim.presentation.staff.StaffAdapter
@@ -35,7 +35,7 @@ class WorkDetailFragment : DaggerFragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, com.okysoft.annictim.R.layout.fragment_work_detail, container, false)
 
-        viewModel.work.observe(this, Observer { work ->
+        viewModel.workResponse.observe(this, Observer { work ->
             binding.title.text = work.title
             binding.media.text = "${work.mediaText} ${work.seasonNameText}"
 
