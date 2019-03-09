@@ -1,13 +1,14 @@
 package com.okysoft.annictim.presentation.record
 
-import com.okysoft.annictim.infra.api.repository.RecordRepository
+import com.okysoft.annictim.usecase.RecordUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.rx2.await
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class RecordsActionCreator @Inject constructor(
-    private val repository: RecordRepository,
+    private val recordUseCase: RecordUseCase,
     private val dispatcher: RecordDispatcher,
     private val coroutineContext: CoroutineContext
 ) {
@@ -15,8 +16,8 @@ class RecordsActionCreator @Inject constructor(
     fun fetch(episodeId: Int) {
         GlobalScope.launch(coroutineContext) {
             try {
-                val response = repository.get(episodeId).await()
-                dispatcher.dispatch(RecordsAction.Success(response.records))
+                val response = recordUseCase.get(episodeId).await()
+                dispatcher.dispatch(RecordsAction.Success(response))
             } catch (throwable: Throwable) {
 
             }
