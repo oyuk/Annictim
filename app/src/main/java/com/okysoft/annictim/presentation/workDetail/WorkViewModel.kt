@@ -12,6 +12,7 @@ import com.okysoft.annictim.infra.api.model.request.CastRequestParams
 import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
 import com.okysoft.annictim.infra.api.model.request.WorkStatusRequestParams
 import com.okysoft.annictim.infra.api.repository.MeRepository
+import com.okysoft.annictim.presentation.CoroutineScopeViewModel
 import com.okysoft.annictim.presentation.WatchKind
 import com.okysoft.annictim.usecase.CastUseCase
 import com.okysoft.annictim.usecase.StaffUseCase
@@ -20,8 +21,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -32,8 +31,8 @@ class WorkViewModel constructor(
     staffUseCase: StaffUseCase,
     private val meRepository: MeRepository,
     work: Work,
-    private val context: CoroutineContext
-) : ViewModel(), CoroutineScope {
+    context: CoroutineContext
+) : CoroutineScopeViewModel(context) {
 
     class Factory @Inject constructor(
         private val workUseCase: WorkUseCase,
@@ -63,10 +62,7 @@ class WorkViewModel constructor(
     private val _workKind = MutableLiveData<WatchKind>()
     val workKind: LiveData<WatchKind> = _workKind
     private val statusPublisher = PublishProcessor.create<WatchKind>()
-    private val job = Job()
     private val compositeDisposable = CompositeDisposable()
-    override val coroutineContext: CoroutineContext
-        get() = context + job
 
     init {
         _work.postValue(work)
