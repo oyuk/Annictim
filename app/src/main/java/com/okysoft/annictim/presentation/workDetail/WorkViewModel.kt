@@ -20,10 +20,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.await
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -33,8 +32,8 @@ class WorkViewModel constructor(
     staffUseCase: StaffUseCase,
     private val meRepository: MeRepository,
     work: Work,
-    coroutineContext: CoroutineContext
-) : ViewModel() {
+    private val context: CoroutineContext
+) : ViewModel(), CoroutineScope {
 
     class Factory @Inject constructor(
         private val workUseCase: WorkUseCase,
@@ -42,7 +41,7 @@ class WorkViewModel constructor(
         private val staffUseCase: StaffUseCase,
         private val meRepository: MeRepository,
         private val work: Work,
-        private val coroutineContext: CoroutineContext
+        private val context: CoroutineContext
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -51,7 +50,7 @@ class WorkViewModel constructor(
                 staffUseCase,
                 meRepository,
                 work,
-                coroutineContext) as T
+                context) as T
         }
     }
 
@@ -65,13 +64,14 @@ class WorkViewModel constructor(
     val workKind: LiveData<WatchKind> = _workKind
     private val statusPublisher = PublishProcessor.create<WatchKind>()
     private val job = Job()
-    private val coroutineContext = coroutineContext + job
     private val compositeDisposable = CompositeDisposable()
+    override val coroutineContext: CoroutineContext
+        get() = context + job
 
     init {
         _work.postValue(work)
 
-        GlobalScope.launch(coroutineContext) {
+        launch {
             try {
                 val watchKind = workUseCase.getWatchKind(workId = work.id).await()
                 _workKind.postValue(watchKind)
@@ -80,7 +80,7 @@ class WorkViewModel constructor(
             }
         }
 
-        GlobalScope.launch(coroutineContext) {
+        launch {
             try {
                 val response = castUseCase.get(CastRequestParams(
                     fields = CastRequestParams.FieldType.All,
@@ -91,7 +91,7 @@ class WorkViewModel constructor(
             }
         }
 
-        GlobalScope.launch(coroutineContext) {
+        launch {
             try {
                 val response = staffUseCase.get(StaffRequestParams(
                     fields = StaffRequestParams.FieldType.Minimum,
@@ -106,7 +106,7 @@ class WorkViewModel constructor(
             .skip(1)
             .distinctUntilChanged()
             .subscribeBy {
-                GlobalScope.launch(coroutineContext) {
+                launch {
                     try {
                         val response = meRepository.updateStatus(WorkStatusRequestParams(work.id, it)).await()
                     } catch (trowable: Throwable) {
