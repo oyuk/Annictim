@@ -104,7 +104,7 @@ class WorkViewModel constructor(
             .subscribeBy {
                 launch {
                     try {
-                        val response = meRepository.updateStatus(WorkStatusRequestParams(work.id, it)).await()
+                        meRepository.updateStatus(WorkStatusRequestParams(work.id, it)).await()
                     } catch (trowable: Throwable) {
                         Log.e("", trowable.toString())
                     }

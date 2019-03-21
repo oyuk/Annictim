@@ -9,6 +9,7 @@ import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
 import com.okysoft.annictim.presentation.ProgramPaginator
 import com.okysoft.annictim.usecase.ProgramUseCase
 import io.reactivex.processors.PublishProcessor
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.rx2.asSingle
 import javax.inject.Inject
@@ -34,9 +35,11 @@ class ProgramsViewModel constructor(
     private val job = Job()
     val loadMore = PublishProcessor.create<Unit>()
     private val refreshPublisher = PublishProcessor.create<Unit>()
+    @ExperimentalCoroutinesApi
     private val paginator: ProgramPaginator = ProgramPaginator(loadMore, refreshPublisher) { page ->
         useCase.get(requestParams.copy(page = page)).asSingle(coroutineContext)
     }
+    @ExperimentalCoroutinesApi
     val programs: LiveData<List<Program>> = paginator.items.toLiveData()
 
     fun refresh() {

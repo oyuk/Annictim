@@ -8,8 +8,8 @@ import com.okysoft.annictim.extension.toLiveData
 import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.presentation.WorkPaginator
 import com.okysoft.annictim.usecase.WorkUseCase
-import io.reactivex.Single
 import io.reactivex.processors.PublishProcessor
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.rx2.asSingle
 import javax.inject.Inject
@@ -35,17 +35,13 @@ class WorksViewModel constructor(
     private val job = Job()
     val loadMore = PublishProcessor.create<Unit>()
     private val refresh = PublishProcessor.create<Unit>()
-    val works: LiveData<List<Work>>
-    private val paginator: WorkPaginator
-
-    init {
-        val context = coroutineContext + job
-        val requestCreator: ((Int) -> Single<List<Work>>) = { page ->
-            useCase.request(workRequestParams.copy(page = page)).asSingle(context)
-        }
-        paginator = WorkPaginator(loadMore, refresh, requestCreator)
-        works = paginator.items.toLiveData()
+    private val context = coroutineContext + job
+    @ExperimentalCoroutinesApi
+    private val paginator =  WorkPaginator(loadMore, refresh) { page ->
+        useCase.request(workRequestParams.copy(page = page)).asSingle(context)
     }
+    @ExperimentalCoroutinesApi
+    val works: LiveData<List<Work>> = paginator.items.toLiveData()
 
     fun refresh() {
         refresh.onNext(Unit)

@@ -31,7 +31,7 @@ abstract class SharedPreferenceManager(filename: String, context: Context) {
         sharedPreferences.edit().putString(key, value).apply()
     }
 
-    protected fun getString(key: String): String = sharedPreferences.getString(key, STRING_DEFAULT)
+    protected fun getString(key: String): String = sharedPreferences.getString(key, STRING_DEFAULT) ?: ""
 
     protected fun remove(key: String) {
         sharedPreferences.edit().remove(key).apply()

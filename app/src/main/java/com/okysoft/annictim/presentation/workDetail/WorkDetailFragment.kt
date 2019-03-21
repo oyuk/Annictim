@@ -1,6 +1,7 @@
 package com.okysoft.annictim.presentation.workDetail
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -96,7 +97,7 @@ class WorkDetailFragment : DaggerFragment() {
     }
 
     private fun setupStatusSpinner(watchKind: WatchKind) {
-        val statusSpinnerAdapter = ArrayAdapter.createFromResource(activity,
+        val statusSpinnerAdapter = ArrayAdapter.createFromResource(activity as Context,
             R.array.status_list,
             R.layout.support_simple_spinner_dropdown_item)
         binding.statusSpinner.adapter = statusSpinnerAdapter

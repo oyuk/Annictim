@@ -1,6 +1,7 @@
 package com.okysoft.annictim.presentation.search
 
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -43,12 +44,12 @@ class SearchFragment : DaggerFragment() {
             }
         })
 
-        val yearSpinnerAdapter = ArrayAdapter(activity,
+        val yearSpinnerAdapter = ArrayAdapter(activity as Context,
             R.layout.support_simple_spinner_dropdown_item,
             createYearSpinnerList())
         binding.yearSpinner.adapter = yearSpinnerAdapter
 
-        val seasonSpinnerAdapter = ArrayAdapter.createFromResource(activity,
+        val seasonSpinnerAdapter = ArrayAdapter.createFromResource(activity as Context,
             R.array.season_list,
             R.layout.support_simple_spinner_dropdown_item)
         binding.seasonSpinner.adapter = seasonSpinnerAdapter

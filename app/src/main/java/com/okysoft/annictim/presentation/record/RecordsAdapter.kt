@@ -76,8 +76,7 @@ class RecordsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemRecordBinding>>
         (holder.binding as ItemRecordBinding).run {
             record = item
             textViewDate.text = item.createdAt.toDate()?.toReadableDateString()
-            val comment = item.comment ?: ""
-            commentTextView.visibility = if (comment.isEmpty()) View.GONE else View.VISIBLE
+            commentTextView.visibility = if (item.comment.isEmpty()) View.GONE else View.VISIBLE
         }
     }
 
