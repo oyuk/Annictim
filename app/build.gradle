@@ -37,6 +37,9 @@ android {
         experimental = true
         features = ["parcelize"]
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
