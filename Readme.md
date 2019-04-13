@@ -13,11 +13,11 @@ Detail |
 
 ## development
 ### How to setup
-create `api-key.properties`
+create `local.properties`
 
 ```
 clientID=YOUR_CLIENT_ID
 clientKey=YOUR_CLIENT_KEY
 ```
 
-put `api-key.properties` to `app/`
+put `local.properties` to root directory.
