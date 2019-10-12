@@ -1,0 +1,19 @@
+package com.okysoft.data
+import com.google.gson.annotations.SerializedName
+
+data class CastRespnse(
+    @SerializedName("character")
+    val character: Character,
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("name_en")
+    val nameEn: String,
+    @SerializedName("person")
+    val person: People,
+    @SerializedName("sort_number")
+    val sortNumber: Int,
+    @SerializedName("workResponse")
+    val workResponse: WorkResponse
+)

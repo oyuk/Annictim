@@ -9,7 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.okysoft.annictim.R
-import com.okysoft.annictim.application.ApplicationActionCreator
+import com.okysoft.infra.ApplicationActionCreator
 import com.okysoft.annictim.databinding.ActivityMainBinding
 import com.okysoft.annictim.extension.clearTopAndStartActivity
 import javax.inject.Inject

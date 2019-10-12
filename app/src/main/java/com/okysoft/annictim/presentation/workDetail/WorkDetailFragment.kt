@@ -13,11 +13,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
-import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.extension.openUrl
-import com.okysoft.annictim.presentation.WatchKind
 import com.okysoft.annictim.presentation.cast.CastsAdapter
 import com.okysoft.annictim.presentation.staff.StaffAdapter
+import com.okysoft.data.WatchKind
+import com.okysoft.domain.model.Work
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

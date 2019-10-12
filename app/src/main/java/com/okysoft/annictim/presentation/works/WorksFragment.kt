@@ -12,8 +12,8 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.presentation.workDetail.WorkDetailActivity
+import com.okysoft.domain.model.Work
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -23,8 +23,8 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorksAdapter()
 
-    val workRequestParams: WorkRequestParams
-        get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?: WorkRequestParams(season = null)
+    val workRequestParams: com.okysoft.data.WorkRequestParams
+        get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?: com.okysoft.data.WorkRequestParams(season = null)
 
     @Inject
     lateinit var viewModel: WorksViewModel
@@ -33,7 +33,7 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         super.onCreate(savedInstanceState)
         viewModel.works.observe(this, Observer {
             binding.swipeRefresh.isRefreshing = false
-            adapter.updateItem(it ?: listOf())
+            adapter.updateItem(it ?: listOf<Work>())
         })
         adapter.onClick.observe(this, Observer {
             it?.let {
@@ -66,7 +66,7 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         val TAG = WorksFragment::class.java.simpleName
         const val REQUEST_PARAM_MODEL = "REQUEST_PARAM_MODEL"
 
-        fun newInstance(workRequestParams: WorkRequestParams): WorksFragment = WorksFragment().apply {
+        fun newInstance(workRequestParams: com.okysoft.data.WorkRequestParams): WorksFragment = WorksFragment().apply {
             val args = Bundle().apply {
                 putParcelable(REQUEST_PARAM_MODEL, workRequestParams)
             }

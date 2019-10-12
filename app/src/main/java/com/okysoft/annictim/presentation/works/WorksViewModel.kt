@@ -3,11 +3,10 @@ package com.okysoft.annictim.presentation.works
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.presentation.WorkPaginator
-import com.okysoft.annictim.usecase.WorkUseCase
+import com.okysoft.domain.model.Work
+import com.okysoft.domain.usecase.WorkUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -17,13 +16,13 @@ import kotlin.coroutines.CoroutineContext
 
 class WorksViewModel constructor(
     useCase: WorkUseCase,
-    workRequestParams: WorkRequestParams,
+    workRequestParams: com.okysoft.data.WorkRequestParams,
     private val coroutineContext: CoroutineContext
 ) : ViewModel() {
 
     class Factory @Inject constructor(
         private val useCase: WorkUseCase,
-        private val workRequestParams: WorkRequestParams,
+        private val workRequestParams: com.okysoft.data.WorkRequestParams,
         private val coroutineContext: CoroutineContext
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")

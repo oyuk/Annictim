@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="java.lang.Integer" />
         <variable
             name="user"
-            type="com.okysoft.annictim.domain.User"
+            type="com.okysoft.domain.model.User"
             />
     </data>
 

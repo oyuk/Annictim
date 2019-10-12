@@ -1,7 +1,7 @@
 package com.okysoft.annictim.presentation.record
 
-import com.okysoft.annictim.domain.Record
-import com.okysoft.annictim.infra.api.model.response.RecordResponse
+import com.okysoft.domain.model.Record
+
 
 sealed class RecordsAction {
     class StartFetch: RecordsAction()

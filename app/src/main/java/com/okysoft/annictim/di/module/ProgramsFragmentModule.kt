@@ -1,7 +1,7 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
+import com.okysoft.data.ProgramRequestParams
 import com.okysoft.annictim.presentation.program.ProgramsFragment
 import com.okysoft.annictim.presentation.program.ProgramsViewModel
 import dagger.Module
@@ -18,7 +18,7 @@ abstract class ProgramsFragmentModule {
     class InjectViewModel {
 
         @Provides
-        fun providesRequestParams(fragment: ProgramsFragment): ProgramRequestParams {
+        fun providesRequestParams(fragment: ProgramsFragment): com.okysoft.data.ProgramRequestParams {
             return fragment.programRequestParams
         }
 

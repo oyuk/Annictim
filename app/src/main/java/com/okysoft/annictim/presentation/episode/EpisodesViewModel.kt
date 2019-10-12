@@ -5,25 +5,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.domain.Episode
-import com.okysoft.annictim.usecase.EpisodeUseCase
+import com.okysoft.domain.model.Episode
+import com.okysoft.domain.usecase.EpisodeUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.await
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class EpisodesViewModel @Inject constructor (
-        private val workId: Int,
-        private val useCase: EpisodeUseCase,
-        private val coroutineContext: CoroutineContext
+    private val workId: Int,
+    private val useCase: EpisodeUseCase,
+    private val coroutineContext: CoroutineContext
 ): ViewModel() {
 
     class Factory @Inject constructor (
-            private val workId: Int,
-            private val useCase: EpisodeUseCase,
-            private val coroutineContext: CoroutineContext
+        private val workId: Int,
+        private val useCase: EpisodeUseCase,
+        private val coroutineContext: CoroutineContext
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

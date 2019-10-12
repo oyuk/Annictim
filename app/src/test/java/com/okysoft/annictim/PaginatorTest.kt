@@ -1,7 +1,7 @@
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
-import com.okysoft.annictim.domain.Work
-import com.okysoft.annictim.infra.api.model.response.WorkResponse
+import com.okysoft.data.Work
+import com.okysoft.data.WorkResponse
 import com.okysoft.annictim.presentation.Paginator
 import com.okysoft.annictim.presentation.WorkPaginator
 import io.reactivex.Single
@@ -12,10 +12,10 @@ import org.junit.Test
 import org.powermock.core.classloader.annotations.PrepareForTest
 import java.util.concurrent.CountDownLatch
 
-@PrepareForTest(WorkResponse::class)
+@PrepareForTest(com.okysoft.data.WorkResponse::class)
 class PaginatorTest {
 
-    lateinit var paginator: Paginator<Work>
+    lateinit var paginator: Paginator<com.okysoft.data.Work>
     lateinit var refresh: PublishProcessor<Unit>
     lateinit var loadMore: PublishProcessor<Unit>
 
@@ -25,12 +25,12 @@ class PaginatorTest {
         loadMore = PublishProcessor.create()
     }
 
-    private fun setupSuccessRequestCreator(): (Int) -> Single<List<Work>>  {
-        val work: Work = mock(name = "Work")
-        val requestCreator: ((Int) -> Single<List<Work>>) = { page ->
-            Single.create<List<Work>> {
+    private fun setupSuccessRequestCreator(): (Int) -> Single<List<com.okysoft.data.Work>>  {
+        val work: com.okysoft.data.Work = mock(name = "Work")
+        val requestCreator: ((Int) -> Single<List<com.okysoft.data.Work>>) = { page ->
+            Single.create<List<com.okysoft.data.Work>> {
                 val size = 20
-                val response = mutableListOf<Work>()
+                val response = mutableListOf<com.okysoft.data.Work>()
                 for (i in 1..size) {
                     response.add(work)
                 }
@@ -40,9 +40,9 @@ class PaginatorTest {
         return requestCreator
     }
 
-    private fun setupErrorRequestCreator(): (Int) -> Single<List<Work>>  {
-        val requestCreator: ((Int) -> Single<List<Work>>) = { page ->
-            Single.create<List<Work>> { it.onError(Throwable()) }
+    private fun setupErrorRequestCreator(): (Int) -> Single<List<com.okysoft.data.Work>>  {
+        val requestCreator: ((Int) -> Single<List<com.okysoft.data.Work>>) = { page ->
+            Single.create<List<com.okysoft.data.Work>> { it.onError(Throwable()) }
         }
         return requestCreator
     }

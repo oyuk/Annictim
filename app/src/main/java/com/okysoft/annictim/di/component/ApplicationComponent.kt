@@ -1,7 +1,10 @@
 package com.okysoft.annictim.di.component
 
+import android.app.Application
 import com.okysoft.annictim.application.AnnictimApplication
 import com.okysoft.annictim.di.module.*
+import com.okysoft.domain.UseCaseModule
+import com.okysoft.infra.InfraModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -9,7 +12,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@dagger.Component(modules = arrayOf(
+@dagger.Component(modules = [
         AndroidSupportInjectionModule::class,
         ApplicationModule::class,
         InfraModule::class,
@@ -28,13 +31,13 @@ import javax.inject.Singleton
         CastsFragmentModule::class,
         ProgramsFragmentModule::class,
         UIModule::class
-        ))
+        ])
 interface ApplicationComponent: AndroidInjector<AnnictimApplication> {
 
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: AnnictimApplication): Builder
+        fun application(application: Application): Builder
         fun build(): ApplicationComponent
     }
 

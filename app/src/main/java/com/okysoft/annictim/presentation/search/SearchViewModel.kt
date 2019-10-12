@@ -2,7 +2,7 @@ package com.okysoft.annictim.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
+import com.okysoft.data.WorkRequestParams
 import com.okysoft.annictim.extension.toLiveData
 import io.reactivex.Flowable
 import io.reactivex.functions.Function3
@@ -21,7 +21,7 @@ class SearchViewModel: ViewModel() {
         private val REGEX: Regex = """(\d{4})""".toRegex()
     }
 
-    val transitionTo: LiveData<WorkRequestParams>
+    val transitionTo: LiveData<com.okysoft.data.WorkRequestParams>
     val enableSeasonSelect: LiveData<Boolean>
 
     init {
@@ -52,7 +52,7 @@ class SearchViewModel: ViewModel() {
                 } else {
                     null
                 }
-                WorkRequestParams(title = title, season = seasonString)
+                com.okysoft.data.WorkRequestParams(title = title, season = seasonString)
             })
 
         transitionTo = tappedSearch.withLatestFrom(parameter)

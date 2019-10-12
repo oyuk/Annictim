@@ -3,11 +3,11 @@ package com.okysoft.annictim.presentation.program
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.domain.Program
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
 import com.okysoft.annictim.presentation.ProgramPaginator
-import com.okysoft.annictim.usecase.ProgramUseCase
+import com.okysoft.data.ProgramRequestParams
+import com.okysoft.domain.model.Program
+import com.okysoft.domain.usecase.ProgramUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job

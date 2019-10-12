@@ -8,7 +8,7 @@
     <data>
         <variable
             name="record"
-            type="com.okysoft.annictim.domain.Record"
+            type="com.okysoft.domain.model.Record"
             />
     </data>
 

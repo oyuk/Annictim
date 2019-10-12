@@ -1,9 +1,9 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.infra.api.model.request.CastRequestParams
 import com.okysoft.annictim.presentation.cast.CastsFragment
 import com.okysoft.annictim.presentation.cast.CastsViewModel
+import com.okysoft.data.CastRequestParams
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector

@@ -1,6 +1,7 @@
 package com.okysoft.annictim.infra.api
 
 import com.google.common.truth.Truth.assertThat
+import com.okysoft.data.WorkTerm
 import org.junit.After
 import org.junit.Before
 import org.junit.BeforeClass

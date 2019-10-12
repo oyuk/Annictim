@@ -13,12 +13,13 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.okysoft.annictim"
-        minSdkVersion 21
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode versionMajor * 100 + versionMinor * 10 + versionPatch
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
         def properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         buildConfigField "String", "annictClientId", "${properties.getProperty("CLIENT_ID")}"
@@ -61,7 +62,6 @@ dependencies {
 
     implementation 'androidx.browser:browser:1.0.0'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation "io.reactivex.rxjava2:rxjava:2.2.2"
@@ -75,10 +75,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
@@ -94,10 +90,6 @@ dependencies {
     testImplementation 'org.powermock:powermock-api-mockito2:2.0.0-beta.5'
     testImplementation "com.google.truth:truth:0.42"
 
-    implementation 'nz.bradcampbell:paperparcel:2.0.6'
-    implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.6' // Optional
-    kapt 'nz.bradcampbell:paperparcel-compiler:2.0.6'
-
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
@@ -111,4 +103,9 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.1.1"
+
+    implementation project(":data")
+    implementation project(":domain")
+    implementation project(":infra")
+    implementation project(":common")
 }

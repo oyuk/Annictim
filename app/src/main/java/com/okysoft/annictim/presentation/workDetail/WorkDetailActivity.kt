@@ -14,10 +14,10 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
-import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.extension.setImage
 import com.okysoft.annictim.presentation.episode.EpisodesFragment
 import com.okysoft.annictim.presentation.review.ReviewsFragment
+import com.okysoft.domain.model.Work
 
 class WorkDetailActivity : AppCompatActivity() {
 

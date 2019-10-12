@@ -10,7 +10,7 @@ import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
 import com.okysoft.annictim.MeStore
-import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
+import com.okysoft.data.ProgramRequestParams
 import com.okysoft.annictim.presentation.program.ProgramsFragment
 import com.okysoft.annictim.presentation.user.UserFragment
 import dagger.android.support.AndroidSupportInjection
@@ -53,7 +53,7 @@ class CustomNavigator(
             }
             ProgramsFragment::class.java.name -> {
                 val b = Bundle().also {
-                    it.putParcelable("REQUEST_PARAM", ProgramRequestParams())
+                    it.putParcelable("REQUEST_PARAM", com.okysoft.data.ProgramRequestParams())
                 }
                 instantiateFragment(context, manager, className, b)
             }

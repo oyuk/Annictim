@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ItemWorkBinding
-import com.okysoft.annictim.domain.Work
 import com.okysoft.annictim.extension.setImage
 import com.okysoft.annictim.presentation.BindingViewHolder
 import com.okysoft.annictim.presentation.widget.DiffUtilCallback
+import com.okysoft.domain.model.Work
 import kotlin.properties.Delegates
 
 data class WorkClickItem(

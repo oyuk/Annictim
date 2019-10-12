@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ItemEpisodeBinding
-import com.okysoft.annictim.domain.Episode
 import com.okysoft.annictim.presentation.BindingViewHolder
+import com.okysoft.domain.model.Episode
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy

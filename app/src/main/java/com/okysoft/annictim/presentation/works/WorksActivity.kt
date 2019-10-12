@@ -7,14 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorksBinding
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
+import com.okysoft.data.WorkRequestParams
 
 class WorksActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_PARAM_MODEL = "REQUEST_PARAM_MODEL"
 
-        fun createIntent(activity: Context, requestParams: WorkRequestParams): Intent {
+        fun createIntent(activity: Context, requestParams: com.okysoft.data.WorkRequestParams): Intent {
             return Intent(activity, WorksActivity::class.java).apply {
                 putExtra(REQUEST_PARAM_MODEL, requestParams)
             }
@@ -33,7 +33,7 @@ class WorksActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            val requestParamModel = intent.getParcelableExtra<WorkRequestParams>(REQUEST_PARAM_MODEL)
+            val requestParamModel = intent.getParcelableExtra<com.okysoft.data.WorkRequestParams>(REQUEST_PARAM_MODEL)
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, WorksFragment.newInstance(requestParamModel))

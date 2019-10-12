@@ -6,7 +6,7 @@
     <data>
         <variable
             name="review"
-            type="com.okysoft.annictim.domain.Review"
+            type="com.okysoft.domain.model.Review"
             />
     </data>
 

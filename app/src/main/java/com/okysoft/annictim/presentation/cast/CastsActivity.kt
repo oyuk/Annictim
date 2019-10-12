@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityCastsBinding
-import com.okysoft.annictim.domain.Work
-import com.okysoft.annictim.infra.api.model.request.CastRequestParams
+import com.okysoft.data.CastRequestParams
+import com.okysoft.domain.model.Work
 
 class CastsActivity : AppCompatActivity() {
 

@@ -10,9 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.okysoft.annictim.R
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
 import com.okysoft.annictim.databinding.FragmentMeWorksTabPagerBinding
-import com.okysoft.annictim.presentation.WatchKind
+import com.okysoft.data.WatchKind
 
 class MeWorksTabPagerFragment : Fragment() {
 
@@ -36,10 +35,10 @@ class MeWorksTabPagerFragment : Fragment() {
 
         override fun getItem(position: Int): Fragment? {
             val meFilterStatus = WatchKind.fromNum(position)
-            return WorksFragment.newInstance(WorkRequestParams(
-                type = WorkRequestParams.Type.Me,
+            return WorksFragment.newInstance(com.okysoft.data.WorkRequestParams(
+                type = com.okysoft.data.WorkRequestParams.Type.Me,
                 status = meFilterStatus.toString(),
-                fields = WorkRequestParams.Fields.Feed,
+                fields = com.okysoft.data.WorkRequestParams.Fields.Feed,
                 season = null))
         }
     }

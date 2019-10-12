@@ -5,18 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.domain.Cast
-import com.okysoft.annictim.domain.Staff
-import com.okysoft.annictim.domain.Work
-import com.okysoft.annictim.infra.api.model.request.CastRequestParams
-import com.okysoft.annictim.infra.api.model.request.StaffRequestParams
-import com.okysoft.annictim.infra.api.model.request.WorkStatusRequestParams
-import com.okysoft.annictim.infra.api.repository.MeRepository
 import com.okysoft.annictim.presentation.CoroutineScopeViewModel
-import com.okysoft.annictim.presentation.WatchKind
-import com.okysoft.annictim.usecase.CastUseCase
-import com.okysoft.annictim.usecase.StaffUseCase
-import com.okysoft.annictim.usecase.WorkUseCase
+import com.okysoft.data.CastRequestParams
+import com.okysoft.data.StaffRequestParams
+import com.okysoft.data.WorkStatusRequestParams
+import com.okysoft.domain.model.Cast
+import com.okysoft.domain.model.Staff
+import com.okysoft.data.WatchKind
+import com.okysoft.domain.model.Work
+import com.okysoft.domain.usecase.CastUseCase
+import com.okysoft.domain.usecase.StaffUseCase
+import com.okysoft.domain.usecase.WorkUseCase
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
@@ -29,7 +28,7 @@ class WorkViewModel constructor(
     workUseCase: WorkUseCase,
     castUseCase: CastUseCase,
     staffUseCase: StaffUseCase,
-    private val meRepository: MeRepository,
+    private val meRepository: com.okysoft.infra.repository.MeRepository,
     work: Work,
     context: CoroutineContext
 ) : CoroutineScopeViewModel(context) {
@@ -38,7 +37,7 @@ class WorkViewModel constructor(
         private val workUseCase: WorkUseCase,
         private val castUseCase: CastUseCase,
         private val staffUseCase: StaffUseCase,
-        private val meRepository: MeRepository,
+        private val meRepository: com.okysoft.infra.repository.MeRepository,
         private val work: Work,
         private val context: CoroutineContext
     ) : ViewModelProvider.Factory {

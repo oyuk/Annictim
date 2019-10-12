@@ -5,12 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.domain.User
-import com.okysoft.annictim.usecase.UserUseCase
+import com.okysoft.domain.model.User
+import com.okysoft.domain.usecase.UserUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.await
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 

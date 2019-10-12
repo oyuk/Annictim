@@ -1,8 +1,8 @@
 package com.okysoft.annictim.presentation
 
-import com.okysoft.annictim.domain.Cast
-import com.okysoft.annictim.domain.Program
-import com.okysoft.annictim.domain.Work
+import com.okysoft.domain.model.Cast
+import com.okysoft.domain.model.Program
+import com.okysoft.domain.model.Work
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable

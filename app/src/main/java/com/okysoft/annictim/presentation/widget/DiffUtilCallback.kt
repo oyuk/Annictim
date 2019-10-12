@@ -1,8 +1,9 @@
 package com.okysoft.annictim.presentation.widget
 
 import androidx.recyclerview.widget.DiffUtil
+import com.okysoft.common.Diffable
 
-class DiffUtilCallback(val old: List<Diffable>, val new: List<Diffable>): DiffUtil.Callback() {
+class DiffUtilCallback(val old: List<Diffable>, val new: List<com.okysoft.common.Diffable>): DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean
         = old[oldItemPosition].isTheSame(new[newItemPosition])

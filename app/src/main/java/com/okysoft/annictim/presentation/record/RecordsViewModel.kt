@@ -3,8 +3,8 @@ package com.okysoft.annictim.presentation.record
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.domain.Record
 import com.okysoft.annictim.extension.toLiveData
+import com.okysoft.domain.model.Record
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 

@@ -1,6 +1,6 @@
 package com.okysoft.annictim.presentation.works
 
-import com.okysoft.annictim.domain.Work
+import com.okysoft.domain.model.Work
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 

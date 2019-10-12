@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ItemStaffBinding
-import com.okysoft.annictim.domain.Staff
 import com.okysoft.annictim.presentation.BindingViewHolder
+import com.okysoft.domain.model.Staff
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy

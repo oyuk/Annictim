@@ -6,16 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.okysoft.annictim.BuildConfig
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.infra.api.repository.AuthRepository
-import com.okysoft.annictim.infra.api.repository.OauthRepository
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
-        private val oauthRepository: OauthRepository,
-        private val authRepository: AuthRepository): ViewModel() {
+    private val oauthRepository: com.okysoft.infra.repository.OauthRepository,
+    private val authRepository: com.okysoft.infra.repository.AuthRepository): ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     val loginComplete: LiveData<Unit> by lazy {

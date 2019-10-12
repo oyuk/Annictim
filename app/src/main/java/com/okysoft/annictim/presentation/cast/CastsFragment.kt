@@ -12,7 +12,7 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentCastsBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
-import com.okysoft.annictim.infra.api.model.request.CastRequestParams
+import com.okysoft.data.CastRequestParams
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -20,8 +20,8 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
     private lateinit var binding: FragmentCastsBinding
 
-    val castRequestParams: CastRequestParams
-        get() = arguments?.getParcelable(REQUEST_PARAMS) ?: CastRequestParams()
+    val castRequestParams: com.okysoft.data.CastRequestParams
+        get() = arguments?.getParcelable(REQUEST_PARAMS) ?: com.okysoft.data.CastRequestParams()
 
     @Inject
     lateinit var viewModel: CastsViewModel
@@ -63,7 +63,7 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         val TAG = CastsFragment::class.java.simpleName
         const val REQUEST_PARAMS = "REQUEST_PARAMS"
 
-        fun newInstance(requestParams: CastRequestParams): CastsFragment = CastsFragment().apply {
+        fun newInstance(requestParams: com.okysoft.data.CastRequestParams): CastsFragment = CastsFragment().apply {
             val args = Bundle().apply {
                 putParcelable(REQUEST_PARAMS, requestParams)
             }

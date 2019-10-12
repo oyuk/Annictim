@@ -1,15 +1,13 @@
 package com.okysoft.annictim
 
 import androidx.lifecycle.LiveData
-import com.okysoft.annictim.infra.api.model.response.UserResponse
-import com.okysoft.annictim.infra.api.repository.AuthRepository
-import com.okysoft.annictim.application.ApplicationDispatcher
 import com.okysoft.annictim.extension.toLiveData
+import com.okysoft.infra.ApplicationDispatcher
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class MeStore (
-    private val authRepository: AuthRepository,
+    private val authRepository: com.okysoft.infra.repository.AuthRepository,
     dispatcher: ApplicationDispatcher
         ) {
 
@@ -21,6 +19,6 @@ class MeStore (
             .observeOn(AndroidSchedulers.mainThread())
             .toLiveData()
 
-    val me: Flowable<UserResponse> = dispatcher.getMe.map { it.me }
+    val me: Flowable<com.okysoft.data.UserResponse> = dispatcher.getMe.map { it.me }
 
 }

@@ -12,7 +12,7 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentProgramsBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
-import com.okysoft.annictim.infra.api.model.request.ProgramRequestParams
+import com.okysoft.data.ProgramRequestParams
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -22,8 +22,8 @@ class ProgramsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     private lateinit var binding: FragmentProgramsBinding
     private val adapter = ProgramsAdapter()
 
-    val programRequestParams: ProgramRequestParams
-        get() =  arguments?.getParcelable(REQUEST_PARAM) ?: ProgramRequestParams()
+    val programRequestParams: com.okysoft.data.ProgramRequestParams
+        get() =  arguments?.getParcelable(REQUEST_PARAM) ?: com.okysoft.data.ProgramRequestParams()
 
     @Inject
     lateinit var viewModel: ProgramsViewModel

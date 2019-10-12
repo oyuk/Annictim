@@ -9,7 +9,7 @@
     <data>
         <variable
             name="work"
-            type="com.okysoft.annictim.domain.Work"
+            type="com.okysoft.domain.model.Work"
             />
     </data>
 

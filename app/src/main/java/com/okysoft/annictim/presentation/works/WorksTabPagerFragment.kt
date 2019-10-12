@@ -11,8 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
-import com.okysoft.annictim.infra.api.WorkTerm
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
+import com.okysoft.data.WorkTerm
 
 class WorksTabPagerFragment : Fragment() {
 
@@ -62,7 +61,7 @@ class WorksTabPagerFragment : Fragment() {
                 2 -> WorkTerm.Previous
                 else -> WorkTerm.Current
             }
-            return WorksFragment.newInstance(WorkRequestParams(workTerm = workTerm, fields = WorkRequestParams.Fields.Feed))
+            return WorksFragment.newInstance(com.okysoft.data.WorkRequestParams(workTerm = workTerm, fields = com.okysoft.data.WorkRequestParams.Fields.Feed))
         }
 
     }

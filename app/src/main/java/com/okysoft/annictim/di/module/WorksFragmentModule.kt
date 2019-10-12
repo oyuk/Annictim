@@ -1,7 +1,7 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import com.okysoft.annictim.infra.api.model.request.WorkRequestParams
+import com.okysoft.data.WorkRequestParams
 import com.okysoft.annictim.presentation.works.WorksFragment
 import com.okysoft.annictim.presentation.works.WorksViewModel
 import dagger.Module
@@ -37,7 +37,7 @@ abstract class WorksFragmentModule {
 //        }
 
         @Provides
-        fun providesWorksRequestParamModel(fragment: WorksFragment): WorkRequestParams {
+        fun providesWorksRequestParamModel(fragment: WorksFragment): com.okysoft.data.WorkRequestParams {
             return fragment.workRequestParams
         }
 

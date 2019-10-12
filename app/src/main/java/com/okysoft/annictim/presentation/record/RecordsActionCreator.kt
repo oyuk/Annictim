@@ -1,9 +1,8 @@
 package com.okysoft.annictim.presentation.record
 
-import com.okysoft.annictim.usecase.RecordUseCase
+import com.okysoft.domain.usecase.RecordUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.await
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
