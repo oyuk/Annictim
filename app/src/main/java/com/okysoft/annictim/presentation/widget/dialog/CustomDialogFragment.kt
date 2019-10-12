@@ -42,7 +42,7 @@ class CustomDialogFragment: DialogFragment() {
         return builder.create()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         parentFragment?.let {
             if (it is CustomDialogFragment.Listener) {

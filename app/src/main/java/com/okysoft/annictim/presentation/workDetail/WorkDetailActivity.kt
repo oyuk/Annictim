@@ -107,19 +107,19 @@ class WorkDetailActivity : AppCompatActivity() {
             }
         }
 
-        override fun getItem(position: Int): Fragment? {
+        override fun getItem(position: Int): Fragment {
             if (work.noEpisodes) {
                 return when (position) {
                     0 -> WorkDetailFragment.newInstance(work)
                     1 -> ReviewsFragment.newInstance(work.id)
-                    else -> null
+                    else -> Fragment()
                 }
             }
             return when (position) {
                 0 -> WorkDetailFragment.newInstance(work)
                 1 -> EpisodesFragment.newInstance(work.id)
                 2 -> ReviewsFragment.newInstance(work.id)
-                else -> null
+                else -> Fragment()
             }
         }
     }

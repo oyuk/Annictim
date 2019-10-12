@@ -72,9 +72,9 @@ class UserFragment : DaggerFragment() {
 //                        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.toolbar_me, menu)
+        inflater.inflate(R.menu.toolbar_me, menu)
 //        val item = menu?.findItem(R.id.menu_settings)
 //        item?.setOnMenuItemClickListener { i ->
 //            activity?.let {
@@ -85,8 +85,8 @@ class UserFragment : DaggerFragment() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, findNavController()) || super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, findNavController()) || super.onOptionsItemSelected(item)
     }
 
     companion object {

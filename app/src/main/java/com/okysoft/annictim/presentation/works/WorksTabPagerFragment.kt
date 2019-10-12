@@ -26,7 +26,7 @@ class WorksTabPagerFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater!!.inflate(R.menu.search, menu)
 //        val item = menu?.findItem(R.id.menu_search)
@@ -38,8 +38,8 @@ class WorksTabPagerFragment : Fragment() {
 //        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, findNavController()) || super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, findNavController()) || super.onOptionsItemSelected(item)
     }
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -54,7 +54,7 @@ class WorksTabPagerFragment : Fragment() {
             else -> getString(R.string.current_season)
         }
 
-        override fun getItem(position: Int): Fragment? {
+        override fun getItem(position: Int): Fragment {
             val workTerm = when(position) {
                 0 -> WorkTerm.Current
                 1 -> WorkTerm.Next
