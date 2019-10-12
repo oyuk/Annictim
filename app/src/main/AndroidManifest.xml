@@ -12,15 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".presentation.person.PersonActivity"></activity>
+        <activity android:name=".presentation.person.PersonActivity"/>
         <activity android:name=".presentation.cast.CastsActivity" />
         <activity android:name=".presentation.works.WorksActivity" />
         <activity
             android:name=".presentation.launch.LaunchActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
