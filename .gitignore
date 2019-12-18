@@ -84,3 +84,4 @@ app/api-key.properties
 
 
 app/src/main/graphql/com/okysoft/annictim/ApolloApi/schema.json
+node_modules/
