@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.apollographql.android'
 
 android {
     compileSdkVersion 28
@@ -27,7 +28,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -54,6 +54,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+
+    def apollo_version = '0.5.0'
+    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
+//    implementation "com.apollographql.apollo:apollo-coroutines-support:$apollo_version"
 
     implementation project(":data")
 
