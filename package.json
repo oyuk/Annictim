@@ -1,0 +1,11 @@
+{
+  "name": "Annictim",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:oyuk/Annictim.git",
+  "author": "oyuk <okysoft68@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-codegen": "^0.20.2"
+  }
+}
