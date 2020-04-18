@@ -3,7 +3,6 @@ package com.okysoft.infra
 import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.okysoft.data.WatchKind
 import com.okysoft.infra.impl.*
 import dagger.Module
@@ -128,7 +127,6 @@ class InfraModule {
             .client(client)
             .baseUrl(REST_END_POINT)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
 
