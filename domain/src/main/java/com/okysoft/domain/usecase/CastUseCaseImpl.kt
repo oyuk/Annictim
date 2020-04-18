@@ -14,7 +14,7 @@ class CastUseCaseImpl (
 
     override fun get(requestParams: com.okysoft.data.CastRequestParams): Deferred<List<Cast>> {
         return GlobalScope.async {
-            val response = repository.get(requestParams).await()
+            val response = repository.get(requestParams)
             val models = response.casts.map { translator.translate(it) }
             return@async models
         }

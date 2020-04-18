@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class MeRepository @Inject constructor(private val service: AnnictService.Me) {
 
-    fun updateStatus(statusRequestParams: WorkStatusRequestParams): Deferred<Response<Unit>> {
+    suspend fun updateStatus(statusRequestParams: WorkStatusRequestParams): Response<Unit> {
         return service.status(statusRequestParams.toParams())
     }
 

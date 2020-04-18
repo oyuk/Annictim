@@ -9,7 +9,7 @@ class CastServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.Cas
 
     private val client = retrofit.create(AnnictService.Cast::class.java)
 
-    override fun get(query: Map<String, String>): Deferred<com.okysoft.data.CastResponse> {
+    override suspend fun get(query: Map<String, String>): com.okysoft.data.CastResponse {
         return client.get(query)
     }
 

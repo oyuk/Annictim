@@ -14,7 +14,7 @@ class ProgramUseCaseImpl (
 
     override fun get(requestParams: com.okysoft.data.ProgramRequestParams): Deferred<List<Program>> {
         return GlobalScope.async {
-            val response = repository.get(requestParams).await()
+            val response = repository.get(requestParams)
             val models = response.programs.map { translator.translate(it) }
             return@async models
         }

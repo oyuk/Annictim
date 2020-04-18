@@ -9,7 +9,7 @@ class ReviewServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.R
 
     private val client = retrofit.create(AnnictService.Review::class.java)
 
-    override fun get(workId: Int): Deferred<com.okysoft.data.ReviewsResponse> {
+    override suspend fun get(workId: Int): com.okysoft.data.ReviewsResponse {
         return client.get(workId)
     }
 

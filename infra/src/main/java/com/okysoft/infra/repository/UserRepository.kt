@@ -9,11 +9,11 @@ class UserRepository @Inject constructor(
     private val authRepository: AuthRepository
         ) {
 
-    fun getMe(): Deferred<com.okysoft.data.UserResponse> {
+    suspend fun getMe(): com.okysoft.data.UserResponse {
         return service.getMe(authRepository.getStoredAccessToken())
     }
 
-    fun get(userId: Int): Deferred<com.okysoft.data.UsersResponse> {
+    suspend fun get(userId: Int): com.okysoft.data.UsersResponse {
         return service.get("${userId}")
     }
 

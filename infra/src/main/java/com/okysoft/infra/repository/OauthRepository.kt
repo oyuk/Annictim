@@ -26,7 +26,7 @@ class OauthRepository @Inject constructor(private val oauthService: AnnictServic
         )
         GlobalScope.launch(CoroutineContext) {
             try {
-                val response = oauthService.getAccessToken(requestModel).await()
+                val response = oauthService.getAccessToken(requestModel)
                 _accessToken.onNext(response.accessToken)
             } catch (throwable: Throwable) {
                 Log.e("", throwable.toString())

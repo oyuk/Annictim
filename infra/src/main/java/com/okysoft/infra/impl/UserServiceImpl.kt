@@ -9,11 +9,11 @@ class UserServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.Use
 
     private val retrofitClient = retrofit.create(AnnictService.User::class.java)
 
-    override fun getMe(accessToken: String): Deferred<com.okysoft.data.UserResponse> {
+    override suspend fun getMe(accessToken: String): com.okysoft.data.UserResponse {
         return retrofitClient.getMe(accessToken)
     }
 
-    override fun get(userIds: String): Deferred<com.okysoft.data.UsersResponse> {
+    override suspend fun get(userIds: String): com.okysoft.data.UsersResponse {
         return retrofitClient.get(userIds)
     }
 

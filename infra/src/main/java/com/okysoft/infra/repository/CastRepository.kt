@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class CastRepository @Inject constructor(private val service: AnnictService.Cast) {
 
-    fun get(requestParams: com.okysoft.data.CastRequestParams): Deferred<com.okysoft.data.CastResponse> {
+    suspend fun get(requestParams: com.okysoft.data.CastRequestParams): com.okysoft.data.CastResponse {
         return service.get(requestParams.toParams())
     }
 

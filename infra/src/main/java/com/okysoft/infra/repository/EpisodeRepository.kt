@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class EpisodeRepository @Inject constructor(private val service: AnnictService.Episode) {
 
-    fun get(workId: Int): Deferred<com.okysoft.data.EpisodesResponse> {
+    suspend fun get(workId: Int): com.okysoft.data.EpisodesResponse {
         return service.get(workId, "asc")
     }
 

@@ -14,7 +14,7 @@ class UserUseCaseImpl (
 
     override fun getMe(): Deferred<User> {
         return GlobalScope.async {
-            val response = repository.getMe().await()
+            val response = repository.getMe()
             val model = translator.translate(response)
             return@async model
         }
@@ -22,7 +22,7 @@ class UserUseCaseImpl (
 
     override fun get(userId: Int): Deferred<List<User>> {
         return GlobalScope.async {
-            val response = repository.get(userId).await()
+            val response = repository.get(userId)
             val models = response.users.map { translator.translate(it) }
             return@async models
         }

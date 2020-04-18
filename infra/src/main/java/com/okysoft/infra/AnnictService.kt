@@ -13,51 +13,51 @@ interface AnnictService {
     interface Oauth {
 
         @POST("/oauth/token")
-        fun getAccessToken(
-                @retrofit2.http.Body oauthRequestModel: com.okysoft.data.OauthRequestModel
-        ): Deferred<com.okysoft.data.OauthResponseModel>
+        suspend fun getAccessToken(
+                @retrofit2.http.Body oauthRequestModel: OauthRequestModel
+        ): com.okysoft.data.OauthResponseModel
 
     }
 
     interface Program {
 
         @GET("/v1/me/programs")
-        fun get(@QueryMap query: Map<String, String>): Deferred<com.okysoft.data.ProgramsResponse>
+        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.ProgramsResponse
     }
 
 
     interface Me {
 
         @POST("v1/me/statuses")
-        fun status(@QueryMap query: Map<String, String>): Deferred<Response<Unit>>
+        suspend fun status(@QueryMap query: Map<String, String>): Response<Unit>
 
     }
 
     interface Staff {
 
         @GET("/v1/staffs")
-        fun get(@QueryMap query: Map<String, String>): Deferred<com.okysoft.data.StaffsResponse>
+        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.StaffsResponse
 
     }
 
     interface Cast {
 
         @GET("/v1/casts")
-        fun get(@QueryMap query: Map<String, String>): Deferred<com.okysoft.data.CastResponse>
+        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.CastResponse
 
     }
 
     interface User {
 
         @GET("/v1/users")
-        fun get(
+        suspend fun get(
                 @Query("filter_ids") userIds: String
-        ): Deferred<com.okysoft.data.UsersResponse>
+        ): com.okysoft.data.UsersResponse
 
         @GET("/v1/me")
-        fun getMe(
+        suspend fun getMe(
                 @Query("access_token") accessToken: String
-        ): Deferred<com.okysoft.data.UserResponse>
+        ): com.okysoft.data.UserResponse
 
     }
 
@@ -66,34 +66,34 @@ interface AnnictService {
         interface Me {
 
             @GET("/v1/me/works")
-            fun me(@QueryMap query: Map<String, String>): Deferred<com.okysoft.data.WorksResponse>
+            suspend fun me(@QueryMap query: Map<String, String>): com.okysoft.data.WorksResponse
 
         }
 
         @GET("/v1/works")
-        fun get(@QueryMap query: Map<String, String>): Deferred<com.okysoft.data.WorksResponse>
+        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.WorksResponse
     }
 
     interface Episode {
         @GET("/v1/episodes")
-        fun get(
+        suspend fun get(
                 @Query("filter_work_id") workId: Int,
                 @Query("sort_sort_number") order: String
-        ): Deferred<com.okysoft.data.EpisodesResponse>
+        ): com.okysoft.data.EpisodesResponse
     }
 
     interface Review {
         @GET("/v1/reviews")
-        fun get(
+        suspend fun get(
                 @Query("filter_work_id") workId: Int
-        ): Deferred<com.okysoft.data.ReviewsResponse>
+        ): com.okysoft.data.ReviewsResponse
     }
 
     interface Record {
         @GET("/v1/records")
-        fun get(
+        suspend fun get(
                 @Query("filter_episode_id") episodeId: Int
-        ): Deferred<com.okysoft.data.RecordsResponse>
+        ): com.okysoft.data.RecordsResponse
     }
 
     interface Works: Work, Work.Me

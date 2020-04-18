@@ -14,7 +14,7 @@ class WorkUseCaseImpl (
 
     override fun get(requestParams: com.okysoft.data.WorkRequestParams): Deferred<List<Work>> {
         return GlobalScope.async {
-            val response = repository.get(requestParams).await()
+            val response = repository.get(requestParams)
             val models = response.works.map { translator.translate(it) }
             return@async models
         }
@@ -22,7 +22,7 @@ class WorkUseCaseImpl (
 
     override fun me(requestParams: com.okysoft.data.WorkRequestParams): Deferred<List<Work>> {
         return GlobalScope.async {
-            val response = repository.me(requestParams).await()
+            val response = repository.me(requestParams)
             val models = response.works.map { translator.translate(it) }
             return@async models
         }
@@ -43,7 +43,7 @@ class WorkUseCaseImpl (
                 ids = listOf(workId),
                 season = null,
                 perPage = 1
-            )).await()
+            ))
             val watchKind = response.works.firstOrNull()?.watchKind ?: WatchKind.no_select
             return@async watchKind
         }

@@ -14,7 +14,7 @@ class StaffUseCaseImpl (
 
     override fun get(requestParams: com.okysoft.data.StaffRequestParams): Deferred<List<Staff>> {
         return GlobalScope.async {
-            val response = repository.get(requestParams).await()
+            val response = repository.get(requestParams)
             val models = response.staffs.map { translator.translate(it) }
             return@async models
         }

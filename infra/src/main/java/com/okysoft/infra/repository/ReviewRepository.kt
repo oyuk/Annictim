@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class ReviewRepository @Inject constructor(private val service: AnnictService.Review) {
 
-    fun get(workId: Int): Deferred<com.okysoft.data.ReviewsResponse>{
+    suspend fun get(workId: Int): com.okysoft.data.ReviewsResponse {
         return service.get(workId)
     }
 

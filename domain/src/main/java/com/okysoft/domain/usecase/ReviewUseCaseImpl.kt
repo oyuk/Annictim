@@ -14,7 +14,7 @@ class ReviewUseCaseImpl(
 
     override fun get(workId: Int): Deferred<List<Review>> {
         return GlobalScope.async {
-            val response = repository.get(workId).await()
+            val response = repository.get(workId)
             val models = response.reviews.map { translator.translate(it) }
             return@async models
         }

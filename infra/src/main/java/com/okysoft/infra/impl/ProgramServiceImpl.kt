@@ -9,7 +9,7 @@ class ProgramServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.
 
     private val retrofitClient = retrofit.create(AnnictService.Program::class.java)
 
-    override fun get(query: Map<String, String>): Deferred<com.okysoft.data.ProgramsResponse> {
+    override suspend fun get(query: Map<String, String>): com.okysoft.data.ProgramsResponse {
         return retrofitClient.get(query)
     }
 

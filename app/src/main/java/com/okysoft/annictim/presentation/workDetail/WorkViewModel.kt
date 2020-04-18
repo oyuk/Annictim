@@ -103,7 +103,7 @@ class WorkViewModel constructor(
             .subscribeBy {
                 launch {
                     try {
-                        meRepository.updateStatus(WorkStatusRequestParams(work.id, it)).await()
+                        meRepository.updateStatus(WorkStatusRequestParams(work.id, it))
                     } catch (trowable: Throwable) {
                         Log.e("", trowable.toString())
                     }

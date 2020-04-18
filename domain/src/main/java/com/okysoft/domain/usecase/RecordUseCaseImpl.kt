@@ -14,7 +14,7 @@ class RecordUseCaseImpl (
 
     override fun get(episodeId: Int): Deferred<List<Record>> {
         return GlobalScope.async {
-            val response = repository.get(episodeId).await()
+            val response = repository.get(episodeId)
             val models = response.records.map { translator.translate(it) }
             return@async models
         }

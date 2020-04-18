@@ -10,11 +10,11 @@ class WorkServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.Wor
     private val retrofitClient = retrofit.create(AnnictService.Work::class.java)
     private val meClient = retrofit.create(AnnictService.Work.Me::class.java)
 
-    override fun get(query: Map<String, String>): Deferred<com.okysoft.data.WorksResponse> {
+    override suspend fun get(query: Map<String, String>): com.okysoft.data.WorksResponse {
         return retrofitClient.get(query)
     }
 
-    override fun me(query: Map<String, String>): Deferred<com.okysoft.data.WorksResponse> {
+    override suspend fun me(query: Map<String, String>): com.okysoft.data.WorksResponse {
         return meClient.me(query)
     }
 

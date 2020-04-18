@@ -9,7 +9,7 @@ class StaffServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.St
 
     private val client = retrofit.create(AnnictService.Staff::class.java)
 
-    override fun get(query: Map<String, String>): Deferred<com.okysoft.data.StaffsResponse> {
+    override suspend fun get(query: Map<String, String>): com.okysoft.data.StaffsResponse {
         return client.get(query)
     }
 

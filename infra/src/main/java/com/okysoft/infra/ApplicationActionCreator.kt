@@ -13,7 +13,7 @@ class ApplicationActionCreator @Inject constructor(
     fun getMe() {
         GlobalScope.launch {
             try {
-                val user = repository.getMe().await()
+                val user = repository.getMe()
                 dispatcher.dispatch(ApplicationAction.GetMe(user))
             } catch (t: Throwable) {
                 Log.d("", t.toString())

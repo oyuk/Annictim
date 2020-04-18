@@ -9,7 +9,7 @@ class RecordServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.R
 
     private val client = retrofit.create(AnnictService.Record::class.java)
 
-    override fun get(episodeId: Int): Deferred<com.okysoft.data.RecordsResponse> {
+    override suspend fun get(episodeId: Int): com.okysoft.data.RecordsResponse {
         return client.get(episodeId)
     }
 
