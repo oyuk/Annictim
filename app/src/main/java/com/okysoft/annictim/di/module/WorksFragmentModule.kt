@@ -1,6 +1,6 @@
 package com.okysoft.annictim.di.module
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.okysoft.data.WorkRequestParams
 import com.okysoft.annictim.presentation.works.WorksFragment
 import com.okysoft.annictim.presentation.works.WorksViewModel
@@ -45,7 +45,7 @@ abstract class WorksFragmentModule {
         fun provideWorksViewModel(
             factory: WorksViewModel.Factory,
             target: WorksFragment
-        ) = ViewModelProviders.of(target, factory).get(WorksViewModel::class.java)
+        ) = ViewModelProvider(target, factory).get(WorksViewModel::class.java)
 
     }
 

@@ -1,6 +1,6 @@
 package com.okysoft.annictim.di.module
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.okysoft.annictim.presentation.setting.SettingFragment
 import com.okysoft.annictim.presentation.setting.SettingViewModel
 import dagger.Module
@@ -20,7 +20,7 @@ abstract class SettingFragmentModule {
         fun provideSettingViewModel(
             factory: SettingViewModel.Factory,
             target: SettingFragment
-        ) = ViewModelProviders.of(target, factory).get(SettingViewModel::class.java)
+        ) = ViewModelProvider(target, factory).get(SettingViewModel::class.java)
 
     }
 }

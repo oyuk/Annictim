@@ -1,6 +1,6 @@
 package com.okysoft.annictim.di.module
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.okysoft.annictim.presentation.record.RecordsFragment
 import com.okysoft.annictim.presentation.review.ReviewsFragment
 import com.okysoft.annictim.presentation.record.RecordDispatcher
@@ -29,7 +29,7 @@ abstract class RecordsFragmentModule {
         fun provideReviewsViewModel(
             factory: RecordsViewModel.Factory,
             target: ReviewsFragment
-        ) = ViewModelProviders.of(target, factory).get(ReviewsViewModel::class.java)
+        ) = ViewModelProvider(target, factory).get(ReviewsViewModel::class.java)
 
     }
 
