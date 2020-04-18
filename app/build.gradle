@@ -10,11 +10,11 @@ def versionMinor = 0
 def versionPatch = 0
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.okysoft.annictim"
-        minSdkVersion 22
-        targetSdkVersion 28
+        minSdkVersion 24
+        targetSdkVersion 29
         versionCode versionMajor * 100 + versionMinor * 10 + versionPatch
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -41,11 +41,15 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
 
-    def dagger_version = '2.20'
+    def dagger_version = '2.26'
     def lifecycle_version = "1.1.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -58,9 +62,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
 
-    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'androidx.browser:browser:1.2.0'
 
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
@@ -76,8 +80,8 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
 
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.2.0'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
     implementation 'com.github.bumptech.glide:glide:4.10.0'
