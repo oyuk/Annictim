@@ -1,6 +1,7 @@
 package com.okysoft.annictim.presentation.setting
 
 
+import android.content.Context
 import android.content.Intent
 import androidx.databinding.DataBindingUtil
 import android.net.Uri
@@ -36,7 +37,7 @@ class SettingFragment : DaggerFragment(), CustomDialogFragment.Listener {
         }
         binding.developerBlogText.setOnClickListener {
             val tabsIntent = CustomTabsIntent.Builder().build()
-            tabsIntent.launchUrl(this@SettingFragment.activity, Uri.parse("http://reidr.hatenablog.com/"))
+            tabsIntent.launchUrl(this@SettingFragment.activity as Context, Uri.parse("http://reidr.hatenablog.com/"))
         }
 //        binding.sourceCodeText.setOnClickListener {
 //            val tabsIntent = CustomTabsIntent.Builder().build()

@@ -28,7 +28,7 @@ class WorksTabPagerFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.search, menu)
+        inflater.inflate(R.menu.search, menu)
 //        val item = menu?.findItem(R.id.menu_search)
 //        item?.setOnMenuItemClickListener { i ->
 //            activity?.let {
