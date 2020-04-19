@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.presentation.WorkPaginator
+import com.okysoft.annictim.presentation.Paginator
 import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.WorkUseCase
 import io.reactivex.processors.PublishProcessor
@@ -33,9 +33,9 @@ class WorksViewModel constructor(
     private val refresh = PublishProcessor.create<Unit>()
 
     @ExperimentalCoroutinesApi
-    private val paginator =  WorkPaginator(loadMore, refresh) { page, callback ->
+    private val paginator = Paginator<Work>(loadMore, refresh) { page, callback ->
         viewModelScope.launch {
-            val response = useCase.request(workRequestParams.copy(page = page))
+            val response = kotlin.runCatching { useCase.request(workRequestParams.copy(page = page)) }
             callback(response)
         }
     }

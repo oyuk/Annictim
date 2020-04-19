@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.presentation.CastPaginator
+import com.okysoft.annictim.presentation.Paginator
 import com.okysoft.domain.model.Cast
 import com.okysoft.domain.usecase.CastUseCase
 import io.reactivex.processors.PublishProcessor
@@ -36,9 +36,9 @@ class CastsViewModel constructor(
     val loadMore = PublishProcessor.create<Unit>()
     private val refreshPublisher = PublishProcessor.create<Unit>()
     @ExperimentalCoroutinesApi
-    private val paginator: CastPaginator = CastPaginator(loadMore, refreshPublisher) { page, callback ->
+    private val paginator = Paginator<Cast>(loadMore, refreshPublisher) { page, callback ->
          viewModelScope.launch {
-             val response = useCase.get(castRequestParams.copy(page = page))
+             val response = kotlin.runCatching { useCase.get(castRequestParams.copy(page = page)) }
              callback(response)
         }
     }

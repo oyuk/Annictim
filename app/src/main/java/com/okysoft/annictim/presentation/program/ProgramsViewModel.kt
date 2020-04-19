@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.presentation.ProgramPaginator
+import com.okysoft.annictim.presentation.Paginator
 import com.okysoft.data.ProgramRequestParams
 import com.okysoft.domain.model.Program
 import com.okysoft.domain.usecase.ProgramUseCase
@@ -37,9 +37,10 @@ class ProgramsViewModel constructor(
     private val refreshPublisher = PublishProcessor.create<Unit>()
 
     @ExperimentalCoroutinesApi
-    private val paginator: ProgramPaginator = ProgramPaginator(loadMore, refreshPublisher) { page, callback ->
+    private val paginator = Paginator<Program>(loadMore, refreshPublisher) { page, callback ->
         viewModelScope.launch {
-            callback(useCase.get(requestParams.copy(page = page)))
+            val response = kotlin.runCatching { useCase.get(requestParams.copy(page = page)) }
+            callback(response)
         }
     }
     @ExperimentalCoroutinesApi
