@@ -42,7 +42,7 @@ class WorksTabPagerFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount() = 3
 

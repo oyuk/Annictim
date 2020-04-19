@@ -1,10 +1,7 @@
 package com.okysoft.annictim.presentation.review
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.okysoft.domain.model.Review
 import com.okysoft.domain.usecase.ReviewUseCase
 import kotlinx.coroutines.GlobalScope
@@ -15,18 +12,16 @@ import kotlin.coroutines.CoroutineContext
 
 class ReviewsViewModel @Inject constructor (
     private val workId: Int,
-    private val useCase: ReviewUseCase,
-    private val coroutineContext: CoroutineContext
+    private val useCase: ReviewUseCase
 ): ViewModel() {
 
     class Factory @Inject constructor (
         private val workId: Int,
-        private val useCase: ReviewUseCase,
-        private val coroutineContext: CoroutineContext
+        private val useCase: ReviewUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ReviewsViewModel(workId, useCase, coroutineContext) as T
+            return ReviewsViewModel(workId, useCase) as T
         }
     }
 
@@ -35,9 +30,9 @@ class ReviewsViewModel @Inject constructor (
     val reviews: LiveData<List<Review>> = _reviews
 
     init {
-        GlobalScope.launch(coroutineContext + job) {
+        viewModelScope.launch {
             try {
-                val response = useCase.get(workId).await()
+                val response = useCase.get(workId)
                 _reviews.postValue(response)
             } catch (throwable: Throwable) {
                 Log.d("", throwable.toString())

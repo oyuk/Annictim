@@ -1,10 +1,7 @@
 package com.okysoft.annictim.presentation.episode
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.okysoft.domain.model.Episode
 import com.okysoft.domain.usecase.EpisodeUseCase
 import kotlinx.coroutines.GlobalScope
@@ -15,18 +12,16 @@ import kotlin.coroutines.CoroutineContext
 
 class EpisodesViewModel @Inject constructor (
     private val workId: Int,
-    private val useCase: EpisodeUseCase,
-    private val coroutineContext: CoroutineContext
+    private val useCase: EpisodeUseCase
 ): ViewModel() {
 
     class Factory @Inject constructor (
         private val workId: Int,
-        private val useCase: EpisodeUseCase,
-        private val coroutineContext: CoroutineContext
+        private val useCase: EpisodeUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return EpisodesViewModel(workId, useCase, coroutineContext) as T
+            return EpisodesViewModel(workId, useCase) as T
         }
     }
 
@@ -35,9 +30,9 @@ class EpisodesViewModel @Inject constructor (
     val episodes: LiveData<List<Episode>> = _episodes
 
     fun fetch() {
-        GlobalScope.launch(coroutineContext + job) {
+        viewModelScope.launch {
             try  {
-                val response = useCase.get(workId).await()
+                val response = useCase.get(workId)
                 _episodes.postValue(response)
             } catch (throwable: Throwable) {
                 Log.d("", throwable.toString())

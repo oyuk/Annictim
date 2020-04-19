@@ -15,7 +15,7 @@ class RecordsActionCreator @Inject constructor(
     fun fetch(episodeId: Int) {
         GlobalScope.launch(coroutineContext) {
             try {
-                val response = recordUseCase.get(episodeId).await()
+                val response = recordUseCase.get(episodeId)
                 dispatcher.dispatch(RecordsAction.Success(response))
             } catch (throwable: Throwable) {
 

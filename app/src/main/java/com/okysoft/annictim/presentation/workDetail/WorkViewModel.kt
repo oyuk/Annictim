@@ -1,11 +1,7 @@
 package com.okysoft.annictim.presentation.workDetail
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.okysoft.annictim.presentation.CoroutineScopeViewModel
+import androidx.lifecycle.*
 import com.okysoft.data.CastRequestParams
 import com.okysoft.data.StaffRequestParams
 import com.okysoft.data.WorkStatusRequestParams
@@ -22,24 +18,21 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class WorkViewModel constructor(
     workUseCase: WorkUseCase,
     castUseCase: CastUseCase,
     staffUseCase: StaffUseCase,
     private val meRepository: com.okysoft.infra.repository.MeRepository,
-    work: Work,
-    context: CoroutineContext
-) : CoroutineScopeViewModel(context) {
+    work: Work
+) : ViewModel() {
 
     class Factory @Inject constructor(
         private val workUseCase: WorkUseCase,
         private val castUseCase: CastUseCase,
         private val staffUseCase: StaffUseCase,
         private val meRepository: com.okysoft.infra.repository.MeRepository,
-        private val work: Work,
-        private val context: CoroutineContext
+        private val work: Work
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -47,8 +40,7 @@ class WorkViewModel constructor(
                 castUseCase,
                 staffUseCase,
                 meRepository,
-                work,
-                context) as T
+                work) as T
         }
     }
 
@@ -66,31 +58,31 @@ class WorkViewModel constructor(
     init {
         _work.postValue(work)
 
-        launch {
+        viewModelScope.launch {
             try {
-                val watchKind = workUseCase.getWatchKind(workId = work.id).await()
+                val watchKind = workUseCase.getWatchKind(workId = work.id)
                 _workKind.postValue(watchKind)
             } catch (throwable: Throwable) {
                 Log.e("", throwable.toString())
             }
         }
 
-        launch {
+        viewModelScope.launch {
             try {
                 val response = castUseCase.get(CastRequestParams(
                     fields = CastRequestParams.FieldType.All,
-                    workId = work.id)).await()
+                    workId = work.id))
                 _casts.postValue(response)
             } catch (throwable: Throwable) {
 
             }
         }
 
-        launch {
+        viewModelScope.launch {
             try {
                 val response = staffUseCase.get(StaffRequestParams(
                     fields = StaffRequestParams.FieldType.Minimum,
-                    workId = work.id)).await()
+                    workId = work.id))
                 _staffs.postValue(response)
             } catch (throwable: Throwable) {
 
@@ -101,7 +93,7 @@ class WorkViewModel constructor(
             .skip(1)
             .distinctUntilChanged()
             .subscribeBy {
-                launch {
+                viewModelScope.launch {
                     try {
                         meRepository.updateStatus(WorkStatusRequestParams(work.id, it))
                     } catch (trowable: Throwable) {
