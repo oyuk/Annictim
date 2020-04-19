@@ -1,8 +1,10 @@
 package com.okysoft.annictim.di.module
 
 import androidx.lifecycle.ViewModelProvider
+import com.okysoft.annictim.presentation.works.MeWorksTabPagerFragment
 import com.okysoft.data.WorkRequestParams
 import com.okysoft.annictim.presentation.works.WorksFragment
+import com.okysoft.annictim.presentation.works.WorksTabPagerFragment
 import com.okysoft.annictim.presentation.works.WorksViewModel
 import dagger.Module
 import dagger.Provides
@@ -23,10 +25,26 @@ abstract class WorksFragmentModule {
         }
 
         @Provides
+        fun providesPosition(fragment: WorksFragment): Int? {
+            return fragment.position
+        }
+
+        @Provides
         fun provideWorksViewModel(
             factory: WorksViewModel.Factory,
-            target: WorksFragment
-        ) = ViewModelProvider(target, factory).get(WorksViewModel::class.java)
+            worksFragment: WorksFragment,
+            position: Int?
+        ): WorksViewModel {
+            val parent = worksFragment.parentFragment
+            val (target, key) = when (parent) {
+                is WorksTabPagerFragment -> { Pair(parent, "${parent.javaClass.name}${position}") }
+                is MeWorksTabPagerFragment -> { Pair(parent, "${parent.javaClass.name}${position}") }
+                else -> { Pair(worksFragment, null) }
+            }
+            return key?.let {
+                ViewModelProvider(target, factory).get(it, WorksViewModel::class.java)
+            } ?: ViewModelProvider(target, factory).get(WorksViewModel::class.java)
+        }
 
     }
 
