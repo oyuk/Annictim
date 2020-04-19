@@ -5,6 +5,6 @@ import kotlinx.coroutines.Deferred
 
 interface ReviewUseCase {
 
-    fun get(workId: Int): Deferred<List<Review>>
+    suspend fun get(workId: Int): List<Review>
 
 }

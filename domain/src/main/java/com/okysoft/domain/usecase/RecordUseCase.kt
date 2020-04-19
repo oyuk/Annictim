@@ -5,6 +5,6 @@ import kotlinx.coroutines.Deferred
 
 interface RecordUseCase {
 
-    fun get(episodeId: Int): Deferred<List<Record>>
+    suspend fun get(episodeId: Int): List<Record>
 
 }

@@ -3,20 +3,18 @@ package com.okysoft.domain.usecase
 import com.okysoft.domain.model.Episode
 import com.okysoft.domain.translator.EpisodeTranslator
 import com.okysoft.infra.repository.EpisodeRepository
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 
 class EpisodeUseCaseImpl (
     private val repository: EpisodeRepository,
     private val translator: EpisodeTranslator
 ): EpisodeUseCase {
 
-    override fun get(workId: Int): Deferred<List<Episode>> {
-        return GlobalScope.async {
+    override suspend fun get(workId: Int): List<Episode> {
+        return withContext(Dispatchers.IO) {
             val response = repository.get(workId)
             val models = response.episodes.map { translator.translate(it) }
-            return@async models
+            return@withContext models
         }
     }
 

@@ -5,6 +5,6 @@ import kotlinx.coroutines.Deferred
 
 interface ProgramUseCase {
 
-    fun get(requestParams: com.okysoft.data.ProgramRequestParams): Deferred<List<Program>>
+    suspend fun get(requestParams: com.okysoft.data.ProgramRequestParams): List<Program>
 
 }

@@ -3,40 +3,38 @@ package com.okysoft.domain.usecase
 import com.okysoft.data.WatchKind
 import com.okysoft.domain.model.Work
 import com.okysoft.domain.translator.WorkTranslator
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 
 class WorkUseCaseImpl (
     private val repository: com.okysoft.infra.repository.WorkRepository,
     private val translator: WorkTranslator
 ): WorkUseCase {
 
-    override fun get(requestParams: com.okysoft.data.WorkRequestParams): Deferred<List<Work>> {
-        return GlobalScope.async {
+    override suspend fun get(requestParams: com.okysoft.data.WorkRequestParams): List<Work> {
+        return withContext(Dispatchers.IO) {
             val response = repository.get(requestParams)
             val models = response.works.map { translator.translate(it) }
-            return@async models
+            return@withContext models
         }
     }
 
-    override fun me(requestParams: com.okysoft.data.WorkRequestParams): Deferred<List<Work>> {
-        return GlobalScope.async {
+    override suspend fun me(requestParams: com.okysoft.data.WorkRequestParams): List<Work> {
+        return withContext(Dispatchers.IO) {
             val response = repository.me(requestParams)
             val models = response.works.map { translator.translate(it) }
-            return@async models
+            return@withContext models
         }
     }
 
-    override fun request(requestParams: com.okysoft.data.WorkRequestParams): Deferred<List<Work>> {
+    override suspend fun request(requestParams: com.okysoft.data.WorkRequestParams): List<Work> {
         return when (requestParams.type) {
             com.okysoft.data.WorkRequestParams.Type.Me -> me(requestParams)
             com.okysoft.data.WorkRequestParams.Type.Works -> get((requestParams))
         }
     }
 
-    override fun getWatchKind(workId: Int): Deferred<WatchKind> {
-        return GlobalScope.async {
+    override suspend fun getWatchKind(workId: Int): WatchKind {
+        return withContext(Dispatchers.IO) {
             val response = repository.me(com.okysoft.data.WorkRequestParams(
                 type = com.okysoft.data.WorkRequestParams.Type.Me,
                 fields = com.okysoft.data.WorkRequestParams.Fields.Status,
@@ -45,7 +43,7 @@ class WorkUseCaseImpl (
                 perPage = 1
             ))
             val watchKind = response.works.firstOrNull()?.watchKind ?: WatchKind.no_select
-            return@async watchKind
+            return@withContext watchKind
         }
     }
 

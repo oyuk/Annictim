@@ -5,6 +5,6 @@ import kotlinx.coroutines.Deferred
 
 interface EpisodeUseCase {
 
-    fun get(workId: Int): Deferred<List<Episode>>
+    suspend fun get(workId: Int): List<Episode>
 
 }
