@@ -41,7 +41,5 @@ interface ApplicationComponent: AndroidInjector<AnnictimApplication> {
         fun build(): ApplicationComponent
     }
 
-    override fun inject(app: AnnictimApplication)
-
 }
 
