@@ -5,18 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.presentation.Paginator
+import com.okysoft.common.Paginator
 import com.okysoft.data.ProgramRequestParams
 import com.okysoft.domain.model.Program
 import com.okysoft.domain.usecase.ProgramUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.rx2.asSingle
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class ProgramsViewModel constructor(
     useCase: ProgramUseCase,

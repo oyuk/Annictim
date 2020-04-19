@@ -1,4 +1,4 @@
-package com.okysoft.annictim.presentation
+package com.okysoft.common
 
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -73,15 +73,15 @@ class Paginator<T>(
             .map { it.second }
             .switchMapSingle { page ->
                 _loading.onNext(true)
-                return@switchMapSingle Single.create<Response<T>> {
+                return@switchMapSingle Single.create<com.okysoft.common.Response<T>> {
                     requestCreator(page) { response ->
                         response.onSuccess { list ->
-                            it.onSuccess(Response.Success(list, page))
+                            it.onSuccess(com.okysoft.common.Response.Success(list, page))
                         }.onFailure { error ->
                             it.tryOnError(error)
                         }
                     }
-                }.onErrorReturn { Response.Error(it, page) }
+                }.onErrorReturn { com.okysoft.common.Response.Error(it, page) }
             }
             .share()
 

@@ -5,14 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.annictim.presentation.Paginator
+import com.okysoft.common.Paginator
 import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.WorkUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.*
-import kotlinx.coroutines.rx2.asSingle
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class WorksViewModel constructor(
     useCase: WorkUseCase,
