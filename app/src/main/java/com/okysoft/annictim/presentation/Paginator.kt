@@ -35,10 +35,10 @@ private fun <T> Flowable<Response<T>>.split(): Pair<Flowable<Response.Success<T>
     return Pair(successResponse, errorResponse)
 }
 
-abstract class Paginator<T>(
+class Paginator<T>(
     paginationTrigger: Flowable<Unit>,
     refresh: Flowable<Unit>,
-    requestCreator: ((Int , (List<T>) -> Unit) -> Unit)
+    requestCreator: ((Int , (Result<List<T>>) -> Unit) -> Unit)
 ) {
 
     val items: Flowable<List<T>>
@@ -78,7 +78,11 @@ abstract class Paginator<T>(
                 _loading.onNext(true)
                 return@switchMapSingle Single.create<Response<T>> {
                     requestCreator(page) { response ->
-                        it.onSuccess(Response.Success(response, page))
+                        response.onSuccess { list ->
+                            it.onSuccess(Response.Success(list, page))
+                        }.onFailure { error ->
+                            it.tryOnError(error)
+                        }
                     }
                 }.onErrorReturn { Response.Error(it, page) }
             }
