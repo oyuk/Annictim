@@ -1,8 +1,8 @@
-package com.okysoft.data
+package com.okysoft.infra.response
+
 import com.google.gson.annotations.SerializedName
 
-
-data class People(
+data class PeopleResponse(
     @SerializedName("birthday")
     val birthday: String?,
     @SerializedName("blood_type")

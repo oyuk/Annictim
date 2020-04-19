@@ -20,8 +20,8 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
     private lateinit var binding: FragmentCastsBinding
 
-    val castRequestParams: com.okysoft.data.CastRequestParams
-        get() = arguments?.getParcelable(REQUEST_PARAMS) ?: com.okysoft.data.CastRequestParams()
+    val castRequestParams: CastRequestParams
+        get() = arguments?.getParcelable(REQUEST_PARAMS) ?: CastRequestParams()
 
     @Inject
     lateinit var viewModel: CastsViewModel
@@ -63,7 +63,7 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         val TAG = CastsFragment::class.java.simpleName
         const val REQUEST_PARAMS = "REQUEST_PARAMS"
 
-        fun newInstance(requestParams: com.okysoft.data.CastRequestParams): CastsFragment = CastsFragment().apply {
+        fun newInstance(requestParams: CastRequestParams): CastsFragment = CastsFragment().apply {
             val args = Bundle().apply {
                 putParcelable(REQUEST_PARAMS, requestParams)
             }

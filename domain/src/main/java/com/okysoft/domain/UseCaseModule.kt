@@ -18,7 +18,11 @@ class UseCaseModule {
 
     @Provides
     fun provideCastUseCase(repository: CastRepository): CastUseCase {
-        return CastUseCaseImpl(repository, CastTranslator())
+        return CastUseCaseImpl(repository, CastTranslator(
+            characterTranslator = CharacterTranslator(
+                seriesTranslator = SeriesTranslator()
+            )
+        ))
     }
 
     @Provides

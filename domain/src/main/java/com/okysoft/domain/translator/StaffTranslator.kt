@@ -1,11 +1,11 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.data.StaffResponse
+import com.okysoft.infra.response.StaffResponse
 import com.okysoft.domain.model.Staff
 
 class StaffTranslator: Translator<StaffResponse, Staff> {
 
-    override fun translate(response: com.okysoft.data.StaffResponse): Staff {
+    override fun translate(response: StaffResponse): Staff {
         return Staff(
             id = response.id,
             name = response.name,

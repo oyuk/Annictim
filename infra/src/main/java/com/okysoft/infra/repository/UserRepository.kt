@@ -1,7 +1,8 @@
 package com.okysoft.infra.repository
 
+import com.okysoft.infra.response.UserResponse
+import com.okysoft.infra.response.UsersResponse
 import com.okysoft.infra.AnnictService
-import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
@@ -9,11 +10,11 @@ class UserRepository @Inject constructor(
     private val authRepository: AuthRepository
         ) {
 
-    suspend fun getMe(): com.okysoft.data.UserResponse {
+    suspend fun getMe(): UserResponse {
         return service.getMe(authRepository.getStoredAccessToken())
     }
 
-    suspend fun get(userId: Int): com.okysoft.data.UsersResponse {
+    suspend fun get(userId: Int): UsersResponse {
         return service.get("${userId}")
     }
 

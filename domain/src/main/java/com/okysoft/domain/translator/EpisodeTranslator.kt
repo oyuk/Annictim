@@ -1,6 +1,6 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.data.EpisodeResponse
+import com.okysoft.infra.response.EpisodeResponse
 import com.okysoft.domain.model.Episode
 
 class EpisodeTranslator: Translator<EpisodeResponse, Episode> {

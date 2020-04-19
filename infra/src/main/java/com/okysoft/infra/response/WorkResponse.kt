@@ -1,13 +1,10 @@
-package com.okysoft.data
+package com.okysoft.infra.response
 
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.okysoft.common.Diffable
-import kotlinx.android.parcel.IgnoredOnParcel
-import kotlinx.android.parcel.Parcelize
+import com.okysoft.data.WatchKind
 
-@Parcelize
 data class WorkResponse (
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,
@@ -30,7 +27,7 @@ data class WorkResponse (
     @SerializedName("no_episodes") val noEpisodes: Boolean,
     @SerializedName("status") val status: Status?
 //    @SerializedName("status") val watchKind: WatchKind
-): Parcelable, Diffable {
+) {
 
     companion object {
 
@@ -63,38 +60,30 @@ data class WorkResponse (
 
     }
 
-    @IgnoredOnParcel
     var watchKind: WatchKind = WatchKind.no_select
-        get() = WatchKind.fromString(status?.kind ?: "")
+        get() = WatchKind.fromString(status?.kind
+            ?: "")
 
-    @Parcelize
     data class Images(
         @SerializedName("recommended_url") val recommendedUrl: String,
         @SerializedName("facebook") val facebook: Facebook,
         @SerializedName("twitter") val twitter: Twitter
-    ): Parcelable
+    )
 
-    @Parcelize
     data class Facebook(
         @SerializedName("og_image_url") val ogImageUrl: String
-    ): Parcelable
+    )
 
-    @Parcelize
     data class Twitter(
         @SerializedName("mini_avatar_url") val miniAvatarUrl: String,
         @SerializedName("normal_avatar_url") val normalAvatarUrl: String,
         @SerializedName("bigger_avatar_url") val biggerAvatarUrl: String,
         @SerializedName("original_avatar_url") val originalAvatarUrl: String,
         @SerializedName("image_url") val imageUrl: String
-    ): Parcelable
+    )
 
-    @Parcelize
     data class Status (
         @SerializedName("kind") val kind: String
-    ): Parcelable
-
-    override fun isTheSame(other: Diffable): Boolean {
-        return id == (other as? WorkResponse)?.id
-    }
+    )
 
 }

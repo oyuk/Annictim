@@ -1,6 +1,6 @@
 package com.okysoft.domain.model
 
-import com.okysoft.data.ReviewResponse
+import com.okysoft.infra.response.ReviewResponse
 
 data class Review(
     val id: Int,

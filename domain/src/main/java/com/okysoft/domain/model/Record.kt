@@ -1,6 +1,6 @@
 package com.okysoft.domain.model
 
-import com.okysoft.data.RecordResponse
+import com.okysoft.infra.response.RecordResponse
 
 
 data class Record(

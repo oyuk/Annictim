@@ -2,6 +2,7 @@ package com.okysoft.annictim
 
 import androidx.lifecycle.LiveData
 import com.okysoft.annictim.extension.toLiveData
+import com.okysoft.infra.response.UserResponse
 import com.okysoft.infra.ApplicationDispatcher
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,6 +20,6 @@ class MeStore (
             .observeOn(AndroidSchedulers.mainThread())
             .toLiveData()
 
-    val me: Flowable<com.okysoft.data.UserResponse> = dispatcher.getMe.map { it.me }
+    val me: Flowable<UserResponse> = dispatcher.getMe.map { it.me }
 
 }

@@ -1,9 +1,7 @@
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
-import com.okysoft.data.WorkResponse
 import com.okysoft.annictim.presentation.Paginator
 import com.okysoft.domain.model.Work
-import io.reactivex.Single
 import io.reactivex.processors.PublishProcessor
 import org.junit.After
 import org.junit.Before

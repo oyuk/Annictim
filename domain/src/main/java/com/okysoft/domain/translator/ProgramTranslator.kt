@@ -1,6 +1,6 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.data.ProgramResponse
+import com.okysoft.infra.response.ProgramResponse
 import com.okysoft.domain.model.Program
 
 class ProgramTranslator: Translator<ProgramResponse, Program> {

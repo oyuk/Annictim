@@ -1,6 +1,7 @@
 package com.okysoft.domain.usecase
 
 import com.okysoft.data.WatchKind
+import com.okysoft.data.WorkRequestParams
 import com.okysoft.domain.model.Work
 import com.okysoft.domain.translator.WorkTranslator
 import kotlinx.coroutines.*
@@ -28,8 +29,8 @@ class WorkUseCaseImpl (
 
     override suspend fun request(requestParams: com.okysoft.data.WorkRequestParams): List<Work> {
         return when (requestParams.type) {
-            com.okysoft.data.WorkRequestParams.Type.Me -> me(requestParams)
-            com.okysoft.data.WorkRequestParams.Type.Works -> get((requestParams))
+            WorkRequestParams.Type.Me -> me(requestParams)
+            WorkRequestParams.Type.Works -> get((requestParams))
         }
     }
 

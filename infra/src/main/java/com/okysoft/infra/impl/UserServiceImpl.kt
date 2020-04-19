@@ -1,7 +1,8 @@
 package com.okysoft.infra.impl
 
+import com.okysoft.infra.response.UserResponse
+import com.okysoft.infra.response.UsersResponse
 import com.okysoft.infra.AnnictService
-import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -9,11 +10,11 @@ class UserServiceImpl @Inject constructor(retrofit: Retrofit): AnnictService.Use
 
     private val retrofitClient = retrofit.create(AnnictService.User::class.java)
 
-    override suspend fun getMe(accessToken: String): com.okysoft.data.UserResponse {
+    override suspend fun getMe(accessToken: String): UserResponse {
         return retrofitClient.getMe(accessToken)
     }
 
-    override suspend fun get(userIds: String): com.okysoft.data.UsersResponse {
+    override suspend fun get(userIds: String): UsersResponse {
         return retrofitClient.get(userIds)
     }
 

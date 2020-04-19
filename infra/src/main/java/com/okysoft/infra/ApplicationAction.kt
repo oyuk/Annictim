@@ -1,6 +1,6 @@
 package com.okysoft.infra
 
-import com.okysoft.data.UserResponse
+import com.okysoft.infra.response.UserResponse
 
 sealed class ApplicationAction {
     class Logout: ApplicationAction()

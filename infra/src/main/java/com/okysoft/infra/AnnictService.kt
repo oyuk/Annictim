@@ -1,7 +1,7 @@
 package com.okysoft.infra
 
 import com.okysoft.data.OauthRequestModel
-import kotlinx.coroutines.Deferred
+import com.okysoft.infra.response.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -22,7 +22,7 @@ interface AnnictService {
     interface Program {
 
         @GET("/v1/me/programs")
-        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.ProgramsResponse
+        suspend fun get(@QueryMap query: Map<String, String>): ProgramsResponse
     }
 
 
@@ -36,14 +36,14 @@ interface AnnictService {
     interface Staff {
 
         @GET("/v1/staffs")
-        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.StaffsResponse
+        suspend fun get(@QueryMap query: Map<String, String>): StaffsResponse
 
     }
 
     interface Cast {
 
         @GET("/v1/casts")
-        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.CastResponse
+        suspend fun get(@QueryMap query: Map<String, String>): CastsResponse
 
     }
 
@@ -52,12 +52,12 @@ interface AnnictService {
         @GET("/v1/users")
         suspend fun get(
                 @Query("filter_ids") userIds: String
-        ): com.okysoft.data.UsersResponse
+        ): UsersResponse
 
         @GET("/v1/me")
         suspend fun getMe(
                 @Query("access_token") accessToken: String
-        ): com.okysoft.data.UserResponse
+        ): UserResponse
 
     }
 
@@ -66,12 +66,12 @@ interface AnnictService {
         interface Me {
 
             @GET("/v1/me/works")
-            suspend fun me(@QueryMap query: Map<String, String>): com.okysoft.data.WorksResponse
+            suspend fun me(@QueryMap query: Map<String, String>): WorksResponse
 
         }
 
         @GET("/v1/works")
-        suspend fun get(@QueryMap query: Map<String, String>): com.okysoft.data.WorksResponse
+        suspend fun get(@QueryMap query: Map<String, String>): WorksResponse
     }
 
     interface Episode {
@@ -79,21 +79,21 @@ interface AnnictService {
         suspend fun get(
                 @Query("filter_work_id") workId: Int,
                 @Query("sort_sort_number") order: String
-        ): com.okysoft.data.EpisodesResponse
+        ): EpisodesResponse
     }
 
     interface Review {
         @GET("/v1/reviews")
         suspend fun get(
                 @Query("filter_work_id") workId: Int
-        ): com.okysoft.data.ReviewsResponse
+        ): ReviewsResponse
     }
 
     interface Record {
         @GET("/v1/records")
         suspend fun get(
                 @Query("filter_episode_id") episodeId: Int
-        ): com.okysoft.data.RecordsResponse
+        ): RecordsResponse
     }
 
     interface Works: Work, Work.Me

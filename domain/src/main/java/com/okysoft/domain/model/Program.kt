@@ -1,7 +1,7 @@
 package com.okysoft.domain.model
 
-import com.okysoft.data.EpisodeResponse
-import com.okysoft.data.WorkResponse
+import com.okysoft.infra.response.EpisodeResponse
+import com.okysoft.infra.response.WorkResponse
 
 data class Program(
     val channel: Channel,

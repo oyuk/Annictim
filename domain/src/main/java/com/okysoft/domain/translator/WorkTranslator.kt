@@ -1,6 +1,6 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.data.WorkResponse
+import com.okysoft.infra.response.WorkResponse
 import com.okysoft.data.WatchKind
 import com.okysoft.domain.model.Work
 

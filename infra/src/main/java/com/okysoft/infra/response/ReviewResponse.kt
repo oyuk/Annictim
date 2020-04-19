@@ -1,4 +1,4 @@
-package com.okysoft.data
+package com.okysoft.infra.response
 import com.google.gson.annotations.SerializedName
 
 data class ReviewResponse(

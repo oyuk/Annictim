@@ -1,6 +1,6 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.data.RecordResponse
+import com.okysoft.infra.response.RecordResponse
 import com.okysoft.domain.model.Record
 
 class RecordTranslator: Translator<RecordResponse, Record> {

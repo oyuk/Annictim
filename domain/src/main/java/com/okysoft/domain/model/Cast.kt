@@ -1,7 +1,5 @@
 package com.okysoft.domain.model
 
-import com.okysoft.data.Character
-
 data class Cast(
     val character: Character,
     val id: Int,
