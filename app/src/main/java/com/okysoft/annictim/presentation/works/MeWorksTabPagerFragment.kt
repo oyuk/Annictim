@@ -39,7 +39,8 @@ class MeWorksTabPagerFragment : Fragment() {
                 type = com.okysoft.data.WorkRequestParams.Type.Me,
                 status = meFilterStatus.toString(),
                 fields = com.okysoft.data.WorkRequestParams.Fields.Feed,
-                season = null))
+                season = null),
+            position)
         }
     }
 

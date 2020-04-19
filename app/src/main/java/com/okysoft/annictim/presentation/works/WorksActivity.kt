@@ -36,7 +36,7 @@ class WorksActivity : AppCompatActivity() {
             val requestParamModel = intent.getParcelableExtra<com.okysoft.data.WorkRequestParams>(REQUEST_PARAM_MODEL)
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, WorksFragment.newInstance(requestParamModel))
+                .replace(R.id.container, WorksFragment.newInstance(requestParamModel, null))
                 .commit()
         }
     }

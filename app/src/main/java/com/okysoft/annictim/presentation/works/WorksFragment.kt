@@ -26,8 +26,16 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     val workRequestParams: com.okysoft.data.WorkRequestParams
         get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?: com.okysoft.data.WorkRequestParams(season = null)
 
+    val position: Int?
+        get() = arguments?.getInt(POSITION)
+
     @Inject
     lateinit var viewModel: WorksViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.refresh()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
@@ -50,7 +58,6 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
                 startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
             }
         })
-        viewModel.refresh()
         return binding.root
     }
 
@@ -61,10 +68,12 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     companion object {
         val TAG = WorksFragment::class.java.simpleName
         const val REQUEST_PARAM_MODEL = "REQUEST_PARAM_MODEL"
+        const val POSITION = "POSITION"
 
-        fun newInstance(workRequestParams: com.okysoft.data.WorkRequestParams): WorksFragment = WorksFragment().apply {
+        fun newInstance(workRequestParams: com.okysoft.data.WorkRequestParams, position: Int?): WorksFragment = WorksFragment().apply {
             val args = Bundle().apply {
                 putParcelable(REQUEST_PARAM_MODEL, workRequestParams)
+                position?.let { putInt(POSITION, it) }
             }
             arguments = args
         }
