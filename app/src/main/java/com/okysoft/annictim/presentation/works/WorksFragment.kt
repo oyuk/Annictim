@@ -29,20 +29,6 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     @Inject
     lateinit var viewModel: WorksViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.works.observe(viewLifecycleOwner, Observer {
-            binding.swipeRefresh.isRefreshing = false
-            adapter.updateItem(it ?: listOf<Work>())
-        })
-        adapter.onClick.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
-            }
-        })
-        viewModel.refresh()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
         val layoutManager = LinearLayoutManager(activity)
@@ -55,6 +41,16 @@ class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refresh()
         }
+        viewModel.works.observe(viewLifecycleOwner, Observer {
+            binding.swipeRefresh.isRefreshing = false
+            adapter.updateItem(it ?: listOf<Work>())
+        })
+        adapter.onClick.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
+            }
+        })
+        viewModel.refresh()
         return binding.root
     }
 

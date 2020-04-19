@@ -27,19 +27,6 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     lateinit var viewModel: CastsViewModel
     private val adapter = CastsAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.casts.observe(viewLifecycleOwner, Observer {
-            binding.swipeRefresh.isRefreshing = false
-            adapter.items.accept(it)
-        })
-        adapter.onClick.observe(viewLifecycleOwner, Observer {
-            it?.let {
-
-            }
-        })
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_casts, container, false)
@@ -52,6 +39,15 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refresh()
         }
+        viewModel.casts.observe(viewLifecycleOwner, Observer {
+            binding.swipeRefresh.isRefreshing = false
+            adapter.items.accept(it)
+        })
+        adapter.onClick.observe(viewLifecycleOwner, Observer {
+            it?.let {
+
+            }
+        })
         return binding.root
     }
 

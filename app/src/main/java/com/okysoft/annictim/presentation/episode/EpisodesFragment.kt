@@ -25,8 +25,12 @@ class EpisodesFragment : DaggerFragment() {
     lateinit var viewModel: EpisodesViewModel
     private val adapter = EpisodesAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_episodes, container, false)
+        val layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.adapter = adapter
         viewModel.episodes.observe(viewLifecycleOwner, Observer {
             adapter.items.accept(it)
         })
@@ -35,14 +39,6 @@ class EpisodesFragment : DaggerFragment() {
                 startActivity(RecordsActivity.createIntent(activity!!, it.id))
             }
         })
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_episodes, container, false)
-        val layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = adapter
         viewModel.fetch()
         return binding.root
     }
