@@ -29,8 +29,14 @@ class RecordsFragment : DaggerFragment() {
         get() = arguments?.getInt(EPISODE_ID) ?: -1
     private val adapter = RecordsAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_records, container, false)
+        val layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.adapter = adapter
+        val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+        binding.recyclerView.addItemDecoration(itemDecoration)
         store.records.observe(viewLifecycleOwner, Observer {
             adapter.items.accept(it)
         })
@@ -50,16 +56,6 @@ class RecordsFragment : DaggerFragment() {
             UserActivity.start(this.activity as AppCompatActivity, pair, it.first)
         })
         actionCreator.fetch(episodeId)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_records, container, false)
-        val layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = adapter
-        val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-        binding.recyclerView.addItemDecoration(itemDecoration)
         return binding.root
     }
 
