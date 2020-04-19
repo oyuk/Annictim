@@ -38,7 +38,7 @@ private fun <T> Flowable<Response<T>>.split(): Pair<Flowable<Response.Success<T>
 abstract class Paginator<T>(
     paginationTrigger: Flowable<Unit>,
     refresh: Flowable<Unit>,
-    requestCreator: ((Int) -> Single<List<T>>)
+    requestCreator: ((Int , (List<T>) -> Unit) -> Unit)
 ) {
 
     val items: Flowable<List<T>>
@@ -75,10 +75,12 @@ abstract class Paginator<T>(
             .withLatestFrom(currentPage)
             .map { it.second }
             .switchMapSingle { page ->
-                requestCreator(page)
-                    .doOnSubscribe { _loading.onNext(true) }
-                    .map { Response.Success(it, page) as Response<T> }
-                    .onErrorReturn { Response.Error(it, page) }
+                _loading.onNext(true)
+                return@switchMapSingle Single.create<Response<T>> {
+                    requestCreator(page) { response ->
+                        it.onSuccess(Response.Success(response, page))
+                    }
+                }.onErrorReturn { Response.Error(it, page) }
             }
             .share()
 
@@ -104,16 +106,17 @@ abstract class Paginator<T>(
 
 class WorkPaginator(nextPage: Flowable<Unit>,
                     refresh: Flowable<Unit>,
-                    requestCreator: ((Int) -> Single<List<Work>>))
+                    requestCreator: ((Int , (List<Work>) -> Unit) -> Unit)
+                    )
     : Paginator<Work>(nextPage, refresh, requestCreator)
 
 class CastPaginator(nextPage: Flowable<Unit>,
                     refresh: Flowable<Unit>,
-                    requestCreator: ((Int) -> Single<List<Cast>>))
+                    requestCreator: ((Int , (List<Cast>) -> Unit) -> Unit))
     : Paginator<Cast>(nextPage, refresh, requestCreator)
 
 class ProgramPaginator(nextPage: Flowable<Unit>,
                     refresh: Flowable<Unit>,
-                    requestCreator: ((Int) -> Single<List<Program>>))
+                    requestCreator: ((Int , (List<Program>) -> Unit) -> Unit))
     : Paginator<Program>(nextPage, refresh, requestCreator)
 
