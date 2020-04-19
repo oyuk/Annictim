@@ -41,8 +41,6 @@ class Paginator<T>(
     val items: Flowable<List<T>>
     val error: Flowable<Throwable>
     val loading: Flowable<Boolean>
-    private val refresh = PublishProcessor.create<Unit>()
-    private val disposable = CompositeDisposable()
 
     init {
         val _loading = BehaviorProcessor.createDefault(false)
