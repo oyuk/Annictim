@@ -1,9 +1,8 @@
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
-import com.okysoft.data.Work
 import com.okysoft.data.WorkResponse
 import com.okysoft.annictim.presentation.Paginator
-import com.okysoft.annictim.presentation.WorkPaginator
+import com.okysoft.domain.model.Work
 import io.reactivex.Single
 import io.reactivex.processors.PublishProcessor
 import org.junit.After
@@ -12,10 +11,10 @@ import org.junit.Test
 import org.powermock.core.classloader.annotations.PrepareForTest
 import java.util.concurrent.CountDownLatch
 
-@PrepareForTest(com.okysoft.data.WorkResponse::class)
+@PrepareForTest(Work::class)
 class PaginatorTest {
 
-    lateinit var paginator: Paginator<com.okysoft.data.Work>
+    lateinit var paginator: Paginator<Work>
     lateinit var refresh: PublishProcessor<Unit>
     lateinit var loadMore: PublishProcessor<Unit>
 
@@ -25,24 +24,22 @@ class PaginatorTest {
         loadMore = PublishProcessor.create()
     }
 
-    private fun setupSuccessRequestCreator(): (Int) -> Single<List<com.okysoft.data.Work>>  {
-        val work: com.okysoft.data.Work = mock(name = "Work")
-        val requestCreator: ((Int) -> Single<List<com.okysoft.data.Work>>) = { page ->
-            Single.create<List<com.okysoft.data.Work>> {
-                val size = 20
-                val response = mutableListOf<com.okysoft.data.Work>()
-                for (i in 1..size) {
-                    response.add(work)
-                }
-                it.onSuccess(response)
+    private fun setupSuccessRequestCreator(): ((Int , (Result<List<Work>>) -> Unit) -> Unit) {
+        val work: Work = mock(name = "Work")
+        val requestCreator: ((Int , (Result<List<Work>>) -> Unit) -> Unit) = { page, callback ->
+            val size = 20
+            val response = mutableListOf<Work>()
+            for (i in 1..size) {
+                response.add(work)
             }
+            callback(Result.success(response))
         }
         return requestCreator
     }
 
-    private fun setupErrorRequestCreator(): (Int) -> Single<List<com.okysoft.data.Work>>  {
-        val requestCreator: ((Int) -> Single<List<com.okysoft.data.Work>>) = { page ->
-            Single.create<List<com.okysoft.data.Work>> { it.onError(Throwable()) }
+    private fun setupErrorRequestCreator(): ((Int , (Result<List<Work>>) -> Unit) -> Unit) {
+        val requestCreator: ((Int , (Result<List<Work>>) -> Unit) -> Unit) =  { page, callback ->
+            callback(Result.failure(Throwable()))
         }
         return requestCreator
     }
@@ -54,7 +51,7 @@ class PaginatorTest {
 
     @Test
     fun pagination() {
-        paginator = WorkPaginator(loadMore, refresh, setupSuccessRequestCreator())
+        paginator = Paginator<Work>(loadMore, refresh, setupSuccessRequestCreator())
         val countDownLatch = CountDownLatch(3)
         val subscriber = paginator.items
         val values = subscriber
@@ -78,7 +75,7 @@ class PaginatorTest {
 
     @Test
     fun refresh() {
-        paginator = WorkPaginator(loadMore, refresh, setupSuccessRequestCreator())
+        paginator = Paginator<Work>(loadMore, refresh, setupSuccessRequestCreator())
         val countDownLatch = CountDownLatch(3)
         val subscriber = paginator.items
         val values = subscriber
@@ -99,7 +96,7 @@ class PaginatorTest {
 
     @Test
     fun error() {
-        paginator = WorkPaginator(loadMore, refresh, setupErrorRequestCreator())
+        paginator = Paginator<Work>(loadMore, refresh, setupErrorRequestCreator())
         val countDownLatch = CountDownLatch(3)
         val subscriber = paginator.error
         val values = subscriber
