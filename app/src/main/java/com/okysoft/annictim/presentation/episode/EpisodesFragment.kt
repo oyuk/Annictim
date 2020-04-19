@@ -27,10 +27,10 @@ class EpisodesFragment : DaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.episodes.observe(this, Observer {
+        viewModel.episodes.observe(viewLifecycleOwner, Observer {
             adapter.items.accept(it)
         })
-        adapter.onClick.observe(this, Observer {
+        adapter.onClick.observe(viewLifecycleOwner, Observer {
             it?.let {
                 startActivity(RecordsActivity.createIntent(activity!!, it.id))
             }

@@ -31,15 +31,15 @@ class RecordsFragment : DaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        store.records.observe(this, Observer {
+        store.records.observe(viewLifecycleOwner, Observer {
             adapter.items.accept(it)
         })
-        adapter.onClick.observe(this, Observer {
+        adapter.onClick.observe(viewLifecycleOwner, Observer {
             it?.let {
 
             }
         })
-        adapter.onClickUser.observe(this, Observer {
+        adapter.onClickUser.observe(viewLifecycleOwner, Observer {
 
             val pair = Pair(it!!.second, "userImageView")
 

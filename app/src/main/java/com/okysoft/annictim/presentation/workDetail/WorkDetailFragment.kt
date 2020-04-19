@@ -70,7 +70,7 @@ class WorkDetailFragment : DaggerFragment() {
 //            }
         })
 
-        viewModel.workKind.observe(this, Observer {
+        viewModel.workKind.observe(viewLifecycleOwner, Observer {
             val watchKind = it ?: WatchKind.no_select
             setupStatusSpinner(watchKind)
         })
@@ -85,11 +85,11 @@ class WorkDetailFragment : DaggerFragment() {
         binding.staffRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         binding.staffRecyclerView.adapter = staffAdapter
 
-        viewModel.staffs.observe(this, Observer {
+        viewModel.staffs.observe(viewLifecycleOwner, Observer {
             staffAdapter.items.accept(it)
         })
 
-        castAdapter.onClick.observe(this, Observer {
+        castAdapter.onClick.observe(viewLifecycleOwner, Observer {
             //            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))
         })
 

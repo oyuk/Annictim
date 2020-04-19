@@ -30,11 +30,11 @@ class ProgramsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.programs.observe(this, Observer {
+        viewModel.programs.observe(viewLifecycleOwner, Observer {
             binding.swipeRefresh.isRefreshing = false
             adapter.items.accept(it)
         })
-        adapter.onClick.observe(this, Observer {
+        adapter.onClick.observe(viewLifecycleOwner, Observer {
 //            it?.let {
 //                startActivity(WorkDetailActivity.createIntent(activity!!, it.workResponse))
 //            }

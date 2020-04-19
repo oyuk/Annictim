@@ -27,7 +27,7 @@ class UserFragment : DaggerFragment() {
 //            binding.toolbar.inflateMenu(R.menu.toolbar_me)
 //        }
         viewModel.userId = arguments!!.getInt(USER_ID)
-        viewModel.user.observe(this, Observer {
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             binding.user = it
         })
         viewModel.fetch()

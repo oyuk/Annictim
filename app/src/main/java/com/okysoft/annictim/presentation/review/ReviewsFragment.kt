@@ -26,10 +26,10 @@ class ReviewsFragment : DaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.reviews.observe(this, Observer {
+        viewModel.reviews.observe(viewLifecycleOwner, Observer {
             adapter.items.accept(it)
         })
-        adapter.onClick.observe(this, Observer {
+        adapter.onClick.observe(viewLifecycleOwner, Observer {
             it?.let {
 
             }

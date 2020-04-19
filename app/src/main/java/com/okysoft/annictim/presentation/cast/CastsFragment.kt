@@ -29,11 +29,11 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.casts.observe(this, Observer {
+        viewModel.casts.observe(viewLifecycleOwner, Observer {
             binding.swipeRefresh.isRefreshing = false
             adapter.items.accept(it)
         })
-        adapter.onClick.observe(this, Observer {
+        adapter.onClick.observe(viewLifecycleOwner, Observer {
             it?.let {
 
             }
