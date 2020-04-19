@@ -5,9 +5,7 @@ import dagger.android.support.DaggerApplication
 
 class AnnictimApplication: DaggerApplication() {
 
-    private val applicationInjector = DaggerApplicationComponent.builder()
-            .application(this)
-            .build()
+    private val applicationInjector = DaggerApplicationComponent.factory().create(this)
 
     override fun applicationInjector() = applicationInjector
 
