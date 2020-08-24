@@ -22,12 +22,17 @@ class MeWorksTabPagerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_me_works_tab_pager, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val pagerAdapter = PagerAdapter(requireActivity())
         binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = pagerAdapter.getPageTitle(position)
         }.attach()
-        return binding.root
     }
 
     private class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {

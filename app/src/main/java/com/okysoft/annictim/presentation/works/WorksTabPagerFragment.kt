@@ -22,13 +22,17 @@ class WorksTabPagerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works_tab_pager, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val pagerAdapter = PagerAdapter(requireActivity())
         binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = pagerAdapter.getPageTitle(position)
         }.attach()
         setHasOptionsMenu(true)
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
