@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksTabPagerBinding
 import com.okysoft.data.WorkTerm
@@ -19,9 +22,11 @@ class WorksTabPagerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works_tab_pager, container, false)
-        val pagerAdapter = PagerAdapter(childFragmentManager)
+        val pagerAdapter = PagerAdapter(requireActivity())
         binding.viewPager.adapter = pagerAdapter
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = pagerAdapter.getPageTitle(position)
+        }.attach()
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -42,11 +47,11 @@ class WorksTabPagerFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    private inner class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private inner class PagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
 
-        override fun getCount() = 3
+        override fun getItemCount() = 3
 
-        override fun getPageTitle(position: Int): CharSequence
+        fun getPageTitle(position: Int): CharSequence
             = when (position) {
             0 -> getString(R.string.current_season)
             1 -> getString(R.string.next_season)
@@ -54,7 +59,7 @@ class WorksTabPagerFragment : Fragment() {
             else -> getString(R.string.current_season)
         }
 
-        override fun getItem(position: Int): Fragment {
+        override fun createFragment(position: Int): Fragment {
             val workTerm = when(position) {
                 0 -> WorkTerm.Current
                 1 -> WorkTerm.Next

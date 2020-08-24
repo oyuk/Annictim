@@ -9,9 +9,12 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
 import com.okysoft.annictim.extension.setImage
@@ -45,9 +48,11 @@ class WorkDetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val pagerAdapter = PagerAdapter(supportFragmentManager, work)
+        val pagerAdapter = PagerAdapter(this, work)
         binding.viewPager.adapter = pagerAdapter
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = pagerAdapter.getPageTitle(position)
+        }.attach()
 
         var inToolbar = true
         binding.toolbar.background = getDrawable(R.drawable.toolbar_transition)
@@ -85,12 +90,12 @@ class WorkDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private inner class PagerAdapter(fm: FragmentManager,
-                                     private val work: Work) : FragmentPagerAdapter(fm) {
+    private class PagerAdapter(fragmentActivity: FragmentActivity,
+                                     private val work: Work) : FragmentStateAdapter(fragmentActivity) {
 
-        override fun getCount() = if (work.noEpisodes) 2 else 3
+        override fun getItemCount() = if (work.noEpisodes) 2 else 3
 
-        override fun getPageTitle(position: Int): CharSequence {
+        fun getPageTitle(position: Int): CharSequence {
             val reviewTitle = "Reviews(${work.reviewsCount})"
             if (work.noEpisodes) {
                 return when (position) {
@@ -107,7 +112,7 @@ class WorkDetailActivity : AppCompatActivity() {
             }
         }
 
-        override fun getItem(position: Int): Fragment {
+        override fun createFragment(position: Int): Fragment {
             if (work.noEpisodes) {
                 return when (position) {
                     0 -> WorkDetailFragment.newInstance(work)
