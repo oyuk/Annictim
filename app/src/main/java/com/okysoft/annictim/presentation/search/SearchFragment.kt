@@ -32,6 +32,11 @@ class SearchFragment : DaggerFragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.titleEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
@@ -82,7 +87,6 @@ class SearchFragment : DaggerFragment() {
                 binding.seasonSpinner.setSelection(0)
             }
         })
-        return binding.root
     }
 
     private fun createYearSpinnerList(): List<String> {

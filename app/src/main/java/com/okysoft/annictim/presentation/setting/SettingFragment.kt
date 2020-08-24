@@ -27,13 +27,19 @@ class SettingFragment : DaggerFragment(), CustomDialogFragment.Listener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.logoutText.setOnClickListener {
             CustomDialogFragment.Builder()
-                    .title(getString(R.string.logout))
-                    .message(getString(R.string.logout_confirm))
-                    .positiveButtonTitle(getString(R.string.OK))
-                    .negativeButtonTitle(getString(R.string.CANCEL))
-                    .show(this@SettingFragment)
+                .title(getString(R.string.logout))
+                .message(getString(R.string.logout_confirm))
+                .positiveButtonTitle(getString(R.string.OK))
+                .negativeButtonTitle(getString(R.string.CANCEL))
+                .show(this@SettingFragment)
         }
         binding.developerBlogText.setOnClickListener {
             val tabsIntent = CustomTabsIntent.Builder().build()
@@ -46,7 +52,6 @@ class SettingFragment : DaggerFragment(), CustomDialogFragment.Listener {
         binding.license.setOnClickListener {
             startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
         }
-        return binding.root
     }
 
     override fun positiveAction() {

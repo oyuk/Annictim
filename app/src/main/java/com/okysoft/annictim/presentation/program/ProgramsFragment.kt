@@ -30,6 +30,12 @@ class ProgramsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_programs, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
@@ -50,7 +56,6 @@ class ProgramsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 //            }
         })
         viewModel.refresh()
-        return binding.root
     }
 
     override fun onLoadMore(currentPage: Int) {

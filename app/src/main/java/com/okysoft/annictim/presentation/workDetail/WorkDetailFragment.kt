@@ -36,6 +36,12 @@ class WorkDetailFragment : DaggerFragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, com.okysoft.annictim.R.layout.fragment_work_detail, container, false)
 
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.workResponse.observe(this, Observer { work ->
             binding.title.text = work.title
             binding.media.text = "${work.mediaText} ${work.seasonNameText}"
@@ -92,8 +98,6 @@ class WorkDetailFragment : DaggerFragment() {
         castAdapter.onClick.observe(viewLifecycleOwner, Observer {
             //            startActivity(PersonActivity.createIntent(this, it!!.person!!.id))
         })
-
-        return binding.root
     }
 
     private fun setupStatusSpinner(watchKind: WatchKind) {

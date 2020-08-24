@@ -30,6 +30,12 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_casts, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
@@ -48,7 +54,6 @@ class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
 
             }
         })
-        return binding.root
     }
 
     override fun onLoadMore(currentPage: Int) {
