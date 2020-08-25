@@ -89,8 +89,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideRecordService(client: Retrofit): AnnictService.Record {
-        return RecordServiceImpl(client)
+    fun provideRecordRepository(client: Retrofit): RecordRepository {
+        return RecordRepositoryImpl(client)
     }
 
     @Singleton

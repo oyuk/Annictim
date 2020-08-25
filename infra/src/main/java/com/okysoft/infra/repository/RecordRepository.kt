@@ -2,12 +2,11 @@ package com.okysoft.infra.repository
 
 import com.okysoft.infra.response.RecordsResponse
 import com.okysoft.infra.AnnictService
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class RecordRepository @Inject constructor(private val service: AnnictService.Record) {
+interface RecordRepository {
 
-    suspend fun get(episodeId: Int): RecordsResponse {
-        return service.get(episodeId)
-    }
+    fun get(episodeId: Int): Flow<RecordsResponse>
 
 }
