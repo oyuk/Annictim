@@ -107,8 +107,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideMeService(client: Retrofit): AnnictService.Me {
-        return MeServiceImpl(client)
+    fun provideMeRepository(client: Retrofit): MeRepository {
+        return MeRepositoryImpl(client)
     }
 
     @Singleton
