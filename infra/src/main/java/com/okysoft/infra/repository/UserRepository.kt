@@ -3,19 +3,13 @@ package com.okysoft.infra.repository
 import com.okysoft.infra.response.UserResponse
 import com.okysoft.infra.response.UsersResponse
 import com.okysoft.infra.AnnictService
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(
-    private val service: AnnictService.User,
-    private val authRepository: AuthRepository
-        ) {
+interface UserRepository {
 
-    suspend fun getMe(): UserResponse {
-        return service.getMe(authRepository.getStoredAccessToken())
-    }
+    suspend fun getMe(): Flow<UserResponse>
 
-    suspend fun get(userId: Int): UsersResponse {
-        return service.get("${userId}")
-    }
+    suspend fun get(userId: Int): Flow<UsersResponse>
 
 }

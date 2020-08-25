@@ -71,8 +71,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideUserService(retrofit: Retrofit): AnnictService.User {
-        return UserServiceImpl(retrofit)
+    fun provideUserRepository(authRepository: AuthRepository,retrofit: Retrofit): UserRepository {
+        return UserRepositoryImpl(authRepository,retrofit)
     }
 
     @Singleton

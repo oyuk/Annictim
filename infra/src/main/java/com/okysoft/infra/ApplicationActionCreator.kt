@@ -3,6 +3,7 @@ package com.okysoft.infra
 import android.util.Log
 import com.okysoft.infra.repository.UserRepository
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,8 +14,9 @@ class ApplicationActionCreator @Inject constructor(
     fun getMe() {
         GlobalScope.launch {
             try {
-                val user = repository.getMe()
-                dispatcher.dispatch(ApplicationAction.GetMe(user))
+                repository.getMe().collect {
+                    dispatcher.dispatch(ApplicationAction.GetMe(it))
+                }
             } catch (t: Throwable) {
                 Log.d("", t.toString())
             }

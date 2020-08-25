@@ -6,6 +6,7 @@ import com.okysoft.domain.model.User
 import com.okysoft.domain.usecase.UserUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -30,9 +31,10 @@ class UserViewModel constructor(
     fun fetch() {
         viewModelScope.launch {
              try {
-                 val userResponse = userUseCase.get(userId)
-                 val user = userResponse.first()
-                 _user.postValue(user)
+                 userUseCase.get(userId).collect {
+                     val user = it.first()
+                     _user.postValue(user)
+                 }
              } catch (throwable: Throwable) {
                  Log.d("", throwable.toString())
              }
