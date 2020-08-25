@@ -4,8 +4,10 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.okysoft.domain.model.Episode
 import com.okysoft.domain.usecase.EpisodeUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -25,15 +27,15 @@ class EpisodesViewModel @Inject constructor (
         }
     }
 
-    private val job = Job()
     private val _episodes = MutableLiveData<List<Episode>>()
     val episodes: LiveData<List<Episode>> = _episodes
 
     fun fetch() {
         viewModelScope.launch {
             try  {
-                val response = useCase.get(workId)
-                _episodes.postValue(response)
+                useCase.get(workId).collect {
+                    _episodes.postValue(it)
+                }
             } catch (throwable: Throwable) {
                 Log.d("", throwable.toString())
 

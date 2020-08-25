@@ -5,6 +5,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.okysoft.data.WatchKind
 import com.okysoft.infra.impl.*
+import com.okysoft.infra.repository.EpisodeRepository
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -76,8 +77,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideEpisodeService(client: Retrofit): AnnictService.Episode {
-        return EpisodeServiceImpl(client)
+    fun provideEpisodeRepository(client: Retrofit): EpisodeRepository {
+        return EpisodeRepositoryImpl(client)
     }
 
     @Singleton
