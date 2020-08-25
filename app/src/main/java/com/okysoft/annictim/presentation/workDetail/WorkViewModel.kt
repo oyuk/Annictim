@@ -16,6 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -80,10 +81,11 @@ class WorkViewModel constructor(
 
         viewModelScope.launch {
             try {
-                val response = staffUseCase.get(StaffRequestParams(
+                staffUseCase.get(StaffRequestParams(
                     fields = StaffRequestParams.FieldType.Minimum,
-                    workId = work.id))
-                _staffs.postValue(response)
+                    workId = work.id)).collect {
+                    _staffs.postValue(it)
+                }
             } catch (throwable: Throwable) {
 
             }

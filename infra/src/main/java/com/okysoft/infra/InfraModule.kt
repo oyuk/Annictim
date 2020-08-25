@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import com.okysoft.data.WatchKind
 import com.okysoft.infra.impl.*
 import com.okysoft.infra.repository.EpisodeRepository
+import com.okysoft.infra.repository.StaffRepository
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -101,8 +102,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideStaffService(client: Retrofit): AnnictService.Staff {
-        return StaffServiceImpl(client)
+    fun provideStaffRepository(client: Retrofit): StaffRepository {
+        return StaffRepositoryImpl(client)
     }
 
     @Singleton
