@@ -65,8 +65,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideWorkService(retrofit: Retrofit): AnnictService.Works {
-        return WorkServiceImpl(retrofit)
+    fun provideWorkRepository(retrofit: Retrofit): WorkRepository {
+        return WorkRepositoryImpl(retrofit)
     }
 
     @Singleton

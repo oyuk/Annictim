@@ -10,6 +10,7 @@ import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.WorkUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class WorksViewModel constructor(
@@ -33,8 +34,13 @@ class WorksViewModel constructor(
     @ExperimentalCoroutinesApi
     private val paginator = Paginator<Work>(loadMore, refresh) { page, callback ->
         viewModelScope.launch {
-            val response = kotlin.runCatching { useCase.request(workRequestParams.copy(page = page)) }
-            callback(response)
+            try {
+                useCase.request(workRequestParams.copy(page = page)).collect {
+                    callback(Result.success(it))
+                }
+            } catch (throwable: Throwable) {
+                callback(Result.failure(throwable))
+            }
         }
     }
 

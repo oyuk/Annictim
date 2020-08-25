@@ -61,8 +61,9 @@ class WorkViewModel constructor(
 
         viewModelScope.launch {
             try {
-                val watchKind = workUseCase.getWatchKind(workId = work.id)
-                _workKind.postValue(watchKind)
+                workUseCase.getWatchKind(workId = work.id).collect {
+                    _workKind.postValue(it)
+                }
             } catch (throwable: Throwable) {
                 Log.e("", throwable.toString())
             }

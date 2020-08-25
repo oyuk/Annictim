@@ -2,23 +2,15 @@ package com.okysoft.infra.repository
 
 import com.okysoft.infra.response.WorksResponse
 import com.okysoft.infra.AnnictService
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class WorkRepository @Inject constructor(private val service: AnnictService.Works) {
+interface WorkRepository {
 
-    suspend fun get(requestParams: com.okysoft.data.WorkRequestParams): WorksResponse {
-        return service.get(requestParams.toParams())
-    }
+    suspend fun get(requestParams: com.okysoft.data.WorkRequestParams): Flow<WorksResponse>
 
-    suspend fun me(requestParamModel: com.okysoft.data.WorkRequestParams): WorksResponse {
-        return service.me(requestParamModel.toParams())
-    }
+    suspend fun me(requestParamModel: com.okysoft.data.WorkRequestParams): Flow<WorksResponse>
 
-    suspend fun request(requestParams: com.okysoft.data.WorkRequestParams, page: Int): WorksResponse {
-        return when (requestParams.type) {
-            com.okysoft.data.WorkRequestParams.Type.Me -> me(requestParams.copy(page = page))
-            com.okysoft.data.WorkRequestParams.Type.Works -> get(requestParams.copy(page = page))
-        }
-    }
+    suspend fun request(requestParams: com.okysoft.data.WorkRequestParams, page: Int): Flow<WorksResponse>
 
 }
