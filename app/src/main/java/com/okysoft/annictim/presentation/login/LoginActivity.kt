@@ -32,7 +32,6 @@ class LoginActivity : BaseActivity() {
     @Inject lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
