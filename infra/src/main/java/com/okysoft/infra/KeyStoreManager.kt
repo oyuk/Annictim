@@ -11,7 +11,7 @@ import javax.security.auth.x500.X500Principal
 class KeyStoreManager(private val context: Context) {
 
     private val KEY_PROVIDER = "AndroidKeyStore"
-    private val KEY_STORE_ALIAS = "${BuildConfig.APPLICATION_ID}_KEY"
+    private val KEY_STORE_ALIAS = "${context.packageName}_KEY"
     private val KEY_STORE_ALGORITHM = "RSA"
     private val CIPHER_ALGORITHM = "RSA/ECB/PKCS1Padding"
 

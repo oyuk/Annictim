@@ -16,7 +16,7 @@ abstract class SharedPreferenceManager(filename: String, context: Context) {
 
     init {
         sharedPreferences = context.getSharedPreferences(
-                BuildConfig.APPLICATION_ID + ".preferences." + filename,
+                context.packageName + ".preferences." + filename,
                 Context.MODE_PRIVATE)
     }
 
