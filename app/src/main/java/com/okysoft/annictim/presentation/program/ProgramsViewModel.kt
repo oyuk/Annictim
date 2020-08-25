@@ -11,6 +11,7 @@ import com.okysoft.domain.model.Program
 import com.okysoft.domain.usecase.ProgramUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,8 +36,13 @@ class ProgramsViewModel constructor(
     @ExperimentalCoroutinesApi
     private val paginator = Paginator<Program>(loadMore, refreshPublisher) { page, callback ->
         viewModelScope.launch {
-            val response = kotlin.runCatching { useCase.get(requestParams.copy(page = page)) }
-            callback(response)
+            try {
+                useCase.get(requestParams.copy(page = page)).collect {
+                    callback(Result.success(it))
+                }
+            } catch (throwable: Throwable) {
+                callback(Result.failure(throwable))
+            }
         }
     }
     @ExperimentalCoroutinesApi
