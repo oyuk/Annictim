@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import com.okysoft.data.WatchKind
 import com.okysoft.infra.impl.*
 import com.okysoft.infra.repository.EpisodeRepository
+import com.okysoft.infra.repository.ReviewRepository
 import com.okysoft.infra.repository.StaffRepository
 import dagger.Module
 import dagger.Provides
@@ -84,8 +85,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideReviewService(client: Retrofit): AnnictService.Review {
-        return ReviewServiceImpl(client)
+    fun provideReviewRepository(client: Retrofit): ReviewRepository {
+        return ReviewRepositoryImpl(client)
     }
 
     @Singleton

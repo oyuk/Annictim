@@ -6,6 +6,7 @@ import com.okysoft.domain.model.Review
 import com.okysoft.domain.usecase.ReviewUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -32,8 +33,10 @@ class ReviewsViewModel @Inject constructor (
     init {
         viewModelScope.launch {
             try {
-                val response = useCase.get(workId)
-                _reviews.postValue(response)
+                useCase.get(workId)
+                    .collect {
+                        _reviews.postValue(it)
+                    }
             } catch (throwable: Throwable) {
                 Log.d("", throwable.toString())
             }
