@@ -65,6 +65,12 @@ class InfraModule {
 
     @Singleton
     @Provides
+    fun provideOauthRepository(oauthService: AnnictService.Oauth, coroutineContext: CoroutineContext): OauthRepository {
+        return OauthRepositoryImpl(oauthService, coroutineContext)
+    }
+
+    @Singleton
+    @Provides
     fun provideWorkRepository(retrofit: Retrofit): WorkRepository {
         return WorkRepositoryImpl(retrofit)
     }
