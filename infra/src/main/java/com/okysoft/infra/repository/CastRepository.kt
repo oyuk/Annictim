@@ -3,12 +3,11 @@ package com.okysoft.infra.repository
 import com.okysoft.data.CastRequestParams
 import com.okysoft.infra.response.CastsResponse
 import com.okysoft.infra.AnnictService
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CastRepository @Inject constructor(private val service: AnnictService.Cast) {
+interface CastRepository {
 
-    suspend fun get(requestParams: CastRequestParams): CastsResponse {
-        return service.get(requestParams.toParams())
-    }
+    fun get(requestParams: CastRequestParams): Flow<CastsResponse>
 
 }

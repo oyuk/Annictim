@@ -70,10 +70,11 @@ class WorkViewModel constructor(
 
         viewModelScope.launch {
             try {
-                val response = castUseCase.get(CastRequestParams(
+                castUseCase.get(CastRequestParams(
                     fields = CastRequestParams.FieldType.All,
-                    workId = work.id))
-                _casts.postValue(response)
+                    workId = work.id)).collect {
+                    _casts.postValue(it)
+                }
             } catch (throwable: Throwable) {
 
             }

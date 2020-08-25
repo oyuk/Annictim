@@ -12,6 +12,7 @@ import com.okysoft.domain.usecase.CastUseCase
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,8 +37,13 @@ class CastsViewModel constructor(
     @ExperimentalCoroutinesApi
     private val paginator = Paginator<Cast>(loadMore, refreshPublisher) { page, callback ->
         viewModelScope.launch {
-            val response = kotlin.runCatching { useCase.get(castRequestParams.copy(page = page)) }
-            callback(response)
+            try {
+                useCase.get(castRequestParams.copy(page = page)).collect {
+                    callback(Result.success(it))
+                }
+            } catch (throwable: Throwable) {
+                callback(Result.failure(throwable))
+            }
         }
     }
     @ExperimentalCoroutinesApi

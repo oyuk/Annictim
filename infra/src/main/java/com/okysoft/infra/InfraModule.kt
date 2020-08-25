@@ -5,10 +5,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.okysoft.data.WatchKind
 import com.okysoft.infra.impl.*
-import com.okysoft.infra.repository.EpisodeRepository
-import com.okysoft.infra.repository.ProgramRepository
-import com.okysoft.infra.repository.ReviewRepository
-import com.okysoft.infra.repository.StaffRepository
+import com.okysoft.infra.repository.*
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -98,8 +95,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideCastService(client: Retrofit): AnnictService.Cast {
-        return CastServiceImpl(client)
+    fun provideCastRepository(client: Retrofit): CastRepository {
+        return CastRepositoryImpl(client)
     }
 
     @Singleton
