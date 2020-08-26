@@ -7,7 +7,10 @@ import com.okysoft.infra.repository.ReviewRepository
 import com.okysoft.infra.repository.WorkRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
+@InstallIn(ApplicationComponent::class)
 @Module
 class UseCaseModule {
 
