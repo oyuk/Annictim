@@ -3,26 +3,28 @@ package com.okysoft.annictim.presentation.setting
 
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
-import androidx.browser.customtabs.CustomTabsIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentSettingBinding
 import com.okysoft.annictim.extension.clearStackAndStartActivity
 import com.okysoft.annictim.presentation.launch.LaunchActivity
 import com.okysoft.annictim.presentation.widget.dialog.CustomDialogFragment
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class SettingFragment : DaggerFragment(), CustomDialogFragment.Listener {
+@AndroidEntryPoint
+class SettingFragment : Fragment(), CustomDialogFragment.Listener {
 
     private lateinit var binding: FragmentSettingBinding
-    @Inject lateinit var viewModel: SettingViewModel
+    private val viewModel: SettingViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
