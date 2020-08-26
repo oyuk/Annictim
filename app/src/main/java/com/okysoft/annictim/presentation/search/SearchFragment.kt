@@ -11,22 +11,21 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentSearchBinding
 import com.okysoft.annictim.presentation.works.WorksActivity
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
-
-class SearchFragment : DaggerFragment() {
+@AndroidEntryPoint
+class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-
-    @Inject
-    lateinit var viewModel: SearchViewModel
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
