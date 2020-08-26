@@ -1,17 +1,15 @@
 package com.okysoft.annictim.presentation.user
 
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.okysoft.domain.model.User
 import com.okysoft.domain.usecase.UserUseCase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
-class UserViewModel constructor(
+class UserViewModel @ViewModelInject constructor(
     private val userUseCase: UserUseCase
 ): ViewModel() {
 

@@ -4,20 +4,22 @@ package com.okysoft.annictim.presentation.user
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentUserBinding
 import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
-class UserFragment : DaggerFragment() {
+@AndroidEntryPoint
+class UserFragment : Fragment() {
 
     private lateinit var binding: FragmentUserBinding
-    @Inject lateinit var viewModel: UserViewModel
-
+    private val viewModel: UserViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
