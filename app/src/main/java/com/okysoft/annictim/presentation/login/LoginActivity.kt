@@ -1,12 +1,12 @@
 package com.okysoft.annictim.presentation.login
 
-import androidx.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityLoginBinding
 import com.okysoft.annictim.extension.clearStackAndStartActivity
@@ -14,9 +14,10 @@ import com.okysoft.annictim.extension.clearTopAndStartActivity
 import com.okysoft.annictim.presentation.activity.BaseActivity
 import com.okysoft.annictim.presentation.activity.MainActivity
 import com.okysoft.annictim.presentation.widget.dialog.ProgressFragment
-import dagger.android.AndroidInjection
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity() {
 
     companion object {
