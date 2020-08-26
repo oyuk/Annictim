@@ -5,10 +5,13 @@ import com.okysoft.infra.ApplicationActionCreator
 import com.okysoft.infra.ApplicationDispatcher
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
+@InstallIn(ApplicationComponent::class)
 @Module
-class ApplicationModule {
+object ApplicationModule {
 
     @Singleton
     @Provides
