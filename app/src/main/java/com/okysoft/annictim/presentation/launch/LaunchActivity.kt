@@ -1,19 +1,20 @@
 package com.okysoft.annictim.presentation.launch
 
-import androidx.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.okysoft.annictim.extension.clearTopAndStartActivity
-import com.okysoft.annictim.presentation.login.LoginActivity
 import com.okysoft.annictim.presentation.activity.MainActivity
-import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
+import com.okysoft.annictim.presentation.login.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class LaunchActivity: DaggerAppCompatActivity() {
+@AndroidEntryPoint
+class LaunchActivity: AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModel: LaunchViewModel
+    private val viewModel: LaunchViewModel by viewModels()
 
     companion object {
 
