@@ -6,22 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentReviewsBinding
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class ReviewsFragment : DaggerFragment() {
+@AndroidEntryPoint
+class ReviewsFragment : Fragment() {
 
     private lateinit var binding: FragmentReviewsBinding
 
     val workId: Int
         get() = arguments?.getInt(WORK_ID) ?: -1
 
-    @Inject
-    lateinit var viewModel: ReviewsViewModel
+
+    @Inject lateinit var viewModel: ReviewsViewModel
     private val adapter = ReviewsAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

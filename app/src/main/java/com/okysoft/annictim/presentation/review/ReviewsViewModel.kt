@@ -4,12 +4,11 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.okysoft.domain.model.Review
 import com.okysoft.domain.usecase.ReviewUseCase
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
+import javax.inject.Named
 
 class ReviewsViewModel @Inject constructor (
     private val workId: Int,
@@ -17,7 +16,7 @@ class ReviewsViewModel @Inject constructor (
 ): ViewModel() {
 
     class Factory @Inject constructor (
-        private val workId: Int,
+        @Named("ReviewsFragment_WorkId") private val workId: Int,
         private val useCase: ReviewUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
