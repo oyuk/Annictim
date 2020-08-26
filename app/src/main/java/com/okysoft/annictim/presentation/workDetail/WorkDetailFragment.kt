@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
@@ -18,16 +19,17 @@ import com.okysoft.annictim.presentation.cast.CastsAdapter
 import com.okysoft.annictim.presentation.staff.StaffAdapter
 import com.okysoft.data.WatchKind
 import com.okysoft.domain.model.Work
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class WorkDetailFragment : DaggerFragment() {
+@AndroidEntryPoint
+class WorkDetailFragment : Fragment() {
 
     val work: Work
         get() =  arguments?.getParcelable(WORK) ?: Work.default()
 
-    @Inject
-    lateinit var viewModel: WorkViewModel
+    @Inject lateinit var viewModel: WorkViewModel
+
     private lateinit var binding: FragmentWorkDetailBinding
     private val castAdapter = CastsAdapter()
     private val staffAdapter = StaffAdapter()
@@ -35,46 +37,44 @@ class WorkDetailFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, com.okysoft.annictim.R.layout.fragment_work_detail, container, false)
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.workResponse.observe(this, Observer { work ->
-            binding.title.text = work.title
-            binding.media.text = "${work.mediaText} ${work.seasonNameText}"
+        val work = this.work
+        binding.title.text = work.title
+        binding.media.text = "${work.mediaText} ${work.seasonNameText}"
 
-            if (work.twitterUsername.isNotBlank()) {
-                binding.twitterLayout.visibility = View.VISIBLE
-                binding.twitterLayout.setOnClickListener {
-                    openUrl("https://twitter.com/${work.twitterUsername}")
-                }
+        if (work.twitterUsername.isNotBlank()) {
+            binding.twitterLayout.visibility = View.VISIBLE
+            binding.twitterLayout.setOnClickListener {
+                openUrl("https://twitter.com/${work.twitterUsername}")
             }
-            if (work.twitterHashtag.isNotBlank()) {
-                binding.hashtagLayout.visibility = View.VISIBLE
-                val url = "https://twitter.com/search?q=${work.twitterHashtag}"
-                binding.hashtagLayout.setOnClickListener {
-                    openUrl(url)
-                }
+        }
+        if (work.twitterHashtag.isNotBlank()) {
+            binding.hashtagLayout.visibility = View.VISIBLE
+            val url = "https://twitter.com/search?q=${work.twitterHashtag}"
+            binding.hashtagLayout.setOnClickListener {
+                openUrl(url)
             }
-            if (work.wikipediaUrl.isNotBlank()) {
-                binding.wikipediaLayout.visibility = View.VISIBLE
-                binding.wikipediaLayout.setOnClickListener {
-                    openUrl(work.wikipediaUrl)
-                }
+        }
+        if (work.wikipediaUrl.isNotBlank()) {
+            binding.wikipediaLayout.visibility = View.VISIBLE
+            binding.wikipediaLayout.setOnClickListener {
+                openUrl(work.wikipediaUrl)
             }
-            if (work.officialSiteUrl.isNotBlank()) {
-                binding.internetLayout.visibility = View.VISIBLE
-                binding.internetLayout.setOnClickListener {
-                    openUrl(work.officialSiteUrl)
-                }
+        }
+        if (work.officialSiteUrl.isNotBlank()) {
+            binding.internetLayout.visibility = View.VISIBLE
+            binding.internetLayout.setOnClickListener {
+                openUrl(work.officialSiteUrl)
             }
+        }
+
 //            binding.castTextView.setOnClickListener {
 //                startActivity(CastsActivity.createIntent(activity!!, ))
 //            }
-        })
 
         viewModel.workKind.observe(viewLifecycleOwner, Observer {
             val watchKind = it ?: WatchKind.no_select

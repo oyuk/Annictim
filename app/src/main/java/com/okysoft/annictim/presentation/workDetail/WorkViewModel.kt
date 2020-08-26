@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.okysoft.data.CastRequestParams
 import com.okysoft.data.StaffRequestParams
+import com.okysoft.data.WatchKind
 import com.okysoft.data.WorkStatusRequestParams
 import com.okysoft.domain.model.Cast
 import com.okysoft.domain.model.Staff
-import com.okysoft.data.WatchKind
 import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.CastUseCase
 import com.okysoft.domain.usecase.StaffUseCase
@@ -21,11 +21,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class WorkViewModel constructor(
-    workUseCase: WorkUseCase,
-    castUseCase: CastUseCase,
-    staffUseCase: StaffUseCase,
+    private val workUseCase: WorkUseCase,
+    private val castUseCase: CastUseCase,
+    private val staffUseCase: StaffUseCase,
     private val meRepository: com.okysoft.infra.repository.MeRepository,
-    work: Work
+    val work: Work
 ) : ViewModel() {
 
     class Factory @Inject constructor(
@@ -45,8 +45,6 @@ class WorkViewModel constructor(
         }
     }
 
-    private val _work = MutableLiveData<Work>()
-    val workResponse: LiveData<Work> = _work
     private val _casts = MutableLiveData<List<Cast>>()
     val casts: LiveData<List<Cast>> = _casts
     private val _staffs = MutableLiveData<List<Staff>>()
@@ -57,8 +55,6 @@ class WorkViewModel constructor(
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        _work.postValue(work)
-
         viewModelScope.launch {
             try {
                 workUseCase.getWatchKind(workId = work.id).collect {

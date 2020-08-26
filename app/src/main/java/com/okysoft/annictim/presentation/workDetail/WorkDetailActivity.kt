@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,7 +19,9 @@ import com.okysoft.annictim.extension.setImage
 import com.okysoft.annictim.presentation.episode.EpisodesFragment
 import com.okysoft.annictim.presentation.review.ReviewsFragment
 import com.okysoft.domain.model.Work
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WorkDetailActivity : AppCompatActivity() {
 
     val work: Work by lazy { intent.getParcelableExtra<Work>(WORK_KEY) }
