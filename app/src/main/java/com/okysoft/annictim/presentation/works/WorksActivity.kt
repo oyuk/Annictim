@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorksBinding
-import com.okysoft.data.WorkRequestParams
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WorksActivity : AppCompatActivity() {
 
     companion object {

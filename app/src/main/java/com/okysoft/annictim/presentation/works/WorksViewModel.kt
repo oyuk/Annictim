@@ -9,8 +9,9 @@ import com.okysoft.common.Paginator
 import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.WorkUseCase
 import io.reactivex.processors.PublishProcessor
-import kotlinx.coroutines.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class WorksViewModel constructor(

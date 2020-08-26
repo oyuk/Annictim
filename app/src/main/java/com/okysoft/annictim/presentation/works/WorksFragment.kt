@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
@@ -14,11 +15,11 @@ import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
 import com.okysoft.annictim.presentation.workDetail.WorkDetailActivity
 import com.okysoft.domain.model.Work
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
-class WorksFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
+@AndroidEntryPoint
+class WorksFragment : Fragment(), LoadMoreScrollListener.Listener {
 
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorksAdapter()
