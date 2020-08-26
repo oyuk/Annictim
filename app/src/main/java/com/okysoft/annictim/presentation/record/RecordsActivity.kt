@@ -2,13 +2,15 @@ package com.okysoft.annictim.presentation.record
 
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityRecordsBinding
 import com.okysoft.annictim.presentation.activity.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecordsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -7,14 +7,15 @@ import com.okysoft.annictim.extension.toLiveData
 import com.okysoft.domain.model.Record
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
+import javax.inject.Named
 
 class RecordsViewModel @Inject constructor(
         private val episodeId: Int,
         private val dispatcher: RecordDispatcher): ViewModel() {
 
     class Factory @Inject constructor (
-            private val episodeId: Int,
-            private val dispatcher: RecordDispatcher
+        @Named("RecordsFragment_episodeId") private val episodeId: Int,
+        private val dispatcher: RecordDispatcher
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

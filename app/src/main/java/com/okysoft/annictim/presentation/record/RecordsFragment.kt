@@ -1,28 +1,29 @@
 package com.okysoft.annictim.presentation.record
 
 
-import androidx.lifecycle.Observer
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.core.util.Pair
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.presentation.user.UserActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.util.Pair
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentRecordsBinding
-import dagger.android.support.DaggerFragment
+import com.okysoft.annictim.presentation.user.UserActivity
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
-
-class RecordsFragment : DaggerFragment() {
+@AndroidEntryPoint
+class RecordsFragment : Fragment() {
 
     private lateinit var binding: FragmentRecordsBinding
-    @Inject lateinit var store: RecordsViewModel
+    private val store: RecordsViewModel by viewModels()
     @Inject lateinit var actionCreator: RecordsActionCreator
 
     val episodeId: Int
