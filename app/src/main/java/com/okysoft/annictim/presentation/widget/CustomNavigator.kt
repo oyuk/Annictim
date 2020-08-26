@@ -10,11 +10,12 @@ import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
 import com.okysoft.annictim.MeStore
-import com.okysoft.data.ProgramRequestParams
 import com.okysoft.annictim.presentation.program.ProgramsFragment
 import com.okysoft.annictim.presentation.user.UserFragment
-import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.components.ApplicationComponent
 
 @Navigator.Name("custom_fragment")
 class CustomNavigator(
@@ -66,10 +67,17 @@ class CustomNavigator(
 
 class CustomNavHostFragment: NavHostFragment() {
 
-    @Inject lateinit var meStore: MeStore
+    private lateinit var meStore: MeStore
+
+    @EntryPoint
+    @InstallIn(ApplicationComponent::class)
+    interface CustomNavHostFragmentEntryPoint {
+        fun meStore(): MeStore
+    }
 
     override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
+        val hiltEntryPoint = EntryPointAccessors.fromApplication(context.applicationContext, CustomNavHostFragmentEntryPoint::class.java)
+        meStore = hiltEntryPoint.meStore()
         super.onAttach(context)
     }
 

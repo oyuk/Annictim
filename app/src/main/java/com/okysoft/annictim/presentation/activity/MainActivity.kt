@@ -9,11 +9,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.okysoft.annictim.R
-import com.okysoft.infra.ApplicationActionCreator
 import com.okysoft.annictim.databinding.ActivityMainBinding
 import com.okysoft.annictim.extension.clearTopAndStartActivity
+import com.okysoft.infra.ApplicationActionCreator
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
