@@ -1,30 +1,31 @@
 package com.okysoft.annictim.presentation.cast
 
 
-import androidx.lifecycle.Observer
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentCastsBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
 import com.okysoft.data.CastRequestParams
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class CastsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
+@AndroidEntryPoint
+class CastsFragment : Fragment(), LoadMoreScrollListener.Listener {
 
     private lateinit var binding: FragmentCastsBinding
 
     val castRequestParams: CastRequestParams
         get() = arguments?.getParcelable(REQUEST_PARAMS) ?: CastRequestParams()
 
-    @Inject
-    lateinit var viewModel: CastsViewModel
+    private val viewModel: CastsViewModel by viewModels()
     private val adapter = CastsAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
