@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
@@ -13,11 +14,11 @@ import com.okysoft.annictim.databinding.FragmentProgramsBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
 import com.okysoft.data.ProgramRequestParams
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
-class ProgramsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
+@AndroidEntryPoint
+class ProgramsFragment : Fragment(), LoadMoreScrollListener.Listener {
 
     private lateinit var binding: FragmentProgramsBinding
     private val adapter = ProgramsAdapter()
@@ -25,8 +26,8 @@ class ProgramsFragment : DaggerFragment(), LoadMoreScrollListener.Listener {
     val programRequestParams: com.okysoft.data.ProgramRequestParams
         get() =  arguments?.getParcelable(REQUEST_PARAM) ?: com.okysoft.data.ProgramRequestParams()
 
-    @Inject
-    lateinit var viewModel: ProgramsViewModel
+
+    @Inject lateinit var viewModel: ProgramsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_programs, container, false)
