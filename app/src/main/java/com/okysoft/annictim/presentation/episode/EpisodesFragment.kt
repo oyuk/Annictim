@@ -1,28 +1,31 @@
 package com.okysoft.annictim.presentation.episode
 
 
-import androidx.lifecycle.Observer
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.okysoft.annictim.presentation.record.RecordsActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentEpisodesBinding
-import dagger.android.support.DaggerFragment
+import com.okysoft.annictim.presentation.record.RecordsActivity
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class EpisodesFragment : DaggerFragment() {
+@AndroidEntryPoint
+class EpisodesFragment : Fragment() {
 
     private lateinit var binding: FragmentEpisodesBinding
 
     val workId: Int
         get() = arguments?.getInt(WORK_ID) ?: -1
 
-    @Inject
-    lateinit var viewModel: EpisodesViewModel
+    @Inject lateinit var  viewModel: EpisodesViewModel
+
     private val adapter = EpisodesAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

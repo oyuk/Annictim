@@ -4,21 +4,18 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.okysoft.domain.model.Episode
 import com.okysoft.domain.usecase.EpisodeUseCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
+import javax.inject.Named
 
-class EpisodesViewModel @Inject constructor (
+class EpisodesViewModel constructor (
     private val workId: Int,
     private val useCase: EpisodeUseCase
 ): ViewModel() {
 
     class Factory @Inject constructor (
-        private val workId: Int,
+        @Named("EpisodesFragment_WorkId") private val workId: Int,
         private val useCase: EpisodeUseCase
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
