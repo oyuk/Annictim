@@ -4,28 +4,33 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.okysoft.domain.model.Review
 import com.okysoft.domain.usecase.ReviewUseCase
-import kotlinx.coroutines.Job
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Named
 
-class ReviewsViewModel @Inject constructor (
-    private val workId: Int,
+class ReviewsViewModel @AssistedInject constructor (
+    @Assisted private val workId: Int,
     private val useCase: ReviewUseCase
 ): ViewModel() {
 
-    class Factory @Inject constructor (
-        @Named("ReviewsFragment_WorkId") private val workId: Int,
-        private val useCase: ReviewUseCase
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ReviewsViewModel(workId, useCase) as T
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(workId: Int): ReviewsViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            workId: Int
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(workId) as T
+            }
         }
     }
 
-    private val job = Job()
     private val _reviews = MutableLiveData<List<Review>>()
     val reviews: LiveData<List<Review>> = _reviews
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
@@ -23,7 +24,10 @@ class ReviewsFragment : Fragment() {
         get() = arguments?.getInt(WORK_ID) ?: -1
 
 
-    @Inject lateinit var viewModel: ReviewsViewModel
+    @Inject lateinit var factory: ReviewsViewModel.Factory
+    private val viewModel: ReviewsViewModel by viewModels {
+        ReviewsViewModel.provideFactory(factory, workId)
+    }
     private val adapter = ReviewsAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
