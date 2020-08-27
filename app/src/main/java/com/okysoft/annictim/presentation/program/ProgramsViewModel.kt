@@ -9,24 +9,32 @@ import com.okysoft.common.Paginator
 import com.okysoft.data.ProgramRequestParams
 import com.okysoft.domain.model.Program
 import com.okysoft.domain.usecase.ProgramUseCase
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class ProgramsViewModel constructor(
+class ProgramsViewModel @AssistedInject constructor(
     useCase: ProgramUseCase,
-    requestParams: ProgramRequestParams
+    @Assisted val requestParams: ProgramRequestParams
 ) : ViewModel() {
 
-    class Factory @Inject constructor(
-        private val useCase: ProgramUseCase,
-        private val requestParams: ProgramRequestParams
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ProgramsViewModel(useCase, requestParams) as T
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(requestParams: ProgramRequestParams): ProgramsViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            requestParams: ProgramRequestParams
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(requestParams) as T
+            }
         }
     }
 

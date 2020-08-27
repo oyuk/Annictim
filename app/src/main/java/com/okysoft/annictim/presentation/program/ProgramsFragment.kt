@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
@@ -23,11 +24,14 @@ class ProgramsFragment : Fragment(), LoadMoreScrollListener.Listener {
     private lateinit var binding: FragmentProgramsBinding
     private val adapter = ProgramsAdapter()
 
-    val programRequestParams: com.okysoft.data.ProgramRequestParams
-        get() =  arguments?.getParcelable(REQUEST_PARAM) ?: com.okysoft.data.ProgramRequestParams()
+    private val programRequestParams: ProgramRequestParams
+        get() =  arguments?.getParcelable(REQUEST_PARAM) ?: ProgramRequestParams()
 
+    @Inject lateinit var factory: ProgramsViewModel.Factory
 
-    @Inject lateinit var viewModel: ProgramsViewModel
+    private val viewModel: ProgramsViewModel by viewModels {
+        ProgramsViewModel.provideFactory(factory, programRequestParams)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_programs, container, false)
