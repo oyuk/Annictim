@@ -4,23 +4,30 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.okysoft.domain.model.Episode
 import com.okysoft.domain.usecase.EpisodeUseCase
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Named
 
-class EpisodesViewModel constructor (
-    private val workId: Int,
+class EpisodesViewModel @AssistedInject constructor (
+    @Assisted private val workId: Int,
     private val useCase: EpisodeUseCase
 ): ViewModel() {
 
-    class Factory @Inject constructor (
-        @Named("EpisodesFragment_WorkId") private val workId: Int,
-        private val useCase: EpisodeUseCase
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return EpisodesViewModel(workId, useCase) as T
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(workId: Int): EpisodesViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            workId: Int
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(workId) as T
+            }
         }
     }
 

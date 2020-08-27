@@ -24,7 +24,11 @@ class EpisodesFragment : Fragment() {
     val workId: Int
         get() = arguments?.getInt(WORK_ID) ?: -1
 
-    @Inject lateinit var  viewModel: EpisodesViewModel
+    @Inject lateinit var viewModelFactory: EpisodesViewModel.Factory
+
+    private val viewModel: EpisodesViewModel by viewModels {
+        EpisodesViewModel.provideFactory(viewModelFactory, workId)
+    }
 
     private val adapter = EpisodesAdapter()
 
