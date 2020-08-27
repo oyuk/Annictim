@@ -1,72 +1,48 @@
 package com.okysoft.annictim.presentation.episode
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jakewharton.rxrelay2.BehaviorRelay
-import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ItemEpisodeBinding
-import com.okysoft.annictim.presentation.BindingViewHolder
 import com.okysoft.domain.model.Episode
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
 
-class EpisodesAdapter: RecyclerView.Adapter<BindingViewHolder<ItemEpisodeBinding>>() {
+class EpisodeViewHolder(val binding: ItemEpisodeBinding):
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(episode: Episode) {
+        binding.episode = episode
+        binding.executePendingBindings()
+    }
+}
 
-    val items: BehaviorRelay<List<Episode>> = BehaviorRelay.createDefault(emptyList())
+class EpisodeDiffCallback: DiffUtil.ItemCallback<Episode>() {
+    override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class EpisodesAdapter: ListAdapter<Episode, EpisodeViewHolder>(EpisodeDiffCallback()) {
+
     private val _onClick = MutableLiveData<Episode>()
     val onClick: LiveData<Episode> = _onClick
-    private val bag = CompositeDisposable()
 
-    enum class ViewType(val num: Int)  {
-        ITEM(0), FOOTER(1)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return EpisodeViewHolder(ItemEpisodeBinding.inflate(inflater, parent, false))
     }
 
-    private val TAG = EpisodesAdapter::class.java.name
-
-    init {
-        items.subscribeBy(
-                onNext = {notifyDataSetChanged()}
-        ).addTo(bag)
-    }
-
-    @Suppress("unused")
-    fun finalize() {
-        bag.dispose()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<ItemEpisodeBinding> {
-        if (viewType == ViewType.ITEM.num) {
-            return BindingViewHolder(parent.context, parent, R.layout.item_episode)
-        }
-        return BindingViewHolder(parent.context, parent, R.layout.item_loading)
-    }
-
-    override fun getItemCount(): Int {
-        if (items.value.isEmpty()) { return 1 }
-        return items.value.size
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        if (position == items.value.size) {
-            return ViewType.FOOTER.num
-        }
-        return ViewType.ITEM.num
-    }
-
-    override fun onBindViewHolder(holder: BindingViewHolder<ItemEpisodeBinding>, position: Int) {
-        val viewType = getItemViewType(position);
-        if (viewType == ViewType.FOOTER.num) {
-            return
-        }
-        val item = items.value[position]
-        holder.binding?.root?.setOnClickListener {
+    override fun onBindViewHolder(holder: EpisodeViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
+        holder.binding.root.setOnClickListener {
             _onClick.postValue(item)
-        }
-        (holder.binding as ItemEpisodeBinding).run {
-            episode = item
         }
     }
 

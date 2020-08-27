@@ -45,11 +45,11 @@ class EpisodesFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
         viewModel.episodes.observe(viewLifecycleOwner, Observer {
-            adapter.items.accept(it)
+            adapter.submitList(it)
         })
         adapter.onClick.observe(viewLifecycleOwner, Observer {
             it?.let {
-                startActivity(RecordsActivity.createIntent(activity!!, it.id))
+                startActivity(RecordsActivity.createIntent(requireActivity(), it.id))
             }
         })
         viewModel.fetch()
