@@ -6,26 +6,35 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.okysoft.annictim.extension.toLiveData
 import com.okysoft.common.Paginator
+import com.okysoft.data.WorkRequestParams
 import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.WorkUseCase
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class WorksViewModel constructor(
+class WorksViewModel @AssistedInject constructor(
     useCase: WorkUseCase,
-    workRequestParams: com.okysoft.data.WorkRequestParams
+    @Assisted workRequestParams: WorkRequestParams
 ) : ViewModel() {
 
-    class Factory @Inject constructor(
-        private val useCase: WorkUseCase,
-        private val workRequestParams: com.okysoft.data.WorkRequestParams
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return WorksViewModel(useCase, workRequestParams) as T
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(workRequestParams: WorkRequestParams): WorksViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            workRequestParams: WorkRequestParams
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(workRequestParams) as T
+            }
         }
     }
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
@@ -30,8 +31,26 @@ class WorksFragment : Fragment(), LoadMoreScrollListener.Listener {
     val position: Int?
         get() = arguments?.getInt(POSITION)
 
-    @Inject
-    lateinit var viewModel: WorksViewModel
+    @Inject lateinit var factory: WorksViewModel.Factory
+
+    private val viewModel: WorksViewModel by lazy {
+        val parent = parentFragment
+        val (target, key) = when (parent) {
+            is WorksTabPagerFragment -> {
+                Pair(parent, "${parent.javaClass.name}${position}")
+            }
+            is MeWorksTabPagerFragment -> {
+                Pair(parent, "${parent.javaClass.name}${position}")
+            }
+            else -> {
+                Pair(this, null)
+            }
+        }
+        val factory = WorksViewModel.provideFactory(factory, workRequestParams)
+        return@lazy key?.let {
+            ViewModelProvider(target, factory).get(it, WorksViewModel::class.java)
+        } ?: ViewModelProvider(target, factory).get(WorksViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +59,6 @@ class WorksFragment : Fragment(), LoadMoreScrollListener.Listener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
-
         return binding.root
     }
 
