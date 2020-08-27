@@ -52,13 +52,9 @@ class WorksFragment : Fragment(), LoadMoreScrollListener.Listener {
         } ?: ViewModelProvider(target, factory).get(WorksViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.refresh()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works, container, false)
+        viewModel.refresh()
         return binding.root
     }
 

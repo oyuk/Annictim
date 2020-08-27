@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -27,7 +24,7 @@ class WorksTabPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pagerAdapter = PagerAdapter(requireActivity())
+        val pagerAdapter = PagerAdapter(this)
         binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = pagerAdapter.getPageTitle(position)
@@ -51,7 +48,7 @@ class WorksTabPagerFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    private inner class PagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
+    private inner class PagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 
         override fun getItemCount() = 3
 

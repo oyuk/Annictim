@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.okysoft.annictim.R
@@ -28,14 +25,14 @@ class MeWorksTabPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pagerAdapter = PagerAdapter(requireActivity())
+        val pagerAdapter = PagerAdapter(this)
         binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = pagerAdapter.getPageTitle(position)
         }.attach()
     }
 
-    private class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    private class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         override fun getItemCount() = WatchKind.meKindCount
 
