@@ -16,6 +16,7 @@ import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
 import com.okysoft.data.CastRequestParams
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CastsFragment : Fragment(), LoadMoreScrollListener.Listener {
@@ -25,7 +26,10 @@ class CastsFragment : Fragment(), LoadMoreScrollListener.Listener {
     val castRequestParams: CastRequestParams
         get() = arguments?.getParcelable(REQUEST_PARAMS) ?: CastRequestParams()
 
-    private val viewModel: CastsViewModel by viewModels()
+    @Inject lateinit var factory: CastsViewModel.Factory
+    private val viewModel: CastsViewModel by viewModels {
+        CastsViewModel.provideFactory(factory, castRequestParams)
+    }
     private val adapter = CastsAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -9,25 +9,33 @@ import com.okysoft.common.Paginator
 import com.okysoft.data.CastRequestParams
 import com.okysoft.domain.model.Cast
 import com.okysoft.domain.usecase.CastUseCase
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class CastsViewModel constructor(
+class CastsViewModel @AssistedInject constructor(
     useCase: CastUseCase,
-    castRequestParams: CastRequestParams
+    @Assisted castRequestParams: CastRequestParams
 ) : ViewModel() {
 
-    class Factory @Inject constructor(
-        private val useCase: CastUseCase,
-        private val castRequestParams: CastRequestParams
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return CastsViewModel(useCase, castRequestParams) as T
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(castRequestParams: CastRequestParams): CastsViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            castRequestParams: CastRequestParams
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(castRequestParams) as T
+            }
         }
     }
 
