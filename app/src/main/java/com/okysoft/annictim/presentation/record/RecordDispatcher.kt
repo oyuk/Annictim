@@ -8,7 +8,6 @@ class RecordDispatcher {
 
     private val _startFetch: FlowableProcessor<RecordsAction.StartFetch>
             = BehaviorProcessor.create<RecordsAction.StartFetch>().toSerialized()
-    val startFetch: Flowable<RecordsAction.StartFetch> = _startFetch
 
     private val _success: FlowableProcessor<RecordsAction.Success>
             = BehaviorProcessor.create<RecordsAction.Success>().toSerialized()

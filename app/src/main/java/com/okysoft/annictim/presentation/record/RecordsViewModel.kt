@@ -2,26 +2,21 @@ package com.okysoft.annictim.presentation.record
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.okysoft.annictim.extension.toLiveData
 import com.okysoft.domain.model.Record
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
-import javax.inject.Named
 
-class RecordsViewModel @Inject constructor(
-        private val episodeId: Int,
-        private val dispatcher: RecordDispatcher): ViewModel() {
+class RecordsViewModel @Inject constructor(val dispatcher: RecordDispatcher): ViewModel() {
 
-    class Factory @Inject constructor (
-        @Named("RecordsFragment_episodeId") private val episodeId: Int,
-        private val dispatcher: RecordDispatcher
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return RecordsViewModel(episodeId, dispatcher) as T
-        }
-    }
+//    class Factory @Inject constructor (
+//        private val dispatcher: RecordDispatcher
+//    ) : ViewModelProvider.Factory {
+//        @Suppress("UNCHECKED_CAST")
+//        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//            return RecordsViewModel(dispatcher) as T
+//        }
+//    }
 
     val records: LiveData<List<Record>> = dispatcher.success
             .map { it.items }
