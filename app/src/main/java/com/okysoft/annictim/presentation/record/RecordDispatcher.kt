@@ -3,8 +3,9 @@ package com.okysoft.annictim.presentation.record
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.processors.FlowableProcessor
+import javax.inject.Inject
 
-class RecordDispatcher {
+class RecordDispatcher @Inject constructor() {
 
     private val _startFetch: FlowableProcessor<RecordsAction.StartFetch>
             = BehaviorProcessor.create<RecordsAction.StartFetch>().toSerialized()

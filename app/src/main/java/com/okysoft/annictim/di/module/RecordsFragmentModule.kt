@@ -13,7 +13,7 @@ class RecordsFragmentModule {
 
     @Provides
     @Reusable
-    fun providesDispatcher(): RecordDispatcher {
+    fun providesRecordDispatcher(): RecordDispatcher {
         return RecordDispatcher()
     }
 }
