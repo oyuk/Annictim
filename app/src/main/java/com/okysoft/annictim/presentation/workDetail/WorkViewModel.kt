@@ -12,36 +12,37 @@ import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.CastUseCase
 import com.okysoft.domain.usecase.StaffUseCase
 import com.okysoft.domain.usecase.WorkUseCase
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class WorkViewModel constructor(
+class WorkViewModel @AssistedInject constructor(
     private val workUseCase: WorkUseCase,
     private val castUseCase: CastUseCase,
     private val staffUseCase: StaffUseCase,
     private val meRepository: com.okysoft.infra.repository.MeRepository,
-    val work: Work
+    @Assisted work: Work
 ) : ViewModel() {
 
-    class Factory @Inject constructor(
-        private val workUseCase: WorkUseCase,
-        private val castUseCase: CastUseCase,
-        private val staffUseCase: StaffUseCase,
-        private val meRepository: com.okysoft.infra.repository.MeRepository,
-        private val work: Work
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return WorkViewModel(workUseCase,
-                castUseCase,
-                staffUseCase,
-                meRepository,
-                work) as T
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(work: Work): WorkViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            work: Work
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(work) as T
+            }
         }
     }
 

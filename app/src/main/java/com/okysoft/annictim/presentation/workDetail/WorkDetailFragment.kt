@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
@@ -28,7 +29,10 @@ class WorkDetailFragment : Fragment() {
     val work: Work
         get() =  arguments?.getParcelable(WORK) ?: Work.default()
 
-    @Inject lateinit var viewModel: WorkViewModel
+    @Inject lateinit var factory: WorkViewModel.Factory
+    private val viewModel: WorkViewModel by viewModels {
+        WorkViewModel.provideFactory(factory, work)
+    }
 
     private lateinit var binding: FragmentWorkDetailBinding
     private val castAdapter = CastsAdapter()
