@@ -1,26 +1,41 @@
 package com.okysoft.infra.impl
 
-import com.okysoft.infra.response.EpisodesResponse
+import com.apollographql.apollo.ApolloClient
 import com.okysoft.infra.AnnictService
 import com.okysoft.infra.repository.EpisodeRepository
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import retrofit2.Retrofit
-import javax.inject.Inject
 
+data class Episode(
+    val id: Int,
+    val numberText: String?,
+    val title: String?
+)
 
-class EpisodeRepositoryImpl @Inject constructor(retrofit: Retrofit): EpisodeRepository {
+class EpisodeRepositoryImpl constructor(retrofit: Retrofit,
+                                        private val apolloClient: ApolloClient): EpisodeRepository {
 
     private val client = retrofit.create(AnnictService.Episode::class.java)
 
-    override suspend fun get(workId: Int, order: String): Flow<EpisodesResponse> {
+    @ExperimentalCoroutinesApi
+    override suspend fun get(workId: Int, order: String): Flow<List<Episode>> {
         return flow {
             val response = client.get(workId, order)
-            emit(response)
+            emit(response.episodes.map { Episode(it.id, it.numberText, it.title) })
         }
-            .flowOn(Dispatchers.IO)
-    }
 
+//        return apolloClient.query(EpisodesQuery(workId)).toFlow()
+//            .map {
+//                val response = it.data?.searchEpisodes?.nodes?.map { node ->
+//                    node?.let {
+//                        Episode(node.annictId, node.numberText, node.title)
+//                    }
+//                }
+//                return@map response?.filterNotNull() ?: emptyList()
+//            }
+//            .flowOn(Dispatchers.IO)
+    }
 }
+
