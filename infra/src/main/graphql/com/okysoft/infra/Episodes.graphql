@@ -1,0 +1,9 @@
+query Episodes($id: Int!) {
+  searchEpisodes(annictIds: [$id], orderBy: {field: CREATED_AT, direction: DESC}) {
+      nodes {
+        annictId
+        title
+        numberText
+    }
+  }
+}
