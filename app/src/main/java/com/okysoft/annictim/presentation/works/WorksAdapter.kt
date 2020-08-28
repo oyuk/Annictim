@@ -1,73 +1,57 @@
 package com.okysoft.annictim.presentation.works
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ItemWorkBinding
 import com.okysoft.annictim.extension.setImage
-import com.okysoft.annictim.presentation.BindingViewHolder
-import com.okysoft.annictim.presentation.widget.DiffUtilCallback
-import com.okysoft.domain.model.Work
-import kotlin.properties.Delegates
+import com.okysoft.infra.extension.seasonText
+import com.okysoft.infra.fragment.WorkFeed
 
-data class WorkClickItem(
-    val work: Work,
-    val imateView: ImageView
-)
+class WorksAdapter: ListAdapter<WorkFeed, WorksAdapter.WorkFeedViewHolder>(WorkFeedDiffCallback()) {
 
-class WorksAdapter: RecyclerView.Adapter<BindingViewHolder<ItemWorkBinding>>() {
-
-    private var items: List<Work> by Delegates.observable(emptyList()) { _, old, new ->
-        DiffUtil.calculateDiff(DiffUtilCallback(old, new), false).dispatchUpdatesTo(this)
-    }
-    private val _onClick = MutableLiveData<WorkClickItem>()
-    val onClick: LiveData<WorkClickItem> = _onClick
-
-    fun updateItem(i: List<Work>) {
-        items = i
-    }
-
-    enum class ViewType(val num: Int)  {
-        ITEM(0), FOOTER(1)
-    }
-
-    private val TAG = WorksAdapter::class.java.name
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<ItemWorkBinding> {
-        if (viewType == ViewType.ITEM.num) {
-            return BindingViewHolder(parent.context, parent, R.layout.item_work)
+    class WorkFeedViewHolder(val binding: ItemWorkBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(workFeed: WorkFeed) {
+            binding.work = workFeed
+            binding.seasonName.text = workFeed.seasonText()
+            val imageUrl = workFeed.image?.recommendedImageUrl
+            if (imageUrl != null) {
+                binding.imageView.setImage(imageUrl)
+            } else {
+                binding.imageView.setImageDrawable(null)
+            }
         }
-        return BindingViewHolder(parent.context, parent, R.layout.item_loading)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
-    override fun getItemViewType(position: Int): Int {
-//        if (position == items.size) {
-//            return ViewType.FOOTER.num
-//        }
-        return ViewType.ITEM.num
-    }
-
-    override fun onBindViewHolder(holder: BindingViewHolder<ItemWorkBinding>, position: Int) {
-        val viewType = getItemViewType(position);
-        if (viewType == ViewType.FOOTER.num) {
-            return
+    class WorkFeedDiffCallback: DiffUtil.ItemCallback<WorkFeed>() {
+        override fun areItemsTheSame(oldItem: WorkFeed, newItem: WorkFeed): Boolean {
+            return oldItem.id == newItem.id
         }
-        val item = items[position]
-        holder.binding?.root?.setOnClickListener {
-            _onClick.postValue(WorkClickItem(item, holder.binding.imageView))
+
+        override fun areContentsTheSame(oldItem: WorkFeed, newItem: WorkFeed): Boolean {
+            return oldItem == newItem
         }
-        (holder.binding as ItemWorkBinding).apply {
-            work = item
-            imageView.setImage(item.imageUrl)
+    }
+
+    private val _onClick = MutableLiveData<WorkFeed>()
+    val onClick: LiveData<WorkFeed> = _onClick
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkFeedViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return WorkFeedViewHolder(ItemWorkBinding.inflate(inflater, parent, false))
+    }
+
+    override fun onBindViewHolder(holder: WorkFeedViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
+        holder.binding.root.setOnClickListener {
+            _onClick.postValue(item)
         }
     }
 
 }
+
