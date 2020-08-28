@@ -1,6 +1,7 @@
 package com.okysoft.infra
 
 import android.app.Application
+import com.apollographql.apollo.ApolloClient
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.okysoft.data.WatchKind
@@ -86,8 +87,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideEpisodeRepository(client: Retrofit): EpisodeRepository {
-        return EpisodeRepositoryImpl(client)
+    fun provideEpisodeRepository(client: Retrofit, apolloClient: ApolloClient): EpisodeRepository {
+        return EpisodeRepositoryImpl(client, apolloClient)
     }
 
     @Singleton
@@ -142,8 +143,23 @@ class InfraModule {
 
     @Singleton
     @Provides
+    fun provideApolloClient(okHttpClient: OkHttpClient): ApolloClient {
+        return ApolloClient.builder()
+            .serverUrl("https://api.annict.com/graphql")
+            .okHttpClient(okHttpClient)
+            .build()
+    }
+
+    @Singleton
+    @Provides
     fun createCoroutineContext(): CoroutineContext {
         return Dispatchers.Default
+    }
+
+    @Singleton
+    @Provides
+    fun createWorkFeedRepository(apolloClient: ApolloClient): WorkFeedRepository {
+        return WorkFeedRepositoryImpl(apolloClient)
     }
 
 }
