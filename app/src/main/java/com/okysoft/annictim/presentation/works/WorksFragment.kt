@@ -70,11 +70,11 @@ class WorksFragment : Fragment(), LoadMoreScrollListener.Listener {
         }
         viewModel.works.observe(viewLifecycleOwner, Observer {
             binding.swipeRefresh.isRefreshing = false
-            adapter.updateItem(it ?: listOf<Work>())
+            adapter.submitList(it)
         })
         adapter.onClick.observe(viewLifecycleOwner, Observer {
             it?.let {
-                startActivity(WorkDetailActivity.createIntent(activity!!, it.work))
+//                startActivity(WorkDetailActivity.createIntent(requireActivity(), it))
             }
         })
     }
