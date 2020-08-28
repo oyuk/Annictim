@@ -14,8 +14,6 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
-import com.okysoft.annictim.presentation.workDetail.WorkDetailActivity
-import com.okysoft.domain.model.Work
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,10 +23,10 @@ class WorksFragment : Fragment(), LoadMoreScrollListener.Listener {
     private lateinit var binding: FragmentWorksBinding
     private val adapter = WorksAdapter()
 
-    val workRequestParams: com.okysoft.data.WorkRequestParams
+    private val workRequestParams: com.okysoft.data.WorkRequestParams
         get() =  arguments?.getParcelable(REQUEST_PARAM_MODEL) ?: com.okysoft.data.WorkRequestParams(season = null)
 
-    val position: Int?
+    private val position: Int?
         get() = arguments?.getInt(POSITION)
 
     @Inject lateinit var factory: WorksViewModel.Factory
