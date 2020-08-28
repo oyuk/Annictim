@@ -83,4 +83,4 @@ fastlane/readme.md
 app/api-key.properties
 
 
-app/src/main/graphql/com/okysoft/annictim/ApolloApi/schema.json
+infra/src/main/graphql/com/okysoft/infra/schema.json
