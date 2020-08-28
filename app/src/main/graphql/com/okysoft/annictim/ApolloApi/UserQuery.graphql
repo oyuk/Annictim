@@ -1,7 +1,0 @@
-query Me {
-  viewer {
-    username
-    name
-    recordsCount
-  }
-}
