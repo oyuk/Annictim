@@ -1,7 +1,8 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.infra.response.UserResponse
 import com.okysoft.domain.model.User
+import com.okysoft.infra.fragment.Work
+import com.okysoft.infra.response.UserResponse
 
 class UserTranslator: Translator<UserResponse, User> {
 
