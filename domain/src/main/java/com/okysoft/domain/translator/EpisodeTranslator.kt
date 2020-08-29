@@ -1,14 +1,13 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.infra.response.EpisodeResponse
 import com.okysoft.domain.model.Episode
 
-class EpisodeTranslator: Translator<EpisodeResponse, Episode> {
+class EpisodeTranslator: Translator<com.okysoft.infra.impl.Episode, Episode> {
 
-    override fun translate(response: EpisodeResponse): Episode {
+    override fun translate(response: com.okysoft.infra.impl.Episode): Episode {
         return Episode(
             id = response.id,
-            numberText = response.numberText,
+            numberText = response.numberText ?: "",
             title = response.title ?: ""
         )
     }

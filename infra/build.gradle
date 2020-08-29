@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-
+apply plugin: "com.apollographql.apollo"
 
 android {
     compileSdkVersion 28
@@ -35,6 +35,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    apollo {
+        // instruct the compiler to generate Kotlin models
+        generateKotlinModels.set(true)
+
+    }
+
 }
 
 dependencies {
@@ -63,6 +73,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.28-alpha"
     kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
 
-    implementation project(":data")
 
+    implementation "com.apollographql.apollo:apollo-runtime:2.2.0"
+    implementation "com.apollographql.apollo:apollo-coroutines-support:2.2.0"
+
+    implementation project(":data")
+    implementation project(":common")
 }

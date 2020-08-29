@@ -9,7 +9,7 @@
     <data>
         <variable
             name="work"
-            type="com.okysoft.domain.model.Work"
+            type="com.okysoft.infra.fragment.WorkFeed"
             />
     </data>
 
@@ -68,7 +68,6 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
                         android:textColor="@color/colorAccent"
-                        android:text="@{work.seasonNameText}"
                         tools:text="2019年冬"
                         />
 

@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.okysoft.annictim.extension.toLiveData
-import com.okysoft.common.Paginator
+import com.okysoft.common.Either
+import com.okysoft.common.PaginatablePaginator
 import com.okysoft.data.WorkRequestParams
-import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.WorkUseCase
+import com.okysoft.infra.fragment.WorkFeed
+import com.okysoft.infra.repository.WorkFeedRepository
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import io.reactivex.processors.PublishProcessor
@@ -18,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class WorksViewModel @AssistedInject constructor(
     useCase: WorkUseCase,
+    private val repository: WorkFeedRepository,
     @Assisted workRequestParams: WorkRequestParams
 ) : ViewModel() {
 
@@ -42,23 +45,25 @@ class WorksViewModel @AssistedInject constructor(
     private val refresh = PublishProcessor.create<Unit>()
 
     @ExperimentalCoroutinesApi
-    private val paginator = Paginator<Work>(loadMore, refresh) { page, callback ->
+    private val paginator = PaginatablePaginator<WorkFeed>(loadMore, refresh) { cursor, callback ->
         viewModelScope.launch {
             try {
-                useCase.request(workRequestParams.copy(page = page)).collect {
-                    callback(Result.success(it))
+            repository.fetch(workRequestParams.season ?: "", cursor)
+                .collect {
+                    callback(Either.Right(it))
                 }
             } catch (throwable: Throwable) {
-                callback(Result.failure(throwable))
+                callback(Either.Left(throwable))
             }
         }
     }
 
     @ExperimentalCoroutinesApi
-    val works: LiveData<List<Work>> = paginator.items.toLiveData()
+    val works: LiveData<List<WorkFeed>> = paginator.items.toLiveData()
 
     fun refresh() {
         refresh.onNext(Unit)
     }
+
 
 }

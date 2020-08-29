@@ -46,11 +46,11 @@ data class CastResponse(
         @SerializedName("height_en")
         val heightEn: String?,
         @SerializedName("id")
-        val id: Int?,
+        val id: Int,
         @SerializedName("kind")
         val kind: String?,
         @SerializedName("name")
-        var name: String?,
+        var name: String,
         @SerializedName("name_en")
         val nameEn: String?,
         @SerializedName("name_kana")

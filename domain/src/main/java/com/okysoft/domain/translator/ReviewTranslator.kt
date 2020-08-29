@@ -1,7 +1,7 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.infra.response.ReviewResponse
 import com.okysoft.domain.model.Review
+import com.okysoft.infra.response.ReviewResponse
 
 class ReviewTranslator: Translator<ReviewResponse, Review> {
 

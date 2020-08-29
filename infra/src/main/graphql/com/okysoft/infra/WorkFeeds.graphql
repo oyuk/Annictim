@@ -1,0 +1,31 @@
+fragment WorkFeed on Work {
+  id
+  annictId
+  title
+  seasonName
+  seasonYear
+  media
+  watchersCount
+  reviewsCount
+  image {
+    recommendedImageUrl
+  }
+}
+
+fragment PageInfo on PageInfo {
+  endCursor
+  startCursor
+  hasNextPage
+  hasPreviousPage
+}
+
+query WorkFeeds($seasons: String!, $after: String) {
+  searchWorks(seasons: [$seasons], orderBy: {field: WATCHERS_COUNT, direction: DESC}, first: 20, after: $after) {
+    pageInfo {
+      ...PageInfo
+    }
+    nodes {
+      ...WorkFeed
+    }
+  }
+}

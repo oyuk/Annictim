@@ -1,9 +1,8 @@
 package com.okysoft.infra.repository
 
+import com.okysoft.infra.fragment.Work
 import com.okysoft.infra.response.WorksResponse
-import com.okysoft.infra.AnnictService
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 interface WorkRepository {
 
@@ -12,5 +11,7 @@ interface WorkRepository {
     suspend fun me(requestParamModel: com.okysoft.data.WorkRequestParams): Flow<WorksResponse>
 
     suspend fun request(requestParams: com.okysoft.data.WorkRequestParams, page: Int): Flow<WorksResponse>
+
+    fun getWork(id: Int): Flow<Work>
 
 }

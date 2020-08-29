@@ -12,7 +12,7 @@ Detail |
 
 
 ## development
-### How to setup
+## How to setup
 create `local.properties`
 
 ```
@@ -21,3 +21,8 @@ clientKey=YOUR_CLIENT_KEY
 ```
 
 put `local.properties` to root directory.
+
+### Create schema.json
+```
+apollo-codegen download-schema https://api.annict.com/graphql --output infra/src/main/graphql/com/okysoft/infra/schema.json --header "Authorization: Bearer YOUR_OUTH_TOKEN"
+```

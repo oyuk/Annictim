@@ -1,7 +1,6 @@
-query Me {
+query First {
   viewer {
     username
     name
-    recordsCount
   }
 }
