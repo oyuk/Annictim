@@ -18,37 +18,64 @@ import com.okysoft.annictim.databinding.ActivityWorkDetailBinding
 import com.okysoft.annictim.extension.setImage
 import com.okysoft.annictim.presentation.episode.EpisodesFragment
 import com.okysoft.annictim.presentation.review.ReviewsFragment
-import com.okysoft.domain.model.Work
+import com.okysoft.domain.model.WorkDetail
+import com.okysoft.domain.usecase.WorkDetailUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class WorkDetailActivity : AppCompatActivity() {
+class WorkDetailActivity : AppCompatActivity(), CoroutineScope {
 
-    val work: Work by lazy { intent.getParcelableExtra<Work>(WORK_KEY) }
+    private val workId: Int by lazy { intent.getIntExtra(WORK_ID_KEY, 0) }
     private lateinit var binding: ActivityWorkDetailBinding
+    @Inject lateinit var usecase: WorkDetailUseCase
+
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
     companion object {
 
-        private val WORK_KEY = "WORK_KEY"
+        private val WORK_ID_KEY = "WORK_ID_KEY"
 
-        fun createIntent(activity: Context, work: Work): Intent {
+        fun createIntent(activity: Context, workId: Int): Intent {
             return Intent(activity, WorkDetailActivity::class.java).apply {
-                putExtra(WORK_KEY, work)
+                putExtra(WORK_ID_KEY, workId)
             }
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_detail)
         binding =  DataBindingUtil.setContentView(this, R.layout.activity_work_detail);
-        binding.imageView.setImage(work.imageUrl)
-        binding.toolbar.title = ""
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        job = Job()
+        launch {
+            usecase.get(workId).collect {
+               setupView(it)
+            }
+        }
+    }
 
-        val pagerAdapter = PagerAdapter(this, work)
+    private fun setupView(workDetail: WorkDetail) {
+        binding.imageView.setImage(workDetail.imageUrl)
+        binding.toolbar.title = ""
+
+        val pagerAdapter = PagerAdapter(this, workDetail)
         binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = pagerAdapter.getPageTitle(position)
@@ -73,12 +100,11 @@ class WorkDetailActivity : AppCompatActivity() {
             } else {
                 if (inToolbar) {
                     transition.startTransition(200)
-                    binding.toolbar.title = work.title
+                    binding.toolbar.title = workDetail.title
                     inToolbar = false
                 }
             }
         })
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -91,7 +117,7 @@ class WorkDetailActivity : AppCompatActivity() {
     }
 
     private class PagerAdapter(fragmentActivity: FragmentActivity,
-                                     private val work: Work) : FragmentStateAdapter(fragmentActivity) {
+                               private val work: WorkDetail) : FragmentStateAdapter(fragmentActivity) {
 
         override fun getItemCount() = if (work.noEpisodes) 2 else 3
 
@@ -116,14 +142,14 @@ class WorkDetailActivity : AppCompatActivity() {
             if (work.noEpisodes) {
                 return when (position) {
                     0 -> WorkDetailFragment.newInstance(work)
-                    1 -> ReviewsFragment.newInstance(work.id)
+                    1 -> ReviewsFragment.newInstance(work.annictId)
                     else -> Fragment()
                 }
             }
             return when (position) {
                 0 -> WorkDetailFragment.newInstance(work)
-                1 -> EpisodesFragment.newInstance(work.id)
-                2 -> ReviewsFragment.newInstance(work.id)
+                1 -> EpisodesFragment.newInstance(work.annictId)
+                2 -> ReviewsFragment.newInstance(work.annictId)
                 else -> Fragment()
             }
         }

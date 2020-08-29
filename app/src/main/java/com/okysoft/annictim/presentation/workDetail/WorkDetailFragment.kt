@@ -19,19 +19,19 @@ import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.presentation.cast.CastsAdapter
 import com.okysoft.annictim.presentation.staff.StaffAdapter
 import com.okysoft.data.WatchKind
-import com.okysoft.domain.model.Work
+import com.okysoft.domain.model.WorkDetail
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class WorkDetailFragment : Fragment() {
 
-    val work: Work
-        get() =  arguments?.getParcelable(WORK) ?: Work.default()
+    val work: WorkDetail
+        get() =  arguments?.getParcelable(WORK) ?: WorkDetail.default()
 
     @Inject lateinit var factory: WorkViewModel.Factory
     private val viewModel: WorkViewModel by viewModels {
-        WorkViewModel.provideFactory(factory, work)
+        WorkViewModel.provideFactory(factory, work.annictId)
     }
 
     private lateinit var binding: FragmentWorkDetailBinding
@@ -46,33 +46,35 @@ class WorkDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val work = this.work
+        val work = this.work ?: return
         binding.title.text = work.title
-        binding.media.text = "${work.mediaText} ${work.seasonNameText}"
+//        binding.media.text = "${work.mediaText} ${work.seasonNameText}"
 
-        if (work.twitterUsername.isNotBlank()) {
+        if (!work.twitterUsername.isNullOrBlank()) {
             binding.twitterLayout.visibility = View.VISIBLE
             binding.twitterLayout.setOnClickListener {
                 openUrl("https://twitter.com/${work.twitterUsername}")
             }
         }
-        if (work.twitterHashtag.isNotBlank()) {
+        if (!work.twitterHashtag.isNullOrBlank()) {
             binding.hashtagLayout.visibility = View.VISIBLE
             val url = "https://twitter.com/search?q=${work.twitterHashtag}"
             binding.hashtagLayout.setOnClickListener {
                 openUrl(url)
             }
         }
-        if (work.wikipediaUrl.isNotBlank()) {
+
+        work.wikipediaUrl?.let { url ->
             binding.wikipediaLayout.visibility = View.VISIBLE
             binding.wikipediaLayout.setOnClickListener {
-                openUrl(work.wikipediaUrl)
+                openUrl(url)
             }
         }
-        if (work.officialSiteUrl.isNotBlank()) {
+
+        work.officialSiteUrl?.let { url ->
             binding.internetLayout.visibility = View.VISIBLE
             binding.internetLayout.setOnClickListener {
-                openUrl(work.officialSiteUrl)
+                openUrl(url)
             }
         }
 
@@ -88,7 +90,7 @@ class WorkDetailFragment : Fragment() {
         binding.castRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         binding.castRecyclerView.adapter = castAdapter
 
-        viewModel.casts.observe(this, Observer {
+        viewModel.casts.observe(viewLifecycleOwner, Observer {
             castAdapter.items.accept(it)
         })
 
@@ -124,7 +126,7 @@ class WorkDetailFragment : Fragment() {
         val TAG = WorkDetailFragment::class.java.simpleName
         const val WORK = "WORK"
 
-        fun newInstance(work: Work): WorkDetailFragment = WorkDetailFragment().apply {
+        fun newInstance(work: WorkDetail): WorkDetailFragment = WorkDetailFragment().apply {
             val args = Bundle().apply {
                 putParcelable(WORK, work)
             }

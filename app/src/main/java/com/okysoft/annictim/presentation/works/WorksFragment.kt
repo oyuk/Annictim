@@ -14,6 +14,7 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorksBinding
 import com.okysoft.annictim.extension.LoadMoreScrollListener
 import com.okysoft.annictim.extension.addOnLoadMoreListener
+import com.okysoft.annictim.presentation.workDetail.WorkDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -74,7 +75,7 @@ class WorksFragment : Fragment(), LoadMoreScrollListener.Listener {
         })
         adapter.onClick.observe(viewLifecycleOwner, Observer {
             it?.let {
-//                startActivity(WorkDetailActivity.createIntent(requireActivity(), it))
+                startActivity(WorkDetailActivity.createIntent(requireActivity(), it.annictId))
             }
         })
     }
