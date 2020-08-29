@@ -75,8 +75,8 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideWorkRepository(retrofit: Retrofit): WorkRepository {
-        return WorkRepositoryImpl(retrofit)
+    fun provideWorkRepository(retrofit: Retrofit, apolloClient: ApolloClient): WorkRepository {
+        return WorkRepositoryImpl(retrofit, apolloClient)
     }
 
     @Singleton

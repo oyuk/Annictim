@@ -15,6 +15,11 @@ import dagger.hilt.android.components.ApplicationComponent
 class UseCaseModule {
 
     @Provides
+    fun provideWorkDetailUseCase(repository: WorkRepository): WorkDetailUseCase {
+        return WorkDetailUseCaseImpl(repository, WorkDetailTranslator())
+    }
+
+    @Provides
     fun provideWorkUseCase(repository: WorkRepository): WorkUseCase {
         return WorkUseCaseImpl(repository, WorkTranslator())
     }
