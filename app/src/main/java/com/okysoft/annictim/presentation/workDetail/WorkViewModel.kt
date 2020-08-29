@@ -8,7 +8,6 @@ import com.okysoft.data.WatchKind
 import com.okysoft.data.WorkStatusRequestParams
 import com.okysoft.domain.model.Cast
 import com.okysoft.domain.model.Staff
-import com.okysoft.domain.model.Work
 import com.okysoft.domain.usecase.CastUseCase
 import com.okysoft.domain.usecase.StaffUseCase
 import com.okysoft.domain.usecase.WorkUseCase
@@ -26,22 +25,22 @@ class WorkViewModel @AssistedInject constructor(
     private val castUseCase: CastUseCase,
     private val staffUseCase: StaffUseCase,
     private val meRepository: com.okysoft.infra.repository.MeRepository,
-    @Assisted work: Work
+    @Assisted workId: Int
 ) : ViewModel() {
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(work: Work): WorkViewModel
+        fun create(workId: Int): WorkViewModel
     }
 
     companion object {
         fun provideFactory(
             factory: Factory,
-            work: Work
+            workId: Int
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return factory.create(work) as T
+                return factory.create(workId) as T
             }
         }
     }
@@ -58,7 +57,7 @@ class WorkViewModel @AssistedInject constructor(
     init {
         viewModelScope.launch {
             try {
-                workUseCase.getWatchKind(workId = work.id).collect {
+                workUseCase.getWatchKind(workId = workId).collect {
                     _workKind.postValue(it)
                 }
             } catch (throwable: Throwable) {
@@ -70,7 +69,7 @@ class WorkViewModel @AssistedInject constructor(
             try {
                 castUseCase.get(CastRequestParams(
                     fields = CastRequestParams.FieldType.All,
-                    workId = work.id)).collect {
+                    workId = workId)).collect {
                     _casts.postValue(it)
                 }
             } catch (throwable: Throwable) {
@@ -82,7 +81,7 @@ class WorkViewModel @AssistedInject constructor(
             try {
                 staffUseCase.get(StaffRequestParams(
                     fields = StaffRequestParams.FieldType.Minimum,
-                    workId = work.id)).collect {
+                    workId = workId)).collect {
                     _staffs.postValue(it)
                 }
             } catch (throwable: Throwable) {
@@ -96,7 +95,7 @@ class WorkViewModel @AssistedInject constructor(
             .subscribeBy {
                 viewModelScope.launch {
                     try {
-                        meRepository.updateStatus(WorkStatusRequestParams(work.id, it))
+                        meRepository.updateStatus(WorkStatusRequestParams(workId, it))
                     } catch (trowable: Throwable) {
                         Log.e("", trowable.toString())
                     }
