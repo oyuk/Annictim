@@ -55,12 +55,12 @@ dependencies {
     kapt("com.google.dagger:dagger-android-processor:${Dependencies.Version.daggerVersion}")
 
     implementation("com.google.code.gson:gson:2.8.6")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.1.1")
-    implementation("com.squareup.retrofit2:retrofit:2.8.1")
-    implementation("com.squareup.retrofit2:converter-gson:2.8.1")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.1")
+    implementation("com.squareup.retrofit2:retrofit:2.8.2")
+    implementation("com.squareup.retrofit2:converter-gson:2.8.2")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.8.0")
 
 
     implementation("com.google.dagger:hilt-android:2.31.2-alpha")
