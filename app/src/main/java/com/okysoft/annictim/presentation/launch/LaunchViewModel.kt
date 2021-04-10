@@ -1,12 +1,14 @@
 package com.okysoft.annictim.presentation.launch
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.okysoft.annictim.MeStore
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LaunchViewModel @ViewModelInject constructor(meStore: MeStore): ViewModel() {
+@HiltViewModel
+class LaunchViewModel @Inject constructor(meStore: MeStore): ViewModel() {
 
 //    class Factory @Inject constructor(
 //            private val meStore: MeStore

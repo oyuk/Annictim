@@ -15,7 +15,7 @@ import com.okysoft.annictim.presentation.user.UserFragment
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 
 @Navigator.Name("custom_fragment")
 class CustomNavigator(
@@ -70,7 +70,7 @@ class CustomNavHostFragment: NavHostFragment() {
     private lateinit var meStore: MeStore
 
     @EntryPoint
-    @InstallIn(ApplicationComponent::class)
+    @InstallIn(SingletonComponent::class)
     interface CustomNavHostFragmentEntryPoint {
         fun meStore(): MeStore
     }
