@@ -9,8 +9,9 @@ import com.okysoft.common.Paginator
 import com.okysoft.data.CastRequestParams
 import com.okysoft.domain.model.Cast
 import com.okysoft.domain.usecase.CastUseCase
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -22,7 +23,7 @@ class CastsViewModel @AssistedInject constructor(
     @Assisted castRequestParams: CastRequestParams
 ) : ViewModel() {
 
-    @AssistedInject.Factory
+    @AssistedFactory
     interface Factory {
         fun create(castRequestParams: CastRequestParams): CastsViewModel
     }

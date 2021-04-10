@@ -4,8 +4,9 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.okysoft.domain.model.Episode
 import com.okysoft.domain.usecase.EpisodeUseCase
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -14,7 +15,7 @@ class EpisodesViewModel @AssistedInject constructor (
     private val useCase: EpisodeUseCase
 ): ViewModel() {
 
-    @AssistedInject.Factory
+    @AssistedFactory
     interface Factory {
         fun create(workId: Int): EpisodesViewModel
     }

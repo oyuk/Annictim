@@ -9,8 +9,9 @@ import com.okysoft.common.Paginator
 import com.okysoft.data.ProgramRequestParams
 import com.okysoft.domain.model.Program
 import com.okysoft.domain.usecase.ProgramUseCase
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -21,7 +22,7 @@ class ProgramsViewModel @AssistedInject constructor(
     @Assisted val requestParams: ProgramRequestParams
 ) : ViewModel() {
 
-    @AssistedInject.Factory
+    @AssistedFactory
     interface Factory {
         fun create(requestParams: ProgramRequestParams): ProgramsViewModel
     }

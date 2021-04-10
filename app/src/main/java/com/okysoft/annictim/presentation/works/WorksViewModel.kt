@@ -11,8 +11,9 @@ import com.okysoft.data.WorkRequestParams
 import com.okysoft.domain.usecase.WorkUseCase
 import com.okysoft.infra.fragment.WorkFeed
 import com.okysoft.infra.repository.WorkFeedRepository
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -24,7 +25,7 @@ class WorksViewModel @AssistedInject constructor(
     @Assisted workRequestParams: WorkRequestParams
 ) : ViewModel() {
 
-    @AssistedInject.Factory
+    @AssistedFactory
     interface Factory {
         fun create(workRequestParams: WorkRequestParams): WorksViewModel
     }

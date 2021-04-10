@@ -11,8 +11,9 @@ import com.okysoft.domain.model.Staff
 import com.okysoft.domain.usecase.CastUseCase
 import com.okysoft.domain.usecase.StaffUseCase
 import com.okysoft.domain.usecase.WorkUseCase
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.rxkotlin.addTo
@@ -28,7 +29,7 @@ class WorkViewModel @AssistedInject constructor(
     @Assisted workId: Int
 ) : ViewModel() {
 
-    @AssistedInject.Factory
+    @AssistedFactory
     interface Factory {
         fun create(workId: Int): WorkViewModel
     }
