@@ -8,7 +8,6 @@ import com.okysoft.annictim.extension.toLiveData
 import com.okysoft.common.Either
 import com.okysoft.common.PaginatablePaginator
 import com.okysoft.data.WorkRequestParams
-import com.okysoft.domain.usecase.WorkUseCase
 import com.okysoft.infra.fragment.WorkFeed
 import com.okysoft.infra.repository.WorkFeedRepository
 import dagger.assisted.Assisted
@@ -20,7 +19,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class WorksViewModel @AssistedInject constructor(
-    useCase: WorkUseCase,
     private val repository: WorkFeedRepository,
     @Assisted workRequestParams: WorkRequestParams
 ) : ViewModel() {
