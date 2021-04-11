@@ -97,7 +97,7 @@ dependencies {
 
 
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-reactivestreams:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
 
     implementation("com.github.bumptech.glide:glide:4.11.0")
