@@ -49,7 +49,8 @@ dependencies {
 
     dagger()
 
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation(Dependencies.gson)
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.1")

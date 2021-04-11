@@ -36,7 +36,7 @@ dependencies {
 
     testImplementation("junit:junit:4.13.1")
 
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation(Dependencies.gson)
 
     compileOnly("javax.annotation:jsr250-api:1.0")
 

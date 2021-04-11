@@ -25,7 +25,8 @@ object Dependencies {
         const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Version}"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.8.0"
     }
-    
+
+    const val gson = "com.google.code.gson:gson:2.8.6"
 }
 
 fun DependencyHandler.retrofit() {
