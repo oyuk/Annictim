@@ -4,5 +4,6 @@ object Dependencies {
         const val targetSdkVersion = "30"
 
         const val daggerVersion = "2.31.2"
+        const val coroutinesVersion = "1.4.2"
     }
 }
