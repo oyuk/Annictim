@@ -110,8 +110,8 @@ dependencies {
     implementation("android.arch.navigation:navigation-fragment-ktx:1.0.0")
     implementation("android.arch.navigation:navigation-ui-ktx:1.0.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Version.coroutinesVersion}")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Dependencies.Version.coroutinesVersion}")
+    implementation(Dependencies.Coroutines.core)
+    implementation(Dependencies.Coroutines.android)
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.1")

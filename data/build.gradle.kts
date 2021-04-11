@@ -38,7 +38,7 @@ dependencies {
 
     implementation(Dependencies.gson)
 
-    compileOnly("javax.annotation:jsr250-api:1.0")
+    compileOnly(Dependencies.Dagger.annotation)
 
     implementation(project(":common"))
 }

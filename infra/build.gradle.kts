@@ -61,12 +61,8 @@ dependencies {
     testImplementation("junit:junit:4.13.1")
 
     retrofit()
-
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.1")
+    coroutines()
     implementation(Dependencies.gson)
-
     dagger()
 
     implementation("com.google.dagger:hilt-android:2.31.2-alpha")

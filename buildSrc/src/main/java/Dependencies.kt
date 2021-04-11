@@ -4,9 +4,6 @@ object Dependencies {
     object Version {
         const val kotlin = "1.4.32"
         const val targetSdkVersion = "30"
-
-
-        const val coroutinesVersion = "1.4.2"
     }
 
     object Dagger {
@@ -26,7 +23,20 @@ object Dependencies {
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.8.0"
     }
 
+    object Coroutines {
+        private const val Version = "1.4.2"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version}"
+        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version}"
+        const val rx = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${Version}"
+    }
+
     const val gson = "com.google.code.gson:gson:2.8.6"
+}
+
+fun DependencyHandler.coroutines() {
+    implementation(Dependencies.Coroutines.core)
+    implementation(Dependencies.Coroutines.android)
+    implementation(Dependencies.Coroutines.rx)
 }
 
 fun DependencyHandler.retrofit() {
