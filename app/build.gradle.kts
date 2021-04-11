@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId("com.okysoft.annictim")
         minSdkVersion(24)
-        targetSdkVersion(29)
+        targetSdkVersion(Dependencies.Version.targetSdkVersion)
         versionCode = versionMajor * 100 + versionMinor * 10 + versionPatch
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"

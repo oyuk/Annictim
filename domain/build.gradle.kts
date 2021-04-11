@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         minSdkVersion(22)
-        targetSdkVersion(28)
+        targetSdkVersion(Dependencies.Version.targetSdkVersion)
         versionCode = 1
         versionName = "1.0"
 
@@ -53,10 +53,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.1")
-    implementation("com.squareup.retrofit2:retrofit:2.8.2")
-    implementation("com.squareup.retrofit2:converter-gson:2.8.2")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.8.0")
-
+    retrofit()
 
     implementation("com.google.dagger:hilt-android:2.31.2-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.31.2-alpha")

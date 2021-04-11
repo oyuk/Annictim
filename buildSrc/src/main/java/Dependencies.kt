@@ -18,7 +18,20 @@ object Dependencies {
         const val daggerCompiler = "com.google.dagger:dagger-compiler:${Version}"
         const val daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:${Version}"
     }
+
+    object Retrofit {
+        private const val Version = "2.8.2"
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Version}"
+        const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Version}"
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.8.0"
+    }
     
+}
+
+fun DependencyHandler.retrofit() {
+    implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.Retrofit.retrofitConverterGson)
+    implementation(Dependencies.Retrofit.loggingInterceptor)
 }
 
 fun DependencyHandler.dagger() {
