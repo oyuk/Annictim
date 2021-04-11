@@ -47,12 +47,7 @@ dependencies {
     implementation(project(":infra"))
     implementation(project(":common"))
 
-    compileOnly("javax.annotation:jsr250-api:1.0")
-    implementation("com.google.dagger:dagger:${Dependencies.Version.daggerVersion}")
-    implementation("com.google.dagger:dagger-android:${Dependencies.Version.daggerVersion}")
-    implementation("com.google.dagger:dagger-android-support:${Dependencies.Version.daggerVersion}")
-    kapt("com.google.dagger:dagger-compiler:${Dependencies.Version.daggerVersion}")
-    kapt("com.google.dagger:dagger-android-processor:${Dependencies.Version.daggerVersion}")
+    dagger()
 
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")

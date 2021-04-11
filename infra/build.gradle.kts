@@ -69,12 +69,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.1")
     implementation("com.google.code.gson:gson:2.8.6")
 
-    compileOnly("javax.annotation:jsr250-api:1.0")
-    implementation("com.google.dagger:dagger:${Dependencies.Version.daggerVersion}")
-    implementation("com.google.dagger:dagger-android:${Dependencies.Version.daggerVersion}")
-    implementation("com.google.dagger:dagger-android-support:${Dependencies.Version.daggerVersion}")
-    kapt("com.google.dagger:dagger-compiler:${Dependencies.Version.daggerVersion}")
-    kapt("com.google.dagger:dagger-android-processor:${Dependencies.Version.daggerVersion}")
+    dagger()
 
     implementation("com.google.dagger:hilt-android:2.31.2-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.31.2-alpha")

@@ -87,14 +87,7 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxkotlin:2.2.0")
     implementation("com.jakewharton.rxrelay2:rxrelay:2.0.0")
 
-
-    compileOnly("javax.annotation:jsr250-api:1.0")
-    implementation("com.google.dagger:dagger:${Dependencies.Version.daggerVersion}")
-    implementation("com.google.dagger:dagger-android:${Dependencies.Version.daggerVersion}")
-    implementation("com.google.dagger:dagger-android-support:${Dependencies.Version.daggerVersion}")
-    kapt("com.google.dagger:dagger-compiler:${Dependencies.Version.daggerVersion}")
-    kapt("com.google.dagger:dagger-android-processor:${Dependencies.Version.daggerVersion}")
-
+    dagger()
 
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1")
