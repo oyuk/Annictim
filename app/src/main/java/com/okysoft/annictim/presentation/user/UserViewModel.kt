@@ -10,7 +10,10 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,15 +39,15 @@ class UserViewModel @AssistedInject constructor(
         }
     }
 
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User> = _user
+    private val _user = MutableStateFlow<User?>(null)
+    val user: LiveData<User> = _user.filterNotNull().asLiveData()
 
     fun fetch() {
         viewModelScope.launch {
              try {
                  userUseCase.get(userId).collect {
                      val user = it.first()
-                     _user.postValue(user)
+                     _user.value = user
                  }
              } catch (throwable: Throwable) {
                  Log.d("", throwable.toString())
