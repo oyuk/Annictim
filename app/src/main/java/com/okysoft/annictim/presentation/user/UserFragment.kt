@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,7 +17,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UserFragment : Fragment() {
+class UserFragment(private val userId: Int,
+                   private val isMe: Boolean,
+                   private var sharedElementId: String?) : Fragment() {
+
+    class UserFragmentFactory(private val userId: Int,
+                              private val isMe: Boolean,
+                              private var sharedElementId: String?): FragmentFactory() {
+        override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
+            if (className == UserFragment::class.java.name) {
+                return UserFragment(userId, isMe, sharedElementId)
+            }
+            return super.instantiate(classLoader, className)
+        }
+    }
 
     private lateinit var binding: FragmentUserBinding
     private val viewModel: UserViewModel by viewModels()
@@ -28,7 +42,7 @@ class UserFragment : Fragment() {
 //        if (arguments!!.getBoolean(IS_ME)) {
 //            binding.toolbar.inflateMenu(R.menu.toolbar_me)
 //        }
-        viewModel.userId = arguments!!.getInt(USER_ID)
+        viewModel.userId = userId
         viewModel.user.observe(viewLifecycleOwner, Observer {
             binding.user = it
         })
@@ -93,18 +107,6 @@ class UserFragment : Fragment() {
 
     companion object {
         val TAG = UserFragment::class.java.simpleName
-        const val USER_ID = "USER_ID"
-        const val SHARED_ELEMENT_ID = "SHARED_ELEMENT_ID"
-        const val IS_ME = "IS_ME"
-
-        fun newInstance(userId: Int, sharedElementId: String, isMe: Boolean): UserFragment = UserFragment().apply {
-            val args = Bundle().apply {
-                putInt(USER_ID, userId)
-                putString(SHARED_ELEMENT_ID, sharedElementId)
-                putBoolean(IS_ME, isMe)
-            }
-            arguments = args
-        }
     }
 
 }

@@ -47,10 +47,7 @@ class CustomNavigator(
         val className = destination.className
         return when (className) {
             UserFragment::class.java.name -> {
-                val b = Bundle().also {
-                    it.putInt("USER_ID", userId)
-                }
-                instantiateFragment(context, manager, className, b)
+                UserFragment(userId, true, null)
             }
             ProgramsFragment::class.java.name -> {
                 val b = Bundle().also {

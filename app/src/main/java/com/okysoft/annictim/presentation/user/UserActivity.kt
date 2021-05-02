@@ -49,11 +49,13 @@ class UserActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_user)
-
         val userId = intent.getIntExtra(USER_ID, -1)
         val sharedElementId = intent.getStringExtra(SHARED_ELEMENT_ID)
         val isMe = meStore.me.blockingFirst()?.id == userId
+        val fragmentFactory = UserFragment.UserFragmentFactory(userId, isMe, sharedElementId)
+        supportFragmentManager.fragmentFactory = UserFragment.UserFragmentFactory(userId, isMe, sharedElementId)
+
+        setContentView(R.layout.activity_user)
 
         binding.toolbar.title = getString(R.string.user)
         setSupportActionBar(binding.toolbar)
@@ -64,7 +66,7 @@ class UserActivity : BaseActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, UserFragment.newInstance(userId, sharedElementId, isMe))
+                    .replace(R.id.container, fragmentFactory.instantiate(classLoader, UserFragment::class.java.name))
                     .commit()
         }
     }
