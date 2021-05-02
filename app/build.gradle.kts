@@ -114,7 +114,7 @@ dependencies {
     implementation(Dependencies.Coroutines.android)
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.2")
 
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
