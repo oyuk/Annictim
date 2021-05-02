@@ -23,11 +23,6 @@ class UseCaseModule {
     @InstallIn(ViewModelComponent::class)
     class ViewModelUseCaseModule {
 
-        @Provides
-        @ViewModelScoped
-        fun provideUserUseCase(repository: com.okysoft.infra.repository.UserRepository): UserUseCase {
-            return UserUseCaseImpl(repository, UserTranslator())
-        }
 
     }
 
@@ -35,6 +30,13 @@ class UseCaseModule {
     @Module
     @InstallIn(ActivityComponent::class)
     class ActivityUseCaseModule {
+
+        @Provides
+        @ActivityScoped
+        fun provideUserUseCase(repository: com.okysoft.infra.repository.UserRepository): UserUseCase {
+            return UserUseCaseImpl(repository, UserTranslator())
+        }
+
 
         @Provides
         @ActivityScoped

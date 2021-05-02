@@ -2,28 +2,40 @@ package com.okysoft.annictim.presentation.user
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.okysoft.annictim.presentation.works.WorksViewModel
+import com.okysoft.data.WorkRequestParams
 import com.okysoft.domain.model.User
 import com.okysoft.domain.usecase.UserUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class UserViewModel @Inject constructor(
-    private val userUseCase: UserUseCase
+class UserViewModel @AssistedInject constructor(
+    private val userUseCase: UserUseCase,
+    @Assisted private val userId: Int
 ): ViewModel() {
 
-    class Factory @Inject constructor(
-        private val userUseCase: UserUseCase
-    ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return UserViewModel(userUseCase) as T
+    @AssistedFactory
+    interface Factory {
+        fun create(userId: Int): UserViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            userId: Int
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(userId) as T
+            }
         }
     }
 
-    var userId: Int = 0
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
 
