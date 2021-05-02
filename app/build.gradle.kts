@@ -74,7 +74,7 @@ dependencies {
     implementation( "androidx.cardview:cardview:1.0.0")
     implementation( "androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    testImplementation("junit:junit:4.13.1")
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test:runner:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
@@ -134,7 +134,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.31.2-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.31.2-alpha")
 
-    implementation("androidx.fragment:fragment-ktx:1.3.2")
+    implementation("androidx.fragment:fragment-ktx:1.3.3")
 
     implementation("com.apollographql.apollo:apollo-runtime:2.2.0")
 }
