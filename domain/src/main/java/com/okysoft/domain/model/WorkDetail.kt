@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.okysoft.infra.type.Media
 import com.okysoft.infra.type.SeasonName
 import com.okysoft.infra.type.StatusState
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WorkDetail(

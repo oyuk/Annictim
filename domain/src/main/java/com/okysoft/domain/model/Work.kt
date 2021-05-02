@@ -3,7 +3,7 @@ package com.okysoft.domain.model
 import android.os.Parcelable
 import com.okysoft.common.Diffable
 import com.okysoft.data.WatchKind
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Work(

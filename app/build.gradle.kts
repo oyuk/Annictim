@@ -4,7 +4,6 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("kotlin-android-extensions")
     id("com.google.android.gms.oss-licenses-plugin")
     id("androidx.navigation.safeargs.kotlin")
     id("dagger.hilt.android.plugin")
@@ -42,10 +41,6 @@ android {
     }
     buildFeatures {
         dataBinding = true
-    }
-    androidExtensions {
-        isExperimental = true
-        features = setOf("parcelize")
     }
     lintOptions {
         isAbortOnError = false
