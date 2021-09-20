@@ -65,8 +65,8 @@ dependencies {
     implementation(Dependencies.gson)
     dagger()
 
-    implementation("com.google.dagger:hilt-android:2.31.2-alpha")
-    kapt("com.google.dagger:hilt-android-compiler:2.31.2-alpha")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
 
     implementation("com.apollographql.apollo:apollo-runtime:2.2.0")
