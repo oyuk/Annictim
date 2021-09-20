@@ -2,7 +2,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object Dependencies {
     object Version {
-        const val kotlin = "1.4.32"
+        const val kotlin = "1.5.31"
         const val targetSdkVersion = "30"
     }
 
