@@ -56,7 +56,7 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.Version.kotlin}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31")
 
     testImplementation("junit:junit:4.13.2")
 
@@ -69,8 +69,8 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
 
-    implementation("com.apollographql.apollo:apollo-runtime:2.2.0")
-    implementation("com.apollographql.apollo:apollo-coroutines-support:2.2.0")
+    implementation("com.apollographql.apollo:apollo-runtime:2.5.9")
+    implementation("com.apollographql.apollo:apollo-coroutines-support:2.5.9")
 
     implementation(project(":data"))
     implementation(project(":common"))

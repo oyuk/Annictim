@@ -64,23 +64,23 @@ android {
 dependencies {
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.Version.kotlin}")
-    implementation( "androidx.appcompat:appcompat:1.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31")
+    implementation("androidx.appcompat:appcompat:1.3.1")
     implementation( "androidx.cardview:cardview:1.0.0")
-    implementation( "androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test:runner:1.3.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-    implementation("com.google.android.material:material:1.3.0")
+    implementation("com.google.android.material:material:1.4.0")
 
     implementation("androidx.browser:browser:1.3.0")
 
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("io.reactivex.rxjava2:rxjava:2.2.10")
-    implementation("io.reactivex.rxjava2:rxkotlin:2.2.0")
-    implementation("com.jakewharton.rxrelay2:rxrelay:2.0.0")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
+    implementation("com.jakewharton.rxrelay2:rxrelay:2.1.1")
 
     dagger()
 
@@ -88,15 +88,15 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
 
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 
-    testImplementation("org.powermock:powermock-core:2.0.0-beta.5")
-    testImplementation("org.powermock:powermock-module-junit4:2.0.0-beta.5")
-    testImplementation("org.powermock:powermock-api-mockito2:2.0.0-beta.5")
-    testImplementation("com.google.truth:truth:1.0.1")
+    testImplementation("org.powermock:powermock-core:2.0.9")
+    testImplementation("org.powermock:powermock-module-junit4:2.0.9")
+    testImplementation("org.powermock:powermock-api-mockito2:2.0.9")
+    testImplementation("com.google.truth:truth:1.1.3")
 
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
 
@@ -109,7 +109,7 @@ dependencies {
     implementation(Dependencies.Coroutines.android)
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2-native-mt")
 
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
@@ -129,7 +129,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
-    implementation("androidx.fragment:fragment-ktx:1.3.3")
+    implementation("androidx.fragment:fragment-ktx:1.3.6")
 
-    implementation("com.apollographql.apollo:apollo-runtime:2.2.0")
+    implementation("com.apollographql.apollo:apollo-runtime:2.5.9")
 }
