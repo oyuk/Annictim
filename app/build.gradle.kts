@@ -102,8 +102,10 @@ dependencies {
 
     implementation("com.makeramen:roundedimageview:2.3.0")
 
-    implementation("android.arch.navigation:navigation-fragment-ktx:1.0.0")
-    implementation("android.arch.navigation:navigation-ui-ktx:1.0.0")
+    val nav_version = "2.3.5"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
 
     implementation(Dependencies.Coroutines.core)
     implementation(Dependencies.Coroutines.android)

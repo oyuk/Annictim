@@ -10,7 +10,8 @@ buildscript {
         classpath("com.android.tools.build:gradle:4.1.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("com.google.android.gms:oss-licenses-plugin:0.10.4")
-        classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0")
+        val nav_version = "2.3.5"
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
         classpath("com.apollographql.apollo:apollo-gradle-plugin:2.5.9")
         // NOTE: Do not place your application dependencies here; they belong
