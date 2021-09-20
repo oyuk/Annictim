@@ -11,6 +11,7 @@ import com.okysoft.annictim.databinding.ItemReviewBinding
 import com.okysoft.annictim.extension.toDate
 import com.okysoft.annictim.extension.toReadableDateString
 import com.okysoft.annictim.presentation.BindingViewHolder
+import com.okysoft.annictim.presentation.program.ProgramsAdapter
 import com.okysoft.domain.model.Review
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -48,15 +49,19 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
     }
 
     override fun getItemCount(): Int {
-        if (items.value.isEmpty()) { return 1 }
-        return items.value.size
+        return items.value?.let {
+            if (it.isEmpty()) { return@let 1 }
+            return@let it.size
+        } ?: 0
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position == items.value.size) {
-            return ViewType.FOOTER.num
-        }
-        return ViewType.ITEM.num
+        return items.value?.let {
+            if (position == it.size) {
+                return@let ProgramsAdapter.ViewType.FOOTER.num
+            }
+            return@let ProgramsAdapter.ViewType.ITEM.num
+        } ?: ProgramsAdapter.ViewType.ITEM.num
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder<ItemReviewBinding>, position: Int) {
@@ -64,7 +69,7 @@ class ReviewsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemReviewBinding>>
         if (viewType == ViewType.FOOTER.num) {
             return
         }
-        val item = items.value[position]
+        val item = items.value?.let { it[position] } ?: return
         holder.binding?.root?.setOnClickListener {
             _onClick.postValue(item)
         }

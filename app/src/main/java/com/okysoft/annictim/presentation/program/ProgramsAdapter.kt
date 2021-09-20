@@ -48,15 +48,19 @@ class ProgramsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemProgramBinding
     }
 
     override fun getItemCount(): Int {
-        if (items.value.isEmpty()) { return 1 }
-        return items.value.size
+        return items.value?.let {
+            if (it.isEmpty()) { return@let 1 }
+            return@let it.size
+        } ?: 0
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position == items.value.size) {
-            return ViewType.FOOTER.num
-        }
-        return ViewType.ITEM.num
+        return items.value?.let {
+            if (position == it.size) {
+                return@let ViewType.FOOTER.num
+            }
+            return@let ViewType.ITEM.num
+        } ?: ViewType.ITEM.num
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder<ItemProgramBinding>, position: Int) {
@@ -64,7 +68,7 @@ class ProgramsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemProgramBinding
         if (viewType == ViewType.FOOTER.num) {
             return
         }
-        val item = items.value[position]
+        val item = items.value?.let { it[position] } ?: return
         holder.binding?.root?.setOnClickListener {
             _onClick.postValue(item)
         }
