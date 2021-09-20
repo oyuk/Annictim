@@ -12,13 +12,9 @@ abstract class SharedPreferenceManager(filename: String, context: Context) {
 
     private val BOOLEAN_DEFAULT = false
 
-    private val sharedPreferences: SharedPreferences
-
-    init {
-        sharedPreferences = context.getSharedPreferences(
-                context.packageName + ".preferences." + filename,
-                Context.MODE_PRIVATE)
-    }
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+            context.packageName + ".preferences." + filename,
+            Context.MODE_PRIVATE)
 
     protected fun saveInt(key: String, value: Int) {
         sharedPreferences.edit().putInt(key, value).apply()

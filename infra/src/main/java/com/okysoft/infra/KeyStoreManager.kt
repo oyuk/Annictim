@@ -2,16 +2,18 @@ package com.okysoft.infra
 
 import android.content.Context
 import android.security.KeyPairGeneratorSpec
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
 import java.math.BigInteger
 import java.security.*
 import java.util.*
 import javax.crypto.Cipher
 import javax.security.auth.x500.X500Principal
 
-class KeyStoreManager(private val context: Context) {
+class KeyStoreManager(packageName: String) {
 
     private val KEY_PROVIDER = "AndroidKeyStore"
-    private val KEY_STORE_ALIAS = "${context.packageName}_KEY"
+    private val KEY_STORE_ALIAS = "${packageName}_KEY"
     private val KEY_STORE_ALGORITHM = "RSA"
     private val CIPHER_ALGORITHM = "RSA/ECB/PKCS1Padding"
 
@@ -22,19 +24,17 @@ class KeyStoreManager(private val context: Context) {
         keyStore.load(null)
     }
 
-    private fun createKeyPairGeneratorSpec(): KeyPairGeneratorSpec {
+    private fun createKeyPairGeneratorSpec(): KeyGenParameterSpec {
         val start = Calendar.getInstance()
         val end = Calendar.getInstance()
         end.add(Calendar.YEAR, 100)
 
-        val spec = KeyPairGeneratorSpec.Builder(context)
-                .setAlias(KEY_STORE_ALIAS)
-                .setSubject(X500Principal("CN=$KEY_STORE_ALIAS"))
-                .setSerialNumber(BigInteger.valueOf(100000))
-                .setStartDate(start.time)
-                .setEndDate(end.time)
-                .build()
-        return spec
+        return KeyGenParameterSpec.Builder(KEY_STORE_ALIAS, KeyProperties.PURPOSE_ENCRYPT)
+            .setCertificateSubject(X500Principal("CN=$KEY_STORE_ALIAS"))
+            .setCertificateSerialNumber(BigInteger.valueOf(100000))
+            .setKeyValidityStart(start.time)
+            .setKeyValidityEnd(end.time)
+            .build()
     }
 
     private fun createKeyPair(): KeyPair {

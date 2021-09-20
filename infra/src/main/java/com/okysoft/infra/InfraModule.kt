@@ -58,7 +58,7 @@ class InfraModule {
 
     @Singleton
     @Provides
-    fun provideKeyStoreManager(application: Application) = KeyStoreManager(application)
+    fun provideKeyStoreManager(application: Application) = KeyStoreManager(application.packageName)
 
     @Singleton
     @Provides
