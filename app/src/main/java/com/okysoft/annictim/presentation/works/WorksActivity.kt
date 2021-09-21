@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityWorksBinding
+import com.okysoft.data.WorkRequestParams
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +35,7 @@ class WorksActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            val requestParamModel = intent.getParcelableExtra<com.okysoft.data.WorkRequestParams>(REQUEST_PARAM_MODEL)
+            val requestParamModel = intent.getParcelableExtra<WorkRequestParams>(REQUEST_PARAM_MODEL) ?: WorkRequestParams()
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, WorksFragment.newInstance(requestParamModel, null))

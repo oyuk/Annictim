@@ -68,7 +68,7 @@ class WorksTabPagerFragment : Fragment() {
                 else -> WorkTerm.Current
             }
             return WorksFragment.newInstance(
-                com.okysoft.data.WorkRequestParams(workTerm = workTerm, fields = com.okysoft.data.WorkRequestParams.Fields.Feed),
+                com.okysoft.data.WorkRequestParams(season = workTerm.term(), fields = com.okysoft.data.WorkRequestParams.Fields.Feed),
                 position)
         }
 

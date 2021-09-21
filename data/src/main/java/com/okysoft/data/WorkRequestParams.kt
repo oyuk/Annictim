@@ -17,30 +17,30 @@ data class WorkRequestParams(
     val sortSeason: String? = null,
     val sortWatchersCount: String = "desc"): Parcelable {
 
-    constructor(
-        type: Type = Type.Works,
-        fields: Fields = Fields.All,
-        ids: List<Int> = listOf(),
-        workTerm: WorkTerm = WorkTerm.Current,
-        title: String? = null,
-        status: String? = null,
-        page: Int = 1,
-        perPage: Int = 20,
-        sortId: String? = null,
-        sortSeason: String? = null,
-        sortWatchersCount:String = "desc"): this(
-        type,
-        fields,
-        ids,
-        workTerm.term(),
-        title,
-        status,
-        page,
-        perPage,
-        sortId,
-        sortSeason,
-        sortWatchersCount
-    )
+//    constructor(
+//        type: Type = Type.Works,
+//        fields: Fields = Fields.All,
+//        ids: List<Int> = listOf(),
+//        workTerm: WorkTerm = WorkTerm.Current,
+//        title: String? = null,
+//        status: String? = null,
+//        page: Int = 1,
+//        perPage: Int = 20,
+//        sortId: String? = null,
+//        sortSeason: String? = null,
+//        sortWatchersCount:String = "desc"): this(
+//        type,
+//        fields,
+//        ids,
+//        workTerm.term(),
+//        title,
+//        status,
+//        page,
+//        perPage,
+//        sortId,
+//        sortSeason,
+//        sortWatchersCount
+//    )
     enum class Type {
         Works, Me
     }
@@ -83,6 +83,12 @@ data class WorkRequestParams(
             this["sort_season"] = it
         }
         this["sort_watchers_count"] = sortWatchersCount
+    }
+
+    companion object {
+        fun empty(): WorkRequestParams {
+            return WorkRequestParams()
+        }
     }
 
 }

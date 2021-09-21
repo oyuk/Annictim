@@ -15,9 +15,9 @@ val versionMinor = 0
 val versionPatch = 0
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
-        applicationId("com.okysoft.annictim")
+        applicationId = "com.okysoft.annictim"
         minSdkVersion(24)
         targetSdkVersion(Dependencies.Version.targetSdkVersion)
         versionCode = versionMajor * 100 + versionMinor * 10 + versionPatch

@@ -10,13 +10,11 @@ plugins {
 
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
 
     defaultConfig {
-        minSdkVersion(24)
+        minSdkVersion(22)
         targetSdkVersion(Dependencies.Version.targetSdkVersion)
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
