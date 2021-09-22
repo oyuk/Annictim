@@ -3,11 +3,11 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 object Dependencies {
     object Version {
         const val kotlin = "1.5.31"
-        const val targetSdkVersion = "30"
+        const val targetSdkVersion = "31"
     }
 
     object Dagger {
-        private const val Version = "2.31.2"
+        private const val Version = "2.38.1"
         const val annotation = "javax.annotation:jsr250-api:1.0"
         const val dagger = "com.google.dagger:dagger:${Version}"
         const val daggerAndroid = "com.google.dagger:dagger-android:${Version}"
@@ -24,7 +24,7 @@ object Dependencies {
     }
 
     object Coroutines {
-        private const val Version = "1.4.2"
+        private const val Version = "1.5.2"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version}"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version}"
         const val rx = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${Version}"

@@ -15,11 +15,11 @@ val versionMinor = 0
 val versionPatch = 0
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 31
     defaultConfig {
         applicationId = "com.okysoft.annictim"
-        minSdkVersion(24)
-        targetSdkVersion(Dependencies.Version.targetSdkVersion)
+        minSdk = 24
+        targetSdk = Dependencies.Version.targetSdkVersion.toIntOrNull()
         versionCode = versionMajor * 100 + versionMinor * 10 + versionPatch
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
@@ -59,6 +59,9 @@ android {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
             }
         }
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0-alpha03"
     }
 }
 
