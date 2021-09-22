@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        compose = true
     }
     lintOptions {
         isAbortOnError = false
@@ -134,4 +135,21 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.3.6")
 
     implementation("com.apollographql.apollo:apollo-runtime:2.5.9")
+
+    // Integration with activities
+    implementation("androidx.activity:activity-compose:1.3.1")
+    // Compose Material Design
+    implementation("androidx.compose.material:material:1.0.2")
+    // Animations
+    implementation("androidx.compose.animation:animation:1.0.2")
+    // Tooling support (Previews, etc.)
+    implementation("androidx.compose.ui:ui-tooling:1.0.2")
+    // Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-beta01")
+    // UI Tests
+    androidTestDebugImplementation("androidx.compose.ui:ui-test-junit4:1.0.2")
+
+    // When using a AppCompat theme
+    implementation("com.google.accompanist:accompanist-appcompat-theme:0.16.0")
+
 }
