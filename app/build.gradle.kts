@@ -115,7 +115,7 @@ dependencies {
     implementation(Dependencies.Coroutines.android)
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2-native-mt")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2")
 
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
@@ -153,6 +153,10 @@ dependencies {
     androidTestDebugImplementation("androidx.compose.ui:ui-test-junit4:1.0.2")
 
     // When using a AppCompat theme
-    implementation("com.google.accompanist:accompanist-appcompat-theme:0.16.0")
+    implementation("com.google.accompanist:accompanist-appcompat-theme:0.18.0")
+
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.18.0")
+
+    implementation("androidx.compose.runtime:runtime-livedata:1.1.0-alpha04")
 
 }

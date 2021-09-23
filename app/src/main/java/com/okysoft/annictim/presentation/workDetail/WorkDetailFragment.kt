@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
+import com.okysoft.annictim.presentation.cast.CastsActivity
 import com.okysoft.annictim.presentation.cast.CastsAdapter
 import com.okysoft.annictim.presentation.staff.StaffAdapter
 import com.okysoft.data.WatchKind

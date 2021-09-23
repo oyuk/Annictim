@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
 import androidx.databinding.DataBindingUtil
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityCastsBinding
@@ -44,5 +45,6 @@ class CastsActivity : AppCompatActivity() {
                 .commit()
         }
     }
-
 }
+
+
