@@ -31,6 +31,7 @@ class WorkDetailTranslator: Translator<Work, WorkDetail> {
 
     override fun translate(response: Work): WorkDetail {
         val charactorTranslator = CharacterTranslator()
+        val personTranslator = PersonTranslator()
         val casts = response.casts?.nodes?.filterNotNull()?.let {
             it.map { l ->
                 val c = l.fragments.cast
@@ -38,7 +39,7 @@ class WorkDetailTranslator: Translator<Work, WorkDetail> {
                     id = c.annictId,
                     name = c.name,
                     annictId = c.annictId,
-                    person = null,
+                    person = personTranslator.translate(c.person),
                     character = charactorTranslator.translate(c.character.fragments.character)
                 )
             }
