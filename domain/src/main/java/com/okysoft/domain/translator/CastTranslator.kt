@@ -12,7 +12,8 @@ class CastTranslator(private val characterTranslator: CharacterTranslator): Tran
             id = response.id,
             character = characterTranslator.translate(response.character),
             name = response.name,
-            annictId = 0
+            annictId = 0,
+            person = null
         )
     }
 

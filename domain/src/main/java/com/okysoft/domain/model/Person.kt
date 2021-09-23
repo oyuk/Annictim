@@ -1,6 +1,10 @@
 package com.okysoft.domain.model
 
-data class People(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Person(
     val birthday: String?,
     val bloodType: String?,
     val castsCount: Int?,
@@ -22,9 +26,10 @@ data class People(
     val urlEn: String?,
     val wikipediaUrl: String?,
     val wikipediaUrlEn: String?
-) {
+) : Parcelable {
+    @Parcelize
     data class Prefecture(
         val id: Int?,
         val name: String?
-    )
+    ) : Parcelable
 }

@@ -18,6 +18,7 @@ import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.presentation.cast.CastsActivity
 import com.okysoft.annictim.presentation.cast.CastsAdapter
+import com.okysoft.annictim.presentation.person.PersonActivity
 import com.okysoft.annictim.presentation.staff.StaffAdapter
 import com.okysoft.data.WatchKind
 import com.okysoft.domain.model.WorkDetail
@@ -93,7 +94,7 @@ class WorkDetailFragment : Fragment() {
 
         castAdapter.items.accept(work.casts)
         castAdapter.onClick.observe(viewLifecycleOwner, {
-            
+            startActivity(PersonActivity.createIntent(requireActivity(), it.annictId))
         })
 
 //        viewModel.casts.observe(viewLifecycleOwner, Observer {

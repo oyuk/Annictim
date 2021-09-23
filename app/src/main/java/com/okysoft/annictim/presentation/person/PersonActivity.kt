@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityPersonBinding
+import com.okysoft.annictim.presentation.cast.CastsFragment
+import com.okysoft.data.CastRequestParams
 
 class PersonActivity : AppCompatActivity() {
 
@@ -33,14 +35,13 @@ class PersonActivity : AppCompatActivity() {
             it.setDisplayHomeAsUpEnabled(true)
         }
 
-//        if (savedInstanceState == null) {
-//            val personId = intent.getIntExtra(PERSON_ID, -1)
-//            val castRequestParam = CastRequestParams(workId = workId)
-//            supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.container, CastsFragment.newInstance(castRequestParam))
-//                .commit()
-//        }
+        if (savedInstanceState == null) {
+            val personId = intent.getIntExtra(PERSON_ID, -1)
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, PersonFragment.newInstance(personId))
+                .commit()
+        }
     }
 
 }

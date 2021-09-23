@@ -11,6 +11,14 @@ fragment Cast on Cast {
   character {
     ...Character
   }
+  person {
+    id
+    annictId
+    name
+    nameEn
+    nameKana
+    nickname
+  }
 }
 
 fragment Episode on Episode {
