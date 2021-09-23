@@ -91,9 +91,14 @@ class WorkDetailFragment : Fragment() {
         binding.castRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         binding.castRecyclerView.adapter = castAdapter
 
-        viewModel.casts.observe(viewLifecycleOwner, Observer {
-            castAdapter.items.accept(it)
+        castAdapter.items.accept(work.casts)
+        castAdapter.onClick.observe(viewLifecycleOwner, {
+            
         })
+
+//        viewModel.casts.observe(viewLifecycleOwner, Observer {
+//            castAdapter.items.accept(it)
+//        })
 
         binding.staffRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         binding.staffRecyclerView.adapter = staffAdapter

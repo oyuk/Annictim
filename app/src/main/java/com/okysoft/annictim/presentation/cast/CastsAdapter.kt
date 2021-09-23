@@ -71,10 +71,6 @@ class CastsAdapter: RecyclerView.Adapter<BindingViewHolder<ItemCastBinding>>() {
             _onClick.postValue(item)
         }
 
-//        holder.binding?.name?.setContent {
-//            text = item.name
-//        }
-
         (holder.binding as ItemCastBinding).apply {
             cast = item
             val characterName = item.character.name ?: ""
