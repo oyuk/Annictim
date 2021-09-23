@@ -1,0 +1,29 @@
+query Person($annictId: Int!) {
+  searchPeople(annictIds: [$annictId], first: 1) {
+      nodes {
+        id
+        annictId
+        name
+        birthday
+        castsCount
+        favoritePeopleCount
+        genderText
+        height
+        nameEn
+        nameKana
+        nickname
+        prefecture {
+          id
+          annictId
+          name
+        }
+        staffsCount
+        twitterUsername
+        twitterUsernameEn
+        url
+        urlEn
+        wikipediaUrl
+        wikipediaUrlEn
+    }
+  }
+}
