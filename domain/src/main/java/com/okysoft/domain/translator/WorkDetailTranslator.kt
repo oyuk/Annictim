@@ -28,6 +28,7 @@ class WorkDetailTranslator: Translator<Work, WorkDetail> {
                 return@map Cast(
                     id = c.annictId,
                     name = c.name,
+                    annictId = c.annictId,
                     character = charactorTranslator.translate(c.character.fragments.character)
                 )
             }
