@@ -17,10 +17,10 @@ object Dependencies {
     }
 
     object Retrofit {
-        private const val Version = "2.8.2"
+        private const val Version = "2.9.0"
         const val retrofit = "com.squareup.retrofit2:retrofit:${Version}"
         const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Version}"
-        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.8.0"
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.9.1"
     }
 
     object Coroutines {
@@ -30,7 +30,7 @@ object Dependencies {
         const val rx = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${Version}"
     }
 
-    const val gson = "com.google.code.gson:gson:2.8.6"
+    const val gson = "com.google.code.gson:gson:2.8.8"
 }
 
 fun DependencyHandler.coroutines() {
