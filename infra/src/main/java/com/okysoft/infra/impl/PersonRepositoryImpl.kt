@@ -17,7 +17,7 @@ class PersonRepositoryImpl @Inject constructor(private val client: ApolloClient)
     override fun get(id: Int): Flow<Person?> {
         return client.query(PersonQuery(id)).toFlow()
             .map {
-                val person = it.data?.searchPeople.nodes?.let { l ->
+                val person = it.data?.searchPeople?.nodes?.let { l ->
                     l.mapNotNull { node -> node?.fragments?.person }
                 }?.firstOrNull()
                 if (person != null) {
