@@ -11,7 +11,7 @@ class RequestInterceptor(
         val request = chain.request()
         val builder = request.newBuilder()
         val token = authRepository.getStoredAccessToken()
-        if (token.isNotBlank()) {
+        if (!token.isNullOrEmpty()) {
             builder.addHeader("Authorization", "Bearer ${token}")
         }
         return chain.proceed(builder.build())

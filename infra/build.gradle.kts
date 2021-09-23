@@ -13,7 +13,7 @@ android {
     compileSdkVersion(31)
 
     defaultConfig {
-        minSdkVersion(22)
+        minSdkVersion(24)
         targetSdkVersion(Dependencies.Version.targetSdkVersion)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -69,6 +69,8 @@ dependencies {
 
     implementation("com.apollographql.apollo:apollo-runtime:2.5.9")
     implementation("com.apollographql.apollo:apollo-coroutines-support:2.5.9")
+
+    implementation("androidx.security:security-crypto:1.1.0-alpha03")
 
     implementation(project(":data"))
     implementation(project(":common"))

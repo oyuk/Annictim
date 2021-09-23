@@ -52,13 +52,12 @@ class InfraModule {
     @Singleton
     @Provides
     fun provideAuthRepository(
-        keyStoreManager: KeyStoreManager,
-        application: Application
-    ): com.okysoft.infra.repository.AuthRepository = AuthRepositoryImpl(keyStoreManager, application)
+        dataStore: EncryptedStore
+    ): com.okysoft.infra.repository.AuthRepository = AuthRepositoryImpl(dataStore)
 
     @Singleton
     @Provides
-    fun provideKeyStoreManager(application: Application) = KeyStoreManager(application.packageName)
+    fun provideDataStore(application: Application) = EncryptedStore(application)
 
     @Singleton
     @Provides

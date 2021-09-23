@@ -8,6 +8,7 @@ import com.okysoft.infra.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
+import java.lang.Exception
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
@@ -19,7 +20,11 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getMe(): Flow<UserResponse> {
         return flow {
-         emit(retrofitClient.getMe(authRepository.getStoredAccessToken()))
+            val token = authRepository.getStoredAccessToken()
+            if (token.isNullOrEmpty()) {
+                throw Exception("hoge")
+            }
+            emit(retrofitClient.getMe(token))
         }
     }
 

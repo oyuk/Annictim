@@ -13,7 +13,7 @@ class MeStore (
         ) {
 
     val isLoggedIn: Boolean
-        get() = authRepository.getStoredAccessToken().isNotEmpty()
+        get() = !authRepository.getStoredAccessToken().isNullOrEmpty()
 
     val logout: LiveData<Unit> = dispatcher.logout
             .map { }
