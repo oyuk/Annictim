@@ -1,6 +1,4 @@
-query Person($annictId: Int!) {
-  searchPeople(annictIds: [$annictId], first: 1) {
-      nodes {
+fragment Person on Person {
         id
         annictId
         name
@@ -24,6 +22,11 @@ query Person($annictId: Int!) {
         urlEn
         wikipediaUrl
         wikipediaUrlEn
+}
+query Person($annictId: Int!) {
+  searchPeople(annictIds: [$annictId], first: 1) {
+    nodes {
+      ...Person
     }
   }
 }
