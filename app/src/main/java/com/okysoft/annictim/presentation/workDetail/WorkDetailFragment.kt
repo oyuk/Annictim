@@ -94,7 +94,7 @@ class WorkDetailFragment : Fragment() {
 
         castAdapter.items.accept(work.casts)
         castAdapter.onClick.observe(viewLifecycleOwner, {
-            startActivity(PersonActivity.createIntent(requireActivity(), it.annictId))
+            startActivity(PersonActivity.createIntent(requireActivity(), it.id))
         })
 
 //        viewModel.casts.observe(viewLifecycleOwner, Observer {
