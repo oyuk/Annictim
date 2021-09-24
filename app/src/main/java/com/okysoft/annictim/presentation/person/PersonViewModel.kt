@@ -1,7 +1,7 @@
 package com.okysoft.annictim.presentation.person
 
 import androidx.lifecycle.*
-import com.okysoft.domain.model.Person
+import com.okysoft.infra.fragment.Person
 import com.okysoft.infra.repository.PersonRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
