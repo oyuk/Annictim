@@ -9,7 +9,9 @@ import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.ActivityPersonBinding
 import com.okysoft.annictim.presentation.cast.CastsFragment
 import com.okysoft.data.CastRequestParams
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PersonActivity : AppCompatActivity() {
 
     companion object {

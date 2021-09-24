@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.viewModels
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -20,7 +21,6 @@ import com.okysoft.data.CastRequestParams
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class PersonFragment : Fragment() {
 
     val personId: Int
@@ -42,6 +42,7 @@ class PersonFragment : Fragment() {
         }
     }
 
+    @Preview
     @Composable
     fun PersonInfo() {
         Text(text = "hogehoge")
