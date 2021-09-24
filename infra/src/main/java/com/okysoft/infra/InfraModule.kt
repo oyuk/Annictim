@@ -49,6 +49,11 @@ class InfraModule {
 //            .create() // NamingPoricy そ指定す
 //    }
 
+    @Provides
+    fun providePersonRepository(apolloClient: ApolloClient): PersonRepository {
+        return PersonRepositoryImpl(apolloClient)
+    }
+
     @Singleton
     @Provides
     fun provideAuthRepository(
