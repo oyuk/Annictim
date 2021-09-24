@@ -1,10 +1,46 @@
 package com.okysoft.annictim.presentation.person
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.okysoft.domain.model.Person
 import com.okysoft.infra.repository.PersonRepository
-import javax.inject.Inject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class PersonViewModel @Inject constructor(personRepository: PersonRepository) {
+class PersonViewModel @AssistedInject constructor(private val personRepository: PersonRepository,
+                                                  @Assisted val personId: Int): ViewModel() {
 
-    
+    @AssistedFactory
+    interface Factory {
+        fun create(personId: Int): PersonViewModel
+    }
 
+    companion object {
+        fun provideFactory(
+            factory: Factory,
+            personId: Int
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return factory.create(personId) as T
+            }
+        }
+    }
+
+    private val _stateFlow = MutableStateFlow<Person?>(null)
+    val stateFlow: StateFlow<Person?> = _stateFlow
+
+    fun fetch() {
+        viewModelScope.launch {
+            personRepository.get(personId).collect {
+                _stateFlow.value = it
+            }
+        }
+    }
 }

@@ -8,11 +8,15 @@ import com.okysoft.infra.WorkQuery
 import com.okysoft.infra.fragment.Person
 import com.okysoft.infra.repository.PersonRepository
 import com.okysoft.infra.repository.WorkRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class PersonRepositoryImpl @Inject constructor(private val client: ApolloClient): PersonRepository {
+class PersonRepositoryImpl @Inject constructor(private val client: ApolloClient,
+                                               private val dispatcher: CoroutineDispatcher = Dispatchers.Default): PersonRepository {
 
     override fun get(id: Int): Flow<Person?> {
         return client.query(PersonQuery(id)).toFlow()
@@ -25,6 +29,7 @@ class PersonRepositoryImpl @Inject constructor(private val client: ApolloClient)
                 }
                 throw NullPointerException()
             }
+            .flowOn(dispatcher)
     }
 
 }
