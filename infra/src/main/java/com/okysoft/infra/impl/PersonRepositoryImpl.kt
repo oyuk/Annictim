@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PersonRepositoryImpl @Inject constructor(private val client: ApolloClient,
-                                               private val dispatcher: CoroutineDispatcher = Dispatchers.Default): PersonRepository {
+                                               private val dispatcher: CoroutineDispatcher = Dispatchers.IO): PersonRepository {
 
     override fun get(id: Int): Flow<Person?> {
         return client.query(PersonQuery(id)).toFlow()

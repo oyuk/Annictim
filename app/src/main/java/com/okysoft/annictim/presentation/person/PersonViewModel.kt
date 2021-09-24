@@ -1,8 +1,6 @@
 package com.okysoft.annictim.presentation.person
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.okysoft.domain.model.Person
 import com.okysoft.infra.repository.PersonRepository
 import dagger.assisted.Assisted
@@ -34,7 +32,7 @@ class PersonViewModel @AssistedInject constructor(private val personRepository: 
     }
 
     private val _stateFlow = MutableStateFlow<Person?>(null)
-    val stateFlow: StateFlow<Person?> = _stateFlow
+    val stateFlow: LiveData<Person?> = _stateFlow.asLiveData()
 
     fun fetch() {
         viewModelScope.launch {
