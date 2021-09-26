@@ -12,12 +12,14 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.okysoft.annictim.R
 import com.okysoft.annictim.presentation.cast.CastsFragment
 import com.okysoft.annictim.presentation.cast.CastsViewModel
 import com.okysoft.data.CastRequestParams
+import com.okysoft.infra.fragment.Person
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -42,10 +44,32 @@ class PersonFragment : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.stateFlow.observe(viewLifecycleOwner, {
+            it?.let {
+
+            }
+        })
+    }
+
     @Preview
     @Composable
-    fun PersonInfo() {
-        Text(text = "hogehoge")
+    fun PersonInfo(person: Person) {
+        Text(text = "名前")
+        Text(text = person.name)
+        Text(text = "名前（かな）")
+        Text(text = person.nameKana)
+    }
+
+    @Preview
+    @Composable
+    fun PersonInfoItem(title: String, content: String, linkable: Boolean) {
+
+    }
+
+    private fun createPersonItems(): Array<>  {
+
     }
 
     companion object {

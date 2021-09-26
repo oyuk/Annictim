@@ -6,9 +6,7 @@ import com.okysoft.infra.repository.PersonRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class PersonViewModel @AssistedInject constructor(private val personRepository: PersonRepository,
@@ -34,11 +32,18 @@ class PersonViewModel @AssistedInject constructor(private val personRepository: 
     private val _stateFlow = MutableStateFlow<Person?>(null)
     val stateFlow: LiveData<Person?> = _stateFlow.asLiveData()
 
+    private fun createListItem(): List<PersonListItem> {
+        val list = listOf<String>("名前", "名前（かな）")
+    }
+
     fun fetch() {
         viewModelScope.launch {
-            personRepository.get(personId).collect {
-                _stateFlow.value = it
-            }
+            personRepository.get(personId)
+                .mapNotNull { it }
+                .map {  }
+                .collect {
+                    _stateFlow.value = it
+                }
         }
     }
 }
