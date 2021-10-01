@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.okysoft.annictim.R
 import com.okysoft.annictim.databinding.FragmentWorkDetailBinding
 import com.okysoft.annictim.extension.openUrl
-import com.okysoft.annictim.presentation.cast.CastsActivity
 import com.okysoft.annictim.presentation.cast.CastsAdapter
+import com.okysoft.annictim.presentation.person.PersonActivity
 import com.okysoft.annictim.presentation.staff.StaffAdapter
 import com.okysoft.data.WatchKind
 import com.okysoft.domain.model.WorkDetail
@@ -91,9 +91,16 @@ class WorkDetailFragment : Fragment() {
         binding.castRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         binding.castRecyclerView.adapter = castAdapter
 
-        viewModel.casts.observe(viewLifecycleOwner, Observer {
-            castAdapter.items.accept(it)
+        castAdapter.items.accept(work.casts)
+        castAdapter.onClick.observe(viewLifecycleOwner, {
+            it.person?.let { person ->
+                startActivity(PersonActivity.createIntent(requireActivity(), person.id))
+            }
         })
+
+//        viewModel.casts.observe(viewLifecycleOwner, Observer {
+//            castAdapter.items.accept(it)
+//        })
 
         binding.staffRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         binding.staffRecyclerView.adapter = staffAdapter
