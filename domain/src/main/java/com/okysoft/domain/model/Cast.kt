@@ -7,9 +7,10 @@ import kotlinx.parcelize.Parcelize
 data class Cast(
     val character: Character,
     val id: Int,
-    val name: String
+    val name: String,
+    val annictId: Int,
 //    val nameEn: String,
-//    val person: People,
+    val person: Person?,
 //    val sortNumber: Int,
 //    val work: Work
 ): Parcelable
