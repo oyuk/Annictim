@@ -1,0 +1,32 @@
+fragment Person on Person {
+        id
+        annictId
+        name
+        birthday
+        castsCount
+        favoritePeopleCount
+        genderText
+        height
+        nameEn
+        nameKana
+        nickname
+        prefecture {
+          id
+          annictId
+          name
+        }
+        staffsCount
+        twitterUsername
+        twitterUsernameEn
+        url
+        urlEn
+        wikipediaUrl
+        wikipediaUrlEn
+}
+query Person($annictId: Int!) {
+  searchPeople(annictIds: [$annictId], first: 1) {
+    nodes {
+      ...Person
+    }
+  }
+}
