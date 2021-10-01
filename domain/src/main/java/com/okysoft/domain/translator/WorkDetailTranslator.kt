@@ -1,9 +1,6 @@
 package com.okysoft.domain.translator
 
-import com.okysoft.domain.model.Cast
-import com.okysoft.domain.model.Episode
-import com.okysoft.domain.model.Staff
-import com.okysoft.domain.model.WorkDetail
+import com.okysoft.domain.model.*
 import com.okysoft.infra.fragment.Character
 import com.okysoft.infra.fragment.Work
 
@@ -20,14 +17,29 @@ class WorkDetailTranslator: Translator<Work, WorkDetail> {
         }
     }
 
+    private class PersonTranslator {
+        fun translate(p: com.okysoft.infra.fragment.Cast.Person): Person {
+            return p.run {
+                Person(
+                    id = annictId,
+                    name = name,
+                    nameEn = nameEn
+                )
+            }
+        }
+    }
+
     override fun translate(response: Work): WorkDetail {
         val charactorTranslator = CharacterTranslator()
+        val personTranslator = PersonTranslator()
         val casts = response.casts?.nodes?.filterNotNull()?.let {
             it.map { l ->
                 val c = l.fragments.cast
                 return@map Cast(
                     id = c.annictId,
                     name = c.name,
+                    annictId = c.annictId,
+                    person = personTranslator.translate(c.person),
                     character = charactorTranslator.translate(c.character.fragments.character)
                 )
             }
