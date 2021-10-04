@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomNavigationView"
-    app:startDestination="@id/works_tab">
+    app:startDestination="@id/me_works">
 
     <custom_fragment
         android:id="@+id/works_tab"
