@@ -19,8 +19,8 @@ fragment PageInfo on PageInfo {
   hasPreviousPage
 }
 
-query WorkFeeds($seasons: String!, $after: String) {
-  searchWorks(seasons: [$seasons], orderBy: {field: WATCHERS_COUNT, direction: DESC}, first: 20, after: $after) {
+query WorkFeeds($seasons: [String!], $titles: [String!], $after: String) {
+  searchWorks(seasons: $seasons, titles: $titles, orderBy: {field: WATCHERS_COUNT, direction: DESC}, first: 20, after: $after) {
     pageInfo {
       ...PageInfo
     }
