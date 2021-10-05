@@ -11,60 +11,47 @@ import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import com.okysoft.annictim.R
-import com.okysoft.annictim.databinding.FragmentSettingBinding
 import com.okysoft.annictim.extension.clearStackAndStartActivity
 import com.okysoft.annictim.presentation.launch.LaunchActivity
-import com.okysoft.annictim.presentation.widget.dialog.CustomDialogFragment
+import com.okysoft.annictim.presentation.widget.dialog.CustomDialog
+import com.okysoft.annictim.presentation.widget.dialog.DialogAction
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingFragment : Fragment(), CustomDialogFragment.Listener {
+class SettingFragment : Fragment() {
 
-    private lateinit var binding: FragmentSettingBinding
     private val viewModel: SettingViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
-
-        val sections = listOf(
-            SettingListSection("設定", listOf(
-                SettingListItem("ログアウト") {
-                    logout()
-                }
-            )),
-            SettingListSection("フィードバック", listOf(
-                SettingListItem("作者サイトへ") {
-                    openDeveloperBlog()
-                }
-            )),
-            SettingListSection("ライセンス", listOf(
-                SettingListItem("ライセンス") {
-                    openLicense()
-                }
-            )),
-        )
-
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                SettingItemList(sections = sections)
+                SettingItemList(sections = viewModel.sections)
+                CustomDialog(
+                    title = "ログアウト",
+                    message = "ログアウトしますか？",
+                    positiveAction = DialogAction.Positive("OK") {
+                      logout()
+                    },
+                    negativeAction = null,
+                    openDialog = viewModel.openDialog
+                )
             }
         }
     }
 
-    private fun logout() {
-        CustomDialogFragment.Builder()
-            .title(getString(R.string.logout))
-            .message(getString(R.string.logout_confirm))
-            .positiveButtonTitle(getString(R.string.OK))
-            .negativeButtonTitle(getString(R.string.CANCEL))
-            .show(this@SettingFragment)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.openDeveloperBlog.observe(viewLifecycleOwner) {
+            openDeveloperBlog()
+        }
+        viewModel.openLicense.observe(viewLifecycleOwner) {
+            openLicense()
+        }
     }
 
     private fun openDeveloperBlog() {
@@ -76,15 +63,11 @@ class SettingFragment : Fragment(), CustomDialogFragment.Listener {
         startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
     }
 
-    override fun positiveAction() {
+    private fun logout() {
         activity?.let {
             viewModel.logout()
             it.clearStackAndStartActivity(LaunchActivity::class.java)
         }
-    }
-
-    override fun negativeAction() {
-        // do nothing
     }
 
     companion object {
