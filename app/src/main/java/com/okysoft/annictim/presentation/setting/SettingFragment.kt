@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,30 +32,48 @@ class SettingFragment : Fragment(), CustomDialogFragment.Listener {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
 
-        return binding.root
+        val sections = listOf(
+            SettingListSection("設定", listOf(
+                SettingListItem("ログアウト") {
+                    logout()
+                }
+            )),
+            SettingListSection("フィードバック", listOf(
+                SettingListItem("作者サイトへ") {
+                    openDeveloperBlog()
+                }
+            )),
+            SettingListSection("ライセンス", listOf(
+                SettingListItem("ライセンス") {
+                    openLicense()
+                }
+            )),
+        )
+
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                SettingItemList(sections = sections)
+            }
+        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.logoutText.setOnClickListener {
-            CustomDialogFragment.Builder()
-                .title(getString(R.string.logout))
-                .message(getString(R.string.logout_confirm))
-                .positiveButtonTitle(getString(R.string.OK))
-                .negativeButtonTitle(getString(R.string.CANCEL))
-                .show(this@SettingFragment)
-        }
-        binding.developerBlogText.setOnClickListener {
-            val tabsIntent = CustomTabsIntent.Builder().build()
-            tabsIntent.launchUrl(this@SettingFragment.activity as Context, Uri.parse("http://reidr.hatenablog.com/"))
-        }
-//        binding.sourceCodeText.setOnClickListener {
-//            val tabsIntent = CustomTabsIntent.Builder().build()
-//            tabsIntent.launchUrl(this@SettingFragment.activity, Uri.parse("https://github.com/oyuk/Annictim"))
-//        }
-        binding.license.setOnClickListener {
-            startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
-        }
+    private fun logout() {
+        CustomDialogFragment.Builder()
+            .title(getString(R.string.logout))
+            .message(getString(R.string.logout_confirm))
+            .positiveButtonTitle(getString(R.string.OK))
+            .negativeButtonTitle(getString(R.string.CANCEL))
+            .show(this@SettingFragment)
+    }
+
+    private fun openDeveloperBlog() {
+        val tabsIntent = CustomTabsIntent.Builder().build()
+        tabsIntent.launchUrl(this@SettingFragment.activity as Context, Uri.parse("http://reidr.hatenablog.com/"))
+    }
+
+    private fun openLicense() {
+        startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
     }
 
     override fun positiveAction() {

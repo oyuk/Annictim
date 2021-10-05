@@ -78,7 +78,7 @@ class SearchFragment : Fragment() {
             viewModel.tappedSearch()
         }
         viewModel.transitionTo.observe(this , Observer {
-            activity?.startActivity(WorksActivity.createIntent(activity!!, it!!))
+            activity?.startActivity(WorksActivity.createIntent(requireActivity(), it!!))
         })
         viewModel.enableSeasonSelect.observe(this, Observer {
             binding.seasonSpinner.isEnabled = it!!
