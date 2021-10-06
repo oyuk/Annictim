@@ -22,9 +22,16 @@ fragment Cast on Cast {
 }
 
 fragment Episode on Episode {
+  id
   annictId
+  number
   numberText
+  recordCommentsCount
+  recordsCount
+  satisfactionRate
   title
+  viewerDidTrack
+  viewerRecordsCount
 }
 
 fragment Staff on Staff {
@@ -58,7 +65,7 @@ fragment Work on Work {
       ...Cast
     }
   }
-  episodes(orderBy: {field: SORT_NUMBER, direction: ASC}, first: 20) {
+  episodes(orderBy: {field: SORT_NUMBER, direction: ASC}) {
     nodes {
       ...Episode
     }
