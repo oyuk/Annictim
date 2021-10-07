@@ -35,6 +35,9 @@ class EpisodesViewModel @AssistedInject constructor (
     private val _episodes = MutableLiveData<List<Episode>>()
     val episodes: LiveData<List<Episode>> = _episodes
 
+    private val _tapped = MutableLiveData<Episode>()
+    val tapped: LiveData<Episode> = _tapped
+
     fun fetch() {
         viewModelScope.launch {
             try  {
@@ -46,6 +49,10 @@ class EpisodesViewModel @AssistedInject constructor (
 
             }
         }
+    }
+
+    fun tappedEpisode(episode: Episode) {
+        _tapped.postValue(episode)
     }
 
 }
