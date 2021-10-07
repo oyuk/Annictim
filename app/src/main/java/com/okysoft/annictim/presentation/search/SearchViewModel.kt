@@ -1,79 +1,35 @@
 package com.okysoft.annictim.presentation.search
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.okysoft.data.WorkRequestParams
-import com.okysoft.annictim.extension.toLiveData
-import io.reactivex.Flowable
-import io.reactivex.functions.Function3
-import io.reactivex.processors.BehaviorProcessor
-import io.reactivex.processors.PublishProcessor
-import io.reactivex.rxkotlin.withLatestFrom
 
 class SearchViewModel: ViewModel() {
-
-    private val titleProcessor = BehaviorProcessor.createDefault("")
-    private val yearProcessor = BehaviorProcessor.createDefault("")
-    private val seasonProcessor = BehaviorProcessor.createDefault("")
-    private val tappedSearch = PublishProcessor.create<Unit>()
-
     companion object {
+
         private val REGEX: Regex = """(\d{4})""".toRegex()
     }
 
-    val transitionTo: LiveData<com.okysoft.data.WorkRequestParams>
-    val enableSeasonSelect: LiveData<Boolean>
+    private val _transitionTo = MutableLiveData<WorkRequestParams>()
+    val transitionTo: LiveData<WorkRequestParams> = _transitionTo
 
-    init {
-        enableSeasonSelect = yearProcessor
-            .map { it != "全体" }
-            .toLiveData()
-
-        val yearParams = yearProcessor
-            .map { REGEX.find(it)?.value ?: "" }
-
-        val seasonParams = seasonProcessor
-            .map {
-                when (it) {
-                    "全体" -> "all"
-                    "春" -> "spring"
-                    "夏" -> "summer"
-                    "秋" -> "autumn"
-                    "冬" -> "winter"
-                    else -> ""
-                }
-            }
-
-        val parameter =
-            Flowable.combineLatest(titleProcessor, yearParams, seasonParams, Function3 {
-                title: String, year: String, season: String ->
-                val seasonString = if (year.isNotBlank() && season.isNotBlank()) {
-                    "$year-$season"
-                } else {
-                    null
-                }
-                com.okysoft.data.WorkRequestParams(title = title, season = seasonString)
-            })
-
-        transitionTo = tappedSearch.withLatestFrom(parameter)
-            .map { it.second }
-            .toLiveData()
+    fun search(searchCondition: SearchCondition) {
+        val year = REGEX.find(searchCondition.year ?: "")?.value ?: ""
+        val season = when (searchCondition.season) {
+            "全体" -> "all"
+            "春" -> "spring"
+            "夏" -> "summer"
+            "秋" -> "autumn"
+            "冬" -> "winter"
+            else -> ""
+        }
+        val seasonString = if (year.isNotBlank() && season.isNotBlank()) {
+            "$year-$season"
+        } else {
+            null
+        }
+        val requestParams = WorkRequestParams(title = searchCondition.title, season = seasonString)
+        _transitionTo.postValue(requestParams)
     }
-
-    fun setTitle(title: CharSequence) {
-        titleProcessor.onNext(title.toString())
-    }
-
-    fun selectYear(year: String) {
-        yearProcessor.onNext(year)
-    }
-
-    fun selectSeason(season: String) {
-        seasonProcessor.onNext(season)
-    }
-
-    fun tappedSearch() {
-        tappedSearch.onNext(Unit)
-    }
-
 }
