@@ -3,10 +3,14 @@ package com.okysoft.annictim.presentation.works
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.okysoft.annictim.R
-import com.okysoft.annictim.databinding.ActivityWorksBinding
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModelProvider
+import com.okysoft.annictim.AnnictimTheme
 import com.okysoft.data.WorkRequestParams
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,34 +18,50 @@ import dagger.hilt.android.AndroidEntryPoint
 class WorksActivity : AppCompatActivity() {
 
     companion object {
+        const val TITLE = "TITLE"
         const val REQUEST_PARAM_MODEL = "REQUEST_PARAM_MODEL"
 
-        fun createIntent(activity: Context, requestParams: com.okysoft.data.WorkRequestParams): Intent {
+        fun createIntent(activity: Context,
+                         title: String,
+                         requestParams: com.okysoft.data.WorkRequestParams): Intent {
             return Intent(activity, WorksActivity::class.java).apply {
+                putExtra(TITLE, title)
                 putExtra(REQUEST_PARAM_MODEL, requestParams)
             }
         }
     }
 
-    private lateinit var binding: ActivityWorksBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_works)
-        binding.toolbar.title = getString(R.string.search)
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true)
-        }
 
-        if (savedInstanceState == null) {
-            val requestParamModel = intent.getParcelableExtra<WorkRequestParams>(REQUEST_PARAM_MODEL) ?: WorkRequestParams()
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, WorksFragment.newInstance(requestParamModel, null))
-                .commit()
+        setContent {
+            AnnictimTheme {
+                Scaffold(
+                    topBar = { AppBar() }
+                ) {
+                    val requestParamModel =
+                        intent.getParcelableExtra<WorkRequestParams>(REQUEST_PARAM_MODEL)
+                            ?: WorkRequestParams()
+                    val factory = WorksViewModel.provideFactory(this, requestParamModel)
+                    val viewModel =
+                        ViewModelProvider(viewModelStore, factory).get(WorksViewModel::class.java)
+                    WorkList(viewModel)
+                }
+            }
         }
     }
 
+    @Composable
+    fun AppBar() {
+        TopAppBar(
+            title = { Text(text = intent.getStringExtra(TITLE) ?: "") },
+            navigationIcon = {
+                IconButton(onClick = { finish() }) {
+                    Icon(imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back")
+                }
+            }
+        )
+    }
 }
 
