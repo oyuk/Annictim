@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun DropDown(selectedValue: MutableState<String>,
@@ -19,7 +18,8 @@ fun DropDown(selectedValue: MutableState<String>,
     Row(modifier = Modifier.clickable {
         expanded.value = !expanded.value
     }) {
-        Text(text = selectedValue.value, fontSize = 18.sp)
+        Text(text = selectedValue.value,
+            style = MaterialTheme.typography.body1)
         Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = null)
     }
     DropdownMenu(expanded = expanded.value,
@@ -37,7 +37,7 @@ fun DropDown(selectedValue: MutableState<String>,
                 } else {
                     MaterialTheme.typography.body1.copy(
                         fontWeight = FontWeight.Normal,
-                        color = MaterialTheme.colors.onSurface
+                        color = MaterialTheme.colors.onBackground
                     )
                 }
                 Text(text = item, style = style)

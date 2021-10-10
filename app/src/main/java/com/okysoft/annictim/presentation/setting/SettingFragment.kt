@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import com.okysoft.annictim.AnnictimTheme
 import com.okysoft.annictim.extension.clearStackAndStartActivity
 import com.okysoft.annictim.presentation.launch.LaunchActivity
 import com.okysoft.annictim.presentation.widget.dialog.CustomDialog
@@ -30,16 +31,18 @@ class SettingFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                SettingItemList(sections = viewModel.sections)
-                CustomDialog(
-                    title = "ログアウト",
-                    message = "ログアウトしますか？",
-                    positiveAction = DialogAction.Positive("OK") {
-                      logout()
-                    },
-                    negativeAction = null,
-                    openDialog = viewModel.openDialog
-                )
+                AnnictimTheme {
+                    SettingItemList(sections = viewModel.sections)
+                    CustomDialog(
+                        title = "ログアウト",
+                        message = "ログアウトしますか？",
+                        positiveAction = DialogAction.Positive("OK") {
+                            logout()
+                        },
+                        negativeAction = null,
+                        openDialog = viewModel.openDialog
+                    )
+                }
             }
         }
     }

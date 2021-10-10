@@ -7,13 +7,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.okysoft.annictim.R
 
 private class PreviewSettingItemListProvider : PreviewParameterProvider<List<SettingListSection>> {
     override val values: Sequence<List<SettingListSection>>
@@ -45,26 +43,25 @@ fun SettingItemList(
                     .fillMaxWidth()) {
                 Text(
                     text = section.title,
-                    fontSize = 14.sp,
-                    color = colorResource(R.color.colorAccent),
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.secondary,
                     lineHeight = 50.sp
                 )
             }
             section.items.forEach { item ->
-                MaterialTheme {
-                    Box(contentAlignment = Alignment.CenterStart,
-                        modifier = Modifier
-                            .clickable(onClick = item.action)
-                            .padding(start = 16.dp, end = 16.dp)
-                            .height(56.dp)
-                            .fillMaxWidth()) {
-                        Text(
-                            text = item.title,
-                            fontSize = 16.sp,
-                        )
-                    }
+                Box(contentAlignment = Alignment.CenterStart,
+                    modifier = Modifier
+                        .clickable(onClick = item.action)
+                        .padding(start = 16.dp, end = 16.dp)
+                        .height(56.dp)
+                        .fillMaxWidth()) {
+                    Text(
+                        text = item.title,
+                        style = MaterialTheme.typography.subtitle1
+                    )
                 }
             }
         }
+
     }
 }

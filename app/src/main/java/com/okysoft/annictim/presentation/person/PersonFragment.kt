@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.okysoft.annictim.AnnictimTheme
 import com.okysoft.annictim.extension.openUrl
 import com.okysoft.annictim.util.compose.Center
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,23 +42,26 @@ class PersonFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                val state: State<PersonViewModel.State> = viewModel.stateFlow.observeAsState(PersonViewModel.State.Loading)
-                when (val stateValue = state.value) {
-                    is PersonViewModel.State.Loading -> {
-                        Center(modifier = Modifier.fillMaxWidth(0.4f)) {
-                            CircularProgressIndicator()
+                AnnictimTheme {
+                    val state: State<PersonViewModel.State> =
+                        viewModel.stateFlow.observeAsState(PersonViewModel.State.Loading)
+                    when (val stateValue = state.value) {
+                        is PersonViewModel.State.Loading -> {
+                            Center(modifier = Modifier.fillMaxWidth(0.4f)) {
+                                CircularProgressIndicator()
+                            }
                         }
-                    }
-                    is PersonViewModel.State.Error -> {
-                        ErrorScreen(resume = { viewModel.fetch() })
-                    }
-                    is PersonViewModel.State.Success -> {
-                        if (stateValue.listItem.isEmpty()) {
-                            EmptyScreen()
-                            return@setContent
+                        is PersonViewModel.State.Error -> {
+                            ErrorScreen(resume = { viewModel.fetch() })
                         }
-                        PersonList(stateValue.listItem) { url ->
-                            openUrl(url)
+                        is PersonViewModel.State.Success -> {
+                            if (stateValue.listItem.isEmpty()) {
+                                EmptyScreen()
+                                return@AnnictimTheme
+                            }
+                            PersonList(stateValue.listItem) { url ->
+                                openUrl(url)
+                            }
                         }
                     }
                 }

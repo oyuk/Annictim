@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.okysoft.annictim.AnnictimTheme
 import com.okysoft.annictim.presentation.record.RecordsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -30,7 +31,9 @@ class EpisodesFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                EpisodesView(viewModel)
+                AnnictimTheme {
+                    EpisodesView(viewModel)
+                }
             }
         }
     }

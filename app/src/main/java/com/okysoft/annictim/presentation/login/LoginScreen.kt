@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -35,7 +36,7 @@ fun LoginScreen(showLoading: MutableState<Boolean>, onClick: () -> Unit = {}) {
         ) {
             Text(
                 text = stringResource(id = R.string.app_name),
-                fontSize = 65.sp,
+                style = MaterialTheme.typography.h2,
                 color = colorResource(id = R.color.grey_50)
             )
             Button(
@@ -48,7 +49,7 @@ fun LoginScreen(showLoading: MutableState<Boolean>, onClick: () -> Unit = {}) {
             ) {
                 Text(
                     text = stringResource(id = R.string.login_or_create),
-                    fontSize = 18.sp
+                    style = MaterialTheme.typography.body1
                 )
             }
         }

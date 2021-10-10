@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.okysoft.domain.model.Episode
 
 private class PreviewEpisodeListProvider : PreviewParameterProvider<List<Episode>> {
@@ -38,16 +37,16 @@ fun EpisodeList(
         items(
             items = episodes,
             itemContent = { item ->
-                MaterialTheme {
                     Box(
                         contentAlignment = Alignment.CenterStart,
-                        modifier = Modifier.clickable { onClick(item) }
+                        modifier = Modifier
+                            .clickable { onClick(item) }
                             .height(48.dp)
                             .fillMaxWidth()
                     ) {
                         Text(
                             text = item.fullTitle,
-                            fontSize = 16.sp,
+                            style = MaterialTheme.typography.subtitle1,
                             modifier = Modifier
                                 .padding(horizontal = 8.dp)
                         )
@@ -58,7 +57,7 @@ fun EpisodeList(
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }
-            }
+
         )
     }
 }
