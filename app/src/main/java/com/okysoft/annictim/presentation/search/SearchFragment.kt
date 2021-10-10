@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.transitionTo.observe(viewLifecycleOwner , Observer {
-            activity?.startActivity(WorksActivity.createIntent(requireActivity(), it!!))
+            activity?.startActivity(WorksActivity.createIntent(requireActivity(), "検索", it!!))
         })
     }
 
