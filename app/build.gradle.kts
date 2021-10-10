@@ -165,4 +165,9 @@ dependencies {
 
     implementation("androidx.paging:paging-runtime-ktx:3.0.1")
     implementation("androidx.paging:paging-compose:1.0.0-alpha13")
+
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
+
+    implementation( "com.google.accompanist:accompanist-pager:0.19.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.19.0")
 }
