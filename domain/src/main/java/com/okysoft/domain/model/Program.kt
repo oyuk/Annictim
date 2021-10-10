@@ -5,7 +5,7 @@ import com.okysoft.infra.response.WorkResponse
 
 data class Program(
     val channel: Channel,
-    val episode: EpisodeResponse,
+    val episode: EpisodeResponse?,
     val id: Int,
     val startedAt: String,
     val workResponse: WorkResponse
